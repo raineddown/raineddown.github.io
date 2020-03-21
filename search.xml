@@ -20,10 +20,17 @@
       
         <tags>
             
+<<<<<<< HEAD
             <tag> 架构模式 </tag>
             
             <tag> 六边形架构 </tag>
             
+=======
+            <tag> 六边形架构 </tag>
+            
+            <tag> 架构模式 </tag>
+            
+>>>>>>> d669c7c27d9038c4fda9472d59a38ad77ad49e71
         </tags>
       
     </entry>
