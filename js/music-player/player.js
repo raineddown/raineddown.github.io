@@ -43,22 +43,28 @@ class Musics {
                 imageUrl: '/music/img/Brooklyn Duo.jpg'
             },{
                 id: 4,
-                title: 'Something Just Like This',
-                singer: 'One Voice',
-                songUrl: '/music/song/One Voice-《Something Just Like This》.mp3',
-                imageUrl: '/music/img/One Voice .jpg'
-            },{
-                id: 5,
                 title: 'Centuries',
                 singer: 'Brooklyn Duo',
                 songUrl: '/music/song/Brooklyn Duo - Centuries (Fall Out Boy Cover).mp3',
                 imageUrl: '/music/img/Brooklyn Duo.jpg'
             },{
-                id: 6,
+                id: 5,
                 title: 'Believer',
                 singer: 'Imagine Dragons',
                 songUrl: '/music/song/Imagine Dragons-Believer.mp3',
                 imageUrl: '/music/img/Believer.jpg'
+            },{
+                id: 6,
+                title: 'Something Just Like This',
+                singer: 'One Voice',
+                songUrl: '/music/song/One Voice-《Something Just Like This》.mp3',
+                imageUrl: '/music/img/One Voice.jpg'
+            },{
+                id: 7,
+                title: '钢铁洪流进行曲',
+                singer: ' ',
+                songUrl: '/music/song/钢铁洪流进行曲.mp3',
+                imageUrl: '/music/img/钢铁洪流进行曲.jpg'
             }
         ]
     }
