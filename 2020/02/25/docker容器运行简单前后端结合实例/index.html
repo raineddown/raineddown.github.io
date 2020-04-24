@@ -20,7 +20,7 @@
         
     </title>
 
-    <link rel="canonical" href="xiangertechnology.top/2020/02/25/docker容器运行简单前后端结合实例/">
+    <link rel="canonical" href="http://radarsoftware.cn/2020/02/25/docker容器运行简单前后端结合实例/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">892</span> and
+                                Words <span class="post-count">914</span> and
                                 Reading Time <span class="post-count">4</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,7 +187,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -201,7 +201,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -222,7 +222,7 @@
                     
                     
                     <li>
-                        <a href="https://blog.csdn.net/d_Nail" target="_blank">Chinese Blog</a>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
                     </li>
                     
                 </ul>
@@ -276,8 +276,8 @@
 
                 <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h3><p>Docker是一种运行于Linux和Windows上的软件，用于创建、管理和编排容器。Docker是在GitHub上开发的Moby开源项目的一部分。<a href="https://docs.docker.com/" target="_blank" rel="noopener">Docker官方文档</a> <a href="http://www.docker.org.cn/page/resources.html" target="_blank" rel="noopener">Docker中文社区</a>(ps:别忘配置加速器Docker图标》Settings》Docker Engine)</p>
 <h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><p>springboot项目，非常简单的演示后端，注解代码实现获取/hello/路径后的string类型数据。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package iteach.docker.service.spring.docker;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.web.bind.annotation.CrossOrigin;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class SpringHelloApplication &#123;</span><br><span class="line"></span><br><span class="line">    @CrossOrigin</span><br><span class="line">    @GetMapping(<span class="string">"/hello/&#123;name&#125;"</span>)</span><br><span class="line">    public String hello(@PathVariable String name) &#123;</span><br><span class="line">        <span class="built_in">return</span> String.format(<span class="string">"Hello,%s!"</span>, name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringHelloApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Docker与后端应用"><a href="#Docker与后端应用" class="headerlink" title="Docker与后端应用"></a>Docker与后端应用</h2><h3 id="Docker创建后端镜像"><a href="#Docker创建后端镜像" class="headerlink" title="Docker创建后端镜像"></a>Docker创建后端镜像</h3><p>1、将后端项目打成jar包，可以在命令行工具（这里使用的是powershell）进入到jar包生成路径运行java -jar .\jar包名.jar\检验jar包是否能运行<br>2、新建一个文件夹，文件夹下放置jar包和新建一个名为Dockerfile的文件不可改名。<br>3、Dockerfile内容,可以将jdk改为jre这样安装的镜像更小更快<br><img src="/img/backend.png" alt="运行结果"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:11</span><br><span class="line">ADD spring-hello.jar app.jar</span><br><span class="line">ENTRYPOINT [<span class="string">"java"</span>,<span class="string">"-jar"</span>,<span class="string">"app.jar"</span>]</span><br></pre></td></tr></table></figure><br>4、命令行工具在该目录下输入(文章最后解释各个指令作用)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t spring-hello .</span><br></pre></td></tr></table></figure></p>
-<h3 id="Docker创建容器并运行"><a href="#Docker创建容器并运行" class="headerlink" title="Docker创建容器并运行"></a>Docker创建容器并运行</h3><p>命令行工具输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name hello-backend -d -p 8000:8080 spring-hello</span><br></pre></td></tr></table></figure><br>获取运行结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Invoke-RestMethod http://localhost:8000/hello/xz</span><br></pre></td></tr></table></figure><br><img src="/img/backend2.png" alt="运行结果">  </p>
+<h2 id="Docker与后端应用"><a href="#Docker与后端应用" class="headerlink" title="Docker与后端应用"></a>Docker与后端应用</h2><h3 id="Docker创建后端镜像"><a href="#Docker创建后端镜像" class="headerlink" title="Docker创建后端镜像"></a>Docker创建后端镜像</h3><p>1、将后端项目打成jar包，可以在命令行工具（这里使用的是powershell）进入到jar包生成路径运行java -jar .\jar包名.jar\检验jar包是否能运行<br>2、新建一个文件夹，文件夹下放置jar包和新建一个名为Dockerfile的文件不可改名。<br>3、Dockerfile内容,可以将jdk改为jre这样安装的镜像更小更快<br><img src="/img/backend.png" alt="运行结果"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:11</span><br><span class="line">ADD spring-hello.jar app.jar</span><br><span class="line">ENTRYPOINT [<span class="string">"java"</span>,<span class="string">"-jar"</span>,<span class="string">"app.jar"</span>]</span><br></pre></td></tr></table></figure><br>4、命令行工具在该目录下输入(文章最后总结解释各个指令作用)<br>拉取镜像(在放置Dockerfile文件处执行)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t spring-hello .</span><br></pre></td></tr></table></figure></p>
+<h3 id="Docker创建容器并运行"><a href="#Docker创建容器并运行" class="headerlink" title="Docker创建容器并运行"></a>Docker创建容器并运行</h3><p>命令行工具输入，创建容器运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name hello-backend -d -p 8000:8080 spring-hello</span><br></pre></td></tr></table></figure><br>获取运行结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Invoke-RestMethod http://localhost:8000/hello/xz</span><br></pre></td></tr></table></figure><br><img src="/img/backend2.png" alt="运行结果">  </p>
 <h2 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">&lt;div id=<span class="string">"sender"</span>&gt;</span><br><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> v-model=<span class="string">"name"</span> /&gt;</span><br><span class="line">&lt;button @click=<span class="string">"send"</span>&gt;发送&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div id=<span class="string">"greeting"</span>&gt;</span><br><span class="line">&lt;p style=<span class="string">"margin-bottom: 0;"</span>&gt;Vue: &#123;&#123; name &#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;p style=<span class="string">"margin-top: 0;"</span>&gt;Spring: &#123;&#123; greeting &#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123; name: <span class="string">"App"</span>,</span><br><span class="line"><span class="function"><span class="title">data</span></span>() &#123; <span class="built_in">return</span> &#123;</span><br><span class="line">name: <span class="string">""</span>, greeting: <span class="string">""</span></span><br><span class="line">&#125;;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line"><span class="function"><span class="title">send</span></span>() &#123; // Axios Promise </span><br><span class="line">fetch(`http://localhost:8000/hello/<span class="variable">$&#123;this.name&#125;</span>`)</span><br><span class="line">.<span class="keyword">then</span>(response =&gt; &#123; <span class="built_in">return</span> response.text();</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="keyword">then</span>(text =&gt; (this.greeting = text))</span><br><span class="line">.catch(error =&gt; console.log(error));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="Docker与前端应用"><a href="#Docker与前端应用" class="headerlink" title="Docker与前端应用"></a>Docker与前端应用</h2><p>注意：这里演示使用的是Vue框架，文件名为hello-vue,使用服务器为nginx.</p>
 <h3 id="Docker创建前端镜像"><a href="#Docker创建前端镜像" class="headerlink" title="Docker创建前端镜像"></a>Docker创建前端镜像</h3><p>新建Dockerfile文件，文件内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM nginx	</span><br><span class="line"><span class="comment"># 更多请参考https://hub.docker.com/_/nginx/</span></span><br><span class="line">COPY ./hello /usr/share/nginx/html</span><br></pre></td></tr></table></figure></p>
@@ -297,7 +297,7 @@
                     
                     
                     <li class="next">
-                        <a href="/2019/12/25/hexo部署博客/" data-toggle="tooltip" data-placement="top" title="Hexo博客配置及个人网站部署">Next Post &rarr;</a>
+                        <a href="/2019/12/25/hexo博客/" data-toggle="tooltip" data-placement="top" title="Hexo博客配置及个人网站部署">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -383,11 +383,6 @@
 
                 <!-- Sharing -->
                 
-                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
-                <!--  css & js -->
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-                
                 <!-- Sharing -->
 
                 <!-- gitment start -->
@@ -444,11 +439,11 @@
                 <ul class="list-inline">
 
                     
-                        <li><a href="https://blog.csdn.net/d_Nail" target="_blank">Dusign&#39;s Blog</a></li>
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
                     
                         <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
                     
-                        <li><a href="https://github.com/dusign" target="_blank">raineddown&#39;s Github</a></li>
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
                     
                         <li><a href="#" target="_blank">Other</a></li>
                     
@@ -519,27 +514,6 @@
                     </li>
                 
 
-                
-                    <li>
-                        <a target="_blank" href="https://twitter.com/dusignr">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/Gang Du">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
 
                 
                     <li>
@@ -554,7 +528,6 @@
 
                 
 
-                
 
                 
 
@@ -614,7 +587,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("xiangertechnology.top/js/jquery.tagcloud.js",function(){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -686,7 +659,7 @@
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
         
 
         <!-- background effects end -->

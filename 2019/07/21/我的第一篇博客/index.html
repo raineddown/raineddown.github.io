@@ -20,7 +20,7 @@
         
     </title>
 
-    <link rel="canonical" href="xiangertechnology.top/2019/07/21/我的第一篇博客/">
+    <link rel="canonical" href="http://radarsoftware.cn/2019/07/21/我的第一篇博客/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -135,7 +135,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">1.9k</span> and
+                                Words <span class="post-count">1.8k</span> and
                                 Reading Time <span class="post-count">6</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -197,7 +197,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -211,7 +211,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -232,7 +232,7 @@
                     
                     
                     <li>
-                        <a href="https://blog.csdn.net/d_Nail" target="_blank">Chinese Blog</a>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
                     </li>
                     
                 </ul>
@@ -285,11 +285,11 @@
                 post-container">
 
                 <h2 id="架构模式"><a href="#架构模式" class="headerlink" title="架构模式"></a>架构模式</h2><h3 id="概要："><a href="#概要：" class="headerlink" title="概要："></a>概要：</h3><p>MVC、MVP、MVVM是传统较为主流的三种架构模式，使用架构模式的目的是为了解决界面呈现和逻辑代码分离问题，其中MVP和MVVM都是在MVC的基础上发展而来的，引发发展的主要原因在于各个模块间的耦合度、模块测试引发的问题。  </p>
-<h3 id="MVC-："><a href="#MVC-：" class="headerlink" title="MVC ："></a>MVC ：</h3><p>MVC(全名：Model View Controller),正如名字一样MVC是使用Model、View、Controller三个模块设计创建 Web 应用程序的模式。<br>三个模块介绍及功能：<br>模型(Model):提供可视化元素的呈现、处理部分逻辑，包含数据和行为，可以认为是领域模型(domain)或JavaBean组件。通俗的讲就是用于网络请求、数据库、业务逻辑处理等操作并对应应用状态和业务功能的封装以及提供View模块显示的数据。如果对java熟悉的话Model模块最直观的部分就是JavaBean中的实体类和DAO类方法了。<br>视图（View）:数据的展示、提供用户数据显示及操作的可视化界面。（比如jsp页面，模板引擎博主学生党暂未深入学习该部分不便举例）<br>控制器（Controller）:接受用户的输入指令并调用模型模块和视图模块去完成用户的需求。可以将控制器理解为模型模块和视图模块之间的桥梁，通过控制器管理两个模块的交互，是设计这类构架模式的基础分层目的的模块，一定程度上降低了耦合度、提高了代码重复利用率。<br><img src="/img/MVC.PNG" alt="MVC架构模式alt">  </p>
+<h3 id="MVC-："><a href="#MVC-：" class="headerlink" title="MVC ："></a>MVC ：</h3><p>MVC(全名：Model View Controller),正如名字一样MVC是使用Model、View、Controller三个模块设计创建 Web 应用程序的模式。<br>三个模块介绍及功能：<br>模型(Model):提供可视化元素的呈现、处理部分逻辑，包含数据和行为，可以认为是领域模型(domain)或JavaBean组件。通俗的讲就是用于网络请求、数据库、业务逻辑处理等操作并对应应用状态和业务功能的封装以及提供View模块显示的数据。如果对java熟悉的话Model模块最直观的部分就是JavaBean中的实体类和DAO类方法了。<br>视图（View）:数据的展示、提供用户数据显示及操作的可视化界面。（比如jsp页面）<br>控制器（Controller）:接受用户的输入指令并调用模型模块和视图模块去完成用户的需求。可以将控制器理解为模型模块和视图模块之间的桥梁，通过控制器管理两个模块的交互，是设计这类构架模式的基础分层目的的模块，一定程度上降低了耦合度、提高了代码重复利用率。<br><img src="/img/MVC.PNG" alt="MVC架构模式alt">  </p>
 <h3 id="MVP"><a href="#MVP" class="headerlink" title="MVP :"></a>MVP :</h3><p>MVP(全名:Model-view-presenter),是MVC演变而来的一种软件设计模式。与MVC有一定的相似性：Presenter负责逻辑的处理，Model提供数据，View负责显示。但MVP与MVC有着一个重大的区别：在MVP中View并不直接使用Model，它们之间的通信是通过Presenter(MVC中的Controller)来进行的，所有的交互都发生在Presenter内部， 从理论上去除了View和Model的耦合。<br>模块介绍及功能：<br>Model：负责存储、检索、操纵数据，但与MVC的Model不同的是MVP的Model与可视化元素的呈现无关，与UI（view）处理逻辑也无关。<br>View：数据的展示、提供用户数据显示及操作的可视化界面，同时含有一个Presenter成员变量及逻辑接口<br>Presenter：处理与用户交互的负责逻辑。相比于MVC的controller，除了相同的事件触发控制功能，由于去除了View和Model的交互，所有的交互功能都发生在了Presenter（从Model传递需要呈现的可视化元素、View逻辑执行后发送响应等等）。由于解除了View与Model的耦合性，开发者可模拟测试View和Model中的任意一个模块，但明显的是Presenter接口与实现类的增加导致代码冗余度、复杂度会有明显增加。<br><img src="/img/MVP.PNG" alt="MVP架构模式alt">  </p>
 <h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM :"></a>MVVM :</h3><p>MVVM(全名:Model View ViewModel)MVVM是MVP的进一步发展与规范，实现了View和Model的自动同步。MVVM模式中，一个ViewModel和一个View匹配绑定，所有View中的修改变化，都会自动更新到ViewModel中，同时ViewModel的任何变化也会自动同步到View上显示(ViewModel中的属性都实现了observable这样的接口，当使用属性 的set的方法，都会同时触发属性修改的事件，使绑定的View自动刷新，一般由不同的前端框架平台封装例如VUE。)，ViewModel和View之间的交互通过Data Binding完成， 而Data Binding可以实现双向的交互,这就使得视图和控制层之间的耦合程度进一步降低。<br>三个模块介绍及功能：<br>Model：负责存储、检索、操纵数据。<br>View：数据的展示、提供用户数据显示及操作的可视化界面，通过通过模板语法来声明在ViewModel模块完成数据绑定。<br>ViewModel：处理与用户交互的负责逻辑，核心是双向数据绑定，去除了View与Model的耦合关联，View可以独立于Model变化和修改方便测试，同时降低了代码的冗余度增加了重用度。<br><img src="/img/MVVM.PNG" alt="MVVM架构模式alt">  </p>
 <h2 id="多层架构"><a href="#多层架构" class="headerlink" title="多层架构"></a>多层架构</h2><p>多层架构是开发人员在开发过程当中面对复杂且易变的需求采取的一种以隔离控制为主的应对策略，具体显示为将业务划分为多个层。  </p>
-<h3 id="3层架构-3-tier-architecture"><a href="#3层架构-3-tier-architecture" class="headerlink" title="3层架构(3-tier architecture)"></a>3层架构(3-tier architecture)</h3><p>三层架构(3-tier architecture) 通常意义上的三层架构就是将整个业务应用划分为：界面层（User Interface layer）、业务逻辑层（Business Logic Layer）、 数据访问层（Data access layer）。<br>各层功能：<br>UI(界面层): 数据的展示、提供用户数据显示及操作的可视化界面。用于接收用户输入的数据和显示处理后用户需要的数据。<br>BLL:(业务逻辑层): UI层和DAL层之间的交互通道。对数据层的操作，对数据业务逻辑处理。<br>DAL:(数据访问层): 实现对数据的增、删、改、查。将存储在数据库中的数据提交给业务层，同时将业务层处理的数据保存到数据库。<br><img src="/img/3-tier-architecture.PNG" alt="三层架构alt"><br>大多数人三层架构易与架构模式混淆（尤其是MVC模式），从表示图可以直观看出它们间区别。架构模式（MVC）设计初衷是降低View与Model间的耦合度、降低代码冗余度、提高数据访问安全性。而三层架构是从整个业务应用出发，架构模式例如MVC只是三层架构中的UI（界面层）和BLL(业务逻辑层)展示。（很多博客文章表示MVC严格意义上 只是三层架构的UI界面层，个人认为MVC的Model模块实现了业务逻辑的处理和对数据层的操作，今后若发现存在问题及时更新）用图表示之间关系如下(下图表示基于B/S系统的三层架构，橙线表示对B/S系统的划分)。<br><img src="/img/emm.PNG" alt="三层架构alt">  </p>
+<h3 id="3层架构-3-tier-architecture"><a href="#3层架构-3-tier-architecture" class="headerlink" title="3层架构(3-tier architecture)"></a>3层架构(3-tier architecture)</h3><p>三层架构(3-tier architecture) 通常意义上的三层架构就是将整个业务应用划分为：界面层（User Interface layer）、业务逻辑层（Business Logic Layer）、 数据访问层（Data access layer）。<br>各层功能：<br>UI(界面层): 数据的展示、提供用户数据显示及操作的可视化界面。用于接收用户输入的数据和显示处理后用户需要的数据。<br>BLL:(业务逻辑层): UI层和DAL层之间的交互通道。对数据层的操作，对数据业务逻辑处理。<br>DAL:(数据访问层): 实现对数据的增、删、改、查。将存储在数据库中的数据提交给业务层，同时将业务层处理的数据保存到数据库。<br><img src="/img/3-tier-architecture.PNG" alt="三层架构alt"><br>大多数人三层架构易与架构模式混淆（尤其是MVC模式），从表示图可以直观看出它们间区别。架构模式（MVC）设计初衷是降低View与Model间的耦合度、降低代码冗余度、提高数据访问安全性。而三层架构是从整个业务应用出发，架构模式例如MVC只是三层架构中的UI（界面层）和BLL(业务逻辑层)展示。（很多博客文章表示MVC严格意义上 只是三层架构的UI界面层，MVC的Model模块实现了业务逻辑的处理和对数据层的操作）用图表示之间关系如下(下图表示基于B/S系统的三层架构，橙线表示对B/S系统的划分)。<br><img src="/img/emm.PNG" alt="三层架构alt">  </p>
 <h3 id="2-2-多层架构-n-tier-architecture"><a href="#2-2-多层架构-n-tier-architecture" class="headerlink" title="2.2 多层架构(n-tier architecture)"></a>2.2 多层架构(n-tier architecture)</h3><p>简单的说多层架构是对三层架构的进一步划分，实际中有时“标准”的划分为三层架构会对维护调试带来很多麻烦，多层架构便是对三层架构中的UI（界面层）与BLL（业务逻辑层）进行进一步细分。</p>
 <h2 id="java的三层架构"><a href="#java的三层架构" class="headerlink" title="java的三层架构"></a>java的三层架构</h2><p>也属于三层架构各个层的名字有所变化。<br>Struts（表示层）：Struts是一个表示层框架，主要作用是界面展示，接收请求，分发请求为用户提供一种交互式操作的界面。在MVC框架中，Struts属于VC层次，负责界面表现，负责MVC关系的分发。<br>Spring（业务层）：业务层框架，是一个整合的框架，能够很好地黏合表示层与持久层。<br>Hibernate（持久层）：持久层，有时候也称为是数据访问层，其功能主要是负责数据库的访问，可以访问数据库系统、二进制文件、文本文档或是XML文档。</p>
 <p>学期末学习了MVC架构模式有感，也算完成了自己的第一篇博客，当作知识积累日志。<br>参考学习文章：<a href="https://www.runoob.com/w3cnote/three-tier-architecture.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/three-tier-architecture.html</a><br>参考学习文章：<a href="https://www.jianshu.com/p/ebd2c5914d20" target="_blank" rel="noopener">https://www.jianshu.com/p/ebd2c5914d20</a></p>
@@ -300,7 +300,7 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/11/01/Hexo-Theme-Snail/" data-toggle="tooltip" data-placement="top" title="Hexo-Theme-Snail">&larr; Previous Post</a>
+                        <a href="/2019/08/19/JSON/" data-toggle="tooltip" data-placement="top" title="JSON基础">&larr; Previous Post</a>
                     </li>
                     
                     
@@ -387,11 +387,6 @@
 
                 <!-- Sharing -->
                 
-                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
-                <!--  css & js -->
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-                
                 <!-- Sharing -->
 
                 <!-- gitment start -->
@@ -458,11 +453,11 @@
                 <ul class="list-inline">
 
                     
-                        <li><a href="https://blog.csdn.net/d_Nail" target="_blank">Dusign&#39;s Blog</a></li>
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
                     
                         <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
                     
-                        <li><a href="https://github.com/dusign" target="_blank">raineddown&#39;s Github</a></li>
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
                     
                         <li><a href="#" target="_blank">Other</a></li>
                     
@@ -533,27 +528,6 @@
                     </li>
                 
 
-                
-                    <li>
-                        <a target="_blank" href="https://twitter.com/dusignr">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/Gang Du">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
 
                 
                     <li>
@@ -568,7 +542,6 @@
 
                 
 
-                
 
                 
 
@@ -628,7 +601,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("xiangertechnology.top/js/jquery.tagcloud.js",function(){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -700,7 +673,7 @@
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
         
 
         <!-- background effects end -->
