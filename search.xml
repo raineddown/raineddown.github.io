@@ -4,6 +4,87 @@
   
     
     <entry>
+      <title>大三实训记录——thymeleaf传值给外联js文件</title>
+      <link href="/2020/06/25/%E5%A4%A7%E4%B8%89%E5%AE%9E%E8%AE%AD%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94thymeleaf%E4%BC%A0%E5%80%BC%E7%BB%99%E5%A4%96%E8%81%94js%E6%96%87%E4%BB%B6/"/>
+      <url>/2020/06/25/%E5%A4%A7%E4%B8%89%E5%AE%9E%E8%AE%AD%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94thymeleaf%E4%BC%A0%E5%80%BC%E7%BB%99%E5%A4%96%E8%81%94js%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<h2 id="实训"><a href="#实训" class="headerlink" title="实训"></a>实训</h2><p>最近大三下半学期刚刚结束，打算用实训记录类标题记录一下自己实训开发中遇到的一些问题。这次实训由京东互联网科技实践中心的老师授课并且给与我们开发小组达到毕设水平的评价，不知后续参加工作后看大学中开发的项目会有一些什么样的感受。项目后续上传到github上，个人负责建筑平台用户操作系统开发，管理员与评审专家由其他组员开发。</p><h2 id="实训问题——thymeleaf传值给外联js文件"><a href="#实训问题——thymeleaf传值给外联js文件" class="headerlink" title="实训问题——thymeleaf传值给外联js文件"></a>实训问题——thymeleaf传值给外联js文件</h2><p>这次实训中后端业务逻辑、架构、数据库操作没有太大阻力，由于个人前端技术较差，主要问题集中于前端模板与后端的交互。这篇文介绍外联js传值问题。<br>当使用前端模板时想使用如下图的动态显示数据问题时需要解决如何后端向js文件传值，这次实训项目未前后端分离采用thymeleaf模板引擎。<br><img src="/img/design20/countJs.PNG" alt="前端js动态显示数据"> </p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>解决思路：后端传值给html页面，html页面设立全局变量赋值接收，js调用含有该变量的function()方法。<br>项目实例见下方代码：<br>html页面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script th:inline=<span class="string">"javascript"</span> <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">           //&lt;![CDATA[</span><br><span class="line">          var countUser = [[<span class="variable">$&#123;userNumber&#125;</span>]];</span><br><span class="line">          var countExpert = [[<span class="variable">$&#123;expertNumber&#125;</span>]];</span><br><span class="line">          var countProject = [[<span class="variable">$&#123;projectNumber&#125;</span>]];</span><br><span class="line">          var countPrize = [[<span class="variable">$&#123;prizeNumber&#125;</span>]];</span><br><span class="line">          //通过参数传递</span><br><span class="line">          countUp(countUser);</span><br><span class="line">          countUp2(countExpert);</span><br><span class="line">          countUp3(countProject);</span><br><span class="line">          countUp4(countPrize);</span><br><span class="line"></span><br><span class="line">           //]]&gt;</span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">      &lt;script src=<span class="string">"/js/count.js"</span> <span class="built_in">type</span>=<span class="string">"text/javascript"</span> /&gt;&lt;/script&gt;&lt;/section&gt;</span><br></pre></td></tr></table></figure><br>js页面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> countUp(count)</span><br><span class="line">&#123;</span><br><span class="line">    var div_by = 100,</span><br><span class="line">        speed = Math.round(count / div_by),</span><br><span class="line">        <span class="variable">$display</span> = $(<span class="string">'.count'</span>),</span><br><span class="line">        run_count = 1,</span><br><span class="line">        int_speed = 24;</span><br><span class="line"></span><br><span class="line">    var int = setInterval(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        <span class="keyword">if</span>(run_count &lt; div_by)&#123;</span><br><span class="line">            <span class="variable">$display</span>.text(speed * run_count);</span><br><span class="line">            run_count++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(parseInt(<span class="variable">$display</span>.text()) &lt; count) &#123;</span><br><span class="line">            var curr_count = parseInt(<span class="variable">$display</span>.text()) + 1;</span><br><span class="line">            <span class="variable">$display</span>.text(curr_count);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            clearInterval(int);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, int_speed);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">countUp(countUser);</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> thymeleaf </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> js </tag>
+            
+            <tag> thymeleaf </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>idea配置run Dashboard</title>
+      <link href="/2020/06/20/idea%E9%85%8D%E7%BD%AErun%20Dashboard/"/>
+      <url>/2020/06/20/idea%E9%85%8D%E7%BD%AErun%20Dashboard/</url>
+      
+        <content type="html"><![CDATA[<h2 id="run-Dashboard功能"><a href="#run-Dashboard功能" class="headerlink" title="run Dashboard功能"></a>run Dashboard功能</h2><p>如下图所示run Dashboard面板可以管理多个服务、modules，对微服务项目以及多modules项目运行和管理十分方便，但idea在运行中不是默认就有run Dashboard的面板<br><img src="/img/design20/Dashboard.PNG" alt=" run Dashboard"> </p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>1.点击多个模块服务启动时的idea右下角弹窗<br><img src="/img/design20/Dashboard-1.PNG" alt=" run Dashboard"><br>2.edit configurations配置，步骤如下图：<br><img src="/img/design20/Dashboard-4.PNG" alt=" run Dashboard"><br><img src="/img/design20/Dashboard-2.PNG" alt=" run Dashboard"><br><img src="/img/design20/Dashboard-3.PNG" alt=" run Dashboard"> </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+            <tag> run Dashboard </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>大三实训记录——springboot2.0后版本配置虚拟路径以访问本地图片</title>
+      <link href="/2020/06/20/%E5%A4%A7%E4%B8%89%E5%AE%9E%E8%AE%AD%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94springboot2-0%E5%90%8E%E7%89%88%E6%9C%AC%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E8%B7%AF%E5%BE%84%E4%BB%A5%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/"/>
+      <url>/2020/06/20/%E5%A4%A7%E4%B8%89%E5%AE%9E%E8%AE%AD%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94springboot2-0%E5%90%8E%E7%89%88%E6%9C%AC%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E8%B7%AF%E5%BE%84%E4%BB%A5%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</url>
+      
+        <content type="html"><![CDATA[<h2 id="实训"><a href="#实训" class="headerlink" title="实训"></a>实训</h2><p>最近大三下半学期刚刚结束，打算用实训记录类标题记录一下自己实训开发中遇到的一些问题。这次实训由京东互联网科技实践中心的老师授课并且给与我们开发小组达到毕设水平的评价，不知后续参加工作后看大学中开发的项目会有一些什么样的感受。项目后续上传到github上，个人负责建筑奖项参评平台用户操作系统开发，管理员与评审专家系统由其他组员开发。</p><h2 id="实训问题——thymeleaf传值给外联js文件"><a href="#实训问题——thymeleaf传值给外联js文件" class="headerlink" title="实训问题——thymeleaf传值给外联js文件"></a>实训问题——thymeleaf传值给外联js文件</h2><p>这次实训中后端业务逻辑、架构、数据库操作没有太大阻力，由于个人前端技术较差，主要问题集中于前端模板与后端的交互。这篇文介绍虚拟路径映射问题，在项目需求分析中为满足用户操作平台中用户账号上传、更换头像并实时显示的问题，springboot开发须配置使用虚拟路径映射完成功能。<br><img src="/img/design20/images.PNG" alt="虚拟路径映射"> </p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>解决思路：@Configuration定义配置类，继承WebMvcConfigurationSupport类配置虚拟路径。<br>项目实例见下方代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class UploadConfiguration extends WebMvcConfigurationSupport  &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">        registry.addResourceHandler(<span class="string">"/upload/**"</span>)//这个是虚拟路径图片路径</span><br><span class="line">                .addResourceLocations(<span class="string">"file:E:/upload/img/"</span>);//这个是图片真实路径</span><br><span class="line">        super.addResourceHandlers(registry);</span><br><span class="line">        registry.addResourceHandler(<span class="string">"/**"</span>).addResourceLocations(<span class="string">"classpath:/static/"</span>);//项目内的图片去static下找</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 虚拟路径 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> springboot </tag>
+            
+            <tag> 虚拟路径 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Druid的sql数据监控没有数据</title>
       <link href="/2020/04/30/Druid%E7%9A%84sql%E6%95%B0%E6%8D%AE%E7%9B%91%E6%8E%A7%E6%B2%A1%E6%9C%89%E6%95%B0%E6%8D%AE/"/>
       <url>/2020/04/30/Druid%E7%9A%84sql%E6%95%B0%E6%8D%AE%E7%9B%91%E6%8E%A7%E6%B2%A1%E6%9C%89%E6%95%B0%E6%8D%AE/</url>
@@ -189,7 +270,7 @@
     
     
     <entry>
-      <title>Docker容器运行前后端结合简单实例</title>
+      <title>Docker容器运行前后端分离简单实例</title>
       <link href="/2020/02/25/docker%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E7%AE%80%E5%8D%95%E5%89%8D%E5%90%8E%E7%AB%AF%E7%BB%93%E5%90%88%E5%AE%9E%E4%BE%8B/"/>
       <url>/2020/02/25/docker%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E7%AE%80%E5%8D%95%E5%89%8D%E5%90%8E%E7%AB%AF%E7%BB%93%E5%90%88%E5%AE%9E%E4%BE%8B/</url>
       
