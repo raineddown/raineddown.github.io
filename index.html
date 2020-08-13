@@ -110,7 +110,7 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
                     <div class="site-heading">
-                        <h1>Heavy Rain</h1>
+                        <h1>welcome to heavy rain&#39;s blog</h1>
                         <!--<hr class="small">-->
                         <span id="subdusi" class="subheading">If builders built buildings the way programmers wrote programs, then the first woodpecker that came along wound destroy civilization</span>
                     </div>
@@ -141,7 +141,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Heavy Rain</a>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s blog</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -178,6 +178,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -186,13 +193,6 @@
                         
                         <li>
                             <a href="/photography/">Photography</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -278,6 +278,42 @@
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/08/13/数据库外键与级联的使用考量/">
+                <h2 class="post-title">
+                    数据库外键与级联的使用考量
+                </h2>
+                <h3 class="post-subtitle">
+                    数据库外键与级联的使用考量
+                </h3>
+                <div class="post-content-preview">
+                    背景在接触了一些企业级项目后发现，项目对应的数据库设计中很少再设计外键和级联（触发器、级联更新与删除）与大学期间的数据库设计课程以及以往的个人小项目的数据库设计相反，当需要用外键做关联的时候，也是仅对字段进行冗余存储。
+开发规范在《阿里巴巴java开发手册》中对数据库设置的规范强调————“【强制】不得使用外键与级联，一切外键概念必须在应用层解决。”
+数据库去外键设计解决方案：设计关联表。举......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-08-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#sql" title="sql">sql</a>
+                    
+                      <a href="/tags/#foreign key" title="foreign key">foreign key</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -459,16 +495,17 @@
 
         <div class="post-preview">
 
-            <a href="/2020/04/21/jdk11新特性/">
+            <a href="/2020/04/21/jdk12新特性/">
                 <h2 class="post-title">
-                    jdk11新特性
+                    jdk12新特性
                 </h2>
                 <h3 class="post-subtitle">
-                    本文为转载记录java11特性
+                    本文为转载记录java12特性
                 </h3>
                 <div class="post-content-preview">
                     这日子过着过着jdk14都发布了，刚起步用jdk11的我瑟瑟发抖，打算记录一下。
-Java11 vs Java8Java 11相对于Java 8确实有一部分进化，除了有很多内部的升级（比如开销和时延更低的GC、TLS1.3加持等等）之外，对于初学使用者来说也有一些语言使用层面的进化。正好最近我在自己的个人小项目上尝试升级使用了一下 Java11（公司项目咱也不敢动、也不敢问，只好动自己的个人......
+低暂停延时的垃圾收集器 (实验版)1A Low-Pause-Time Garbage Collector (Experimental)
+添加一个名为 Shenandoah的新垃圾收集 (GC)算法，该算法通过与正在运行的 Java线程并发执行回收工作来减少 GC暂停时间。Shenandoah的暂停时间与堆大小无......
                 </div>
             </a>
             
@@ -492,17 +529,16 @@ Java11 vs Java8Java 11相对于Java 8确实有一部分进化，除了有很多�
 
         <div class="post-preview">
 
-            <a href="/2020/04/21/jdk12新特性/">
+            <a href="/2020/04/21/jdk11新特性/">
                 <h2 class="post-title">
-                    jdk12新特性
+                    jdk11新特性
                 </h2>
                 <h3 class="post-subtitle">
-                    本文为转载记录java12特性
+                    本文为转载记录java11特性
                 </h3>
                 <div class="post-content-preview">
                     这日子过着过着jdk14都发布了，刚起步用jdk11的我瑟瑟发抖，打算记录一下。
-低暂停延时的垃圾收集器 (实验版)1A Low-Pause-Time Garbage Collector (Experimental)
-添加一个名为 Shenandoah的新垃圾收集 (GC)算法，该算法通过与正在运行的 Java线程并发执行回收工作来减少 GC暂停时间。Shenandoah的暂停时间与堆大小无......
+Java11 vs Java8Java 11相对于Java 8确实有一部分进化，除了有很多内部的升级（比如开销和时延更低的GC、TLS1.3加持等等）之外，对于初学使用者来说也有一些语言使用层面的进化。正好最近我在自己的个人小项目上尝试升级使用了一下 Java11（公司项目咱也不敢动、也不敢问，只好动自己的个人......
                 </div>
             </a>
             
@@ -595,40 +631,6 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/03/01/六边形架构/">
-                <h2 class="post-title">
-                    六边形架构认识
-                </h2>
-                <h3 class="post-subtitle">
-                    微服务架构基础架构
-                </h3>
-                <div class="post-content-preview">
-                    六边形架构简介六边形架构由Alistair Cockburn于2005年提出，相较于传统三层架构方式的缺点————不支持多客户端、不支持多数据库、领域层依赖持久层，六边形架构实现了业务逻辑以一种松耦合的形式与多个外部系统通过“适配器-端口”的形式进行集成。某种意义上六边形架构也是一种分层架构，将架构分为了内部和外部但没有了层的概念。六边形架构也称为端口与适配器，在领域驱动设计（DDD）和微服......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-03-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#架构模式" title="架构模式">架构模式</a>
-                    
-                      <a href="/tags/#六边形架构" title="六边形架构">六边形架构</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -696,15 +698,15 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -731,6 +733,10 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
             
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
+            
+        
+            
+        
             
         
             
@@ -766,7 +772,7 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
 
         
-            <p>欢迎到访,这里是Heavy Rain的个人博客,该主题暂无中文主题zh-CN敬请理解。Welcome to visit, I&#39;m Heavy Rain!I like to sign with @raineddown.</p>
+            <p>欢迎到访,这里是Heavy Rain的个人博客，博主号“醒骨真人”。该博客由hexo搭建，该主题暂无中文主题zh-CN敬请理解。Welcome to visit, I&#39;m Heavy Rain!I like to sign with @raineddown.</p>
         
 
         <!-- SNS Link -->
@@ -847,6 +853,10 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
     <ul>
       
         <li>
+          <a href="/2020/08/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%96%E9%94%AE%E4%B8%8E%E7%BA%A7%E8%81%94%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%83%E9%87%8F/">数据库外键与级联的使用考量</a>
+        </li>
+      
+        <li>
           <a href="/2020/06/25/%E5%A4%A7%E4%B8%89%E5%AE%9E%E8%AE%AD%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94thymeleaf%E4%BC%A0%E5%80%BC%E7%BB%99%E5%A4%96%E8%81%94js%E6%96%87%E4%BB%B6/">大三实训记录——thymeleaf传值给外联js文件</a>
         </li>
       
@@ -860,10 +870,6 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
       
         <li>
           <a href="/2020/04/30/Druid%E7%9A%84sql%E6%95%B0%E6%8D%AE%E7%9B%91%E6%8E%A7%E6%B2%A1%E6%9C%89%E6%95%B0%E6%8D%AE/">Druid的sql数据监控没有数据</a>
-        </li>
-      
-        <li>
-          <a href="/2020/04/21/IDEA%E6%97%97%E8%88%B0%E7%89%88%E5%AD%A6%E7%94%9F%E5%85%9A%E5%A6%82%E4%BD%95%E8%8E%B7%E5%BE%97%E5%85%8D%E8%B4%B9%E7%9A%84%E4%B8%AA%E4%BA%BA%E8%AE%B8%E5%8F%AF%E8%AF%81-1/">IDEA旗舰版学生党如何获得免费的个人许可证</a>
         </li>
       
     </ul>
@@ -892,7 +898,7 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -903,11 +909,11 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
     <div class="widget">
       <ul>
         
-          <a href="categories/#架构模式"><li>架构模式</li></a>
+          <a href="categories/#JSON"><li>JSON</li></a>
         
           <a href="categories/#GitHub"><li>GitHub</li></a>
         
-          <a href="categories/#JSON"><li>JSON</li></a>
+          <a href="categories/#架构模式"><li>架构模式</li></a>
         
           <a href="categories/#Annotation"><li>Annotation</li></a>
         
@@ -921,9 +927,11 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
           <a href="categories/#jdk"><li>jdk</li></a>
         
+          <a href="categories/#idea"><li>idea</li></a>
+        
           <a href="categories/#Druid"><li>Druid</li></a>
         
-          <a href="categories/#idea"><li>idea</li></a>
+          <a href="categories/#sql"><li>sql</li></a>
         
           <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
@@ -1105,7 +1113,7 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
         
 
         <!-- background effects end -->

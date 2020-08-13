@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://radarsoftware.cn/2019/12/25/hexo%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2020-08-13</lastmod>
+  </url>  <url>
+    <loc>http://radarsoftware.cn/2020/08/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%96%E9%94%AE%E4%B8%8E%E7%BA%A7%E8%81%94%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%83%E9%87%8F/</loc>
+    <lastmod>2020-08-13</lastmod>
+  </url>  <url>
     <loc>http://radarsoftware.cn/2020/06/20/idea%E9%85%8D%E7%BD%AErun%20Dashboard/</loc>
     <lastmod>2020-07-04</lastmod>
   </url>  <url>
@@ -39,9 +45,6 @@
   </url>  <url>
     <loc>http://radarsoftware.cn/2020/04/05/centos%E5%AE%89%E8%A3%85nginx%E5%B9%B6%E9%85%8D%E7%BD%AESSL%E8%AF%81%E4%B9%A6/</loc>
     <lastmod>2020-04-21</lastmod>
-  </url>  <url>
-    <loc>http://radarsoftware.cn/2019/12/25/hexo%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2020-04-20</lastmod>
   </url>  <url>
     <loc>http://radarsoftware.cn/2019/07/21/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2020-04-20</lastmod>
