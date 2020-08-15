@@ -171,13 +171,6 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -278,6 +278,44 @@
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/08/15/数据库批量修改语句生成查询语句/">
+                <h2 class="post-title">
+                    数据库批量修改语句生成查询语句
+                </h2>
+                <h3 class="post-subtitle">
+                    sql批量修改语句生成语句
+                </h3>
+                <div class="post-content-preview">
+                    背景在接老师开发商业性质的项目的时候，接受了一个批量修改数据库的任务，花费了自己蛮多心血特此记录一下。
+任务要求任务详情：在现有的数据库中，每张表都有 CREATER，CREATER_ID，CREATE_DATE，UPDATER，UPDATER_ID，UPDATE_DATE等字段，编写一个工具，用于：
+
+确保一致性：每张表内的这些字段名字，类型，长度都相同
+统一被修改：批量修改这些字段的名字......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-08-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Git" title="Git">Git</a>
+                    
+                      <a href="/tags/#GitHub" title="GitHub">GitHub</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -445,11 +483,11 @@
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#springboot" title="springboot">springboot</a>
-                    
                       <a href="/tags/#Druid" title="Druid">Druid</a>
                     
                       <a href="/tags/#alibaba.druid" title="alibaba.druid">alibaba.druid</a>
+                    
+                      <a href="/tags/#springboot" title="springboot">springboot</a>
                     
                 </div>
             
@@ -592,45 +630,6 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/04/05/centos安装nginx并配置SSL证书/">
-                <h2 class="post-title">
-                    centos安装nginx并配置SSL证书
-                </h2>
-                <h3 class="post-subtitle">
-                    SSL证书安装
-                </h3>
-                <div class="post-content-preview">
-                    安装nginx的命令12sudo yum install epel-releasesudo yum install nginx
-让nginx随系统启动而启动1sudo systemctl enable nginx
-常用命令123启动：nginx停止：nginx -s stop重载配置：nginx -s reload
-配置SSL证书配置路径：/etc/nginx/日志路径：/var/log/n......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-04-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#nginx" title="nginx">nginx</a>
-                    
-                      <a href="/tags/#centos" title="centos">centos</a>
-                    
-                      <a href="/tags/#SSL" title="SSL">SSL</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -710,6 +709,16 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
             
         
             
+            <a href="/tags/#Git" title="Git" rel="2">Git</a>
+            
+        
+            
+            <a href="/tags/#GitHub" title="GitHub" rel="2">GitHub</a>
+            
+        
+            
+        
+            
         
             
         
@@ -735,12 +744,6 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
             
             <a href="/tags/#springboot" title="springboot" rel="2">springboot</a>
-            
-        
-            
-        
-            
-        
             
         
             
@@ -853,6 +856,10 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
     <ul>
       
         <li>
+          <a href="/2020/08/15/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E8%AF%AD%E5%8F%A5%E7%94%9F%E6%88%90%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5/">数据库批量修改语句生成查询语句</a>
+        </li>
+      
+        <li>
           <a href="/2020/08/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%96%E9%94%AE%E4%B8%8E%E7%BA%A7%E8%81%94%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%83%E9%87%8F/">数据库外键与级联的使用考量</a>
         </li>
       
@@ -866,10 +873,6 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
       
         <li>
           <a href="/2020/06/20/%E5%A4%A7%E4%B8%89%E5%AE%9E%E8%AE%AD%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94springboot2-0%E5%90%8E%E7%89%88%E6%9C%AC%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E8%B7%AF%E5%BE%84%E4%BB%A5%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/">大三实训记录——springboot2.0后版本配置虚拟路径以访问本地图片</a>
-        </li>
-      
-        <li>
-          <a href="/2020/04/30/Druid%E7%9A%84sql%E6%95%B0%E6%8D%AE%E7%9B%91%E6%8E%A7%E6%B2%A1%E6%9C%89%E6%95%B0%E6%8D%AE/">Druid的sql数据监控没有数据</a>
         </li>
       
     </ul>
@@ -898,7 +901,7 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -911,11 +914,15 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
           <a href="categories/#架构模式"><li>架构模式</li></a>
         
-          <a href="categories/#GitHub"><li>GitHub</li></a>
+          <a href="categories/#Annotation"><li>Annotation</li></a>
         
           <a href="categories/#JSON"><li>JSON</li></a>
         
+          <a href="categories/#GitHub"><li>GitHub</li></a>
+        
           <a href="categories/#hexo"><li>hexo</li></a>
+        
+          <a href="categories/#Docker"><li>Docker</li></a>
         
           <a href="categories/#centos"><li>centos</li></a>
         
@@ -923,19 +930,15 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
         
           <a href="categories/#jdk"><li>jdk</li></a>
         
+          <a href="categories/#Druid"><li>Druid</li></a>
+        
           <a href="categories/#idea"><li>idea</li></a>
         
           <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
-          <a href="categories/#Druid"><li>Druid</li></a>
-        
-          <a href="categories/#sql"><li>sql</li></a>
-        
-          <a href="categories/#Docker"><li>Docker</li></a>
-        
           <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
         
-          <a href="categories/#Annotation"><li>Annotation</li></a>
+          <a href="categories/#sql"><li>sql</li></a>
         
       </ul>
     </div>

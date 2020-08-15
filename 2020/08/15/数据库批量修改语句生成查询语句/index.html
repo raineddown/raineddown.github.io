@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          Docker容器运行前后端分离简单实例 - radarsoftware
+          数据库批量修改语句生成查询语句 - radarsoftware
         
     </title>
 
-    <link rel="canonical" href="http://radarsoftware.cn/2020/02/25/docker容器运行简单前后端结合实例/">
+    <link rel="canonical" href="http://radarsoftware.cn/2020/08/15/数据库批量修改语句生成查询语句/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -112,21 +112,23 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
+                              <a class="tag" href="/tags/#Git" title="Git">Git</a>
+                            
+                              <a class="tag" href="/tags/#GitHub" title="GitHub">GitHub</a>
                             
                         </div>
-                        <h1>Docker容器运行前后端分离简单实例</h1>
-                        <h2 class="subheading"></h2>
+                        <h1>数据库批量修改语句生成查询语句</h1>
+                        <h2 class="subheading">sql批量修改语句生成语句</h2>
                         <span class="meta">
                             Posted by John Doe on
-                            2020-02-25
+                            2020-08-15
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">914</span> and
-                                Reading Time <span class="post-count">4</span> Minutes
+                                Words <span class="post-count">492</span> and
+                                Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -274,30 +276,37 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h3><p>Docker是一种运行于Linux和Windows上的软件，用于创建、管理和编排容器。Docker是在GitHub上开发的Moby开源项目的一部分。<a href="https://docs.docker.com/" target="_blank" rel="noopener">Docker官方文档</a> <a href="http://www.docker.org.cn/page/resources.html" target="_blank" rel="noopener">Docker中文社区</a>(ps:别忘配置加速器Docker图标》Settings》Docker Engine)</p>
-<h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><p>springboot项目，非常简单的演示后端，注解代码实现获取/hello/路径后的string类型数据。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package iteach.docker.service.spring.docker;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.web.bind.annotation.CrossOrigin;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class SpringHelloApplication &#123;</span><br><span class="line"></span><br><span class="line">    @CrossOrigin</span><br><span class="line">    @GetMapping(<span class="string">"/hello/&#123;name&#125;"</span>)</span><br><span class="line">    public String hello(@PathVariable String name) &#123;</span><br><span class="line">        <span class="built_in">return</span> String.format(<span class="string">"Hello,%s!"</span>, name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringHelloApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Docker与后端应用"><a href="#Docker与后端应用" class="headerlink" title="Docker与后端应用"></a>Docker与后端应用</h2><h3 id="Docker创建后端镜像"><a href="#Docker创建后端镜像" class="headerlink" title="Docker创建后端镜像"></a>Docker创建后端镜像</h3><p>1、将后端项目打成jar包，可以在命令行工具（这里使用的是powershell）进入到jar包生成路径运行java -jar .\jar包名.jar\检验jar包是否能运行<br>2、新建一个文件夹，文件夹下放置jar包和新建一个名为Dockerfile的文件不可改名。<br>3、Dockerfile内容,可以将jdk改为jre这样安装的镜像更小更快<br><img src="/img/backend.png" alt="运行结果"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:11</span><br><span class="line">ADD spring-hello.jar app.jar</span><br><span class="line">ENTRYPOINT [<span class="string">"java"</span>,<span class="string">"-jar"</span>,<span class="string">"app.jar"</span>]</span><br></pre></td></tr></table></figure><br>4、命令行工具在该目录下输入(文章最后总结解释各个指令作用)<br>拉取镜像(在放置Dockerfile文件处执行)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t spring-hello .</span><br></pre></td></tr></table></figure></p>
-<h3 id="Docker创建容器并运行"><a href="#Docker创建容器并运行" class="headerlink" title="Docker创建容器并运行"></a>Docker创建容器并运行</h3><p>命令行工具输入，创建容器运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name hello-backend -d -p 8000:8080 spring-hello</span><br></pre></td></tr></table></figure><br>获取运行结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Invoke-RestMethod http://localhost:8000/hello/xz</span><br></pre></td></tr></table></figure><br><img src="/img/backend2.png" alt="运行结果">  </p>
-<h2 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">&lt;div id=<span class="string">"sender"</span>&gt;</span><br><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> v-model=<span class="string">"name"</span> /&gt;</span><br><span class="line">&lt;button @click=<span class="string">"send"</span>&gt;发送&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div id=<span class="string">"greeting"</span>&gt;</span><br><span class="line">&lt;p style=<span class="string">"margin-bottom: 0;"</span>&gt;Vue: &#123;&#123; name &#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;p style=<span class="string">"margin-top: 0;"</span>&gt;Spring: &#123;&#123; greeting &#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123; name: <span class="string">"App"</span>,</span><br><span class="line"><span class="function"><span class="title">data</span></span>() &#123; <span class="built_in">return</span> &#123;</span><br><span class="line">name: <span class="string">""</span>, greeting: <span class="string">""</span></span><br><span class="line">&#125;;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line"><span class="function"><span class="title">send</span></span>() &#123; // Axios Promise </span><br><span class="line">fetch(`http://localhost:8000/hello/<span class="variable">$&#123;this.name&#125;</span>`)</span><br><span class="line">.<span class="keyword">then</span>(response =&gt; &#123; <span class="built_in">return</span> response.text();</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="keyword">then</span>(text =&gt; (this.greeting = text))</span><br><span class="line">.catch(error =&gt; console.log(error));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="Docker与前端应用"><a href="#Docker与前端应用" class="headerlink" title="Docker与前端应用"></a>Docker与前端应用</h2><p>注意：这里演示使用的是Vue框架，文件名为hello-vue,使用服务器为nginx.</p>
-<h3 id="Docker创建前端镜像"><a href="#Docker创建前端镜像" class="headerlink" title="Docker创建前端镜像"></a>Docker创建前端镜像</h3><p>新建Dockerfile文件，文件内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM nginx	</span><br><span class="line"><span class="comment"># 更多请参考https://hub.docker.com/_/nginx/</span></span><br><span class="line">COPY ./hello /usr/share/nginx/html</span><br></pre></td></tr></table></figure></p>
-<h3 id="Docker创建容器并运行-1"><a href="#Docker创建容器并运行-1" class="headerlink" title="Docker创建容器并运行"></a>Docker创建容器并运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t hello-vue . </span><br><span class="line">docker run --name hello-frontend -d -p 80:80 hello-vue</span><br></pre></td></tr></table></figure>
-<p>运行结果：<br><img src="/img/result1.png" alt="运行结果"></p>
-<h2 id="Docker-compose一次运行两个容器"><a href="#Docker-compose一次运行两个容器" class="headerlink" title="Docker-compose一次运行两个容器"></a>Docker-compose一次运行两个容器</h2><p>避免干扰测试建议停止并删除之前运行的容器，指令行在文章末尾<br>1、命令行工具输入code docker-compose.yml 创建docker-compose文件<br>2、docker-compose.yml编译内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'3'</span></span><br><span class="line">services:</span><br><span class="line">  frontend:</span><br><span class="line">    image: hello-vue</span><br><span class="line">    ports:</span><br><span class="line">    - 80:80 </span><br><span class="line">    depends_on:</span><br><span class="line">    - backend</span><br><span class="line">  backend:</span><br><span class="line">    image: spring-hello</span><br><span class="line">    ports:</span><br><span class="line">    - 8000:8080</span><br></pre></td></tr></table></figure><br>3、命令行工具输入运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose.exe up</span><br></pre></td></tr></table></figure><br><img src="/img/image.png" alt="镜像"><br><img src="/img/container.png" alt="容器"><br>4、运行结果<br><img src="/img/result2.png" alt="运行结果"></p>
-<h2 id="Docker基础指令"><a href="#Docker基础指令" class="headerlink" title="Docker基础指令"></a>Docker基础指令</h2><p>下面是这篇文章运用的docker指令集合方便观看<br>Docker构建镜像(spring-hello为镜像名，-t为容器重新分配一个伪输入终端)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t spring-hello .</span><br></pre></td></tr></table></figure><br>Docker运行容器(hello-backend为容器名，-d表示后台运行容器并返回容器ID，-p表示端口号，spring-hello为已搭建的镜像名)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name hello-backend -d -p 8000:8080 spring-hello</span><br></pre></td></tr></table></figure><br>显示已安装镜像<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure><br>显示所有容器与显示正在运行容器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure><br>停止容器、删除容器、删除镜像<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器名</span><br><span class="line">docker rm 容器名</span><br><span class="line">docker rmi 镜像名</span><br></pre></td></tr></table></figure><br>获取网页内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Invoke-RestMethod http://localhost:8000/hello/xz</span><br></pre></td></tr></table></figure><br>创建docker-compose文件与运行该文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">code docker-compose.yml</span><br><span class="line">docker-compose.exe up</span><br></pre></td></tr></table></figure></p>
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在接老师开发商业性质的项目的时候，接受了一个批量修改数据库的任务，花费了自己蛮多心血特此记录一下。</p>
+<h2 id="任务要求"><a href="#任务要求" class="headerlink" title="任务要求"></a>任务要求</h2><p>任务详情：<br>在现有的数据库中，每张表都有 CREATER，CREATER_ID，CREATE_DATE，UPDATER，UPDATER_ID，UPDATE_DATE等字段，编写一个工具，用于：</p>
+<ol>
+<li>确保一致性：每张表内的这些字段名字，类型，长度都相同</li>
+<li>统一被修改：批量修改这些字段的名字，类型，长度<br><img src="/img/sql工具.PNG" alt=""></li>
+</ol>
+<h2 id="解决思路-amp-方案"><a href="#解决思路-amp-方案" class="headerlink" title="解决思路&amp;方案"></a>解决思路&amp;方案</h2><p>刚开始时想复杂了，脚本学习较少，时间紧迫，于是选择从sql查询语句入手，一直往IF EXISTS钻牛角尖，但批量多表操作的拼接折磨了我很久，后续将问题简单化为将对应数据库没有字段的表添加字段列，再将所有表对应字段列的属性以及长度更新校验更正为任务要求的。</p>
+<p>拼接代码：<br>注意：除CREATER其它字段sql全部省略,下位核心拼接代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION;</span><br><span class="line">SELECT DISTINCT CONCAT(<span class="string">'ALTER TABLE '</span>,table_name,<span class="string">' ADD COLUMN CREATER VARCHAR(32);'</span>) FROM information_schema.tables WHERE table_schema = DATABASE() AND TABLE_NAME NOT IN (SELECT TABLE_NAME FROM information_schema.columns WHERE table_schema = DATABASE() AND column_name LIKE <span class="string">'CREATER'</span>);</span><br><span class="line"></span><br><span class="line">SELECT CONCAT(<span class="string">'ALTER TABLE '</span>,table_name,<span class="string">' MODIFY  COLUMN CREATER VARCHAR(32);'</span>) from information_schema.`TABLES`WHERE table_schema=<span class="string">'agency_test'</span>;</span><br><span class="line">COMMIT;</span><br></pre></td></tr></table></figure></p>
+<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><ol>
+<li><p>在要修改的数据库新建查询</p>
+</li>
+<li><p>在查询里黏贴sql查询代码生成脚本的内容并运行</p>
+</li>
+<li><p>保存该查询结果为.txt文件（或sql文件）</p>
+</li>
+<li><p>在该文件内容开头另起一行添加  START TRANSACTION;  内容结尾另一起行添加  COMMIT;</p>
+</li>
+<li><p>将该内容黏贴至新的查询（或运行sql文件注意指定运行sql的数据库）</p>
+</li>
+<li><p>注意：sql查询代码生成脚本未指定生成查询的关联数据库，请在需要使用的数据库使用该查询，若想指定对应数据库请将中所有table_schema=DATABASE()修改为table_schema=’指定数据库’</p>
+</li>
+</ol>
 
                 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2020/03/01/六边形架构/" data-toggle="tooltip" data-placement="top" title="六边形架构认识">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/12/25/hexo博客/" data-toggle="tooltip" data-placement="top" title="Hexo博客配置及个人网站部署">Next Post &rarr;</a>
+                        <a href="/2020/08/13/数据库外键与级联的使用考量/" data-toggle="tooltip" data-placement="top" title="数据库外键与级联的使用考量">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -406,7 +415,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Docker"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Docker</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Docker简介"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Docker简介</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#后端代码"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">后端代码</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Docker与后端应用"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Docker与后端应用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Docker创建后端镜像"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Docker创建后端镜像</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Docker创建容器并运行"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Docker创建容器并运行</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前端代码"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">前端代码</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Docker与前端应用"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Docker与前端应用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Docker创建前端镜像"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">Docker创建前端镜像</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Docker创建容器并运行-1"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">Docker创建容器并运行</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Docker-compose一次运行两个容器"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Docker-compose一次运行两个容器</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Docker基础指令"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Docker基础指令</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#背景"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">背景</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#任务要求"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">任务要求</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#解决思路-amp-方案"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">解决思路&amp;方案</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#操作方法"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">操作方法</span></a></li></ol>
         
         </div>
       </aside>
@@ -426,7 +435,9 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
+                          <a class="tag" href="/tags/#Git" title="Git">Git</a>
+                        
+                          <a class="tag" href="/tags/#GitHub" title="GitHub">GitHub</a>
                         
                     </div>
                 </section>
