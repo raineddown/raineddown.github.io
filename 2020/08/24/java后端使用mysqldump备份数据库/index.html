@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          jdk11新特性 - radarsoftware
+          java后端使用mysqldump备份数据库 - radarsoftware
         
     </title>
 
-    <link rel="canonical" href="http://radarsoftware.cn/2020/04/21/jdk11新特性/">
+    <link rel="canonical" href="http://radarsoftware.cn/2020/08/24/java后端使用mysqldump备份数据库/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -112,21 +112,21 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#jdk" title="jdk">jdk</a>
+                              <a class="tag" href="/tags/#mysqldump" title="mysqldump">mysqldump</a>
                             
                         </div>
-                        <h1>jdk11新特性</h1>
-                        <h2 class="subheading">本文为转载记录java11特性</h2>
+                        <h1>java后端使用mysqldump备份数据库</h1>
+                        <h2 class="subheading">java后端使用mysqldump命令备份数据库</h2>
                         <span class="meta">
                             Posted by John Doe on
-                            2020-04-21
+                            2020-08-24
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">421</span> and
-                                Reading Time <span class="post-count">1</span> Minutes
+                                Words <span class="post-count">546</span> and
+                                Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -274,35 +274,19 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>这日子过着过着jdk14都发布了，刚起步用jdk11的我瑟瑟发抖，打算记录一下。<br><img src="/img/jdk14.PNG" alt=""></p>
-<h2 id="Java11-vs-Java8"><a href="#Java11-vs-Java8" class="headerlink" title="Java11 vs Java8"></a>Java11 vs Java8</h2><p><img src="/img/jdk11/jdk11_1.jpg" alt=""><br>Java 11相对于Java 8确实有一部分进化，除了有很多内部的升级（比如开销和时延更低的<br>GC、TLS1.3加持等等）之外，对于初学使用者来说也有一些语言使用层面的进化。<br>正好最近我在自己的个人小项目上尝试升级使用了一下 Java11（公司项目咱也不敢动、也不<br>敢问，只好动自己的个人项目），因此本文从实际代码编写角度来大致体验一下我个人使用<br>Java11之后相对 Java8所感觉到的一些比较深刻的进化，官方文档里说得也非常清楚了：<br><a href="https://docs.oracle.com/en/java/javase/11/" target="_blank" rel="noopener">https://docs.oracle.com/en/java/javase/11/</a><br>我这次实验装的 Java11版本是 11.0.6：<br><img src="/img/jdk11/jdk11_2.jpg" alt=""><br>下文将要实验验证的一些新特性其实也并非 147 Java11才引入，很多其实在 Java9和 Java10时<br>就已经引入，只不过到了 Java11这个稳定版才沉淀下来。</p>
-<h2 id="变量类型推断"><a href="#变量类型推断" class="headerlink" title="变量类型推断"></a>变量类型推断</h2><p>新版Java引入了一个全新的类型关键字 var，用 var来定义的变量不用写具体类型，编译器能<br>根据 =右边的实际赋值来自动推断出变量的类型：<br>1、普通局部变量<br><img src="/img/jdk11/jdk11_3.jpg" alt=""><br>怎么样？是不是有一种在使用类似JavaScript这种弱类型语言的错觉？</p>
-<p>2、for循环中使用<br><img src="/img/jdk11/jdk11_4.jpg" alt=""></p>
-<p>这地方就能看出用 var定义局部变量的优势了，假如这个例子中集合里的元素类型更为复杂，<br>是类似 List<List<String>&gt;这种嵌套类型的话， var定义就非常简洁明了！</p>
-<p>3、当然，有些情况是不能使用的<br>var类型变量一旦赋值后，重新赋不同类型的值是不行的，比如：<br><img src="/img/jdk11/jdk11_5.jpg" alt=""></p>
-<p>定义 var类型变量没有初始化是不行的，比如：<br><img src="/img/jdk11/jdk11_6.jpg" alt=""><br>另外，像类的 成员变量类型、 方法入参类型、 返回值类型等是不能使用 var的，比如：<br><img src="/img/jdk11/jdk11_7.jpg" alt=""></p>
-<h2 id="官方HTTP-Client加持"><a href="#官方HTTP-Client加持" class="headerlink" title="官方HTTP Client加持"></a>官方HTTP Client加持</h2><p>是的！<br>现在 JDK官方就自带 HTTPClient了，位于 java.net.http包下，支持发送同步、异步的 HTTP请<br>求，这样一来，以前咱们常用的HTTP请求客户端诸如： OKHttp、 HttpClient这种现在都可以<br>退下了！<br>发送同步请求：<br><img src="/img/jdk11/jdk11_8.jpg" alt=""><br>发送异步请求：<br><img src="/img/jdk11/jdk11_9.jpg" alt=""><br>当然你也可以自定义请求头，比如携带 JWT Token权限信息去请求等：<br><img src="/img/jdk11/jdk11_10.jpg" alt=""></p>
-<h2 id="String处理增强"><a href="#String处理增强" class="headerlink" title="String处理增强"></a>String处理增强</h2><p>新版字符串 String类型增加了诸如： isBlank()、 strip()、 repeat()等方便的字符串处理方<br>法<br><img src="/img/jdk11/jdk11_11.jpg" alt=""></p>
-<h2 id="集合增强"><a href="#集合增强" class="headerlink" title="集合增强"></a>集合增强</h2><p>主要是增加了诸如 of()和 copyOf()等方法用于更加方便的创建和复制集合类型<br><img src="/img/jdk11/jdk11_12.jpg" alt=""></p>
-<h2 id="函数式编程增强"><a href="#函数式编程增强" class="headerlink" title="函数式编程增强"></a>函数式编程增强</h2><p>我印象最深的是对 Stream流增加了诸如 takeWhile()和 dropWhile()的截止结算方法：<br><img src="/img/jdk11/jdk11_13.jpg" alt=""></p>
-<h2 id="文件读写增强"><a href="#文件读写增强" class="headerlink" title="文件读写增强"></a>文件读写增强</h2><h3 id="1、Files类增强"><a href="#1、Files类增强" class="headerlink" title="1、Files类增强"></a>1、Files类增强</h3><p>我们以前心心念的直接能把文件内容读取到 String以及 String回写到文件的功能终于支持了,<br>可以通过 Files类的静态方法 writeString()和 readString()完成：<br><img src="/img/jdk11/jdk11_14.jpg" alt=""></p>
-<h3 id="2、InputStream增强"><a href="#2、InputStream增强" class="headerlink" title="2、InputStream增强"></a>2、InputStream增强</h3><p>InputStream则增加了一个 transferTo()方法，直接将数据丢到 OutputStream去：<br><img src="/img/jdk11/jdk11_15.jpg" alt=""></p>
-<h2 id="支持源文件直接运行-666！"><a href="#支持源文件直接运行-666！" class="headerlink" title="支持源文件直接运行(666！)"></a>支持源文件直接运行(666！)</h2><p>比如写一个最简单的 Hello World程序：<br><img src="/img/jdk11/jdk11_16.jpg" alt=""><br>并保存为 hello.java文件，这时候可以直接用 java指令去运行这个Java源文件，直接省去以<br>前 javac编译源文件的过程：<br><img src="/img/jdk11/jdk11_17.jpg" alt=""><br><img src="/img/jdk11/jdk11_18.jpg" alt=""><br>怎么样？是不是和python源文件的运行有点像？这个信息量就有点大了，大家可以自行脑补<br>一下</p>
-<h2 id="小-结"><a href="#小-结" class="headerlink" title="小 结"></a>小 结</h2><p>Java 11确有很多改进，但还是那句话，对于初学者来说Java 8足够啦，没必要刻意求新，稳<br>才是最重要的！</p>
-<p>转载的原文地址：<a href="https://www.bilibili.com/read/cv5037646" target="_blank" rel="noopener">https://www.bilibili.com/read/cv5037646</a></p>
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在接老师开发商业性质的项目的时候，接受了一个前端操作向后端发送请求进行数据库备份文件生成于下载的任务，花费了自己蛮多心血特此记录一下。</p>
+<h2 id="任务要求"><a href="#任务要求" class="headerlink" title="任务要求"></a>任务要求</h2><p>在指定页面以form表单（采用layui框架）显示出相关企业单位的备份信息(备份时间、备份文件名，文件名显示备份完成时间、备份相关内容、备份次数)，同时提供操作栏进行备份下载于删除操作<br><img src="/img/sql/backup.PNG" alt=""></p>
+<h2 id="核心完成方法"><a href="#核心完成方法" class="headerlink" title="核心完成方法"></a>核心完成方法</h2><p>java拼接mysqldump运行指令，并执行，由于数据库冗余较少涉及多次命令拼接与执行耗费较多时间（mysqldump指令在我的查找各种博客和官方文档暂未看到像sql查询语句的in、not in、or关键词字段进行条件判断只得在—where上下功夫）,后续也不知道会不会采用第三方云备份服务……</p>
+<p>废话少说下面是示例代码：<br>path： 备份文件的生成路径地址<br>dateString:转换为yyyyMMddHHmm格式的date字符串<br>ent_id： 主键id(String)<br>userTableName: 所有需要备份的表名字符串(“,”分隔的字符串)<br>user： 备份相关数据库的用户名<br>password： 备份相关数据库的密码<br>hostIP： 数据库IP地址<br>exportDatabaseName： 备份的数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public void exportSql(String path, String dateString, String ent_id,String userTableName,String user, String password, String hostIP, String exportDatabaseName) &#123;</span><br><span class="line">       String folderName_1 = <span class="string">"ZYK_"</span> + ent_id + <span class="string">"_BackupENT_"</span> + dateString + <span class="string">".sql"</span>;</span><br><span class="line">       File saveFile = new File(path);</span><br><span class="line">       // 如果目录不存在</span><br><span class="line">       <span class="keyword">if</span> (!saveFile.exists()) &#123;</span><br><span class="line">           // 创建文件夹</span><br><span class="line">           saveFile.mkdirs();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span>(!path.endsWith(File.separator))&#123;</span><br><span class="line">           path = path + File.separator;</span><br><span class="line">       &#125;</span><br><span class="line">       //备份有ent_id字段列的表</span><br><span class="line">       PrintWriter printWriter = null;</span><br><span class="line">       BufferedReader bufferedReader = null;</span><br><span class="line">       try &#123;</span><br><span class="line">           printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path + folderName_1), <span class="string">"utf8"</span>));</span><br><span class="line">           Process process = Runtime.getRuntime().<span class="built_in">exec</span>(<span class="string">" mysqldump -h"</span> + hostIP + <span class="string">" -u"</span> + user + <span class="string">" -p"</span> + password + <span class="string">" --set-charset=UTF8 "</span> + exportDatabaseName +<span class="string">" --tables "</span>+entTableName+<span class="string">" "</span>+<span class="string">"--where=\"ent_id='"</span>+ ent_id + <span class="string">"'\""</span>);</span><br><span class="line">           InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), <span class="string">"utf8"</span>);</span><br><span class="line">           bufferedReader = new BufferedReader(inputStreamReader);</span><br><span class="line">           String line;</span><br><span class="line">           <span class="keyword">while</span> ((line = bufferedReader.readLine()) != null) &#123;</span><br><span class="line">               printWriter.println(line);</span><br><span class="line">           &#125;</span><br><span class="line">           printWriter.flush();</span><br><span class="line">           <span class="keyword">if</span> (process.waitFor() != 0) &#123;</span><br><span class="line">               throw new CustomException(<span class="string">"线程未正常中止"</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; catch (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">           throw new CustomException(<span class="string">"备份sql操作失败"</span>);</span><br><span class="line">       &#125; finally &#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               <span class="keyword">if</span> (bufferedReader != null) &#123;</span><br><span class="line">                   bufferedReader.close();</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">if</span> (printWriter != null) &#123;</span><br><span class="line">                   printWriter.close();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; catch (IOException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
 
                 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2020/04/21/jdk12新特性/" data-toggle="tooltip" data-placement="top" title="jdk12新特性">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2020/04/21/IDEA 2020升级体验Java14/" data-toggle="tooltip" data-placement="top" title="IDEA 2020、Java14升级体验">Next Post &rarr;</a>
+                        <a href="/2020/08/15/数据库批量修改语句生成查询语句/" data-toggle="tooltip" data-placement="top" title="数据库批量修改语句生成查询语句">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -411,7 +395,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Java11-vs-Java8"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Java11 vs Java8</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#变量类型推断"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">变量类型推断</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#官方HTTP-Client加持"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">官方HTTP Client加持</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#String处理增强"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">String处理增强</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#集合增强"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">集合增强</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#函数式编程增强"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">函数式编程增强</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#文件读写增强"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">文件读写增强</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1、Files类增强"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">1、Files类增强</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2、InputStream增强"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">2、InputStream增强</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#支持源文件直接运行-666！"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">支持源文件直接运行(666！)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#小-结"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">小 结</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#背景"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">背景</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#任务要求"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">任务要求</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#核心完成方法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">核心完成方法</span></a></li></ol>
         
         </div>
       </aside>
@@ -431,7 +415,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#jdk" title="jdk">jdk</a>
+                          <a class="tag" href="/tags/#mysqldump" title="mysqldump">mysqldump</a>
                         
                     </div>
                 </section>

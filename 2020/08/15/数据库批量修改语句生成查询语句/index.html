@@ -112,9 +112,7 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Git" title="Git">Git</a>
-                            
-                              <a class="tag" href="/tags/#GitHub" title="GitHub">GitHub</a>
+                              <a class="tag" href="/tags/#SQL" title="SQL">SQL</a>
                             
                         </div>
                         <h1>数据库批量修改语句生成查询语句</h1>
@@ -189,13 +187,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -210,7 +201,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -218,6 +209,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -280,7 +278,7 @@
 <h2 id="任务要求"><a href="#任务要求" class="headerlink" title="任务要求"></a>任务要求</h2><p>任务详情：<br>数据库的表结构不统一，字段列名缺失以及长度不匹配。<br>在现有的数据库中，每张表都有 CREATER，CREATER_ID，CREATE_DATE，UPDATER，UPDATER_ID，UPDATE_DATE等字段，编写一个工具，用于：</p>
 <ol>
 <li>确保一致性：每张表内的这些字段名字，类型，长度都相同</li>
-<li>统一被修改：批量修改这些字段的名字，类型，长度<br><img src="/img/sql工具.PNG" alt=""></li>
+<li>统一被修改：批量修改这些字段的名字，类型，长度<br><img src="/img/sql/sql工具.PNG" alt=""></li>
 </ol>
 <h2 id="解决思路-amp-方案"><a href="#解决思路-amp-方案" class="headerlink" title="解决思路&amp;方案"></a>解决思路&amp;方案</h2><p>刚开始时想复杂了，脚本学习较少，时间紧迫，于是选择从sql查询语句入手，一直往IF EXISTS钻牛角尖，但批量多表操作的拼接折磨了我很久，后续将问题简单化为将对应数据库没有字段的表添加字段列，再将所有表对应字段列的属性以及长度更新校验更正为任务要求的。</p>
 <p>拼接代码：<br>注意：除CREATER其它字段sql全部省略,下为核心拼接代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION;</span><br><span class="line">SELECT DISTINCT CONCAT(<span class="string">'ALTER TABLE '</span>,table_name,<span class="string">' ADD COLUMN CREATER VARCHAR(32);'</span>) FROM information_schema.tables WHERE table_schema = DATABASE() AND TABLE_NAME NOT IN (SELECT TABLE_NAME FROM information_schema.columns WHERE table_schema = DATABASE() AND column_name LIKE <span class="string">'CREATER'</span>);</span><br><span class="line"></span><br><span class="line">SELECT CONCAT(<span class="string">'ALTER TABLE '</span>,table_name,<span class="string">' MODIFY  COLUMN CREATER VARCHAR(32);'</span>) from information_schema.`TABLES`WHERE table_schema=<span class="string">'agency_test'</span>;</span><br><span class="line">COMMIT;</span><br></pre></td></tr></table></figure></p>
@@ -304,6 +302,10 @@
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/08/24/java后端使用mysqldump备份数据库/" data-toggle="tooltip" data-placement="top" title="java后端使用mysqldump备份数据库">&larr; Previous Post</a>
+                    </li>
                     
                     
                     <li class="next">
@@ -436,9 +438,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Git" title="Git">Git</a>
-                        
-                          <a class="tag" href="/tags/#GitHub" title="GitHub">GitHub</a>
+                          <a class="tag" href="/tags/#SQL" title="SQL">SQL</a>
                         
                     </div>
                 </section>
