@@ -164,7 +164,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s blog</a>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -187,20 +187,6 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -208,7 +194,21 @@
 
                         
                         <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -293,9 +293,9 @@
 <h3 id="网站配置与基础指令"><a href="#网站配置与基础指令" class="headerlink" title="网站配置与基础指令"></a>网站配置与基础指令</h3><ul>
 <li>config文件中记录网站参数 相关参数介绍<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">Hexo官方文档</a></li>
 <li>基础指令：<br><strong>new</strong><br>新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+-<br><strong>generate</strong><br>生成静态文件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><strong>generate</strong><br>生成静态文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></p>
 <p><strong>server</strong><br>启动服务器。可简写为hexo s,默认情况下，访问网址为： <a href="http://localhost:4000/。" target="_blank" rel="noopener">http://localhost:4000/。</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>
 <p><strong>clean</strong><br>清除缓存文件 (db.json) 和已生成的静态文件 (public)。<br>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></p>
 <h2 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h2><p>文件夹进入指令new新建的.md文件，使用文本编辑器编译，个人推荐Sublime Text 3。进入后基于markdown语法进行写作。Hexo官方文档也有写作方法。完成博客编写后可在命令行输入<br>hexo s进入<a href="http://localhost:4000/页面查看编写结果。" target="_blank" rel="noopener">http://localhost:4000/页面查看编写结果。</a>    </p>
@@ -306,7 +306,7 @@
 <p>3、填写完后点击页面最下面的create按钮，于下图位置点击复制按钮<br><img src="/img/copy.PNG" alt="https/ssh alt"></p>
 <p>4、黏贴复制的内容，修改_config.yml文件下图位置的配置(不同主题可能有些许小不同但命名基本相同),修改url、root、type、branch、github这几处。<br><img src="/img/deploy.PNG" alt="deploy alt"><br><img src="/img/url.PNG" alt="url alt"></p>
 <p>5、进入本地博客文件夹git bash,安装 hexo-deployer-git 输入npm install hexo-deployer-git —save安装完成后依次输入hexo g(生成静态文件)、hexo d(部署到服务器)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line">一般流程：</span><br><span class="line">hexo g 生成静态资源</span><br><span class="line">hexo d 部署</span><br><span class="line">hexo clean 清除静态缓存</span><br><span class="line">hexo s启动服务</span><br></pre></td></tr></table></figure>
 <p>完成上述操作后可在地址 ownername.github.io 查看页面效果</p>
 <h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>若想部署到自己的域名则按下列操作<br>1、ping获取github上部署的博客页面ip地址<br><img src="/img/ping.PNG" alt="ping alt"></p>
 <p>2、github仓库设置(save前为自己的域名地址,不要留https://)<br>在你的博客仓库找到如图所示位置进行设置<br><img src="/img/Settings.PNG" alt="Setting alt"><br><img src="/img/save.PNG" alt="Save alt"></p>

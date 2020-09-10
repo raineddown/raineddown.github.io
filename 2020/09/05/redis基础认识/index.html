@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Redis基础认识 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2020/09/05/redis基础认识/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Redis" title="Redis">Redis</a>
+                            
+                        </div>
+                        <h1>Redis基础认识</h1>
+                        <h2 class="subheading">中间件Redis的了解与认识</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2020-09-05
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3.2k</span> and
+                                Reading Time <span class="post-count">12</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Redis属于NOSQL((NoSQL = Not Only SQL )，意即“不仅仅是SQL”。NoSQL 数据库种类繁多(Redis、Mongodb、HBase、Elasticsearch 等等)),NOSQL的特点是去掉关系数据库的关系型特性。数据之间无关系，这样就非常容易扩展。无形之间也在架构的层面上带来了可扩展的能力。NoSQL数据库都具有非常高的读写性能，尤其在大量下数据，更能体现它的优势。这得益于它的无关系性，数据库的结构简单。</p>
+<p>Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整个数据库在内存当中进行操作，定期通过异步操作把数据库数据写到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key- Value DB。 Redis的出色之处不仅仅是性能，Redis最大的魅力是支持保存多种数据结构，此外单个value的最大限制是1GB，不像memcached只能保存1MB的数据，因此Redis可以用来实现很多有用的功能。默认16个数据库，类似数组下标是从零开始，初始默认使用零号库，统一的密码管理，16个库都是同样密码，要么都连上要么一个也连接不上，redis默认端口是6379。</p>
+<p>在 Redis 中，事务总是具有原子性 （Atomicity)、一致性(Consistency)和隔离性（Isolation），并且当 Redis 运行在某种特定的持久化模式下时(快照、文件追加)，事务也具有持久性（Durability）。 </p>
+<p>快照（snapshotting）持久化（RDB） Redis可以通过创建快照来获得存储在内存里面的数据在某个时间点上的副本。Redis创建快照之后，可以对快照进行 备份，可以将快照复制到其他服务器从而创建具有相同数据的服务器副本（Redis主从结构，主要用来提高Redis性 能），还可以将快照留在原地以便重启服务器的时候使用。<br>快照实例配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save 900 1              #在900秒(15分钟)之后，如果至少有1个key发生变化，Redis就会自动触发BGSAVE命令 创建快照。</span><br></pre></td></tr></table></figure></p>
+<p>AOF（append-only ﬁle）持久化 与快照持久化相比，AOF持久化 的实时性更好，因此已成为主流的持久化方案。默认情况下Redis没有开启 AOF（append only ﬁle）方式的持久化，可以通过appendonly参数开启：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonly yes</span><br></pre></td></tr></table></figure><br>开启AOF持久化后每执行一条会更改Redis中的数据的命令，Redis就会将该命令写入硬盘中的AOF文件。AOF文件的 保存位置和RDB文件的位置相同，都是通过dir参数设置的，默认的文件名是appendonly.aof。<br>在Redis的配置文件中存在三种不同的 AOF 持久化方式，它们分别是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">appendfsync always     <span class="comment">#每次有数据修改发生时都会写入AOF文件,这样会严重降低Redis的速度 </span></span><br><span class="line">appendfsync everysec  <span class="comment">#每秒钟同步一次，显示地将多个写命令同步到硬盘 </span></span><br><span class="line">appendfsync no      <span class="comment">#让操作系统决定何时进行同步</span></span><br></pre></td></tr></table></figure><br>为了兼顾数据和写入性能，用户可以考虑 appendfsync everysec选项 ，让Redis每秒同步一次AOF文件，Redis性能 几乎没受到任何影响。而且这样即使出现系统崩溃，用户多只会丢失一秒之内产生的数据。当硬盘忙于执行写入操 作的时候，Redis还会优雅的放慢自己的速度以便适应硬盘的大写入速度</p>
+<p>redis的优点：<br>速度快：因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1) 持久化：定期通过异步操作把数据库数据写到硬盘上进行保存<br>支持丰富数据类型：支持string，list，set，sorted   set，hash<br>支持事务：操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除</p>
+<p>redis支持类型详细：</p>
+<ol>
+<li><p>String<br>常用命令: set,get,decr,incr,mget 等。 String数据结构是简单的key-value类型，value其实不仅可以是String，也可以是数字。 常规key-value缓存应用； 常规计数：微博数，粉丝数等。 </p>
+</li>
+<li><p>Hash<br>常用命令： hget,hset,hgetall 等。<br>Hash 是一个 string 类型的 ﬁeld 和 value 的映射表，hash 特别适合用于存储对象，后续操作的时候，你可以直接仅 仅修改这个对象中的某个字段的值。 比如我们可以Hash数据结构来存储用户信息，商品信息等等。比如下面我就用 hash 类型存放了我本人的一些信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">key=JavaUser293847</span><br><span class="line">value=&#123;  </span><br><span class="line">	“id”: 1,</span><br><span class="line">	“name”: “SnailClimb”,  </span><br><span class="line">	“age”: 22,  </span><br><span class="line">	“location”: “Wuhan, Hubei”</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>List<br>常用命令: lpush,rpush,lpop,rpop,lrange等<br>key=JavaUser293847 value={  “id”: 1,  “name”: “SnailClimb”,  “age”: 22,  “location”: “Wuhan, Hubei” }<br>list 就是链表，Redis list 的应用场景非常多，也是Redis重要的数据结构之一，比如微博的关注列表，粉丝列表， 消息列表等功能都可以用Redis的 list 结构来实现。 Redis list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销。<br>另外可以通过 lrange 命令，就是从某个元素开始读取多少个元素，可以基于 list 实现分页查询，这个很棒的一个功能，基于 redis 实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西（一页一页的往下走），性能高。 </p>
+</li>
+<li><p>Set<br>常用命令： sadd,spop,smembers,sunion 等 set 对外提供的功能与list类似是一个列表的功能，特殊之处在于 set 是可以自动排重的。<br>当你需要存储一个列表数据，又不希望出现重复数据时，set是一个很好的选择，并且set提供了判断某个成员是否在 一个set集合内的重要接口，这个也是list所不能提供的。可以基于 set 轻易实现交集、并集、差集的操作。 比如：在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis可以非常 方便的实现如共同关注、共同粉丝、共同喜好等功能。这个过程也就是求交集的过程。</p>
+</li>
+<li><p>Sorted Set<br>常用命令： zadd,zrange,zrem,zcard等 和set相比，sorted set增加了一个权重参数score，使得集合中的元素能够按score进行有序排列。<br>举例： 在直播系统中，实时排行信息包含直播间在线用户列表，各种礼物排行榜，弹幕消息（可以理解为按消息维 度的消息排行榜）等信息，适合使用 Redis 中的 SortedSet 结构进行存储。</p>
+</li>
+</ol>
+<h2 id="缓存雪崩和缓存穿透问题解决方案"><a href="#缓存雪崩和缓存穿透问题解决方案" class="headerlink" title="缓存雪崩和缓存穿透问题解决方案"></a>缓存雪崩和缓存穿透问题解决方案</h2><p>缓存雪崩<br>简介：缓存同一时间大面积的失效，所以，后面的请求都会落到数据库上，造成数据库短时间内承受大量请求而崩 掉。<br>解决办法（中华石杉老师在他的视频中提到过，视频地址在后一个问题中有提到）：<br>事前：尽量保证整个 redis 集群的高可用性，发现机器宕机尽快补上。选择合适的内存淘汰策略。 事中：本地ehcache缓存 + hystrix限流&amp;降级，避免MySQL崩掉 事后：利用 redis 持久化机制保存的数据尽快恢复缓存</p>
+<p>缓存穿透<br>简介：一般是黑客故意去请求缓存中不存在的数据，导致所有的请求都落到数据库上，造成数据库短时间内承受大量 请求而崩掉。<br>解决办法： 有很多种方法可以有效地解决缓存穿透问题，常见的则是采用布隆过滤器，将所有可能存在的数据哈 希到一个足够大的bitmap中，一个一定不存在的数据会被 这个bitmap拦截掉，从而避免了对底层存储系统的查询压 力。另外也有一个更为简单粗暴的方法，如果一个查询返回的数据为空（不管是数据不存在，还是系统故障），我们仍然把这个空结果进行缓存，但它的过期时间会很短，长不超过五分钟。</p>
+<h2 id="Redis序列化"><a href="#Redis序列化" class="headerlink" title="Redis序列化"></a>Redis序列化</h2><p>针对数据的“序列化/反序列化”，springboot提供了多种可选择策略(RedisSerializer) :<br>JdkSerializationRedisSerializer：这个序列化方法就是Jdk提供的了。首先要求我们要被序列化的类继承自Serializeable<br>接口，然后通过，然后通过Jdk对象序列化的方法保存。（注：这个序列化保存的对象，即使是个String类型的，在redis<br>控制台，也是看不出来的，因为它保存了一些对象的类型什么的额外信息）。是目前最常用的序列化策略。</p>
+<p>StringRedisSerializer：就是通过String.getBytes()来实现的。而且在Redis中，所有存储的值都是字符串类型的。所以这种方法保存后，通过Redis-cli控制台，是可以清楚的查看到我们保存了什么key,value是什么。是最轻量级和高效的策<br>略。</p>
+<p>JacksonJsonRedisSerializer：jackson-json工具提供了javabean与json之间的转换能力，可以将pojo实例序列化成json 格式存储在redis中，也可以将json格式的数据转换成pojo实例。因为jackson工具在序列化和反序列化时，需要明确指定Class类型，因此策略封装起来稍微复杂。</p>
+<p>spring boot导入redis依赖后，spring boot启动后会像spring 注入两个bean:RedisTemplate、StringRedisTemplate,</p>
+<ol>
+<li>两者的关系是StringRedisTemplate继承RedisTemplate。</li>
+<li>RedisTemplate是一个泛型类，而StringRedisTemplate则不是。</li>
+<li>StringRedisTemplate只能对key=String，value=String的键值对进行操作，RedisTemplate可以对任何类型的key-value键值对 操作。</li>
+<li>他们各自序列化的方式不同，但最终都是得到了一个字节数组，殊途同归，StringRedisTemplate使用的是StringRedisSerializer类；RedisTemplate使用的是JdkSerializationRedisSerializer类。反序列化，则是一个得到String，一个得到Object。</li>
+</ol>
+<p>RedisTemplate在操作数据的时候，存入数据会将数据先序列化成字节数组然后在存入Redis数据库(默认JdkSerializationRedisSerializer:这个序列化方法就是Jdk提供的了,首先要求我们要被序列化的类继承自Serializeable接口，然后通过Jdk对象序列化的方法保存)，这个时候打开Redis查看的时候，你会看到你的数据不是以可读的形式，展现的，而是以字节数组显示，<br><img src="/img/Redis/Redis.png" alt="序列化不可读"><br>（注：这个序列化保存的对象，即使是个String类型的，在redis控制台，也是看不出来的，因为它保存了一些对象的类型什么的额外信息）</p>
+<h2 id="Redis最近应用"><a href="#Redis最近应用" class="headerlink" title="Redis最近应用"></a>Redis最近应用</h2><p>个人开发小型JavaWeb程序利用redis存储token,记录获取验证的电话号码今日申请了几次，通过JWT将对象信息转化为String。<br>改造StringRedisTemplate、自定义RedisTemplate的实现类，使得Object对象转化为json使key-vlue再次转化为String-String进行序列化存储。<br>StringRedisSerializer源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.data.redis.serializer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.charset.Charset;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.StandardCharsets; <span class="keyword">import</span> org.springframework.lang.Nullable; <span class="keyword">import</span> org.springframework.util.Assert;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringRedisSerializer</span> <span class="keyword">implements</span> <span class="title">RedisSerializer</span>&lt;<span class="title">String</span>&gt; </span>&#123; <span class="keyword">private</span> <span class="keyword">final</span> Charset charset;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> StringRedisSerializer US_ASCII; <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> StringRedisSerializer ISO_8859_1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> StringRedisSerializer UTF_8;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringRedisSerializer</span><span class="params">()</span> </span>&#123; <span class="keyword">this</span>(StandardCharsets.UTF_8);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringRedisSerializer</span><span class="params">(Charset charset)</span> </span>&#123; Assert.notNull(charset, <span class="string">"Charset must not be null!"</span>); <span class="keyword">this</span>.charset = charset;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">deserialize</span><span class="params">(@Nullable <span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> bytes == <span class="keyword">null</span> ? <span class="keyword">null</span> : <span class="keyword">new</span> String(bytes, <span class="keyword">this</span>.charset);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">byte</span>[] serialize(<span class="meta">@Nullable</span> String string) &#123;</span><br><span class="line"><span class="keyword">return</span> string == <span class="keyword">null</span> ? <span class="keyword">null</span> : string.getBytes(<span class="keyword">this</span>.charset);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">US_ASCII = <span class="keyword">new</span> StringRedisSerializer(StandardCharsets.US_ASCII); ISO_8859_1 = <span class="keyword">new</span> StringRedisSerializer(StandardCharsets.ISO_8859_1); UTF_8 = <span class="keyword">new</span> StringRedisSerializer(StandardCharsets.UTF_8);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>自定义序列化方式使得可以接收Object对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.RedisSerializer; <span class="keyword">import</span> org.springframework.util.Assert;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.charset.Charset;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.StandardCharsets;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*<span class="doctag">@ClassName</span>: MyStringRedisSerializer</span></span><br><span class="line"><span class="comment">*<span class="doctag">TODO:</span>类文件简单描述</span></span><br><span class="line"><span class="comment">*<span class="doctag">@Author</span>: 小霍</span></span><br><span class="line"><span class="comment">*<span class="doctag">@UpdateUser</span>: 小霍</span></span><br><span class="line"><span class="comment">*<span class="doctag">@Version</span>: 0.0.1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyStringRedisSerializer</span> <span class="keyword">implements</span> <span class="title">RedisSerializer</span>&lt;<span class="title">Object</span>&gt; </span>&#123; </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Charset charset;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyStringRedisSerializer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	 <span class="keyword">this</span>(StandardCharsets.UTF_8);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyStringRedisSerializer</span><span class="params">(Charset charset)</span> </span>&#123; </span><br><span class="line">	Assert.notNull(charset, <span class="string">"Charset must not be null!"</span>);</span><br><span class="line">	 <span class="keyword">this</span>.charset = charset;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">deserialize</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (bytes == <span class="keyword">null</span> ? <span class="keyword">null</span> : <span class="keyword">new</span> String(bytes, charset));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//修改部分</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">byte</span>[] serialize(Object object) &#123; </span><br><span class="line">		<span class="keyword">if</span> (object == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(object <span class="keyword">instanceof</span> String)&#123;</span><br><span class="line">		<span class="keyword">return</span> object.toString().getBytes(charset);</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		String string = JSON.toJSONString(object);</span><br><span class="line">		<span class="keyword">return</span> string.getBytes(charset);</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/05/shiro基础认识/" data-toggle="tooltip" data-placement="top" title="shiro基础认识">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/08/24/java后端使用mysqldump备份数据库/" data-toggle="tooltip" data-placement="top" title="java后端使用mysqldump备份数据库">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#概述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#缓存雪崩和缓存穿透问题解决方案"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">缓存雪崩和缓存穿透问题解决方案</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Redis序列化"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Redis序列化</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Redis最近应用"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Redis最近应用</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Redis" title="Redis">Redis</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2020 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>
