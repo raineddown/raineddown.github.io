@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">546</span> and
+                                Words <span class="post-count">589</span> and
                                 Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,7 +187,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -201,14 +201,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -276,7 +276,7 @@
 
                 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在接老师开发商业性质的项目的时候，接受了一个前端操作向后端发送请求进行数据库备份文件生成于下载的任务，花费了自己蛮多心血特此记录一下。</p>
 <h2 id="任务要求"><a href="#任务要求" class="headerlink" title="任务要求"></a>任务要求</h2><p>在指定页面以form表单（采用layui框架）显示出相关企业单位的备份信息(备份时间、备份文件名，文件名显示备份完成时间、备份相关内容、备份次数)，同时提供操作栏进行备份下载于删除操作<br><img src="/img/sql/backup.PNG" alt=""></p>
-<h2 id="核心完成方法"><a href="#核心完成方法" class="headerlink" title="核心完成方法"></a>核心完成方法</h2><p>java拼接mysqldump运行指令，并执行，由于数据库冗余较少涉及多次命令拼接与执行耗费较多时间（mysqldump指令在我的查找各种博客和官方文档暂未看到像sql查询语句的in、not in、or关键词字段进行条件判断只得在—where上下功夫）,后续也不知道会不会采用第三方云备份服务……</p>
+<h2 id="核心完成方法"><a href="#核心完成方法" class="headerlink" title="核心完成方法"></a>核心完成方法</h2><p>java拼接mysqldump运行指令，并执行，由于数据库冗余较少涉及多次命令拼接与执行耗费较多时间（mysqldump指令在我的查找各种博客和官方文档暂未看到像sql查询语句的in、not in、or关键词字段进行条件判断只得在—where上下功夫）<br>注意：mysqldump数据库备份可导致锁表，对一个正在运行的数据库进行备份请慎重！！ 如果一定要 在服务运行期间备份，请添加 —skip-opt<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump --skip-opt -h hostip -u root --password=password DatabaseName &gt;xxxx.sql</span><br></pre></td></tr></table></figure></p>
 <p>废话少说下面是示例代码：<br>path： 备份文件的生成路径地址<br>dateString:转换为yyyyMMddHHmm格式的date字符串<br>ent_id： 主键id(String)<br>userTableName: 所有需要备份的表名字符串(“,”分隔的字符串)<br>user： 备份相关数据库的用户名<br>password： 备份相关数据库的密码<br>hostIP： 数据库IP地址<br>exportDatabaseName： 备份的数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public void exportSql(String path, String dateString, String ent_id,String userTableName,String user, String password, String hostIP, String exportDatabaseName) &#123;</span><br><span class="line">       String folderName_1 = <span class="string">"ZYK_"</span> + ent_id + <span class="string">"_BackupENT_"</span> + dateString + <span class="string">".sql"</span>;</span><br><span class="line">       File saveFile = new File(path);</span><br><span class="line">       // 如果目录不存在</span><br><span class="line">       <span class="keyword">if</span> (!saveFile.exists()) &#123;</span><br><span class="line">           // 创建文件夹</span><br><span class="line">           saveFile.mkdirs();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span>(!path.endsWith(File.separator))&#123;</span><br><span class="line">           path = path + File.separator;</span><br><span class="line">       &#125;</span><br><span class="line">       //备份有ent_id字段列的表</span><br><span class="line">       PrintWriter printWriter = null;</span><br><span class="line">       BufferedReader bufferedReader = null;</span><br><span class="line">       try &#123;</span><br><span class="line">           printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path + folderName_1), <span class="string">"utf8"</span>));</span><br><span class="line">           Process process = Runtime.getRuntime().<span class="built_in">exec</span>(<span class="string">" mysqldump -h"</span> + hostIP + <span class="string">" -u"</span> + user + <span class="string">" -p"</span> + password + <span class="string">" --set-charset=UTF8 "</span> + exportDatabaseName +<span class="string">" --tables "</span>+entTableName+<span class="string">" "</span>+<span class="string">"--where=\"ent_id='"</span>+ ent_id + <span class="string">"'\""</span>);</span><br><span class="line">           InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), <span class="string">"utf8"</span>);</span><br><span class="line">           bufferedReader = new BufferedReader(inputStreamReader);</span><br><span class="line">           String line;</span><br><span class="line">           <span class="keyword">while</span> ((line = bufferedReader.readLine()) != null) &#123;</span><br><span class="line">               printWriter.println(line);</span><br><span class="line">           &#125;</span><br><span class="line">           printWriter.flush();</span><br><span class="line">           <span class="keyword">if</span> (process.waitFor() != 0) &#123;</span><br><span class="line">               throw new CustomException(<span class="string">"线程未正常中止"</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; catch (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">           throw new CustomException(<span class="string">"备份sql操作失败"</span>);</span><br><span class="line">       &#125; finally &#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               <span class="keyword">if</span> (bufferedReader != null) &#123;</span><br><span class="line">                   bufferedReader.close();</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">if</span> (printWriter != null) &#123;</span><br><span class="line">                   printWriter.close();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; catch (IOException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
 
                 
@@ -285,7 +285,7 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/09/05/redis基础认识/" data-toggle="tooltip" data-placement="top" title="Redis基础认识">&larr; Previous Post</a>
+                        <a href="/2020/09/05/shiro基础认识/" data-toggle="tooltip" data-placement="top" title="shiro基础认识">&larr; Previous Post</a>
                     </li>
                     
                     

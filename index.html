@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -283,6 +283,38 @@
 
         <div class="post-preview">
 
+            <a href="/2020/09/08/redis基础认识/">
+                <h2 class="post-title">
+                    Redis基础认识
+                </h2>
+                <h3 class="post-subtitle">
+                    中间件Redis的了解与认识
+                </h3>
+                <div class="post-content-preview">
+                    概述Redis属于NOSQL((NoSQL = Not Only SQL )，意即“不仅仅是SQL”。NoSQL 数据库种类繁多(Redis、Mongodb、HBase、Elasticsearch 等等)),NOSQL的特点是去掉关系数据库的关系型特性。数据之间无关系，这样就非常容易扩展。无形之间也在架构的层面上带来了可扩展的能力。NoSQL数据库都具有非常高的读写性能，尤其在大量下数据，更......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-09-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
             <a href="/2020/09/05/shiro基础认识/">
                 <h2 class="post-title">
                     shiro基础认识
@@ -302,38 +334,6 @@
                 <div class="tags">
                     
                       <a href="/tags/#shiro" title="shiro">shiro</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/05/redis基础认识/">
-                <h2 class="post-title">
-                    Redis基础认识
-                </h2>
-                <h3 class="post-subtitle">
-                    中间件Redis的了解与认识
-                </h3>
-                <div class="post-content-preview">
-                    概述Redis属于NOSQL((NoSQL = Not Only SQL )，意即“不仅仅是SQL”。NoSQL 数据库种类繁多(Redis、Mongodb、HBase、Elasticsearch 等等)),NOSQL的特点是去掉关系数据库的关系型特性。数据之间无关系，这样就非常容易扩展。无形之间也在架构的层面上带来了可扩展的能力。NoSQL数据库都具有非常高的读写性能，尤其在大量下数据，更......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-09-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
                     
                 </div>
             
@@ -452,6 +452,74 @@
 
         <div class="post-preview">
 
+            <a href="/2020/08/08/SpringBoot使用-Async实现异步调用/">
+                <h2 class="post-title">
+                    SpringBoot使用@Async实现异步调用
+                </h2>
+                <h3 class="post-subtitle">
+                    SpringBoot使用@Async实现异步调用
+                </h3>
+                <div class="post-content-preview">
+                    背景在写项目时，有个需求为前端使用用户下载数据库备份压缩文件，其中涉及多表多条件dump备份
+部分代码类似方法有4个，未异步调用耗时较长影响用户体验。1234567891011121314151617181920212223242526272829303132333435public void entIdSqlDumpOne(String path, String dateString, S......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-08-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#异步调用" title="异步调用">异步调用</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/25/前后端分离整体项目docker部署/">
+                <h2 class="post-title">
+                    前后端分离整体项目docker部署
+                </h2>
+                <h3 class="post-subtitle">
+                    docker部署jar+vue+nginx
+                </h3>
+                <div class="post-content-preview">
+                    背景介绍前后端分离项目涉及vue、nginx与含dockerFile的jar包部署，使用docker一次性部署vue、nginx、jar、mysql。
+操作流程安装&amp;启动docker123yum install dockersystemctl start docker
+安装nginx12//查看镜像docker images
+12#使用nginx镜像来创建nginx容器实例并运行do......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-07-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#docker" title="docker">docker</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
             <a href="/2020/06/25/大三实训记录——thymeleaf传值给外联js文件/">
                 <h2 class="post-title">
                     大三实训记录——thymeleaf传值给外联js文件
@@ -554,76 +622,6 @@
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/04/30/Druid的sql数据监控没有数据/">
-                <h2 class="post-title">
-                    Druid的sql数据监控没有数据
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Druid无sql数据监控在使用springboot集成Druid数据源时遇到了一直监控不到sql数据问题问题情形如下：可以发现filter类名下为空，查看配置问题
-解决方案可能原因：(1)config下的filter方法没添加@Bean(2)filters没配置
-(1)的解决方案不做赘述。(2)的解决方案：打开resources目录下配置文件添加配置.yml格式：12345678sprin......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-04-30
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Druid" title="Druid">Druid</a>
-                    
-                      <a href="/tags/#alibaba.druid" title="alibaba.druid">alibaba.druid</a>
-                    
-                      <a href="/tags/#springboot" title="springboot">springboot</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/04/21/IDEA旗舰版学生党如何获得免费的个人许可证-1/">
-                <h2 class="post-title">
-                    IDEA旗舰版学生党如何获得免费的个人许可证
-                </h2>
-                <h3 class="post-subtitle">
-                    转载学生党如何获得免费的IDEA旗舰版
-                </h3>
-                <div class="post-content-preview">
-                    说明版本：Ultimate | Community Edition        旗舰版    社区版本为什么我要使用旗舰版的IDEA？请看官方比较：https://www.jetbrains.com/idea/features/editions_comparison_matrix.html旗舰版还支持HTML，CSS，PHP，SQL，Python等语言，并且支持更多的服务端框架和前端框架例......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-04-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#IDEA" title="IDEA">IDEA</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -691,6 +689,12 @@
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
             
         
@@ -717,15 +721,13 @@
             
         
             
-        
+            <a href="/tags/#IDEA" title="IDEA" rel="2">IDEA</a>
             
         
             
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
             
         
-            
-            <a href="/tags/#IDEA" title="IDEA" rel="2">IDEA</a>
             
         
             
@@ -854,11 +856,11 @@
     <ul>
       
         <li>
-          <a href="/2020/09/05/shiro%E5%9F%BA%E7%A1%80%E8%AE%A4%E8%AF%86/">shiro基础认识</a>
+          <a href="/2020/09/08/redis%E5%9F%BA%E7%A1%80%E8%AE%A4%E8%AF%86/">Redis基础认识</a>
         </li>
       
         <li>
-          <a href="/2020/09/05/redis%E5%9F%BA%E7%A1%80%E8%AE%A4%E8%AF%86/">Redis基础认识</a>
+          <a href="/2020/09/05/shiro%E5%9F%BA%E7%A1%80%E8%AE%A4%E8%AF%86/">shiro基础认识</a>
         </li>
       
         <li>
@@ -899,7 +901,7 @@
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -910,41 +912,45 @@
     <div class="widget">
       <ul>
         
-          <a href="categories/#架构模式"><li>架构模式</li></a>
+          <a href="categories/#Annotation"><li>Annotation</li></a>
         
           <a href="categories/#JSON"><li>JSON</li></a>
         
+          <a href="categories/#Docker"><li>Docker</li></a>
+        
           <a href="categories/#GitHub"><li>GitHub</li></a>
+        
+          <a href="categories/#架构模式"><li>架构模式</li></a>
         
           <a href="categories/#hexo"><li>hexo</li></a>
         
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
           <a href="categories/#centos"><li>centos</li></a>
         
-          <a href="categories/#Docker"><li>Docker</li></a>
+          <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#IDEA"><li>IDEA</li></a>
         
           <a href="categories/#jdk"><li>jdk</li></a>
         
-          <a href="categories/#IDEA"><li>IDEA</li></a>
+          <a href="categories/#异步调用"><li>异步调用</li></a>
         
           <a href="categories/#idea"><li>idea</li></a>
         
           <a href="categories/#Druid"><li>Druid</li></a>
         
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
-        
           <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
+        
+          <a href="categories/#mysqldump"><li>mysqldump</li></a>
         
           <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
-          <a href="categories/#SQL"><li>SQL</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
-          <a href="categories/#sql"><li>sql</li></a>
+          <a href="categories/#SQL"><li>SQL</li></a>
         
           <a href="categories/#shiro"><li>shiro</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
+          <a href="categories/#sql"><li>sql</li></a>
         
       </ul>
     </div>
