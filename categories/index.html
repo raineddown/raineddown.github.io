@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -257,35 +257,35 @@
                 
                     <a href="#hexo" title="hexo" rel="1">hexo</a>
                 
+                    <a href="#centos" title="centos" rel="1">centos</a>
+                
                     <a href="#Docker" title="Docker" rel="1">Docker</a>
                 
                     <a href="#IDEA" title="IDEA" rel="2">IDEA</a>
                 
-                    <a href="#centos" title="centos" rel="1">centos</a>
-                
                     <a href="#jdk" title="jdk" rel="2">jdk</a>
-                
-                    <a href="#idea" title="idea" rel="1">idea</a>
                 
                     <a href="#Druid" title="Druid" rel="1">Druid</a>
                 
                     <a href="#虚拟路径" title="虚拟路径" rel="1">虚拟路径</a>
                 
-                    <a href="#docker" title="docker" rel="1">docker</a>
+                    <a href="#异步调用" title="异步调用" rel="1">异步调用</a>
                 
                     <a href="#thymeleaf" title="thymeleaf" rel="1">thymeleaf</a>
                 
-                    <a href="#异步调用" title="异步调用" rel="1">异步调用</a>
+                    <a href="#docker" title="docker" rel="1">docker</a>
+                
+                    <a href="#idea" title="idea" rel="1">idea</a>
                 
                     <a href="#sql" title="sql" rel="1">sql</a>
                 
-                    <a href="#SQL" title="SQL" rel="1">SQL</a>
+                    <a href="#redis" title="redis" rel="3">redis</a>
                 
                     <a href="#mysqldump" title="mysqldump" rel="1">mysqldump</a>
                 
-                    <a href="#shiro" title="shiro" rel="1">shiro</a>
+                    <a href="#SQL" title="SQL" rel="1">SQL</a>
                 
-                    <a href="#redis" title="redis" rel="3">redis</a>
+                    <a href="#shiro" title="shiro" rel="1">shiro</a>
                 
                     <a href="#vue" title="vue" rel="4">vue</a>
                 
@@ -297,13 +297,21 @@
                 
                     <a href="#mybatis-plus" title="mybatis-plus" rel="1">mybatis-plus</a>
                 
+                    <a href="#netty" title="netty" rel="15">netty</a>
+                
                     <a href="#javastream" title="javastream" rel="1">javastream</a>
+                
+                    <a href="#cache" title="cache" rel="1">cache</a>
                 
                     <a href="#map" title="map" rel="1">map</a>
                 
                     <a href="#easyexcel" title="easyexcel" rel="1">easyexcel</a>
                 
-                    <a href="#cache" title="cache" rel="1">cache</a>
+                    <a href="#TCP" title="TCP" rel="1">TCP</a>
+                
+                    <a href="#Reactor" title="Reactor" rel="1">Reactor</a>
+                
+                    <a href="#粘包和半包" title="粘包和半包" rel="1">粘包和半包</a>
                 
             </div>
 
@@ -460,6 +468,32 @@
             </div>
             
             <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="centos">
+                    <span class="tag-text">centos</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2020/04/05/centos安装nginx并配置SSL证书/">
+                        <h2 class="post-title">
+                            centos安装nginx并配置SSL证书
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                SSL证书安装
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="Docker">
                     <span class="tag-text">Docker</span>
                 </span>
@@ -527,32 +561,6 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="centos">
-                    <span class="tag-text">centos</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2020/04/05/centos安装nginx并配置SSL证书/">
-                        <h2 class="post-title">
-                            centos安装nginx并配置SSL证书
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                SSL证书安装
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="jdk">
                     <span class="tag-text">jdk</span>
                 </span>
@@ -588,32 +596,6 @@
                         
                             <h3 class="post-subtitle">
                                 本文为记录java12特性
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="idea">
-                    <span class="tag-text">idea</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2020/06/20/idea配置run Dashboard/">
-                        <h2 class="post-title">
-                            idea配置run Dashboard
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                idea配置run Dashboard
                             </h3>
                         
                     </a>
@@ -672,8 +654,8 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="docker">
-                    <span class="tag-text">docker</span>
+                <span class="fa fa-tag listing-seperator" id="异步调用">
+                    <span class="tag-text">异步调用</span>
                 </span>
                 
                   <!-- <li class="listing-item">
@@ -681,13 +663,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2020/07/25/前后端分离整体项目docker部署/">
+                     <a href="/2020/08/08/SpringBoot使用-Async实现异步调用/">
                         <h2 class="post-title">
-                            前后端分离整体项目docker部署
+                            SpringBoot使用@Async实现异步调用
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                docker部署jar+vue+nginx
+                                SpringBoot使用@Async实现异步调用
                             </h3>
                         
                     </a>
@@ -724,8 +706,8 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="异步调用">
-                    <span class="tag-text">异步调用</span>
+                <span class="fa fa-tag listing-seperator" id="docker">
+                    <span class="tag-text">docker</span>
                 </span>
                 
                   <!-- <li class="listing-item">
@@ -733,13 +715,39 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2020/08/08/SpringBoot使用-Async实现异步调用/">
+                     <a href="/2020/07/25/前后端分离整体项目docker部署/">
                         <h2 class="post-title">
-                            SpringBoot使用@Async实现异步调用
+                            前后端分离整体项目docker部署
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                SpringBoot使用@Async实现异步调用
+                                docker部署jar+vue+nginx
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="idea">
+                    <span class="tag-text">idea</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2020/06/20/idea配置run Dashboard/">
+                        <h2 class="post-title">
+                            idea配置run Dashboard
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                idea配置run Dashboard
                             </h3>
                         
                     </a>
@@ -766,84 +774,6 @@
                         
                             <h3 class="post-subtitle">
                                 数据库外键与级联的使用考量
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="SQL">
-                    <span class="tag-text">SQL</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2020/08/15/数据库批量修改语句生成查询语句/">
-                        <h2 class="post-title">
-                            数据库批量修改语句生成查询语句
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                sql批量修改语句生成语句
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="mysqldump">
-                    <span class="tag-text">mysqldump</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2020/08/24/java后端使用mysqldump备份数据库/">
-                        <h2 class="post-title">
-                            java后端使用mysqldump备份数据库
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                java后端使用mysqldump命令备份数据库
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="shiro">
-                    <span class="tag-text">shiro</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2020/09/05/shiro基础认识/">
-                        <h2 class="post-title">
-                            shiro基础认识
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                中间件shiro的了解与认识
                             </h3>
                         
                     </a>
@@ -918,6 +848,84 @@
             </div>
             
             <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="mysqldump">
+                    <span class="tag-text">mysqldump</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2020/08/24/java后端使用mysqldump备份数据库/">
+                        <h2 class="post-title">
+                            java后端使用mysqldump备份数据库
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                java后端使用mysqldump命令备份数据库
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="SQL">
+                    <span class="tag-text">SQL</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2020/08/15/数据库批量修改语句生成查询语句/">
+                        <h2 class="post-title">
+                            数据库批量修改语句生成查询语句
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                sql批量修改语句生成语句
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="shiro">
+                    <span class="tag-text">shiro</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2020/09/05/shiro基础认识/">
+                        <h2 class="post-title">
+                            shiro基础认识
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                中间件shiro的了解与认识
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="vue">
                     <span class="tag-text">vue</span>
                 </span>
@@ -934,6 +942,25 @@
                         
                             <h3 class="post-subtitle">
                                 element-ui+mybatis-plus+springboot解决IPage分页问题
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/01/08/vue的几种传值方式与demo代码/">
+                        <h2 class="post-title">
+                            vue的几种传值方式与demo代码
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                vue的几种传值方式
                             </h3>
                         
                     </a>
@@ -979,50 +1006,12 @@
                 </div>
                 <hr>
                 
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2021/01/08/vue的几种传值方式与demo代码/">
-                        <h2 class="post-title">
-                            vue的几种传值方式与demo代码
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                vue的几种传值方式
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
             </div>
             
             <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="并发编程">
                     <span class="tag-text">并发编程</span>
                 </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2020/11/25/并发编程初步认识与基础理论（一）/">
-                        <h2 class="post-title">
-                            并发编程初步认识与基础理论（一）
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                java并发编程认识
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
                 
                   <!-- <li class="listing-item">
                   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
@@ -1036,6 +1025,25 @@
                         
                             <h3 class="post-subtitle">
                                 常见Java并发中断方法
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2020/11/25/并发编程初步认识与基础理论（一）/">
+                        <h2 class="post-title">
+                            并发编程初步认识与基础理论（一）
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                java并发编程认识
                             </h3>
                         
                     </a>
@@ -1143,6 +1151,298 @@
             </div>
             
             <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="netty">
+                    <span class="tag-text">netty</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/01/netty学习-1-0/">
+                        <h2 class="post-title">
+                            netty学习-1.0-初识netty
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                初识netty
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/01/netty学习-2-0/">
+                        <h2 class="post-title">
+                            netty学习-2.0-nettyI/O模式
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                netty I/O模式
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/05/netty学习-2-2/">
+                        <h2 class="post-title">
+                            netty学习-2.2-常用的"二次"编解码方式
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                常用的"二次"编解码方式
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/05/netty学习-2-1/">
+                        <h2 class="post-title">
+                            netty学习-2.1-TCP粘包、半包
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                TCP粘包、半包
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/05/netty学习-2-3/">
+                        <h2 class="post-title">
+                            netty学习-2.3-keepalive与idle监控
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                keepalive与idle监控
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/05/netty学习-2-4netty中的锁/">
+                        <h2 class="post-title">
+                            netty学习-2.4-netty中的锁
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                netty中的锁
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/05/netty学习-2-5netty如何玩转对内存的使用/">
+                        <h2 class="post-title">
+                            netty学习-2.5netty如何玩转内存的使用
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                netty如何玩转对内存的使用
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/09/Netty学习3-0-Netty代码编译/">
+                        <h2 class="post-title">
+                            Netty学习3.0-Netty代码编译
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                Netty代码编译
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/06/Netty学习3-1-启动服务/">
+                        <h2 class="post-title">
+                            Netty学习3.1-启动服务
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                启动服务
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/06/Netty学习3-2-构建连接/">
+                        <h2 class="post-title">
+                            Netty学习3.2-构建连接
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                构建连接
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/12/Netty学习3-3-接受数据/">
+                        <h2 class="post-title">
+                            Netty学习3.3-接受数据
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                接受数据
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/06/Netty学习3-4-业务处理/">
+                        <h2 class="post-title">
+                            Netty学习3.4-业务处理
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                业务处理
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/14/Netty学习3-5-发送数据/">
+                        <h2 class="post-title">
+                            Netty学习3.5-发送数据
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                发送数据
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/15/Netty学习3-6-断开连接/">
+                        <h2 class="post-title">
+                            Netty学习3.6-断开连接
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                断开连接
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/16/Netty学习3-7-关闭服务/">
+                        <h2 class="post-title">
+                            Netty学习3.7-关闭服务
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                关闭服务
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="javastream">
                     <span class="tag-text">javastream</span>
                 </span>
@@ -1159,6 +1459,32 @@
                         
                             <h3 class="post-subtitle">
                                 javastream流
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="cache">
+                    <span class="tag-text">cache</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/01/一致性哈希与哈希槽/">
+                        <h2 class="post-title">
+                            一致性哈希与哈希槽
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                一致性哈希与哈希槽
                             </h3>
                         
                     </a>
@@ -1221,8 +1547,8 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="cache">
-                    <span class="tag-text">cache</span>
+                <span class="fa fa-tag listing-seperator" id="TCP">
+                    <span class="tag-text">TCP</span>
                 </span>
                 
                   <!-- <li class="listing-item">
@@ -1230,13 +1556,65 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2021/04/01/一致性哈希与哈希槽/">
+                     <a href="/2021/04/05/netty学习-2-1/">
                         <h2 class="post-title">
-                            一致性哈希与哈希槽
+                            netty学习-2.1-TCP粘包、半包
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                一致性哈希与哈希槽
+                                TCP粘包、半包
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Reactor">
+                    <span class="tag-text">Reactor</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/01/netty学习-2-0/">
+                        <h2 class="post-title">
+                            netty学习-2.0-nettyI/O模式
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                netty I/O模式
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="粘包和半包">
+                    <span class="tag-text">粘包和半包</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2021/04/05/netty学习-2-1/">
+                        <h2 class="post-title">
+                            netty学习-2.1-TCP粘包、半包
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                TCP粘包、半包
                             </h3>
                         
                     </a>

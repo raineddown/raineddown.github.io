@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -283,28 +283,26 @@
 
         <div class="post-preview">
 
-            <a href="/2021/04/01/一致性哈希与哈希槽/">
+            <a href="/2021/04/16/Netty学习3-7-关闭服务/">
                 <h2 class="post-title">
-                    一致性哈希与哈希槽
+                    Netty学习3.7-关闭服务
                 </h2>
                 <h3 class="post-subtitle">
-                    一致性哈希与哈希槽
+                    关闭服务
                 </h3>
                 <div class="post-content-preview">
-                    前言随着缓存技术出现，分布式存储的缓存集群无疑极大的提升了数据访问速度。但缓存该按照什么规定去存储到指定的节点(集群中的某个缓存服务器),新增或删除某几台缓存服务器后对以前的缓存的查找怎么办，如何处理。以下以redis非关系型内存数据库为例。
-缓存集群分配节点问题一台或多台应用服务器的数据放入多台redis缓存服务器中时如何选择存到哪台缓存服务器，如何让数据尽可能均衡的存储数据做到负载均衡？......
+                    主线：
+源码解析:先在服务端加个断点和修改下代码：如图： 然后启动server和client;然后跳过bossGroup到workerGroup;进入workerGroup的关闭：在此之前呢，先在NioEventLoop里面的关闭处打个断点： 然后跟进来看看closeAll(); 这里selectAgain();目的是为了去除canceled的key，接下来的key都是有效的key了。完成之......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-04-01
+                    2021-04-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#redis" title="redis">redis</a>
-                    
-                      <a href="/tags/#cache" title="cache">cache</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -318,26 +316,26 @@
 
         <div class="post-preview">
 
-            <a href="/2021/03/01/RabbitMQ的4种广播类型/">
+            <a href="/2021/04/15/Netty学习3-6-断开连接/">
                 <h2 class="post-title">
-                    RabbitMQ的4种广播类型与DEMO
+                    Netty学习3.6-断开连接
                 </h2>
                 <h3 class="post-subtitle">
-                    RabbitMQ的4种广播类型与DEMO
+                    断开连接
                 </h3>
                 <div class="post-content-preview">
-                    rabbitmq管理界面可见我的上篇文章介绍的rabbitMQ基础与docker安装rabbitMQ management网址输入：http://127.0.0.1:15672/登录名&amp;密码：guest
-1.直接模式Direct直接模式介绍rabbitMQ直接模式:最基础最简单的模式，发送方把消息发送给订阅方，如果有多个订阅者，默认采取轮询的方式进行消息发送。当我们需要将消息发给唯一......
+                    主线:
+源码解析:在NioEventLoop的unsafe.read()打断点在客户端关闭的地方也加个断点,并且修改点代码:然后启动server和client;就会发现代码停在关闭的地方：当下一步的时候，则会来到最开始的断点：这个时候的unsafe就是NioSocketChannel,继续跟进并在下图的“doReadBytes()”打个断点：继续跟进：再进入writeBytes():这个时候......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-03-01
+                    2021-04-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#rabbitmq" title="rabbitmq">rabbitmq</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -351,29 +349,32 @@
 
         <div class="post-preview">
 
-            <a href="/2021/02/23/vue-springboot整合easyexcel/">
+            <a href="/2021/04/14/Netty学习3-5-发送数据/">
                 <h2 class="post-title">
-                    vue+springboot整合easyexcel
+                    Netty学习3.5-发送数据
                 </h2>
                 <h3 class="post-subtitle">
-                    vue+springboot整合easyexcel
+                    发送数据
                 </h3>
                 <div class="post-content-preview">
-                    前言：最近Vue+ssm开发项目的excel导入导出下载整合
-代码编写项目依赖
-123456&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;easyexcel&lt;&#x2F;artifactId&gt;    &lt;!--目前最新的版本--&gt;   ......
+                    前言：  开始之前先介绍下Netty写数据的三种方式：
+①：write:写到一个buffer,flush：把buffer里的数据发送出去
+
+②：writeAndFlush:写到buffer,立马发送
+
+③：write和flush之间有个ChannelOutboundBuffer
+　可以用生活中快递场景来类比下：
+　　write相当于揽收到仓库，flush相当于从仓库发货，writeAndFl......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-02-23
+                    2021-04-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#vue" title="vue">vue</a>
-                    
-                      <a href="/tags/#easyexcel" title="easyexcel">easyexcel</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -387,27 +388,31 @@
 
         <div class="post-preview">
 
-            <a href="/2021/02/16/mybatis-plus分组求和以及Map与Bean的转换/">
+            <a href="/2021/04/12/Netty学习3-3-接受数据/">
                 <h2 class="post-title">
-                    mybatis-plus分组求和以及Map与Bean的转换
+                    Netty学习3.3-接受数据
                 </h2>
                 <h3 class="post-subtitle">
-                    mybatis-plus、Map转对象
+                    接受数据
                 </h3>
                 <div class="post-content-preview">
-                    mybatis-plus分组求和平常lambdaQuery写习惯了突然发现lambdaQuery好像不能求和，捡一下QueryWrapper写法1234QueryWrapper&lt;Entity&gt; yearQueryWrapper = new QueryWrapper&lt;&gt;();        yearQueryWrapper.select("bid_year as nam......
+                    主线worker thread①多路复用器（Selector）接受到OP_READ事件
+②处理OP_READ事件：NioSocketChannel.NioSocketChannelUnsafe.read();
+-1分配一个初始1024字节的byte buffer来接受数据
+
+-2从Channel接受数据到byte buffer
+
+-3记录实际接受数据大小，调整下次分配byte buffer大......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-02-16
+                    2021-04-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mybatis-plus" title="mybatis-plus">mybatis-plus</a>
-                    
-                      <a href="/tags/#map" title="map">map</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -421,30 +426,29 @@
 
         <div class="post-preview">
 
-            <a href="/2021/01/16/vue-cli3脚手架创建项目变化/">
+            <a href="/2021/04/09/Netty学习3-0-Netty代码编译/">
                 <h2 class="post-title">
-                    vue-cli3脚手架创建项目变化
+                    Netty学习3.0-Netty代码编译
                 </h2>
                 <h3 class="post-subtitle">
-                    vue-cli3
+                    Netty代码编译
                 </h3>
                 <div class="post-content-preview">
-                    前言：一晃眼Vue都出到4了发现自己对Vue3和Vue2之间的变化还不清楚，因为实习工作的原因经常在Vue3和Vue2之间反复横跳，项目结构的变化让自己很难受，特此记录一下。
-项目结构对比
-vue cli2build包: 配置webpack,图中base.conf.js、dev.conf.js、prod.conf.js分别为webpack基础配置、开发环境配置、生产环境配置
-config包:......
+                    Netty各部分作用Netty结构:
+
+netty-buffer提供字节buffer功能。Netty 的 ByteBuf相当于 JDK 的ByteBuffer，ByteBuf的作用是在 Netty 中通过 Channel 传输数据。它被重新设计以解决 JDK的 ByteBuffer 中的一些问题， 从而使开发人员开发网络应用程序显得更有效率。
+
+netty-codec 处理TCP粘包半包，二......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-01-16
+                    2021-04-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#vue" title="vue">vue</a>
-                    
-                      <a href="/tags/#vue-cli3" title="vue-cli3">vue-cli3</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -458,28 +462,31 @@ config包:......
 
         <div class="post-preview">
 
-            <a href="/2021/01/08/vue的几种传值方式与demo代码/">
+            <a href="/2021/04/06/Netty学习3-1-启动服务/">
                 <h2 class="post-title">
-                    vue的几种传值方式与demo代码
+                    Netty学习3.1-启动服务
                 </h2>
                 <h3 class="post-subtitle">
-                    vue的几种传值方式
+                    启动服务
                 </h3>
                 <div class="post-content-preview">
-                    ⽗⼦组件传值几种传值方式
-props / $emit  ⼦组件中通过定义props接收⽗组件中通过v-bind绑定的数据  ⽗组件中通过监听⼦组件中$emit的⾃定义事件接收数据
-$parent / children  ⼦组件中通过this.$parent这个对象获取⽗组件中的数据  ⽗组件中通过this.$children这个数组获取⼦组件中的数据
-$ref  ⽗组件中定义⼦组件中的ref......
+                    主线分两步　　一：首先在our thread里，如果写在main方法中则就是main thread;
+①：创建selector;
+②：创建server socket channel;
+③：初始化server socket channel;
+④：给server socket channel 从boss  group中选择一个NioEventLoop;
+　　二：boss thread：
+⑤：将s......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-01-08
+                    2021-04-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#vue" title="vue">vue</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -493,26 +500,30 @@ $ref  ⽗组件中定义⼦组件中的ref......
 
         <div class="post-preview">
 
-            <a href="/2020/12/25/stream流/">
+            <a href="/2021/04/06/Netty学习3-2-构建连接/">
                 <h2 class="post-title">
-                    javastream流
+                    Netty学习3.2-构建连接
                 </h2>
                 <h3 class="post-subtitle">
-                    javastream流
+                    构建连接
                 </h3>
                 <div class="post-content-preview">
-                    前言在工作过程中看到类似以下代码，一时间理解不能，static void方法中有return方法，后续意识到这应该是stream流的拦截处理，特此记录巩固java stream的写法
-1234567891011121314151617181920212223&#x2F;** 获取结案操作逻辑处理*&#x2F;private static void getXXXXByEnum(List&lt;......
+                    主线：　　和启动一样也是有两个线程完成的，boss thread 和 worker thread;
+boss thread:
+　　　①NioEventLoop中的selector轮询创建连接事件（OP_ACCEPT）
+　　　②创建socket channel
+　　　③初始化socket channel 并从 worker group 中选择一个NioEventLoop
+worker thre......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-12-25
+                    2021-04-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#javastream" title="javastream">javastream</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -526,26 +537,26 @@ $ref  ⽗组件中定义⼦组件中的ref......
 
         <div class="post-preview">
 
-            <a href="/2020/12/20/消息队列、RabbitMQ简介/">
+            <a href="/2021/04/06/Netty学习3-4-业务处理/">
                 <h2 class="post-title">
-                    消息队列、RabbitMQ简介
+                    Netty学习3.4-业务处理
                 </h2>
                 <h3 class="post-subtitle">
-                    消息队列基础、RabbitMQ简介
+                    业务处理
                 </h3>
                 <div class="post-content-preview">
-                    消息队列简介消息队列MQ(Message Queue)中间件是分布式系统中重要的组件，主要解决应用耦合，异步消息，流量削锋等问题实现高性能，高可用，可伸缩和终一致性,使用较多的消息队列有ActiveMQ，RabbitMQ，ZeroMQ，Kafka，RocketMQ.其中把数据放到消息队列叫做生产者，从消息队列里边取数据叫做消费者。
-消息队列的作用解耦： 假设有A、B2个系统，B系统需要调用A......
+                    主线worker thread触发pipeline.fireChannelRead(byteBuf)把读取到的数据传播出去
+源码解析:还和之前一样，在NioEventLoop里面加断点：然后启动服务端和客户端：效果图：然后跟进read()；由于步骤和之前的源码差不多，所以这次只挑重点：这个就是业务处理的入口，所以跟进去看看即可：这个head表示从头开始的，继续跟进去：这里的next默认的就是......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-12-20
+                    2021-04-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#rabbitmq" title="rabbitmq">rabbitmq</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -559,36 +570,45 @@ $ref  ⽗组件中定义⼦组件中的ref......
 
         <div class="post-preview">
 
-            <a href="/2020/12/11/布隆过滤器/">
+            <a href="/2021/04/05/netty学习-2-5netty如何玩转对内存的使用/">
                 <h2 class="post-title">
-                    布隆过滤器
+                    netty学习-2.5netty如何玩转内存的使用
                 </h2>
                 <h3 class="post-subtitle">
-                    布隆过滤器
+                    netty如何玩转对内存的使用
                 </h3>
                 <div class="post-content-preview">
-                    布隆过滤器的优缺点概述优点：
-由于存储的是二进制数据，所以占用的空间很小
+                    内存使用技巧的目标
+内存占用少(空间)
+应用速度快(时间)
 
-它的插入和查询速度是非常快的，时间复杂度是O（K），可以联想一下HashMap的过程
+对java而言:减少Full GC的STW(Stop the world)时间
+Netty内存使用技巧
 
-保密性很好，因为本身不存储任何原始数据，只有二进制数据
+
+2.
+
+结合前2者，包装类换基本类型，不实例使用类变量
+
+对分配内存进行预估
+
+零复制
+
+堆外内存
 
 
-缺点：
-存在误判，详细说明与例子见上文布隆器基础介绍部分。
 
-删除困难，试想布隆过滤器存入的几个数据经过计算的hash值相同，那么他们的二进制数组下标也一定相同，删除后导......
+优点:  更广阔的”空间”，缓解店铺内的压力 -&gt; 破除堆空间限制,减轻GC压力  减少”冗余”细节(假设烧烤过......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-12-11
+                    2021-04-05
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#布隆过滤器" title="布隆过滤器">布隆过滤器</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -602,26 +622,31 @@ $ref  ⽗组件中定义⼦组件中的ref......
 
         <div class="post-preview">
 
-            <a href="/2020/11/26/常见Java并发中断方法/">
+            <a href="/2021/04/05/netty学习-2-4netty中的锁/">
                 <h2 class="post-title">
-                    常见Java并发中断相关方法
+                    netty学习-2.4-netty中的锁
                 </h2>
                 <h3 class="post-subtitle">
-                    常见Java并发中断方法
+                    netty中的锁
                 </h3>
                 <div class="post-content-preview">
-                    背景在极客时间学习09Java线程的生命周期(上)时，课后思考出现了本文没有介绍的isInterrupted()方法，特此记录学习Java并发中断方法。
-中断介绍并发编程引用了中断机制无疑证明了中断对多线程并发的裨益，想想死锁的四个条件：互斥、请求与保持、环路等待、不可抢占。中断可以完美的破坏请求与保持、环路等待的死锁条件。再比如有的线程可能迷失在怪圈无法自拔（自旋浪费资源），这时就可以用其......
+                    Netty玩转锁的五个关键点：① 在意锁的对象和范围  —&gt; 减少粒度
+② 注意锁的对象本身大小   —&gt; 减少空间占用
+③ 注意锁的速度 —&gt; 提高速度
+④ 不同场景选择不同的并发类 —&gt;因需而边
+⑤ 衡量好锁的价值 —&gt; 能不用则不用
+接下来按个看看：
+①：在Netty的ServerBootstrap中的init()：上图不难看出来，多处使用了synchro......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-11-26
+                    2021-04-05
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#并发编程" title="并发编程">并发编程</a>
+                      <a href="/tags/#netty" title="netty">netty</a>
                     
                 </div>
             
@@ -722,21 +747,17 @@ $ref  ⽗组件中定义⼦组件中的ref......
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#IDEA" title="IDEA" rel="2">IDEA</a>
             
         
             
-        
-            
-        
-            
-        
-            
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
-            
-        
-            
-        
             
         
             
@@ -766,9 +787,13 @@ $ref  ⽗组件中定义⼦组件中的ref......
             
         
             
+            <a href="/tags/#redis" title="redis" rel="3">redis</a>
+            
         
             
-            <a href="/tags/#redis" title="redis" rel="3">redis</a>
+        
+            
+        
             
         
             
@@ -788,7 +813,17 @@ $ref  ⽗组件中定义⼦组件中的ref......
             
         
             
+        
+            
             <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#netty" title="netty" rel="15">netty</a>
             
         
             
@@ -897,23 +932,23 @@ $ref  ⽗组件中定义⼦组件中的ref......
     <ul>
       
         <li>
-          <a href="/2021/04/01/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E4%B8%8E%E5%93%88%E5%B8%8C%E6%A7%BD/">一致性哈希与哈希槽</a>
+          <a href="/2021/04/16/Netty%E5%AD%A6%E4%B9%A03-7-%E5%85%B3%E9%97%AD%E6%9C%8D%E5%8A%A1/">Netty学习3.7-关闭服务</a>
         </li>
       
         <li>
-          <a href="/2021/03/01/RabbitMQ%E7%9A%844%E7%A7%8D%E5%B9%BF%E6%92%AD%E7%B1%BB%E5%9E%8B/">RabbitMQ的4种广播类型与DEMO</a>
+          <a href="/2021/04/15/Netty%E5%AD%A6%E4%B9%A03-6-%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/">Netty学习3.6-断开连接</a>
         </li>
       
         <li>
-          <a href="/2021/02/23/vue-springboot%E6%95%B4%E5%90%88easyexcel/">vue+springboot整合easyexcel</a>
+          <a href="/2021/04/14/Netty%E5%AD%A6%E4%B9%A03-5-%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE/">Netty学习3.5-发送数据</a>
         </li>
       
         <li>
-          <a href="/2021/02/16/mybatis-plus%E5%88%86%E7%BB%84%E6%B1%82%E5%92%8C%E4%BB%A5%E5%8F%8AMap%E4%B8%8EBean%E7%9A%84%E8%BD%AC%E6%8D%A2/">mybatis-plus分组求和以及Map与Bean的转换</a>
+          <a href="/2021/04/12/Netty%E5%AD%A6%E4%B9%A03-3-%E6%8E%A5%E5%8F%97%E6%95%B0%E6%8D%AE/">Netty学习3.3-接受数据</a>
         </li>
       
         <li>
-          <a href="/2021/01/16/vue-cli3%E8%84%9A%E6%89%8B%E6%9E%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%8F%98%E5%8C%96/">vue-cli3脚手架创建项目变化</a>
+          <a href="/2021/04/09/Netty%E5%AD%A6%E4%B9%A03-0-Netty%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/">Netty学习3.0-Netty代码编译</a>
         </li>
       
     </ul>
@@ -942,7 +977,7 @@ $ref  ⽗组件中定义⼦组件中的ref......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -963,35 +998,35 @@ $ref  ⽗组件中定义⼦组件中的ref......
         
           <a href="categories/#hexo"><li>hexo</li></a>
         
+          <a href="categories/#centos"><li>centos</li></a>
+        
           <a href="categories/#Docker"><li>Docker</li></a>
         
           <a href="categories/#IDEA"><li>IDEA</li></a>
         
-          <a href="categories/#centos"><li>centos</li></a>
-        
           <a href="categories/#jdk"><li>jdk</li></a>
-        
-          <a href="categories/#idea"><li>idea</li></a>
         
           <a href="categories/#Druid"><li>Druid</li></a>
         
           <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
-          <a href="categories/#docker"><li>docker</li></a>
+          <a href="categories/#异步调用"><li>异步调用</li></a>
         
           <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
         
-          <a href="categories/#异步调用"><li>异步调用</li></a>
+          <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#idea"><li>idea</li></a>
         
           <a href="categories/#sql"><li>sql</li></a>
         
-          <a href="categories/#SQL"><li>SQL</li></a>
+          <a href="categories/#redis"><li>redis</li></a>
         
           <a href="categories/#mysqldump"><li>mysqldump</li></a>
         
-          <a href="categories/#shiro"><li>shiro</li></a>
+          <a href="categories/#SQL"><li>SQL</li></a>
         
-          <a href="categories/#redis"><li>redis</li></a>
+          <a href="categories/#shiro"><li>shiro</li></a>
         
           <a href="categories/#vue"><li>vue</li></a>
         
@@ -1003,13 +1038,21 @@ $ref  ⽗组件中定义⼦组件中的ref......
         
           <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
         
+          <a href="categories/#netty"><li>netty</li></a>
+        
           <a href="categories/#javastream"><li>javastream</li></a>
+        
+          <a href="categories/#cache"><li>cache</li></a>
         
           <a href="categories/#map"><li>map</li></a>
         
           <a href="categories/#easyexcel"><li>easyexcel</li></a>
         
-          <a href="categories/#cache"><li>cache</li></a>
+          <a href="categories/#TCP"><li>TCP</li></a>
+        
+          <a href="categories/#Reactor"><li>Reactor</li></a>
+        
+          <a href="categories/#粘包和半包"><li>粘包和半包</li></a>
         
       </ul>
     </div>

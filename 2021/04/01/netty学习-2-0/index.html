@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          netty学习-2.0-nettyI/O模式 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2021/04/01/netty学习-2-0/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#netty" title="netty">netty</a>
+                            
+                              <a class="tag" href="/tags/#Reactor" title="Reactor">Reactor</a>
+                            
+                        </div>
+                        <h1>netty学习-2.0-nettyI/O模式</h1>
+                        <h2 class="subheading">netty I/O模式</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2021-04-01
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.2k</span> and
+                                Reading Time <span class="post-count">10</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>该文为极客时间netty源码解析记录笔记</p>
+<h2 id="Netty怎么切换三种I-O模式"><a href="#Netty怎么切换三种I-O模式" class="headerlink" title="Netty怎么切换三种I/O模式"></a>Netty怎么切换三种I/O模式</h2><h3 id="学习目标问题"><a href="#学习目标问题" class="headerlink" title="学习目标问题"></a>学习目标问题</h3><ul>
+<li><p>什么是经典的三种I/O模式</p>
+</li>
+<li><p>Netty对三种I/O模式的支持</p>
+</li>
+<li><p>为什么Netty仅仅支持NIO了？</p>
+</li>
+<li><p>为什么Netty有多种NIO实现？</p>
+</li>
+<li><p>NIO一定优于BIO么？</p>
+</li>
+<li><p>源码解读Netty怎么切换I/O模式?</p>
+</li>
+</ul>
+<h3 id="三种I-O模式"><a href="#三种I-O模式" class="headerlink" title="三种I/O模式:"></a>三种I/O模式:</h3><p>当我们去饭店吃饭时:</p>
+<ul>
+<li><p>食堂排队打饭模式: 排队在窗口,打好才走;</p>
+</li>
+<li><p>点单、等待被叫模式: 等待被叫，好了自己去端;</p>
+</li>
+<li><p>包厢模式: 点单后菜直接被端上桌。</p>
+</li>
+</ul>
+<p>类比:</p>
+<ul>
+<li><p>饭店-&gt; 服务器</p>
+</li>
+<li><p>饭菜-&gt; 数据                               排队打饭模式|BIO(阻塞I/O)|JDK1.4之前</p>
+<pre><code>                                  点单、等待被叫模式|NIO(非阻塞I/O)|JDK1.4(2002年，java.nio包)
+</code></pre></li>
+<li><p>饭菜好了 -&gt; 数据就绪                       包厢模式|AIO(异步阻塞)|JDK1.7(2011年)</p>
+</li>
+<li><p>端菜/送菜 -&gt; 数据读取</p>
+</li>
+</ul>
+<p>阻塞与非阻塞</p>
+<ul>
+<li><p>菜没好, 要不要死等 -&gt;数据就绪前要不要等待</p>
+</li>
+<li><p>阻塞: 没有数据传过来时, 读会阻塞直到有数据; 缓冲区满时，写操作也会阻塞。非阻塞遇到这些情况,都是直接返回</p>
+</li>
+</ul>
+<p>同步与异步</p>
+<ul>
+<li><p>菜好了, 谁端 -&gt;数据就绪后,数据操作谁完成?</p>
+</li>
+<li><p>数据就绪后需要自己去读是同步, 数据就绪直接读好再回调给程序是异步。</p>
+</li>
+</ul>
+<h3 id="Netty对三种I-O模式的支持"><a href="#Netty对三种I-O模式的支持" class="headerlink" title="Netty对三种I/O模式的支持:"></a>Netty对三种I/O模式的支持:</h3><p><img src="/img/netty/io.png" alt="Netty对三种I/O模式的支持"></p>
+<h3 id="为什么Netty仅仅支持NIO了？"><a href="#为什么Netty仅仅支持NIO了？" class="headerlink" title="为什么Netty仅仅支持NIO了？"></a>为什么Netty仅仅支持NIO了？</h3><ul>
+<li>为什么不建议(deprecate)阻塞I/O(BIO/OIO)?<br>连接数高的情况下：阻塞-&gt;耗资源、效率低</li>
+<li>为什么删掉已经做好的AIO支持?<ul>
+<li>Windows实现成熟，但是很少用来做服务器。</li>
+<li>Linux常用来做服务器,但是AIO实现不够成熟。</li>
+<li>Linux下AIO相比较NIO的提升不明显。</li>
+</ul>
+</li>
+</ul>
+<h3 id="为什么Netty有多种NIO实现？"><a href="#为什么Netty有多种NIO实现？" class="headerlink" title="为什么Netty有多种NIO实现？"></a>为什么Netty有多种NIO实现？</h3><p>通用的NIO实现(Common)在Linux下也是使用epoll, 为什么自己单独实现?</p>
+<p>实现得更好！</p>
+<ul>
+<li>Netty暴露了更多的可控参数, 例如:<ul>
+<li>JDK的NIO默认实现是水平触发</li>
+<li>Netty是边缘触发(默认)和水平触发可切换</li>
+</ul>
+</li>
+<li>Netty实现的垃圾回收更少、性能更好    </li>
+</ul>
+<h3 id="NIO一定优于BIO么？"><a href="#NIO一定优于BIO么？" class="headerlink" title="NIO一定优于BIO么？"></a>NIO一定优于BIO么？</h3><ul>
+<li>BIO代码简单</li>
+<li>特定场景: 连接数少,并发度低, BIO性能不输NIO。<br>连接数少，不存在代码扩展的情况下可选用BIO。</li>
+</ul>
+<h3 id="Netty怎么切换I-O模式的"><a href="#Netty怎么切换I-O模式的" class="headerlink" title="Netty怎么切换I/O模式的?"></a>Netty怎么切换I/O模式的?</h3><ul>
+<li>怎么切换?</li>
+<li>原理是什么?</li>
+<li>为什么服务器开发并不需要切换客户端对应Socket？<br><img src="/img/netty/io切换1.png" alt="Netty切换I/O模式"><br><img src="/img/netty/io切换2.png" alt="Netty切换I/O模式"></li>
+</ul>
+<h2 id="Netty如何支持三种Reactor"><a href="#Netty如何支持三种Reactor" class="headerlink" title="Netty如何支持三种Reactor"></a>Netty如何支持三种Reactor</h2><ul>
+<li>什么是Reactor及三种版本</li>
+<li>如何在Netty中使用Reactor模式</li>
+<li>解析Netty对Reactor模式支持的常见疑问</li>
+</ul>
+<h3 id="什么是Reactor及三种版本"><a href="#什么是Reactor及三种版本" class="headerlink" title="什么是Reactor及三种版本"></a>什么是Reactor及三种版本</h3><p>生活场景: 饭店规模变化</p>
+<ul>
+<li>一个人包揽所有: 迎宾、电池、做饭、上菜、送客等;</li>
+<li>多招几个伙计: 大家一起做上面的事情;</li>
+<li>进一步分工: 搞一个或多个人专门做迎宾。</li>
+</ul>
+<p>场景类比</p>
+<ul>
+<li>饭店伙计: 线程</li>
+<li>迎宾工作: 接入连接</li>
+<li>点菜： 请求</li>
+<li>做菜: 业务处理</li>
+<li>上菜: 响应</li>
+<li>送客: 断连</li>
+</ul>
+<p>三种版本:<br>BIO|NIO|AIO<br>Thread-Per-Connection|Reactor|Proactor</p>
+<p>三种模式:</p>
+<ol>
+<li>一个人包揽所有: 迎宾、点菜、做饭、上菜、送客等-&gt;Reactor单线程</li>
+<li>多招几个伙计: 大家一起做上面的事情 -&gt; Reactor多线程模式</li>
+<li>进一步分工: 搞一个或者多个人专门做迎宾 -&gt; 主从Reactor多线程模式</li>
+</ol>
+<p>Reactor是一种开发模式，模式的核心流程:<br>注册感兴趣的事件-&gt;扫描是否有感兴趣的事件发生-&gt;事件发生后做出相应的处理</p>
+<p>BIO版本的开发模式:<br><img src="/img/netty/reactor-BIO.png" alt="BIO"></p>
+<p>Reactor单线程模式:<br><img src="/img/netty/ReactorV1.png" alt="reactorV1"><br><img src="/img/netty/ReactorV2.png" alt="reactorV2"><br><img src="/img/netty/ReactorV2.png" alt="reactorV3"></p>
+<h3 id="Netty中使用Reactor模式"><a href="#Netty中使用Reactor模式" class="headerlink" title="Netty中使用Reactor模式"></a>Netty中使用Reactor模式</h3><p><img src="/img/netty/Reactor.png" alt="reactor使用3种模式"></p>
+<h2 id="解析Netty对Reactor模式支持的常见疑问"><a href="#解析Netty对Reactor模式支持的常见疑问" class="headerlink" title="解析Netty对Reactor模式支持的常见疑问"></a>解析Netty对Reactor模式支持的常见疑问</h2><ul>
+<li>Netty如何支持主从Reactor模式的?</li>
+<li>为什么说Netty的main reactor大多并不能用到一个线程组,只能是线程组里面的一个?</li>
+<li>Netty给Channel分配NIO event loop的规则是什么</li>
+<li>为什么通用模式的NIO实现多路复用器是专门跨平台的</li>
+</ul>
+<h3 id="Netty如何支持主从Reactor模式的"><a href="#Netty如何支持主从Reactor模式的" class="headerlink" title="Netty如何支持主从Reactor模式的?"></a>Netty如何支持主从Reactor模式的?</h3><p>设置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">EchoServer</span> </span>&#123;</span><br><span class="line">		......</span><br><span class="line">	    <span class="comment">// Configure the server. EchoServer56行</span></span><br><span class="line">        EventLoopGroup bossGroup = <span class="keyword">new</span> NioEventLoopGroup(<span class="number">1</span>);</span><br><span class="line">        EventLoopGroup workerGroup = <span class="keyword">new</span> NioEventLoopGroup(); <span class="comment">//在此设置主从</span></span><br><span class="line">        <span class="keyword">final</span> EchoServerHandler serverHandler = <span class="keyword">new</span> EchoServerHandler();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ServerBootstrap b = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line">            b.group(bossGroup, workerGroup)  <span class="comment">//在此设置主从组进入源码</span></span><br><span class="line">             .channel(NioServerSocketChannel<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">        ......</span></span><br><span class="line"><span class="class">&#125;</span></span><br></pre></td></tr></table></figure><br>主:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerBootstrap</span> <span class="keyword">extends</span> <span class="title">AbstractBootstrap</span>&lt;<span class="title">ServerBootstrap</span>, <span class="title">ServerChannel</span>&gt; </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Map&lt;ChannelOption&lt;?&gt;, Object&gt; childOptions = <span class="keyword">new</span> LinkedHashMap&lt;ChannelOption&lt;?&gt;, Object&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;AttributeKey&lt;?&gt;, Object&gt; childAttrs = <span class="keyword">new</span> ConcurrentHashMap&lt;AttributeKey&lt;?&gt;, Object&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ServerBootstrapConfig config = <span class="keyword">new</span> ServerBootstrapConfig(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> EventLoopGroup childGroup; <span class="comment">//workGroup</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> ChannelHandler childHandler;</span><br><span class="line">	.......</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerBootstrap <span class="title">group</span><span class="params">(EventLoopGroup parentGroup, EventLoopGroup childGroup)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.group(parentGroup);  <span class="comment">//进入源码</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.childGroup != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"childGroup set already"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.childGroup = ObjectUtil.checkNotNull(childGroup, <span class="string">"childGroup"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractBootstrap</span>&lt;<span class="title">B</span> <span class="keyword">extends</span> <span class="title">AbstractBootstrap</span>&lt;<span class="title">B</span>, <span class="title">C</span>&gt;, <span class="title">C</span> <span class="keyword">extends</span> <span class="title">Channel</span>&gt; <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">	    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map.Entry&lt;ChannelOption&lt;?&gt;, Object&gt;[] EMPTY_OPTION_ARRAY = <span class="keyword">new</span> Map.Entry[<span class="number">0</span>];</span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map.Entry&lt;AttributeKey&lt;?&gt;, Object&gt;[] EMPTY_ATTRIBUTE_ARRAY = <span class="keyword">new</span> Map.Entry[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">volatile</span> EventLoopGroup group;</span><br><span class="line">	......</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The &#123;<span class="doctag">@link</span> EventLoopGroup&#125; which is used to handle all the events for the to-be-created</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> Channel&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> B <span class="title">group</span><span class="params">(EventLoopGroup group)</span> </span>&#123;</span><br><span class="line">        ObjectUtil.checkNotNull(group, <span class="string">"group"</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.group != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"group set already"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.group = group;</span><br><span class="line">        <span class="keyword">return</span> self();</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">    <span class="comment">//开始register</span></span><br><span class="line">        ChannelFuture regFuture = config().group().register(channel); <span class="comment">//将socketChannel绑定到bossGroup</span></span><br><span class="line">        <span class="keyword">if</span> (regFuture.cause() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (channel.isRegistered()) &#123;</span><br><span class="line">                channel.close();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                channel.unsafe().closeForcibly();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>从:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Channel child = (Channel) msg;</span><br><span class="line"></span><br><span class="line">    child.pipeline().addLast(childHandler);</span><br><span class="line"></span><br><span class="line">    setChannelOptions(child, childOptions, logger);</span><br><span class="line">    setAttributes(child, childAttrs);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//绑定socketChannel到子组workGroup</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        childGroup.register(child).addListener(<span class="keyword">new</span> ChannelFutureListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operationComplete</span><span class="params">(ChannelFuture future)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (!future.isSuccess()) &#123;</span><br><span class="line">                    forceClose(child, future.cause());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">        forceClose(child, t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="为什么说Netty的main-reactor大多并不能用到一个线程组-只能是线程组里面的一个"><a href="#为什么说Netty的main-reactor大多并不能用到一个线程组-只能是线程组里面的一个" class="headerlink" title="为什么说Netty的main reactor大多并不能用到一个线程组,只能是线程组里面的一个"></a>为什么说Netty的main reactor大多并不能用到一个线程组,只能是线程组里面的一个</h3><p>查看group方法的调用栈:<br><img src="/img/netty/groupstack.png" alt="reactorV3"><br>绑定服务器地址和端口，一般只会绑定一个服务器地址和一个端口所以Netty的main reactor只能是线程组里面的一个。</p>
+<h3 id="Netty给Channel分配NIO-event-loop的规则是什么"><a href="#Netty给Channel分配NIO-event-loop的规则是什么" class="headerlink" title="Netty给Channel分配NIO event loop的规则是什么"></a>Netty给Channel分配NIO event loop的规则是什么</h3><p>源码分析:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ServerBootstrap.java: </span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//进入register方法</span></span><br><span class="line">                childGroup.register(child).addListener(<span class="keyword">new</span> ChannelFutureListener() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operationComplete</span><span class="params">(ChannelFuture future)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> (!future.isSuccess()) &#123;</span><br><span class="line">                            forceClose(child, future.cause());</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure><br><img src="/img/netty/nio.png" alt="nio实现"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">register</span><span class="params">(Channel channel)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//next选择</span></span><br><span class="line">    <span class="keyword">return</span> next().register(channel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> EventLoop <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (EventLoop) <span class="keyword">super</span>.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> EventExecutor <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> chooser.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><img src="/img/netty/choose.png" alt="选择工厂实现"><br>2种实现对应的源码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> io.netty.util.concurrent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.netty.util.internal.UnstableApi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicLong;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Default implementation which uses simple round-robin to choose next &#123;<span class="doctag">@link</span> EventExecutor&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@UnstableApi</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultEventExecutorChooserFactory</span> <span class="keyword">implements</span> <span class="title">EventExecutorChooserFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DefaultEventExecutorChooserFactory INSTANCE = <span class="keyword">new</span> DefaultEventExecutorChooserFactory();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">DefaultEventExecutorChooserFactory</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> EventExecutorChooser <span class="title">newChooser</span><span class="params">(EventExecutor[] executors)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//根据待绑定的executor是否是2的幂次方,做出不同的选择</span></span><br><span class="line">        <span class="keyword">if</span> (isPowerOfTwo(executors.length)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> PowerOfTwoEventExecutorChooser(executors);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> GenericEventExecutorChooser(executors);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (val &amp; -val) == val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">PowerOfTwoEventExecutorChooser</span> <span class="keyword">implements</span> <span class="title">EventExecutorChooser</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger idx = <span class="keyword">new</span> AtomicInteger();</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> EventExecutor[] executors;</span><br><span class="line"></span><br><span class="line">        PowerOfTwoEventExecutorChooser(EventExecutor[] executors) &#123;</span><br><span class="line">            <span class="keyword">this</span>.executors = executors;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="comment">//executor总数必须是2的幂次方(2,4,8...等)才会用&amp;运算效率更高</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> EventExecutor <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> executors[idx.getAndIncrement() &amp; executors.length - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericEventExecutorChooser</span> <span class="keyword">implements</span> <span class="title">EventExecutorChooser</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Use a 'long' counter to avoid non-round-robin behaviour at the 32-bit overflow boundary.</span></span><br><span class="line">        <span class="comment">// The 64-bit long solves this by placing the overflow so far into the future, that no system</span></span><br><span class="line">        <span class="comment">// will encounter this in practice.</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> AtomicLong idx = <span class="keyword">new</span> AtomicLong();</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> EventExecutor[] executors;</span><br><span class="line"></span><br><span class="line">        GenericEventExecutorChooser(EventExecutor[] executors) &#123;</span><br><span class="line">            <span class="keyword">this</span>.executors = executors;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> EventExecutor <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">//递增、取模、取正值，不然可能是负数</span></span><br><span class="line">            <span class="keyword">return</span> executors[(<span class="keyword">int</span>) Math.abs(idx.getAndIncrement() % executors.length)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="为什么通用模式的NIO实现多路复用器是专门跨平台的"><a href="#为什么通用模式的NIO实现多路复用器是专门跨平台的" class="headerlink" title="为什么通用模式的NIO实现多路复用器是专门跨平台的"></a>为什么通用模式的NIO实现多路复用器是专门跨平台的</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NioEventLoopGroup</span> <span class="keyword">extends</span> <span class="title">MultithreadEventLoopGroup</span> </span>&#123;</span><br><span class="line">    ......</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NioEventLoopGroup</span><span class="params">(<span class="keyword">int</span> nThreads, Executor executor)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//进入provider方法</span></span><br><span class="line">        <span class="keyword">this</span>(nThreads, executor, SelectorProvider.provider());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SelectorProvider <span class="title">provider</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">        <span class="keyword">if</span> (provider != <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> provider;</span><br><span class="line">        <span class="keyword">return</span> AccessController.doPrivileged(</span><br><span class="line">            <span class="keyword">new</span> PrivilegedAction&lt;&gt;() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> SelectorProvider <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                        <span class="comment">// 1.查看是否有参数，默认false</span></span><br><span class="line">                        <span class="keyword">if</span> (loadProviderFromProperty())</span><br><span class="line">                            <span class="keyword">return</span> provider;</span><br><span class="line">                        <span class="comment">// 2.查看是否有实现, 默认false    </span></span><br><span class="line">                        <span class="keyword">if</span> (loadProviderAsService())</span><br><span class="line">                            <span class="keyword">return</span> provider;</span><br><span class="line">                        <span class="comment">// 3.跨平台实现的根本进入create方法    </span></span><br><span class="line">                        provider = sun.nio.ch.DefaultSelectorProvider.create();</span><br><span class="line">                        <span class="keyword">return</span> provider;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过反射看是否有参数java.nio.channels.spi.SelectorProvider无返回true</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">loadProviderFromProperty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String cn = System.getProperty(<span class="string">"java.nio.channels.spi.SelectorProvider"</span>);</span><br><span class="line">    <span class="keyword">if</span> (cn == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"deprecation"</span>)</span><br><span class="line">        Object tmp = Class.forName(cn, <span class="keyword">true</span>,</span><br><span class="line">                                   ClassLoader.getSystemClassLoader()).newInstance();</span><br><span class="line">        provider = (SelectorProvider)tmp;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ClassNotFoundException x) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ServiceConfigurationError(<span class="keyword">null</span>, x);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IllegalAccessException x) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ServiceConfigurationError(<span class="keyword">null</span>, x);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InstantiationException x) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ServiceConfigurationError(<span class="keyword">null</span>, x);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SecurityException x) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ServiceConfigurationError(<span class="keyword">null</span>, x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>2.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过serviceLoader找到实现，没找到返回false</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">loadProviderAsService</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    ServiceLoader&lt;SelectorProvider&gt; sl =</span><br><span class="line">        ServiceLoader.load(SelectorProvider<span class="class">.<span class="keyword">class</span>,</span></span><br><span class="line"><span class="class">                           <span class="title">ClassLoader</span>.<span class="title">getSystemClassLoader</span>())</span>;</span><br><span class="line">    Iterator&lt;SelectorProvider&gt; i = sl.iterator();</span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!i.hasNext())</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            provider = i.next();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ServiceConfigurationError sce) &#123;</span><br><span class="line">            <span class="keyword">if</span> (sce.getCause() <span class="keyword">instanceof</span> SecurityException) &#123;</span><br><span class="line">                <span class="comment">// Ignore the security exception, try the next provider</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">throw</span> sce;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>3.跨平台<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultSelectorProvider</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Prevent instantiation.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">DefaultSelectorProvider</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns the default SelectorProvider.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SelectorProvider <span class="title">create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//可以发现未windows下jdk实现</span></span><br><span class="line">        <span class="comment">//macosx实现: return new sun.nio.ch.KQueueSelectorProvider();</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> sun.nio.ch.WindowsSelectorProvider();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/04/01/netty学习-1-0/" data-toggle="tooltip" data-placement="top" title="netty学习-1.0-初识netty">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/04/01/一致性哈希与哈希槽/" data-toggle="tooltip" data-placement="top" title="一致性哈希与哈希槽">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Netty怎么切换三种I-O模式"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Netty怎么切换三种I&#x2F;O模式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#学习目标问题"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">学习目标问题</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#三种I-O模式"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">三种I&#x2F;O模式:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Netty对三种I-O模式的支持"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Netty对三种I&#x2F;O模式的支持:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#为什么Netty仅仅支持NIO了？"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">为什么Netty仅仅支持NIO了？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#为什么Netty有多种NIO实现？"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">为什么Netty有多种NIO实现？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#NIO一定优于BIO么？"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">NIO一定优于BIO么？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Netty怎么切换I-O模式的"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">Netty怎么切换I&#x2F;O模式的?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Netty如何支持三种Reactor"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Netty如何支持三种Reactor</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#什么是Reactor及三种版本"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">什么是Reactor及三种版本</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Netty中使用Reactor模式"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Netty中使用Reactor模式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#解析Netty对Reactor模式支持的常见疑问"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">解析Netty对Reactor模式支持的常见疑问</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Netty如何支持主从Reactor模式的"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Netty如何支持主从Reactor模式的?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#为什么说Netty的main-reactor大多并不能用到一个线程组-只能是线程组里面的一个"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">为什么说Netty的main reactor大多并不能用到一个线程组,只能是线程组里面的一个</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Netty给Channel分配NIO-event-loop的规则是什么"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Netty给Channel分配NIO event loop的规则是什么</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#为什么通用模式的NIO实现多路复用器是专门跨平台的"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">为什么通用模式的NIO实现多路复用器是专门跨平台的</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#netty" title="netty">netty</a>
+                        
+                          <a class="tag" href="/tags/#Reactor" title="Reactor">Reactor</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2021 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>
