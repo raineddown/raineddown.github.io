@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+<<<<<<< HEAD
     <loc>http://radarsoftware.cn/2021/07/15/%E5%B7%A5%E5%8E%82%E3%80%81%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E4%B8%8E%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2021-07-29</lastmod>
   </url>  <url>
+=======
+>>>>>>> cc25d752f6073b494deb78a17e7bfd4c4d3dd806
     <loc>http://radarsoftware.cn/2021/04/11/Netty%E5%AD%A6%E4%B9%A03-2-%E6%9E%84%E5%BB%BA%E8%BF%9E%E6%8E%A5/</loc>
     <lastmod>2021-04-06</lastmod>
   </url>  <url>
@@ -34,10 +37,17 @@
     <loc>http://radarsoftware.cn/2021/04/05/netty%E5%AD%A6%E4%B9%A0-2-4netty%E4%B8%AD%E7%9A%84%E9%94%81/</loc>
     <lastmod>2021-04-05</lastmod>
   </url>  <url>
+<<<<<<< HEAD
     <loc>http://radarsoftware.cn/2021/04/05/netty%E5%AD%A6%E4%B9%A0-2-1/</loc>
     <lastmod>2021-04-05</lastmod>
   </url>  <url>
     <loc>http://radarsoftware.cn/2021/04/05/netty%E5%AD%A6%E4%B9%A0-2-2/</loc>
+=======
+    <loc>http://radarsoftware.cn/2021/04/05/netty%E5%AD%A6%E4%B9%A0-2-2/</loc>
+    <lastmod>2021-04-05</lastmod>
+  </url>  <url>
+    <loc>http://radarsoftware.cn/2021/04/05/netty%E5%AD%A6%E4%B9%A0-2-1/</loc>
+>>>>>>> cc25d752f6073b494deb78a17e7bfd4c4d3dd806
     <lastmod>2021-04-05</lastmod>
   </url>  <url>
     <loc>http://radarsoftware.cn/2021/04/01/netty%E5%AD%A6%E4%B9%A0-1-0/</loc>
