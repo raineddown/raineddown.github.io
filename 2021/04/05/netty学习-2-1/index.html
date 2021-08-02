@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          netty学习-2.1-TCP粘包、半包 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2021/04/05/netty学习-2-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#netty" title="netty">netty</a>
+                            
+                              <a class="tag" href="/tags/#TCP" title="TCP">TCP</a>
+                            
+                              <a class="tag" href="/tags/#粘包和半包" title="粘包和半包">粘包和半包</a>
+                            
+                        </div>
+                        <h1>netty学习-2.1-TCP粘包、半包</h1>
+                        <h2 class="subheading">TCP粘包、半包</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2021-04-05
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.7k</span> and
+                                Reading Time <span class="post-count">7</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="学习后解决问题"><a href="#学习后解决问题" class="headerlink" title="学习后解决问题:"></a>学习后解决问题:</h2><ul>
+<li>什么是粘包和半包?</li>
+<li>为什么TCP应用中会出现粘包和半包现象?</li>
+<li>解决粘包和半包问题的几种常用方法</li>
+<li>Netty对三种常用封帧方式的支持</li>
+<li>解读Netty处理粘包、半包的源码</li>
+</ul>
+<h2 id="什么是粘包和半包"><a href="#什么是粘包和半包" class="headerlink" title="什么是粘包和半包?"></a>什么是粘包和半包?</h2><p>发生远程消息 “ABC DEF”<br>有可能接收到的消息 1.”ABCDEF” 2.”A BC DEF” 3.”AB CD EF”<br>1为粘包 2和3为半包<br>粘包的主要原因:</p>
+<ul>
+<li>发送方每次写入数据 &lt; 套接字缓冲区大小</li>
+<li>接收方读取套接字缓冲去数据不够及时</li>
+</ul>
+<p>半包的主要原因:</p>
+<ul>
+<li>发送方写入数据 &gt; 套接字缓冲区大小</li>
+<li>发送的数据大于协议的MTU(Maximum Transmission Unit, 最大传输单元), 必须拆包<br><img src="/img/netty/io.png" alt="各个协议的MTU"></li>
+</ul>
+<p>换个角度看</p>
+<ul>
+<li><p>收发:<br>  一个发送可能被多次接收，多个发送可能被一次接收</p>
+</li>
+<li><p>传输:<br>  一个发送可能占用多个传输包,多个发送可能公用一个传输包</p>
+</li>
+</ul>
+<p>根本原因:<br>    TCP是流式协议,消息无边界。<br>    补充ps:UDP像8邮寄的包裹,虽然一次运输多个,但每个包裹都有”界限”,一个一个签收所以无粘包、半包问题。</p>
+<p>解决问题的根本手段：找出消息的边界<br><img src="/img/netty/粘包半包.png" alt="粘包半包的解决方式"></p>
+<p>Netty对三种常用封帧方式的支持（三个类都继承ByteTomessageDecoder.java）<br><img src="/img/netty/粘包半包1.png" alt="粘包半包的解决方式"></p>
+<h2 id="源码解读"><a href="#源码解读" class="headerlink" title="源码解读:"></a>源码解读:</h2><h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><ul>
+<li>解码核心工作流程?</li>
+<li>解码中两种数据累积器(Cumulator)的区别?</li>
+<li>三种解码器的常用额外控制参数有哪些?</li>
+</ul>
+<h3 id="解读Netty处理粘包、半包的源码———-解码核心工作流程"><a href="#解读Netty处理粘包、半包的源码———-解码核心工作流程" class="headerlink" title="解读Netty处理粘包、半包的源码———-解码核心工作流程:"></a>解读Netty处理粘包、半包的源码———-解码核心工作流程:</h3><p>先找到ByteToMessageDecoder.java，可以看到它继承了ChannelInboundHandlerAdapter.java<br><img src="/img/netty/粘包半包2.png" alt="粘包半包的解决方式"><br>这个ChannelInboundHandlerAdapter有个核心的入口方法“channelRead()”;<br><img src="/img/netty/粘包半包3.png" alt="粘包半包的解决方式"><br>图中的msg就相当于我们的数据，开始就把数据转换成data,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuf data = (ByteBuf) msg;</span><br></pre></td></tr></table></figure><br>然后判断cumulation是否为null,cumulation是数据积累器，用来积累数据。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuf cumulation;</span><br></pre></td></tr></table></figure><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">first = cumulation == <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (first) &#123;</span><br><span class="line">    cumulation = data;</span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     cumulation = cumulator.cumulate(ctx.alloc(), cumulation, data);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><br>第一次的时候肯定为null  所以first是true，直接把data数据给了cumulation。再接下来就是解码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">callDecode(ctx, cumulation, out);</span><br></pre></td></tr></table></figure><br>进入具体方法<br><img src="/img/netty/粘包半包4.png" alt="粘包半包的解决方式"></p>
+<p>参数中的in就是数据积累器中的数据，也就是我们传入的数据。往下走又这么个方法调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decodeRemovalReentryProtection(ctx, in, out);</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是：decode中时，不能执行完handler remove清理操作，decode完之后需要清理数据，改方法的名称长久是标识功能的。点进去可以查看<br><img src="/img/netty/粘包半包5.png" alt="粘包半包的解决方式"></p>
+<p>可以看出有个decodeState = STATE_CALLING_CHILD_DECODE;这个就是处理刚才remove handler 的；接下来就是“decode(ctx, in, out);”；这个decode是个抽象方法采用模板模式<br><img src="/img/netty/粘包半包6.png" alt="粘包半包的解决方式"></p>
+<p>之前说过Netty对三种封帧的支持分别是：“FixedLengthFrameDecoder”，“DelimiterBasedFrameDecoder”，“LengthFieldBasedFrameDecoder”。这里以“FixedLengthFrameDecoder”为例，所以点开FixedLengthFrameDecoder的decode();<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> 　　<span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">decode</span><span class="params">(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Object decoded = decode(ctx, in);</span><br><span class="line">    <span class="keyword">if</span> (decoded != <span class="keyword">null</span>) &#123;</span><br><span class="line">        out.add(decoded);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>然后再进去查看Object decoded = decode(ctx, in);<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">decode</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            @SuppressWarnings(<span class="string">"UnusedParameters"</span>)</span> ChannelHandlerContext ctx, ByteBuf in) <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//这个in还是数据积累器的数据，取得之后进行判断，如果小于则返回null不能解出,否则解出。这样一来就完成了一个数据解析的过程。</span></span><br><span class="line">        <span class="keyword">if</span> (in.readableBytes() &lt; frameLength) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> in.readRetainedSlice(frameLength);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><br>这个in还是数据积累器的数据，取得之后进行判断，如果小于则返回null不能解出,否则解出。这样一来就完成了一个数据解析的过程。</p>
+<p>数据积累器源码解析:<br>1.找到channelRead方法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ByteToMessageDecoder</span> <span class="keyword">extends</span> <span class="title">ChannelInboundHandlerAdapter</span> </span>&#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (msg <span class="keyword">instanceof</span> ByteBuf) &#123;</span><br><span class="line">           CodecOutputList out = CodecOutputList.newInstance();</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               first = cumulation == <span class="keyword">null</span>;</span><br><span class="line">               cumulation = cumulator.cumulate(ctx.alloc(),</span><br><span class="line">                       first ? Unpooled.EMPTY_BUFFER : cumulation, (ByteBuf) msg);</span><br><span class="line">               callDecode(ctx, cumulation, out);</span><br><span class="line">               &#125;</span><br><span class="line">               ......</span><br></pre></td></tr></table></figure><br>方法接口:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Cumulator</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Cumulate the given &#123;<span class="doctag">@link</span> ByteBuf&#125;s and return the &#123;<span class="doctag">@link</span> ByteBuf&#125; that holds the cumulated bytes.</span></span><br><span class="line"><span class="comment">     * The implementation is responsible to correctly handle the life-cycle of the given &#123;<span class="doctag">@link</span> ByteBuf&#125;s and so</span></span><br><span class="line"><span class="comment">     * call &#123;<span class="doctag">@link</span> ByteBuf#release()&#125; if a &#123;<span class="doctag">@link</span> ByteBuf&#125; is fully consumed.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">ByteBuf <span class="title">cumulate</span><span class="params">(ByteBufAllocator alloc, ByteBuf cumulation, ByteBuf in)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>2种实现:<br>1.内存复制:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Cumulate &#123;<span class="doctag">@link</span> ByteBuf&#125;s by merge them into one &#123;<span class="doctag">@link</span> ByteBuf&#125;'s, using memory copies.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Cumulator MERGE_CUMULATOR = <span class="keyword">new</span> Cumulator() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ByteBuf <span class="title">cumulate</span><span class="params">(ByteBufAllocator alloc, ByteBuf cumulation, ByteBuf in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!cumulation.isReadable() &amp;&amp; in.isContiguous()) &#123;</span><br><span class="line">            <span class="comment">// If cumulation is empty and input buffer is contiguous, use it directly</span></span><br><span class="line">            cumulation.release();</span><br><span class="line">            <span class="keyword">return</span> in;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> required = in.readableBytes();</span><br><span class="line">            <span class="keyword">if</span> (required &gt; cumulation.maxWritableBytes() ||</span><br><span class="line">                    (required &gt; cumulation.maxFastWritableBytes() &amp;&amp; cumulation.refCnt() &gt; <span class="number">1</span>) ||</span><br><span class="line">                    cumulation.isReadOnly()) &#123;</span><br><span class="line">                <span class="comment">// Expand cumulation (by replacing it) under the following conditions:</span></span><br><span class="line">                <span class="comment">// - cumulation cannot be resized to accommodate the additional data</span></span><br><span class="line">                <span class="comment">// - cumulation can be expanded with a reallocation operation to accommodate but the buffer is</span></span><br><span class="line">                <span class="comment">//   assumed to be shared (e.g. refCnt() &gt; 1) and the reallocation may not be safe.</span></span><br><span class="line">                <span class="keyword">return</span> expandCumulation(alloc, cumulation, in);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//数据追加内存复制</span></span><br><span class="line">            cumulation.writeBytes(in, in.readerIndex(), required);</span><br><span class="line">            in.readerIndex(in.writerIndex());</span><br><span class="line">            <span class="keyword">return</span> cumulation;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// We must release in in all cases as otherwise it may produce a leak if writeBytes(...) throw</span></span><br><span class="line">            <span class="comment">// for whatever release (for example because of OutOfMemoryError)</span></span><br><span class="line">            in.release();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>2.COMPOSITE_CUMULATOR ：不是复制而是组合，先扩容，如果数据够了的话就直接把数据给组合起来，避免了内存复制<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Cumulator COMPOSITE_CUMULATOR = <span class="keyword">new</span> Cumulator() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ByteBuf <span class="title">cumulate</span><span class="params">(ByteBufAllocator alloc, ByteBuf cumulation, ByteBuf in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!cumulation.isReadable()) &#123;</span><br><span class="line">            cumulation.release();</span><br><span class="line">            <span class="keyword">return</span> in;</span><br><span class="line">        &#125;</span><br><span class="line">        CompositeByteBuf composite = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (cumulation <span class="keyword">instanceof</span> CompositeByteBuf &amp;&amp; cumulation.refCnt() == <span class="number">1</span>) &#123;</span><br><span class="line">                composite = (CompositeByteBuf) cumulation;</span><br><span class="line">                <span class="comment">// Writer index must equal capacity if we are going to "write"</span></span><br><span class="line">                <span class="comment">// new components to the end</span></span><br><span class="line">                <span class="keyword">if</span> (composite.writerIndex() != composite.capacity()) &#123;</span><br><span class="line">                    composite.capacity(composite.writerIndex());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                composite = alloc.compositeBuffer(Integer.MAX_VALUE).addFlattenedComponents(<span class="keyword">true</span>, cumulation);</span><br><span class="line">            &#125;</span><br><span class="line">            composite.addFlattenedComponents(<span class="keyword">true</span>, in);</span><br><span class="line">            in = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">return</span> composite;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// We must release if the ownership was not transferred as otherwise it may produce a leak</span></span><br><span class="line">                in.release();</span><br><span class="line">                <span class="comment">// Also release any new buffer allocated if we're not returning it</span></span><br><span class="line">                <span class="keyword">if</span> (composite != <span class="keyword">null</span> &amp;&amp; composite != cumulation) &#123;</span><br><span class="line">                    composite.release();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="三种解码器的常用控制参数有哪些"><a href="#三种解码器的常用控制参数有哪些" class="headerlink" title="三种解码器的常用控制参数有哪些?"></a>三种解码器的常用控制参数有哪些?</h3><p>三种解码器链接<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* Generally frame detection should be handled earlier in the pipeline by adding a</span><br><span class="line">* &#123;<span class="meta">@link</span> DelimiterBasedFrameDecoder&#125;, &#123;<span class="meta">@link</span> FixedLengthFrameDecoder&#125;, &#123;<span class="meta">@link</span> LengthFieldBasedFrameDecoder&#125;,</span><br><span class="line">* or &#123;<span class="meta">@link</span> LineBasedFrameDecoder&#125;.</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>分隔符解码器DelimiterBasedFrameDecoder：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelimiterBasedFrameDecoder</span> <span class="keyword">extends</span> <span class="title">ByteToMessageDecoder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//数组可存多个分隔符</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ByteBuf[] delimiters;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> maxFrameLength;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> stripDelimiter;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> failFast;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> discardingTooLongFrame;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> tooLongFrameLength;</span><br><span class="line">    <span class="comment">/** Set only when decoding with "\n" and "\r\n" as the delimiter.  */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> LineBasedFrameDecoder lineBasedDecoder;</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure></li>
+<li><p>固定长度控制符解码器FixedLengthFrameDecoder</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FixedLengthFrameDecoder</span> <span class="keyword">extends</span> <span class="title">ByteToMessageDecoder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> frameLength;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>存内容长度解码器LengthFieldBasedFrameDecoder<br>源码文档</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* &lt;pre&gt;</span><br><span class="line">* &lt;b&gt;lengthFieldOffset&lt;/b&gt;   = &lt;b&gt;0&lt;/b&gt; 位移参数</span><br><span class="line">* &lt;b&gt;lengthFieldLength&lt;/b&gt;   = &lt;b&gt;2&lt;/b&gt; length所占长度(存长度的地址)</span><br><span class="line">* lengthAdjustment    = <span class="number">0</span> 调整长度计算多加的字段和实际字段长度</span><br><span class="line">* initialBytesToStrip = <span class="number">0</span> (= <span class="keyword">do</span> not strip header)   <span class="number">0</span>为原样copy,如下表，为lengthFieldLength长度则不copy长度信息只copy<span class="string">"HELLO, WORLD"</span></span><br><span class="line">*</span><br><span class="line">* <span class="function">BEFORE <span class="title">DECODE</span> <span class="params">(<span class="number">14</span> bytes)</span>         AFTER <span class="title">DECODE</span> <span class="params">(<span class="number">14</span> bytes)</span></span></span><br><span class="line"><span class="function">* +--------+----------------+      +--------+----------------+</span></span><br><span class="line"><span class="function">* | Length | Actual Content |-----&gt;| Length | Actual Content |</span></span><br><span class="line"><span class="function">* | 0x000C | "HELLO, WORLD" |      | 0x000C | "HELLO, WORLD" |</span></span><br><span class="line"><span class="function">* +--------+----------------+      +--------+----------------+</span></span><br><span class="line"><span class="function">* &lt;/pre&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/04/05/netty学习-2-2/" data-toggle="tooltip" data-placement="top" title="netty学习-2.2-常用的"二次"编解码方式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/04/01/一致性哈希与哈希槽/" data-toggle="tooltip" data-placement="top" title="一致性哈希与哈希槽">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#学习后解决问题"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">学习后解决问题:</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#什么是粘包和半包"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">什么是粘包和半包?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#源码解读"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">源码解读:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#解决问题"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">解决问题</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#解读Netty处理粘包、半包的源码———-解码核心工作流程"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">解读Netty处理粘包、半包的源码———-解码核心工作流程:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#三种解码器的常用控制参数有哪些"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">三种解码器的常用控制参数有哪些?</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#netty" title="netty">netty</a>
+                        
+                          <a class="tag" href="/tags/#TCP" title="TCP">TCP</a>
+                        
+                          <a class="tag" href="/tags/#粘包和半包" title="粘包和半包">粘包和半包</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2021 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>
