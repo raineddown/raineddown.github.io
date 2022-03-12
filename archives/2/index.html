@@ -164,6 +164,13 @@
 
                         
                         <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -178,7 +185,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -186,13 +193,6 @@
                         
                         <li>
                             <a href="/photography/">Photography</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -283,34 +283,26 @@
 
         <div class="post-preview">
 
-            <a href="/2021/04/05/netty学习-2-3/">
+            <a href="/2020/12/25/stream流/">
                 <h2 class="post-title">
-                    netty学习-2.3-keepalive与idle监控
+                    javastream流
                 </h2>
                 <h3 class="post-subtitle">
-                    keepalive与idle监控
+                    javastream流
                 </h3>
                 <div class="post-content-preview">
-                    学习焦点
-为什么需要keepalive?
-怎么设计keepalive?以TCP keepalive为例
-为什么还需要应用层keepalive?
-idle监测是什么?
-如何在Netty中开启TCP keepalive和idle监测
-
-为什么需要keepalive生活场景:假设你开了一个饭店,,别人电话来订餐,电话通了后，订餐的说了一堆订餐要求,说着说着对方就不讲话了。
-
-这个时候你会一直握着电......
+                    前言在工作过程中看到类似以下代码，一时间理解不能，static void方法中有return方法，后续意识到这应该是stream流的拦截处理，特此记录巩固java stream的写法
+1234567891011121314151617181920212223&#x2F;** 获取结案操作逻辑处理*&#x2F;private static void getXXXXByEnum(List&lt;......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-04-05
+                    2020-12-25
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#netty" title="netty">netty</a>
+                      <a href="/tags/#javastream" title="javastream">javastream</a>
                     
                 </div>
             
@@ -324,238 +316,22 @@ idle监测是什么?
 
         <div class="post-preview">
 
-            <a href="/2021/04/05/netty学习-2-2/">
+            <a href="/2020/12/20/消息队列、RabbitMQ简介/">
                 <h2 class="post-title">
-                    netty学习-2.2-常用的"二次"编解码方式
+                    消息队列、RabbitMQ简介
                 </h2>
                 <h3 class="post-subtitle">
-                    常用的"二次"编解码方式
+                    消息队列基础、RabbitMQ简介
                 </h3>
                 <div class="post-content-preview">
-                    学习后解决问题:
-为什么需要”二次解码”?
-常用的”二次”编解码方式
-选择编解码方式的要点
-Protobuf简介与使用
-源码解读:Netty对二次编解码的支持
-
-为什么需要”二次”编解码解决TCP粘包、半包的一次解码器都是继承的ByteToMessageDecoder,而ByteToMessageDecoder主要是将原始数据流（可能存在粘包、半包问题的数据流）转换为用户数据（是一个字节数组......
+                    消息队列简介消息队列MQ(Message Queue)中间件是分布式系统中重要的组件，主要解决应用耦合，异步消息，流量削锋等问题实现高性能，高可用，可伸缩和终一致性,使用较多的消息队列有ActiveMQ，RabbitMQ，ZeroMQ，Kafka，RocketMQ.其中把数据放到消息队列叫做生产者，从消息队列里边取数据叫做消费者。
+消息队列的作用解耦： 假设有A、B2个系统，B系统需要调用A......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-04-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#netty" title="netty">netty</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/04/05/netty学习-2-1/">
-                <h2 class="post-title">
-                    netty学习-2.1-TCP粘包、半包
-                </h2>
-                <h3 class="post-subtitle">
-                    TCP粘包、半包
-                </h3>
-                <div class="post-content-preview">
-                    学习后解决问题:
-什么是粘包和半包?
-为什么TCP应用中会出现粘包和半包现象?
-解决粘包和半包问题的几种常用方法
-Netty对三种常用封帧方式的支持
-解读Netty处理粘包、半包的源码
-
-什么是粘包和半包?发生远程消息 “ABC DEF”有可能接收到的消息 1.”ABCDEF” 2.”A BC DEF” 3.”AB CD EF”1为粘包 2和3为半包粘包的主要原因:
-
-发送方每次写入数据 &......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-04-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#netty" title="netty">netty</a>
-                    
-                      <a href="/tags/#TCP" title="TCP">TCP</a>
-                    
-                      <a href="/tags/#粘包和半包" title="粘包和半包">粘包和半包</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/04/01/一致性哈希与哈希槽/">
-                <h2 class="post-title">
-                    一致性哈希与哈希槽
-                </h2>
-                <h3 class="post-subtitle">
-                    一致性哈希与哈希槽
-                </h3>
-                <div class="post-content-preview">
-                    前言随着缓存技术出现，分布式存储的缓存集群无疑极大的提升了数据访问速度。但缓存该按照什么规定去存储到指定的节点(集群中的某个缓存服务器),新增或删除某几台缓存服务器后对以前的缓存的查找怎么办，如何处理。以下以redis非关系型内存数据库为例。
-缓存集群分配节点问题一台或多台应用服务器的数据放入多台redis缓存服务器中时如何选择存到哪台缓存服务器，如何让数据尽可能均衡的存储数据做到负载均衡？......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-04-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#redis" title="redis">redis</a>
-                    
-                      <a href="/tags/#cache" title="cache">cache</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/04/01/netty学习-2-0/">
-                <h2 class="post-title">
-                    netty学习-2.0-nettyI/O模式
-                </h2>
-                <h3 class="post-subtitle">
-                    netty I/O模式
-                </h3>
-                <div class="post-content-preview">
-                    该文为极客时间netty源码解析记录笔记
-Netty怎么切换三种I/O模式学习目标问题
-什么是经典的三种I/O模式
-
-Netty对三种I/O模式的支持
-
-为什么Netty仅仅支持NIO了？
-
-为什么Netty有多种NIO实现？
-
-NIO一定优于BIO么？
-
-源码解读Netty怎么切换I/O模式?
-
-
-三种I/O模式:当我们去饭店吃饭时:
-
-食堂排队打饭模式: 排队在窗口,打好才走;
-
-点单、......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-04-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#netty" title="netty">netty</a>
-                    
-                      <a href="/tags/#Reactor" title="Reactor">Reactor</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/04/01/netty学习-1-0/">
-                <h2 class="post-title">
-                    netty学习-1.0-初识netty
-                </h2>
-                <h3 class="post-subtitle">
-                    初识netty
-                </h3>
-                <div class="post-content-preview">
-                    该文为极客时间netty源码解析记录笔记
-简介官方定义为：Netty 是一款异步的事件驱动的网络应用程序框架，支持快速地开发可维护的高性能的面向协议的服务器和客户端Netty 由 Trustin Lee(韩国， Line公司)2004年开发
-
-本质：网络应用程序框架
-
-实现：异步、事件驱动
-
-特性: 高性能、可维护、快速开发
-
-用途: 开发服务器和客户端Netty结构图：
-
-
-为什么不直接使......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-04-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#netty" title="netty">netty</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/03/01/RabbitMQ的4种广播类型/">
-                <h2 class="post-title">
-                    RabbitMQ的4种广播类型与DEMO
-                </h2>
-                <h3 class="post-subtitle">
-                    RabbitMQ的4种广播类型与DEMO
-                </h3>
-                <div class="post-content-preview">
-                    rabbitmq管理界面可见我的上篇文章介绍的rabbitMQ基础与docker安装rabbitMQ management网址输入：http://127.0.0.1:15672/登录名&amp;密码：guest
-1.直接模式Direct直接模式介绍rabbitMQ直接模式:最基础最简单的模式，发送方把消息发送给订阅方，如果有多个订阅者，默认采取轮询的方式进行消息发送。当我们需要将消息发给唯一......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-03-01
+                    2020-12-20
                 </p>
                 <div class="tags">
                     
@@ -573,29 +349,36 @@ NIO一定优于BIO么？
 
         <div class="post-preview">
 
-            <a href="/2021/02/23/vue-springboot整合easyexcel/">
+            <a href="/2020/12/11/布隆过滤器/">
                 <h2 class="post-title">
-                    vue+springboot整合easyexcel
+                    布隆过滤器
                 </h2>
                 <h3 class="post-subtitle">
-                    vue+springboot整合easyexcel
+                    布隆过滤器
                 </h3>
                 <div class="post-content-preview">
-                    前言：最近Vue+ssm开发项目的excel导入导出下载整合
-代码编写项目依赖
-123456&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;easyexcel&lt;&#x2F;artifactId&gt;    &lt;!--目前最新的版本--&gt;   ......
+                    布隆过滤器的优缺点概述优点：
+由于存储的是二进制数据，所以占用的空间很小
+
+它的插入和查询速度是非常快的，时间复杂度是O（K），可以联想一下HashMap的过程
+
+保密性很好，因为本身不存储任何原始数据，只有二进制数据
+
+
+缺点：
+存在误判，详细说明与例子见上文布隆器基础介绍部分。
+
+删除困难，试想布隆过滤器存入的几个数据经过计算的hash值相同，那么他们的二进制数组下标也一定相同，删除后导......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-02-23
+                    2020-12-11
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#vue" title="vue">vue</a>
-                    
-                      <a href="/tags/#easyexcel" title="easyexcel">easyexcel</a>
+                      <a href="/tags/#布隆过滤器" title="布隆过滤器">布隆过滤器</a>
                     
                 </div>
             
@@ -609,27 +392,98 @@ NIO一定优于BIO么？
 
         <div class="post-preview">
 
-            <a href="/2021/02/16/mybatis-plus分组求和以及Map与Bean的转换/">
+            <a href="/2020/11/26/常见Java并发中断方法/">
                 <h2 class="post-title">
-                    mybatis-plus分组求和以及Map与Bean的转换
+                    常见Java并发中断相关方法
                 </h2>
                 <h3 class="post-subtitle">
-                    mybatis-plus、Map转对象
+                    常见Java并发中断方法
                 </h3>
                 <div class="post-content-preview">
-                    mybatis-plus分组求和平常lambdaQuery写习惯了突然发现lambdaQuery好像不能求和，捡一下QueryWrapper写法1234QueryWrapper&lt;Entity&gt; yearQueryWrapper = new QueryWrapper&lt;&gt;();        yearQueryWrapper.select("bid_year as nam......
+                    背景在极客时间学习09Java线程的生命周期(上)时，课后思考出现了本文没有介绍的isInterrupted()方法，特此记录学习Java并发中断方法。
+中断介绍并发编程引用了中断机制无疑证明了中断对多线程并发的裨益，想想死锁的四个条件：互斥、请求与保持、环路等待、不可抢占。中断可以完美的破坏请求与保持、环路等待的死锁条件。再比如有的线程可能迷失在怪圈无法自拔（自旋浪费资源），这时就可以用其......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-02-16
+                    2020-11-26
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#并发编程" title="并发编程">并发编程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/25/并发编程初步认识与基础理论（一）/">
+                <h2 class="post-title">
+                    并发编程初步认识与基础理论（一）
+                </h2>
+                <h3 class="post-subtitle">
+                    java并发编程认识
+                </h3>
+                <div class="post-content-preview">
+                    学习资源总结来源感谢这位大佬课程的教育与分享，从中我得以管中窥豹一番，本文为并发编程基础理论的个人总结笔记，欢迎大家于下方链接去学习更全面的Java并发编程知识。来源：https://time.geekbang.org/column/intro/159?utm_campaign=guanwang&amp;utm_source=baidu-ad&amp;utm_medium=ppzq-pc&a......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-11-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#并发编程" title="并发编程">并发编程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/06/element-ui-mybatis-plus-springboot解决IPage分页问题/">
+                <h2 class="post-title">
+                    element-ui+mybatis-plus+springboot解决IPage分页问题
+                </h2>
+                <h3 class="post-subtitle">
+                    element-ui+mybatis-plus+springboot解决IPage分页问题
+                </h3>
+                <div class="post-content-preview">
+                    简介本文应用于ssm框架，解决controller接口返回mybatis-plus封装的IPage类型与Vue.element-ui前端的接收与分页
+mybatis-plus中的IPage与Page类首先上源码(部分)接口Ipage类型：IPage的实现类Page:
+源码可见Page是IPage的实现类，可见想使用mybatis-plus的封装分页则要明白Page类的属性Page类的属性介绍......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-11-06
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#springboot" title="springboot">springboot</a>
                     
                       <a href="/tags/#mybatis-plus" title="mybatis-plus">mybatis-plus</a>
                     
-                      <a href="/tags/#map" title="map">map</a>
+                      <a href="/tags/#element-ui" title="element-ui">element-ui</a>
+                    
+                      <a href="/tags/#vue" title="vue">vue</a>
                     
                 </div>
             
@@ -643,30 +497,124 @@ NIO一定优于BIO么？
 
         <div class="post-preview">
 
-            <a href="/2021/01/16/vue-cli3脚手架创建项目变化/">
+            <a href="/2020/11/02/redis常见问题/">
                 <h2 class="post-title">
-                    vue-cli3脚手架创建项目变化
+                    redis缓存雪崩、缓存穿透、缓存击穿与布隆过滤器
                 </h2>
                 <h3 class="post-subtitle">
-                    vue-cli3
+                    redis常见问题与布隆过滤器基础原理介绍
                 </h3>
                 <div class="post-content-preview">
-                    前言：一晃眼Vue都出到4了发现自己对Vue3和Vue2之间的变化还不清楚，因为实习工作的原因经常在Vue3和Vue2之间反复横跳，项目结构的变化让自己很难受，特此记录一下。
-项目结构对比
-vue cli2build包: 配置webpack,图中base.conf.js、dev.conf.js、prod.conf.js分别为webpack基础配置、开发环境配置、生产环境配置
-config包:......
+                    前言redis作为基于内存的非关系型数据库，通过读取缓存有效降低了大数据量访问系统(如购物商城网站)导致的数据库大量的磁盘读写操作，减少了数据库瘫痪、服务器宕机的风险。但是引入redis后也可能会产生新的问题导致redis缓存失效，大量数据访问依旧直接落在数据库上导致数据库瘫痪。本文主要介绍redis缓存雪崩、缓存穿透、缓存击穿与他们的解决方案。
+redis常见问题缓存雪崩我们知道redis......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-01-16
+                    2020-11-02
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#vue" title="vue">vue</a>
+                      <a href="/tags/#redis" title="redis">redis</a>
                     
-                      <a href="/tags/#vue-cli3" title="vue-cli3">vue-cli3</a>
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/08/redis基础认识/">
+                <h2 class="post-title">
+                    Redis基础认识
+                </h2>
+                <h3 class="post-subtitle">
+                    中间件Redis的了解与认识
+                </h3>
+                <div class="post-content-preview">
+                    概述Redis属于NOSQL((NoSQL = Not Only SQL )，意即“不仅仅是SQL”。NoSQL 数据库种类繁多(Redis、Mongodb、HBase、Elasticsearch 等等)),NOSQL的特点是去掉关系数据库的关系型特性。数据之间无关系，这样就非常容易扩展。无形之间也在架构的层面上带来了可扩展的能力。NoSQL数据库都具有非常高的读写性能，尤其在大量下数据，更......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-09-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#redis" title="redis">redis</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/05/shiro基础认识/">
+                <h2 class="post-title">
+                    shiro基础认识
+                </h2>
+                <h3 class="post-subtitle">
+                    中间件shiro的了解与认识
+                </h3>
+                <div class="post-content-preview">
+                    shiro 简介shiro是apache的一个开源框架，而且呢是一个权限管理的框架，用于实现用户认证、用户授权。spring 中也有一个权限框架 spring security (原名Acegi)，它和 spring 依赖过于紧密，没有 shiro 使用简单。shiro 不依赖于 spring，shiro 不仅可以实现 web应用的权限管理，还可以实现c/s系统，分布式系统权限管理，shir......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-09-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#shiro" title="shiro">shiro</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/08/24/java后端使用mysqldump备份数据库/">
+                <h2 class="post-title">
+                    java后端使用mysqldump备份数据库
+                </h2>
+                <h3 class="post-subtitle">
+                    java后端使用mysqldump命令备份数据库
+                </h3>
+                <div class="post-content-preview">
+                    背景在接老师开发商业性质的项目的时候，接受了一个前端操作向后端发送请求进行数据库备份文件生成于下载的任务，花费了自己蛮多心血特此记录一下。
+任务要求在指定页面以form表单（采用layui框架）显示出相关企业单位的备份信息(备份时间、备份文件名，文件名显示备份完成时间、备份相关内容、备份次数)，同时提供操作栏进行备份下载于删除操作
+核心完成方法java拼接mysqldump运行指令，并执行，......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-08-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysqldump" title="mysqldump">mysqldump</a>
                     
                 </div>
             
@@ -747,11 +695,11 @@ config包:......
             
         
             
+        
+            
+        
+            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
-            
-        
-            
-        
             
         
             
@@ -847,11 +795,15 @@ config包:......
             
         
             
-        
+            <a href="/tags/#注册中心" title="注册中心" rel="4">注册中心</a>
             
         
             
-            <a href="/tags/#netty" title="netty" rel="15">netty</a>
+            <a href="/tags/#spring cloud" title="spring cloud" rel="4">spring cloud</a>
+            
+        
+            
+        
             
         
             
@@ -956,23 +908,23 @@ config包:......
     <ul>
       
         <li>
-          <a href="/2021/04/16/Netty%E5%AD%A6%E4%B9%A03-7-%E5%85%B3%E9%97%AD%E6%9C%8D%E5%8A%A1/">Netty学习3.7-关闭服务</a>
+          <a href="/2021/05/21/Eureka%E3%80%81zookeeper%E3%80%81consul%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E7%9A%84%E5%BC%82%E5%90%8C/">Eureka、zookeeper、consul三个注册中心的异同</a>
         </li>
       
         <li>
-          <a href="/2021/04/15/Netty%E5%AD%A6%E4%B9%A03-6-%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/">Netty学习3.6-断开连接</a>
+          <a href="/2021/05/20/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83consul/">微服务注册中心consul</a>
         </li>
       
         <li>
-          <a href="/2021/04/14/Netty%E5%AD%A6%E4%B9%A03-5-%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE/">Netty学习3.5-发送数据</a>
+          <a href="/2021/05/17/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83zookeeper/">微服务注册中心zookeeper</a>
         </li>
       
         <li>
-          <a href="/2021/04/12/Netty%E5%AD%A6%E4%B9%A03-3-%E6%8E%A5%E5%8F%97%E6%95%B0%E6%8D%AE/">Netty学习3.3-接受数据</a>
+          <a href="/2021/05/15/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83Eureka/">微服务注册中心Eureka</a>
         </li>
       
         <li>
-          <a href="/2021/04/11/Netty%E5%AD%A6%E4%B9%A03-2-%E6%9E%84%E5%BB%BA%E8%BF%9E%E6%8E%A5/">Netty学习3.2-构建连接</a>
+          <a href="/2021/04/01/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E4%B8%8E%E5%93%88%E5%B8%8C%E6%A7%BD/">一致性哈希与哈希槽</a>
         </li>
       
     </ul>
@@ -1001,7 +953,7 @@ config包:......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -1012,17 +964,17 @@ config包:......
     <div class="widget">
       <ul>
         
+          <a href="categories/#Annotation"><li>Annotation</li></a>
+        
           <a href="categories/#架构模式"><li>架构模式</li></a>
         
           <a href="categories/#JSON"><li>JSON</li></a>
         
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
-          <a href="categories/#hexo"><li>hexo</li></a>
-        
           <a href="categories/#GitHub"><li>GitHub</li></a>
         
           <a href="categories/#Docker"><li>Docker</li></a>
+        
+          <a href="categories/#hexo"><li>hexo</li></a>
         
           <a href="categories/#centos"><li>centos</li></a>
         
@@ -1032,19 +984,19 @@ config包:......
         
           <a href="categories/#Druid"><li>Druid</li></a>
         
-          <a href="categories/#idea"><li>idea</li></a>
+          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
+          <a href="categories/#idea"><li>idea</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
+        
           <a href="categories/#异步调用"><li>异步调用</li></a>
         
-          <a href="categories/#sql"><li>sql</li></a>
-        
-          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
-        
           <a href="categories/#SQL"><li>SQL</li></a>
+        
+          <a href="categories/#sql"><li>sql</li></a>
         
           <a href="categories/#mysqldump"><li>mysqldump</li></a>
         
@@ -1062,21 +1014,35 @@ config包:......
         
           <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
         
-          <a href="categories/#javastream"><li>javastream</li></a>
+          <a href="categories/#Eureka"><li>Eureka</li></a>
         
-          <a href="categories/#netty"><li>netty</li></a>
+          <a href="categories/#zookeeper"><li>zookeeper</li></a>
+        
+          <a href="categories/#注册中心"><li>注册中心</li></a>
         
           <a href="categories/#map"><li>map</li></a>
         
-          <a href="categories/#easyexcel"><li>easyexcel</li></a>
+          <a href="categories/#注册中心"><li>注册中心</li></a>
+        
+          <a href="categories/#注册中心"><li>注册中心</li></a>
         
           <a href="categories/#cache"><li>cache</li></a>
         
-          <a href="categories/#Reactor"><li>Reactor</li></a>
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
         
-          <a href="categories/#TCP"><li>TCP</li></a>
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
         
-          <a href="categories/#粘包和半包"><li>粘包和半包</li></a>
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
+        
+          <a href="categories/#consul"><li>consul</li></a>
+        
+          <a href="categories/#javastream"><li>javastream</li></a>
+        
+          <a href="categories/#easyexcel"><li>easyexcel</li></a>
+        
+          <a href="categories/#注册中心"><li>注册中心</li></a>
+        
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
         
       </ul>
     </div>
@@ -1128,7 +1094,7 @@ config包:......
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; John Doe 2021 
+                    Copyright &copy; John Doe 2022 
                     <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
@@ -1254,7 +1220,7 @@ config包:......
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;对象？new一个就好了&#34;,&#34;just do it&#34;,&#34;🍀&#34;,&#34;🍂&#34;,&#34;🍃&#34;,&#34;time is running out&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34; ,&#34;rgb(242,153,29)&#34; ,&#34;rgb(22,36,92)&#34; ,&#34;rgb(119,195,79)&#34; ,&#34;rgb(119,195,79)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1264,22 +1230,6 @@ config包:......
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </body>
 
 </html>
