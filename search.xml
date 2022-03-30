@@ -370,11 +370,11 @@
       
         <tags>
             
-            <tag> zookeeper </tag>
-            
             <tag> 注册中心 </tag>
             
             <tag> spring cloud </tag>
+            
+            <tag> zookeeper </tag>
             
         </tags>
       
@@ -403,11 +403,11 @@
       
         <tags>
             
+            <tag> Eureka </tag>
+            
             <tag> 注册中心 </tag>
             
             <tag> spring cloud </tag>
-            
-            <tag> Eureka </tag>
             
         </tags>
       
