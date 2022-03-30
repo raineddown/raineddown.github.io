@@ -164,14 +164,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -185,14 +185,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -283,26 +283,36 @@
 
         <div class="post-preview">
 
-            <a href="/2020/12/25/stream流/">
+            <a href="/2021/05/27/OpenFeign服务调用/">
                 <h2 class="post-title">
-                    javastream流
+                    OpenFeign服务调用
                 </h2>
                 <h3 class="post-subtitle">
-                    javastream流
+                    OpenFeign服务调用
                 </h3>
                 <div class="post-content-preview">
-                    前言在工作过程中看到类似以下代码，一时间理解不能，static void方法中有return方法，后续意识到这应该是stream流的拦截处理，特此记录巩固java stream的写法
-1234567891011121314151617181920212223&#x2F;** 获取结案操作逻辑处理*&#x2F;private static void getXXXXByEnum(List&lt;......
+                    简介
+
+项目demo地址：https://github.com/raineddown/spring-cloud-demo
+涉及服务:cloud-consumer-feign-order80、cloud-provider-payment8001、cloud-eureka-server7001
+Feign与OpenFeign区别
+使用流程1.主启动类中
+
+2.fegin需要调用的其他的服务的接口......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-12-25
+                    2021-05-27
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#javastream" title="javastream">javastream</a>
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                      <a href="/tags/#OpenFeign" title="OpenFeign">OpenFeign</a>
+                    
+                      <a href="/tags/#服务远程调用" title="服务远程调用">服务远程调用</a>
                     
                 </div>
             
@@ -316,22 +326,258 @@
 
         <div class="post-preview">
 
-            <a href="/2020/12/20/消息队列、RabbitMQ简介/">
+            <a href="/2021/05/25/Ribbon负载均衡服务调用/">
                 <h2 class="post-title">
-                    消息队列、RabbitMQ简介
+                    Ribbon负载均衡服务调用
                 </h2>
                 <h3 class="post-subtitle">
-                    消息队列基础、RabbitMQ简介
+                    Ribbon负载均衡服务调用
                 </h3>
                 <div class="post-content-preview">
-                    消息队列简介消息队列MQ(Message Queue)中间件是分布式系统中重要的组件，主要解决应用耦合，异步消息，流量削锋等问题实现高性能，高可用，可伸缩和终一致性,使用较多的消息队列有ActiveMQ，RabbitMQ，ZeroMQ，Kafka，RocketMQ.其中把数据放到消息队列叫做生产者，从消息队列里边取数据叫做消费者。
-消息队列的作用解耦： 假设有A、B2个系统，B系统需要调用A......
+                    简介
+Ribbon源码地址: https://github.com/Netflix/ribbon
+
+一句话介绍：负载均衡 + RestTemplate调用
+demo地址:项目地址：https://github.com/raineddown/spring-cloud-demo
+涉及服务: cloud-consumer-order80
+使用流程注意：
+Eureka最新的包(client)中包含R......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-12-20
+                    2021-05-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                      <a href="/tags/#Ribbon" title="Ribbon">Ribbon</a>
+                    
+                      <a href="/tags/#负载均衡" title="负载均衡">负载均衡</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/05/21/Eureka、zookeeper、consul三个注册中心的异同/">
+                <h2 class="post-title">
+                    Eureka、zookeeper、consul三个注册中心的异同
+                </h2>
+                <h3 class="post-subtitle">
+                    微服务注册中心Eureka
+                </h3>
+                <div class="post-content-preview">
+                    区别
+
+
+
+
+...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-05-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#注册中心" title="注册中心">注册中心</a>
+                    
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/05/20/微服务注册中心consul/">
+                <h2 class="post-title">
+                    微服务注册中心consul
+                </h2>
+                <h3 class="post-subtitle">
+                    微服务注册中心consul
+                </h3>
+                <div class="post-content-preview">
+                    前言来源：尚硅谷spring cloud2020
+项目demo地址：https://github.com/raineddown/spring-cloud-demo
+涉及服务: cloud-consumerconsul-order80、cloud-providerconsul-payment8006
+简介
+
+consul官网：https://www.consul.io/docs/intro
+s......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-05-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#注册中心" title="注册中心">注册中心</a>
+                    
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                      <a href="/tags/#consul" title="consul">consul</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/05/17/微服务注册中心zookeeper/">
+                <h2 class="post-title">
+                    微服务注册中心zookeeper
+                </h2>
+                <h3 class="post-subtitle">
+                    微服务注册中心zookeeper
+                </h3>
+                <div class="post-content-preview">
+                    Zookeeper服务注册与发现demo地址:项目地址：https://github.com/raineddown/spring-cloud-demo
+涉及服务: cloud-consumerzk-order80、cloud-provider-payment8004
+配置流程服务提供方配置
+1234567891011server:  port: 8004#服务别名----注册zookeepe......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-05-17
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#zookeeper" title="zookeeper">zookeeper</a>
+                    
+                      <a href="/tags/#注册中心" title="注册中心">注册中心</a>
+                    
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/05/15/微服务注册中心Eureka/">
+                <h2 class="post-title">
+                    微服务注册中心Eureka
+                </h2>
+                <h3 class="post-subtitle">
+                    微服务注册中心Eureka
+                </h3>
+                <div class="post-content-preview">
+                    前言什么是服务治理​    Spring Cloud封装了Netfilx公司开发的Eureka模块来实现服务治理
+​    在传统的rpc远程调用框架中，管理每个服务与服务之间依赖关系比较复杂，管理比较复杂，所以需要使用服务治理，管理服务于服务之间依赖关系，可以实现服务调用、负载均衡、容错等，实现服务注册与发现。
+什么是服务治理​    Eureka采用了CS的设计架构，Eureka Ser......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-05-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#注册中心" title="注册中心">注册中心</a>
+                    
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                      <a href="/tags/#Eureka" title="Eureka">Eureka</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/04/01/一致性哈希与哈希槽/">
+                <h2 class="post-title">
+                    一致性哈希与哈希槽
+                </h2>
+                <h3 class="post-subtitle">
+                    一致性哈希与哈希槽
+                </h3>
+                <div class="post-content-preview">
+                    前言随着缓存技术出现，分布式存储的缓存集群无疑极大的提升了数据访问速度。但缓存该按照什么规定去存储到指定的节点(集群中的某个缓存服务器),新增或删除某几台缓存服务器后对以前的缓存的查找怎么办，如何处理。以下以redis非关系型内存数据库为例。
+缓存集群分配节点问题一台或多台应用服务器的数据放入多台redis缓存服务器中时如何选择存到哪台缓存服务器，如何让数据尽可能均衡的存储数据做到负载均衡？......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-04-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#redis" title="redis">redis</a>
+                    
+                      <a href="/tags/#cache" title="cache">cache</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/03/01/RabbitMQ的4种广播类型/">
+                <h2 class="post-title">
+                    RabbitMQ的4种广播类型与DEMO
+                </h2>
+                <h3 class="post-subtitle">
+                    RabbitMQ的4种广播类型与DEMO
+                </h3>
+                <div class="post-content-preview">
+                    rabbitmq管理界面可见我的上篇文章介绍的rabbitMQ基础与docker安装rabbitMQ management网址输入：http://127.0.0.1:15672/登录名&amp;密码：guest
+1.直接模式Direct直接模式介绍rabbitMQ直接模式:最基础最简单的模式，发送方把消息发送给订阅方，如果有多个订阅者，默认采取轮询的方式进行消息发送。当我们需要将消息发给唯一......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-03-01
                 </p>
                 <div class="tags">
                     
@@ -349,174 +595,29 @@
 
         <div class="post-preview">
 
-            <a href="/2020/12/11/布隆过滤器/">
+            <a href="/2021/02/23/vue-springboot整合easyexcel/">
                 <h2 class="post-title">
-                    布隆过滤器
+                    vue+springboot整合easyexcel
                 </h2>
                 <h3 class="post-subtitle">
-                    布隆过滤器
+                    vue+springboot整合easyexcel
                 </h3>
                 <div class="post-content-preview">
-                    布隆过滤器的优缺点概述优点：
-由于存储的是二进制数据，所以占用的空间很小
-
-它的插入和查询速度是非常快的，时间复杂度是O（K），可以联想一下HashMap的过程
-
-保密性很好，因为本身不存储任何原始数据，只有二进制数据
-
-
-缺点：
-存在误判，详细说明与例子见上文布隆器基础介绍部分。
-
-删除困难，试想布隆过滤器存入的几个数据经过计算的hash值相同，那么他们的二进制数组下标也一定相同，删除后导......
+                    前言：最近Vue+ssm开发项目的excel导入导出下载整合
+代码编写项目依赖
+123456&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;easyexcel&lt;&#x2F;artifactId&gt;    &lt;!--目前最新的版本--&gt;   ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-12-11
+                    2021-02-23
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#布隆过滤器" title="布隆过滤器">布隆过滤器</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/26/常见Java并发中断方法/">
-                <h2 class="post-title">
-                    常见Java并发中断相关方法
-                </h2>
-                <h3 class="post-subtitle">
-                    常见Java并发中断方法
-                </h3>
-                <div class="post-content-preview">
-                    背景在极客时间学习09Java线程的生命周期(上)时，课后思考出现了本文没有介绍的isInterrupted()方法，特此记录学习Java并发中断方法。
-中断介绍并发编程引用了中断机制无疑证明了中断对多线程并发的裨益，想想死锁的四个条件：互斥、请求与保持、环路等待、不可抢占。中断可以完美的破坏请求与保持、环路等待的死锁条件。再比如有的线程可能迷失在怪圈无法自拔（自旋浪费资源），这时就可以用其......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-11-26
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#并发编程" title="并发编程">并发编程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/25/并发编程初步认识与基础理论（一）/">
-                <h2 class="post-title">
-                    并发编程初步认识与基础理论（一）
-                </h2>
-                <h3 class="post-subtitle">
-                    java并发编程认识
-                </h3>
-                <div class="post-content-preview">
-                    学习资源总结来源感谢这位大佬课程的教育与分享，从中我得以管中窥豹一番，本文为并发编程基础理论的个人总结笔记，欢迎大家于下方链接去学习更全面的Java并发编程知识。来源：https://time.geekbang.org/column/intro/159?utm_campaign=guanwang&amp;utm_source=baidu-ad&amp;utm_medium=ppzq-pc&a......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-11-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#并发编程" title="并发编程">并发编程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/06/element-ui-mybatis-plus-springboot解决IPage分页问题/">
-                <h2 class="post-title">
-                    element-ui+mybatis-plus+springboot解决IPage分页问题
-                </h2>
-                <h3 class="post-subtitle">
-                    element-ui+mybatis-plus+springboot解决IPage分页问题
-                </h3>
-                <div class="post-content-preview">
-                    简介本文应用于ssm框架，解决controller接口返回mybatis-plus封装的IPage类型与Vue.element-ui前端的接收与分页
-mybatis-plus中的IPage与Page类首先上源码(部分)接口Ipage类型：IPage的实现类Page:
-源码可见Page是IPage的实现类，可见想使用mybatis-plus的封装分页则要明白Page类的属性Page类的属性介绍......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-11-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#springboot" title="springboot">springboot</a>
-                    
-                      <a href="/tags/#mybatis-plus" title="mybatis-plus">mybatis-plus</a>
-                    
-                      <a href="/tags/#element-ui" title="element-ui">element-ui</a>
                     
                       <a href="/tags/#vue" title="vue">vue</a>
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/02/redis常见问题/">
-                <h2 class="post-title">
-                    redis缓存雪崩、缓存穿透、缓存击穿与布隆过滤器
-                </h2>
-                <h3 class="post-subtitle">
-                    redis常见问题与布隆过滤器基础原理介绍
-                </h3>
-                <div class="post-content-preview">
-                    前言redis作为基于内存的非关系型数据库，通过读取缓存有效降低了大数据量访问系统(如购物商城网站)导致的数据库大量的磁盘读写操作，减少了数据库瘫痪、服务器宕机的风险。但是引入redis后也可能会产生新的问题导致redis缓存失效，大量数据访问依旧直接落在数据库上导致数据库瘫痪。本文主要介绍redis缓存雪崩、缓存穿透、缓存击穿与他们的解决方案。
-redis常见问题缓存雪崩我们知道redis......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-11-02
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#redis" title="redis">redis</a>
+                      <a href="/tags/#easyexcel" title="easyexcel">easyexcel</a>
                     
                 </div>
             
@@ -530,91 +631,27 @@ redis常见问题缓存雪崩我们知道redis......
 
         <div class="post-preview">
 
-            <a href="/2020/09/08/redis基础认识/">
+            <a href="/2021/02/16/mybatis-plus分组求和以及Map与Bean的转换/">
                 <h2 class="post-title">
-                    Redis基础认识
+                    mybatis-plus分组求和以及Map与Bean的转换
                 </h2>
                 <h3 class="post-subtitle">
-                    中间件Redis的了解与认识
+                    mybatis-plus、Map转对象
                 </h3>
                 <div class="post-content-preview">
-                    概述Redis属于NOSQL((NoSQL = Not Only SQL )，意即“不仅仅是SQL”。NoSQL 数据库种类繁多(Redis、Mongodb、HBase、Elasticsearch 等等)),NOSQL的特点是去掉关系数据库的关系型特性。数据之间无关系，这样就非常容易扩展。无形之间也在架构的层面上带来了可扩展的能力。NoSQL数据库都具有非常高的读写性能，尤其在大量下数据，更......
+                    mybatis-plus分组求和平常lambdaQuery写习惯了突然发现lambdaQuery好像不能求和，捡一下QueryWrapper写法1234QueryWrapper&lt;Entity&gt; yearQueryWrapper = new QueryWrapper&lt;&gt;();        yearQueryWrapper.select("bid_year as nam......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-09-08
+                    2021-02-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#redis" title="redis">redis</a>
+                      <a href="/tags/#mybatis-plus" title="mybatis-plus">mybatis-plus</a>
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/05/shiro基础认识/">
-                <h2 class="post-title">
-                    shiro基础认识
-                </h2>
-                <h3 class="post-subtitle">
-                    中间件shiro的了解与认识
-                </h3>
-                <div class="post-content-preview">
-                    shiro 简介shiro是apache的一个开源框架，而且呢是一个权限管理的框架，用于实现用户认证、用户授权。spring 中也有一个权限框架 spring security (原名Acegi)，它和 spring 依赖过于紧密，没有 shiro 使用简单。shiro 不依赖于 spring，shiro 不仅可以实现 web应用的权限管理，还可以实现c/s系统，分布式系统权限管理，shir......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-09-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#shiro" title="shiro">shiro</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/24/java后端使用mysqldump备份数据库/">
-                <h2 class="post-title">
-                    java后端使用mysqldump备份数据库
-                </h2>
-                <h3 class="post-subtitle">
-                    java后端使用mysqldump命令备份数据库
-                </h3>
-                <div class="post-content-preview">
-                    背景在接老师开发商业性质的项目的时候，接受了一个前端操作向后端发送请求进行数据库备份文件生成于下载的任务，花费了自己蛮多心血特此记录一下。
-任务要求在指定页面以form表单（采用layui框架）显示出相关企业单位的备份信息(备份时间、备份文件名，文件名显示备份完成时间、备份相关内容、备份次数)，同时提供操作栏进行备份下载于删除操作
-核心完成方法java拼接mysqldump运行指令，并执行，......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-08-24
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysqldump" title="mysqldump">mysqldump</a>
+                      <a href="/tags/#map" title="map">map</a>
                     
                 </div>
             
@@ -719,17 +756,21 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
-        
-            
-        
-            
-        
-            
             <a href="/tags/#IDEA" title="IDEA" rel="2">IDEA</a>
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
+            
+        
+            
+        
             
         
             
@@ -759,13 +800,21 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
-        
-            
-        
-            
-        
-            
             <a href="/tags/#redis" title="redis" rel="3">redis</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
+            
+        
+            
+            <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
+            
+        
             
         
             
@@ -779,16 +828,6 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
-            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
-            
-        
-            
         
             
         
@@ -799,9 +838,35 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
-            <a href="/tags/#spring cloud" title="spring cloud" rel="4">spring cloud</a>
+            <a href="/tags/#spring cloud" title="spring cloud" rel="7">spring cloud</a>
             
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Zookeeper" title="Zookeeper" rel="4">Zookeeper</a>
             
         
             
@@ -908,23 +973,23 @@ redis常见问题缓存雪崩我们知道redis......
     <ul>
       
         <li>
-          <a href="/2021/05/21/Eureka%E3%80%81zookeeper%E3%80%81consul%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E7%9A%84%E5%BC%82%E5%90%8C/">Eureka、zookeeper、consul三个注册中心的异同</a>
+          <a href="/2021/12/14/log4j2%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D%E5%8F%8Ademo/">log4j2漏洞介绍及demo</a>
         </li>
       
         <li>
-          <a href="/2021/05/20/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83consul/">微服务注册中心consul</a>
+          <a href="/2021/07/18/spring/">spring</a>
         </li>
       
         <li>
-          <a href="/2021/05/17/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83zookeeper/">微服务注册中心zookeeper</a>
+          <a href="/2021/07/05/Zookeeper%E6%A1%88%E4%BE%8B-%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80ID%E7%94%9F%E6%88%90/">Zookeeper案例-分布式全局唯一ID生成</a>
         </li>
       
         <li>
-          <a href="/2021/05/15/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83Eureka/">微服务注册中心Eureka</a>
+          <a href="/2021/07/02/Zookeeper%E6%A1%88%E4%BE%8B-%E5%88%86%E5%B8%83%E5%BC%8F%E5%B1%8F%E9%9A%9CBarrier/">Zookeeper案例-分布式屏障Barrier</a>
         </li>
       
         <li>
-          <a href="/2021/04/01/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E4%B8%8E%E5%93%88%E5%B8%8C%E6%A7%BD/">一致性哈希与哈希槽</a>
+          <a href="/2021/06/25/Zookeeper%E6%A1%88%E4%BE%8B-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">Zookeeper案例-分布式锁</a>
         </li>
       
     </ul>
@@ -953,7 +1018,7 @@ redis常见问题缓存雪崩我们知道redis......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -964,33 +1029,35 @@ redis常见问题缓存雪崩我们知道redis......
     <div class="widget">
       <ul>
         
-          <a href="categories/#Annotation"><li>Annotation</li></a>
+          <a href="categories/#GitHub"><li>GitHub</li></a>
         
           <a href="categories/#架构模式"><li>架构模式</li></a>
         
+          <a href="categories/#Annotation"><li>Annotation</li></a>
+        
           <a href="categories/#JSON"><li>JSON</li></a>
-        
-          <a href="categories/#GitHub"><li>GitHub</li></a>
-        
-          <a href="categories/#Docker"><li>Docker</li></a>
         
           <a href="categories/#hexo"><li>hexo</li></a>
         
-          <a href="categories/#centos"><li>centos</li></a>
+          <a href="categories/#Docker"><li>Docker</li></a>
         
           <a href="categories/#IDEA"><li>IDEA</li></a>
         
+          <a href="categories/#centos"><li>centos</li></a>
+        
           <a href="categories/#jdk"><li>jdk</li></a>
+        
+          <a href="categories/#idea"><li>idea</li></a>
         
           <a href="categories/#Druid"><li>Druid</li></a>
         
           <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
-          <a href="categories/#idea"><li>idea</li></a>
+          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
+          <a href="categories/#mysqldump"><li>mysqldump</li></a>
         
           <a href="categories/#异步调用"><li>异步调用</li></a>
         
@@ -998,27 +1065,39 @@ redis常见问题缓存雪崩我们知道redis......
         
           <a href="categories/#sql"><li>sql</li></a>
         
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
+          <a href="categories/#redis"><li>redis</li></a>
         
           <a href="categories/#shiro"><li>shiro</li></a>
         
-          <a href="categories/#redis"><li>redis</li></a>
-        
-          <a href="categories/#vue"><li>vue</li></a>
+          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
         
           <a href="categories/#并发编程"><li>并发编程</li></a>
         
-          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
-        
           <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
+        
+          <a href="categories/#javastream"><li>javastream</li></a>
+        
+          <a href="categories/#vue"><li>vue</li></a>
         
           <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
         
-          <a href="categories/#Eureka"><li>Eureka</li></a>
-        
           <a href="categories/#zookeeper"><li>zookeeper</li></a>
         
+          <a href="categories/#Eureka"><li>Eureka</li></a>
+        
           <a href="categories/#注册中心"><li>注册中心</li></a>
+        
+          <a href="categories/#Hystrix"><li>Hystrix</li></a>
+        
+          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
+        
+          <a href="categories/#consul"><li>consul</li></a>
+        
+          <a href="categories/#Ribbon"><li>Ribbon</li></a>
+        
+          <a href="categories/#java线程池"><li>java线程池</li></a>
+        
+          <a href="categories/#spring"><li>spring</li></a>
         
           <a href="categories/#map"><li>map</li></a>
         
@@ -1026,21 +1105,29 @@ redis常见问题缓存雪崩我们知道redis......
         
           <a href="categories/#注册中心"><li>注册中心</li></a>
         
-          <a href="categories/#cache"><li>cache</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#consul"><li>consul</li></a>
-        
-          <a href="categories/#javastream"><li>javastream</li></a>
-        
           <a href="categories/#easyexcel"><li>easyexcel</li></a>
         
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
+        
+          <a href="categories/#cache"><li>cache</li></a>
+        
+          <a href="categories/#服务降级"><li>服务降级</li></a>
+        
+          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
+        
           <a href="categories/#注册中心"><li>注册中心</li></a>
+        
+          <a href="categories/#负载均衡"><li>负载均衡</li></a>
+        
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
+        
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
+        
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
+        
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
+        
+          <a href="categories/#spring cloud"><li>spring cloud</li></a>
         
           <a href="categories/#spring cloud"><li>spring cloud</li></a>
         

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Zookeeper案例-分布式全局唯一ID生成 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2021/07/05/Zookeeper案例-分布式全局唯一ID生成/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Zookeeper" title="Zookeeper">Zookeeper</a>
+                            
+                        </div>
+                        <h1>Zookeeper案例-分布式全局唯一ID生成</h1>
+                        <h2 class="subheading">Zookeeper实现分布式全局唯一ID生成</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2021-07-05
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.4k</span> and
+                                Reading Time <span class="post-count">11</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在单体架构中，我们通常使用数据库字段自带的自增auto_increment属性来自动为每一条记录生成唯一的ID，但是当我们采用分布式系统后，特别是分库分表后，就无法再依靠数据库的auto_increment属性来唯一标识一条记录，这就需要采用其他方法来生成全局唯一ID。</p>
+<p>在zookeeper中，它提供了一种以创建临时有序节点来获取到全局唯一ID，它能保证在整个分布式系统中的全局唯一性。</p>
+<h2 id="项目demo地址"><a href="#项目demo地址" class="headerlink" title="项目demo地址"></a>项目demo地址</h2><h2 id="案例实现"><a href="#案例实现" class="headerlink" title="案例实现"></a>案例实现</h2><p>实现步骤：</p>
+<ul>
+<li>1、客户端连接到zookeeper服务器端；</li>
+<li>2、客户端在指定路径下生成临时有序节点；</li>
+<li>3、取出序列号，这就是分布式全局唯一ID；</li>
+</ul>
+<h3 id="zookeeper实现"><a href="#zookeeper实现" class="headerlink" title="zookeeper实现"></a>zookeeper实现</h3><p>1、引入依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    排除zk依赖的log4j和slf4j，使用springboot提供的logback    --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2、代码实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZookeeperUniqueID</span> <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 计数器对象 */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 连接对象 */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ZooKeeper zooKeeper;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String IP = <span class="string">"127.0.0.1:2181"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 用户生成序号的节点 */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String DEFAULT_PATH = <span class="string">"/uniqueId"</span>;</span><br><span class="line">    <span class="comment">/** 根节点 */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String ROOT_PATH = <span class="string">"/uniqueId"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ZookeeperUniqueID</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            zooKeeper = <span class="keyword">new</span> ZooKeeper(IP, <span class="number">6000</span>, <span class="keyword">this</span>);</span><br><span class="line">            <span class="comment">//等待zk正常连接后，往下走程序</span></span><br><span class="line">            countDownLatch.await();</span><br><span class="line">            <span class="comment">// 判断根节点是否存在</span></span><br><span class="line">            Stat stat = zooKeeper.exists(ROOT_PATH, <span class="keyword">false</span>);</span><br><span class="line">            <span class="keyword">if</span> (stat == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 创建一下根节点</span></span><br><span class="line">                zooKeeper.create(ROOT_PATH, <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent watchedEvent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//EventType = None时</span></span><br><span class="line">            <span class="keyword">if</span> (watchedEvent.getType() == Event.EventType.None) &#123;</span><br><span class="line">                <span class="keyword">if</span> (watchedEvent.getState() == Event.KeeperState.SyncConnected) &#123;</span><br><span class="line">                    log.info(<span class="string">"连接成功"</span>);</span><br><span class="line">                    countDownLatch.countDown();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (watchedEvent.getState() == Event.KeeperState.Disconnected) &#123;</span><br><span class="line">                    log.info(<span class="string">"断开连接"</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (watchedEvent.getState() == Event.KeeperState.Expired) &#123;</span><br><span class="line">                    log.info(<span class="string">"会话超时"</span>);</span><br><span class="line">                    <span class="comment">// 超时后服务器端已经将连接释放，需要重新连接服务器端</span></span><br><span class="line">                    zooKeeper = <span class="keyword">new</span> ZooKeeper(IP, <span class="number">6000</span>, <span class="keyword">this</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (watchedEvent.getState() == Event.KeeperState.AuthFailed) &#123;</span><br><span class="line">                    log.info(<span class="string">"认证失败"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据 zk 临时有序节点，生成唯一ID</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 唯一ID</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUniqueId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String path = <span class="string">""</span>;</span><br><span class="line">        <span class="comment">//创建临时有序节点</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            path = zooKeeper.create(ROOT_PATH + DEFAULT_PATH, <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>], ZooDefs.Ids.OPEN_ACL_UNSAFE,</span><br><span class="line">                    CreateMode.EPHEMERAL_SEQUENTIAL);</span><br><span class="line">            log.info(<span class="string">"zk创建临时有序节点：&#123;&#125;"</span>, path);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeeperException | InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//截取defaultPath的长度</span></span><br><span class="line">        <span class="keyword">return</span> path.substring(ROOT_PATH.length() + DEFAULT_PATH.length());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZookeeperUniqueIDTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试 zk 生成唯一ID</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUniqueId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ZookeeperUniqueID zookeeperUniqueID = <span class="keyword">new</span> ZookeeperUniqueID();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"分布式唯一ID:"</span> + zookeeperUniqueID.getUniqueId());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试 zk 生成唯一ID（多线程下）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUniqueIdForMore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ZookeeperUniqueID zookeeperUniqueID = <span class="keyword">new</span> ZookeeperUniqueID();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"分布式唯一ID:"</span> + zookeeperUniqueID.getUniqueId());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"thread-0"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"分布式唯一ID:"</span> + zookeeperUniqueID.getUniqueId());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"thread-1"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"分布式唯一ID:"</span> + zookeeperUniqueID.getUniqueId());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"thread-2"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//睡眠，用以保证有充足的时间执行</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Zookeeper Client 查看节点数据</strong>：</p>
+<p><img src="/img/zookeeper/uniqueId-zookeeper.png" alt=""></p>
+<p><strong>分析</strong>：</p>
+<ul>
+<li>所有ID唯一，无重复</li>
+<li>多线程环境下可保证ID自增</li>
+</ul>
+<p><strong>原生ZooKeeper的API实现的一些问题</strong></p>
+<p>会话连接是异步的，需要自己去处理。比如使用 CountDownLatch<br>Watch 需要重复注册，不然就不能生效<br>开发的复杂性还是比较高的<br>不支持多节点删除和创建，需要自己去递归。<br>因此可以使用ZooKeeper的框架——Curator。</p>
+<h3 id="Curator实现分布式ID"><a href="#Curator实现分布式ID" class="headerlink" title="Curator实现分布式ID"></a>Curator实现分布式ID</h3><p>Curator是Netflix公司开源的一套ZooKeeper客户端框架，提供了一套易用性和可读性更强的Fluent风格的客户端API框架。为ZooKeeper客户端框架提供了一些比较普遍的、开箱即用的、分布式开发用的解决方案，例如Recipe、共享锁服务、Master选举机制和分布式计算器等，帮助开发者避免了“重复造轮子”的无效开发工作。</p>
+<p>Guava is to Java that Curator to ZooKeeper</p>
+<p>更多Curator介绍参考：《Zookeeper开源客户端框架Curator简介》<a href="https://www.iteye.com/blog/macrochen-1366136" target="_blank" rel="noopener">https://www.iteye.com/blog/macrochen-1366136</a></p>
+<p>1、代码实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CuratorUniqueID</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> CuratorFramework curatorFrameworkClient;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> RetryPolicy retryPolicy;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String IP = <span class="string">"127.0.0.1:2181"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String ROOT = <span class="string">"/uniqueId-curator"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String NODE_NAME = <span class="string">"/uniqueId"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        retryPolicy = <span class="keyword">new</span> ExponentialBackoffRetry(<span class="number">1000</span>, <span class="number">3</span>);</span><br><span class="line">        curatorFrameworkClient = CuratorFrameworkFactory</span><br><span class="line">                .builder()</span><br><span class="line">                .connectString(IP)</span><br><span class="line">                .sessionTimeoutMs(<span class="number">5000</span>)</span><br><span class="line">                .connectionTimeoutMs(<span class="number">5000</span>)</span><br><span class="line">                .retryPolicy(retryPolicy)</span><br><span class="line">                .build();</span><br><span class="line">        curatorFrameworkClient.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//请先判断父节点/root节点是否存在</span></span><br><span class="line">            Stat stat = curatorFrameworkClient.checkExists().forPath(ROOT);</span><br><span class="line">            <span class="keyword">if</span> (stat == <span class="keyword">null</span>) &#123;</span><br><span class="line">                curatorFrameworkClient.create().withMode(CreateMode.PERSISTENT).forPath(ROOT, <span class="keyword">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成唯一id</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 唯一id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">generateId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String backPath = <span class="string">""</span>;</span><br><span class="line">        String fullPath = ROOT.concat(NODE_NAME);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 关键点：创建临时顺序节点</span></span><br><span class="line">            backPath = curatorFrameworkClient.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(fullPath,</span><br><span class="line">                    <span class="keyword">null</span>);</span><br><span class="line">            log.info(<span class="string">"zk创建临时有序节点：&#123;&#125;"</span>, backPath);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> backPath.substring(ROOT.length() + NODE_NAME.length());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CuratorUniqueIDTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试 Curator 生成分布式id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id = CuratorUniqueID.generateId();</span><br><span class="line">        System.out.println(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试 Curator 生成唯一ID（多线程下）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUniqueIdForThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"分布式唯一ID:"</span> + CuratorUniqueID.generateId());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"thread-0"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"分布式唯一ID:"</span> + CuratorUniqueID.generateId());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"thread-1"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"分布式唯一ID:"</span> + CuratorUniqueID.generateId());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"thread-2"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//睡眠，用以保证有充足的时间执行</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 单机ZooKeeper</span></span><br><span class="line"><span class="comment">     * 单线程生成10W个 分布式ID 测速</span></span><br><span class="line"><span class="comment">     * 大约为：3060085 ms  大约为 51min</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateUniqueIdForMore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        LocalDateTime startTime = LocalDateTime.now();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">            String id = CuratorUniqueID.generateId();</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">        LocalDateTime endTime = LocalDateTime.now();</span><br><span class="line">        <span class="comment">// 计算时间差值</span></span><br><span class="line">        <span class="keyword">long</span> minutes = Duration.between(startTime, endTime).toMillis();</span><br><span class="line">        <span class="comment">// 输出</span></span><br><span class="line">        System.out.println(<span class="string">"生成10万个分布式id所用的时间："</span> + minutes + <span class="string">" ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 单机ZooKeeper</span></span><br><span class="line"><span class="comment">     * 线程池开10个线程生成10W个 分布式ID 测速</span></span><br><span class="line"><span class="comment">     * 大约为：3073690 ms  基本和单线程环境一致</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateUniqueIdForThreadPoolExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建线程池</span></span><br><span class="line">        threadPoolExecutor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">10</span>,</span><br><span class="line">                <span class="number">20</span>,</span><br><span class="line">                <span class="number">10</span>,</span><br><span class="line">                TimeUnit.SECONDS,</span><br><span class="line">                <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;(<span class="number">20</span>),</span><br><span class="line">                <span class="keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line">        LocalDateTime startTime = LocalDateTime.now();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">            FutureTask&lt;String&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;&gt;(<span class="keyword">new</span> ThreadPoolTask());</span><br><span class="line">            threadPoolExecutor.execute(futureTask);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String id = futureTask.get();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException | ExecutionException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        threadPoolExecutor.shutdown();</span><br><span class="line">        LocalDateTime endTime = LocalDateTime.now();</span><br><span class="line">        <span class="comment">// 计算时间差值</span></span><br><span class="line">        <span class="keyword">long</span> minutes = Duration.between(startTime, endTime).toMillis();</span><br><span class="line">        <span class="comment">// 输出</span></span><br><span class="line">        System.out.println(<span class="string">"线程池 生成10万个分布式id所用的时间："</span> + minutes + <span class="string">" ms"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolTask</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            String id = CuratorUniqueID.generateId();</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"---"</span> + id);</span><br><span class="line">            <span class="keyword">return</span> id;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Zookeeper Client 查看节点数据</strong>：</p>
+<p><img src="/img/zookeeper/uniqueId-curator.png" alt=""></p>
+<h3 id="单线程生成10万个分布式ID测速"><a href="#单线程生成10万个分布式ID测速" class="headerlink" title="单线程生成10万个分布式ID测速"></a>单线程生成10万个分布式ID测速</h3><p><strong>ZooKeeper单机环境下，使用单线程，生成10万分布式ID测速</strong>。</p>
+<p>代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 单机ZooKeeper</span></span><br><span class="line"><span class="comment">     * 单线程生成10W个 分布式ID 测速</span></span><br><span class="line"><span class="comment">     * 大约为：3060085 ms  大约为 51min</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateUniqueIdForMore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    LocalDateTime startTime = LocalDateTime.now();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">        String id = CuratorUniqueID.generateId();</span><br><span class="line">        System.out.println(id);</span><br><span class="line">    &#125;</span><br><span class="line">    LocalDateTime endTime = LocalDateTime.now();</span><br><span class="line">    <span class="comment">// 计算时间差值</span></span><br><span class="line">    <span class="keyword">long</span> minutes = Duration.between(startTime, endTime).toMillis();</span><br><span class="line">    <span class="comment">// 输出</span></span><br><span class="line">    System.out.println(<span class="string">"生成10万个分布式id所用的时间："</span> + minutes + <span class="string">" ms"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">08</span>-<span class="number">21</span> <span class="number">10</span>:<span class="number">29</span>:<span class="number">28</span>,<span class="number">568</span> INFO [cn.duktig.learn.id.CuratorUniqueID] - zk创建临时有序节点：/uniqueId-curator/uniqueId0000100087</span><br><span class="line"> <span class="number">0000100087</span></span><br><span class="line"><span class="number">2021</span>-<span class="number">08</span>-<span class="number">21</span> <span class="number">10</span>:<span class="number">29</span>:<span class="number">28</span>,<span class="number">603</span> INFO [cn.duktig.learn.id.CuratorUniqueID] - zk创建临时有序节点：/uniqueId-curator/uniqueId0000100088</span><br><span class="line"> <span class="number">0000100088</span></span><br><span class="line"><span class="number">2021</span>-<span class="number">08</span>-<span class="number">21</span> <span class="number">10</span>:<span class="number">29</span>:<span class="number">28</span>,<span class="number">645</span> INFO [cn.duktig.learn.id.CuratorUniqueID] - zk创建临时有序节点：/uniqueId-curator/uniqueId0000100089</span><br><span class="line"> <span class="number">0000100089</span></span><br><span class="line"><span class="number">2021</span>-<span class="number">08</span>-<span class="number">21</span> <span class="number">10</span>:<span class="number">29</span>:<span class="number">28</span>,<span class="number">681</span> INFO [cn.duktig.learn.id.CuratorUniqueID] - zk创建临时有序节点：/uniqueId-curator/uniqueId0000100090</span><br><span class="line"> <span class="number">0000100090</span></span><br><span class="line">    </span><br><span class="line">生成<span class="number">10</span>万个分布式id所用的时间：<span class="number">3060085</span> ms</span><br></pre></td></tr></table></figure>
+<h3 id="线程池10个线程生成10万个分布式ID测速"><a href="#线程池10个线程生成10万个分布式ID测速" class="headerlink" title="线程池10个线程生成10万个分布式ID测速"></a>线程池10个线程生成10万个分布式ID测速</h3><p><strong>ZooKeeper单机环境下，使用线程池开10个线程，生成10万分布式ID测速</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 单机ZooKeeper</span></span><br><span class="line"><span class="comment">     * 线程池开10个线程生成10W个 分布式ID 测速</span></span><br><span class="line"><span class="comment">     * 大约为：3073690 ms  基本和单线程环境一致</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateUniqueIdForThreadPoolExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ThreadPoolExecutor threadPoolExecutor = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建线程池</span></span><br><span class="line">    threadPoolExecutor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">10</span>,</span><br><span class="line">                                                <span class="number">20</span>,</span><br><span class="line">                                                <span class="number">10</span>,</span><br><span class="line">                                                TimeUnit.SECONDS,</span><br><span class="line">                                                <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;(<span class="number">20</span>),</span><br><span class="line">                                                <span class="keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line">    LocalDateTime startTime = LocalDateTime.now();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">        FutureTask&lt;String&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;&gt;(<span class="keyword">new</span> ThreadPoolTask());</span><br><span class="line">        threadPoolExecutor.execute(futureTask);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String id = futureTask.get();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException | ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    threadPoolExecutor.shutdown();</span><br><span class="line">    LocalDateTime endTime = LocalDateTime.now();</span><br><span class="line">    <span class="comment">// 计算时间差值</span></span><br><span class="line">    <span class="keyword">long</span> minutes = Duration.between(startTime, endTime).toMillis();</span><br><span class="line">    <span class="comment">// 输出</span></span><br><span class="line">    System.out.println(<span class="string">"线程池 生成10万个分布式id所用的时间："</span> + minutes + <span class="string">" ms"</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolTask</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id = CuratorUniqueID.generateId();</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"---"</span> + id);</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line">2021-08-21 11:24:31,674 INFO [cn.duktig.learn.id.CuratorUniqueID] - zk创建临时有序节点：&#x2F;uniqueId-curator&#x2F;uniqueId0000200088</span><br><span class="line"> pool-1-thread-4---0000200088</span><br><span class="line">2021-08-21 11:24:31,694 INFO [cn.duktig.learn.id.CuratorUniqueID] - zk创建临时有序节点：&#x2F;uniqueId-curator&#x2F;uniqueId0000200089</span><br><span class="line"> pool-1-thread-2---0000200089</span><br><span class="line">2021-08-21 11:24:31,718 INFO [cn.duktig.learn.id.CuratorUniqueID] - zk创建临时有序节点：&#x2F;uniqueId-curator&#x2F;uniqueId0000200090</span><br><span class="line"> pool-1-thread-3---0000200090</span><br><span class="line"></span><br><span class="line">线程池 生成10万个分布式id所用的时间：3073690 ms</span><br></pre></td></tr></table></figure>
+<p><strong>Redis与ZooKeeper实现分布式ID对比</strong><br>环境：单机的Redis和单机的ZooKeeper进行测试</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Redis</th>
+<th>ZooKeeper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单线程10万分布式ID</td>
+<td>110353 ms</td>
+<td>3060085 ms 大约为 51min</td>
+</tr>
+<tr>
+<td>线程池开10个线程生成10万分布式ID</td>
+<td>106959 ms</td>
+<td>3073690 ms 基本和单线程环境一致</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/07/18/spring/" data-toggle="tooltip" data-placement="top" title="spring">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/07/02/Zookeeper案例-分布式屏障Barrier/" data-toggle="tooltip" data-placement="top" title="Zookeeper案例-分布式屏障Barrier">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#概述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#项目demo地址"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">项目demo地址</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#案例实现"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">案例实现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#zookeeper实现"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">zookeeper实现</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Curator实现分布式ID"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Curator实现分布式ID</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#单线程生成10万个分布式ID测速"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">单线程生成10万个分布式ID测速</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#线程池10个线程生成10万个分布式ID测速"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">线程池10个线程生成10万个分布式ID测速</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Zookeeper" title="Zookeeper">Zookeeper</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2022 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;对象？new一个就好了&#34;,&#34;just do it&#34;,&#34;🍀&#34;,&#34;🍂&#34;,&#34;🍃&#34;,&#34;time is running out&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34; ,&#34;rgb(242,153,29)&#34; ,&#34;rgb(22,36,92)&#34; ,&#34;rgb(119,195,79)&#34; ,&#34;rgb(119,195,79)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

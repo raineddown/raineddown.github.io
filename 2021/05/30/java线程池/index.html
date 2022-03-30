@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          java线程池 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2021/05/30/java线程池/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java线程池" title="java线程池">java线程池</a>
+                            
+                        </div>
+                        <h1>java线程池</h1>
+                        <h2 class="subheading">java线程池</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2021-05-30
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.5k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="Java线程池"><a href="#Java线程池" class="headerlink" title="Java线程池"></a>Java线程池</h2><h2 id="线程池的概念"><a href="#线程池的概念" class="headerlink" title="线程池的概念"></a>线程池的概念</h2><p>线程池就是首先创建一些线程，它们的集合称为线程池。使用线程池可以很好地提高性能，线程池在系统启动时即创建大量空闲的线程，程序将一个任务传给线程池，线程池就会启动一条线程来执行这个任务，执行结束以后，该线程并不会死亡，而是再次返回线程池中成为空闲状态，等待执行下一个任务。</p>
+<h2 id="使用线程池的原因"><a href="#使用线程池的原因" class="headerlink" title="使用线程池的原因"></a>使用线程池的原因</h2><ul>
+<li><p>降低资源消耗。通过重复利⽤已创建的线程降低线程创建和销毁造成的消耗。 </p>
+</li>
+<li><p>提⾼响应速度。当任务到达时，任务可以不需要的等到线程创建就能⽴即执⾏。</p>
+</li>
+<li><p>提⾼线程的可管理性。线程是稀缺资源，如果⽆限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使⽤线程池可以进⾏统⼀的分配，调优和监控。</p>
+</li>
+</ul>
+<h2 id="线程池7大参数"><a href="#线程池7大参数" class="headerlink" title="线程池7大参数"></a>线程池7大参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (corePoolSize &lt; <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt;= <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">if</span> (workQueue == <span class="keyword">null</span> || threadFactory == <span class="keyword">null</span> || handler == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="keyword">this</span>.acc = System.getSecurityManager() == <span class="keyword">null</span> ?</span><br><span class="line">            <span class="keyword">null</span> :</span><br><span class="line">            AccessController.getContext();</span><br><span class="line">    <span class="keyword">this</span>.corePoolSize = corePoolSize;</span><br><span class="line">    <span class="keyword">this</span>.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    <span class="keyword">this</span>.workQueue = workQueue;</span><br><span class="line">    <span class="keyword">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);</span><br><span class="line">    <span class="keyword">this</span>.threadFactory = threadFactory;</span><br><span class="line">    <span class="keyword">this</span>.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>corePoolSize：核心线程数，核⼼线程数线程数定义了最⼩可以同时运⾏的线程数量。</p>
+<p>maximumPoolSize：最大线程数， 当workQueue缓冲队列中存放的任务达到队列容量的时候，当前可以同时运⾏的线程数 量变为最⼤线程数。</p>
+<p>keepAliveTime：非核心线程存活时间，当线程池中的线程数量⼤于 corePoolSize 的时候，如果这时没有新的任务提交，核⼼线程外的线程不会⽴即销毁，⽽是会等待，直到等待的时间超过了 keepAliveTime 才会被回收销毁。</p>
+<p>unit: 时间单位，keepAliveTime 参数的时间单位。</p>
+<p>workQueue：缓冲队列，当新任务来的时候会先判断当前运⾏的线程数量是否达到核⼼线程数，如果达 到的话，新任务就会被存放在队列中。</p>
+<p>threadFactory：线程工厂，executor 创建新线程的时候会⽤到。</p>
+<p>handler：拒绝策略，当线程池的任务缓存队列已满并且线程池中的线程数目达到maximumPoolSize，如果还有任务到来就会采取任务拒绝策略。</p>
+<h3 id="几种缓冲队列"><a href="#几种缓冲队列" class="headerlink" title="几种缓冲队列"></a>几种缓冲队列</h3><p>workQueue的类型为BlockingQueue<Runnable>，通常可以取下面三种类型：</p>
+<ul>
+<li><p>ArrayBlockingQueue：基于数组的先进先出队列，此队列创建时必须指定大小；</p>
+</li>
+<li><p>LinkedBlockingQueue：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE；</p>
+</li>
+<li><p>synchronousQueue：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务。</p>
+</li>
+</ul>
+<h3 id="几种拒绝策略"><a href="#几种拒绝策略" class="headerlink" title="几种拒绝策略"></a>几种拒绝策略</h3><p>　　当线程池的任务缓存队列已满并且线程池中的线程数目达到maximumPoolSize，如果还有任务到来就会采取任务拒绝策略，通常有以下四种策略：</p>
+<ul>
+<li>ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常</li>
+<li>ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。</li>
+<li>ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）</li>
+<li>ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务</li>
+</ul>
+<h2 id="jdk自带的三种线程池源码分析"><a href="#jdk自带的三种线程池源码分析" class="headerlink" title="jdk自带的三种线程池源码分析"></a>jdk自带的三种线程池源码分析</h2><h3 id="newCachedThreadPool"><a href="#newCachedThreadPool" class="headerlink" title="newCachedThreadPool"></a>newCachedThreadPool</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例化</span></span><br><span class="line">ExecutorService newCachedExecutorService = Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line"><span class="comment">//源码</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                      <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                      <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>corePoolSize核心线程数为0，创建的都是非核心线程，有多少任务创建多少个线程(最多创建Integer的最大值以内的非核心线程数2^31 - 1，任务执行较快的话线程复用除外，有CPU百分百占用风险)</p>
+<p>synchronousQueue使用同步队列直接新建线程执行任务。</p>
+<h3 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例化</span></span><br><span class="line">ExecutorService newFixedExecutorService = Executors.newFixedThreadPool(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//源码</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                      <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                      <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>corePoolSize核心线程数为实例化时传入参数，创建的都是核心线程，没有非核心线程。使用LinkedBlockingQueue：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE；有OOM风险</p>
+<h3 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor"></a>newSingleThreadExecutor</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例化</span></span><br><span class="line">ExecutorService newSingleExecutorService = Executors.newSingleThreadExecutor();</span><br><span class="line"></span><br><span class="line"><span class="comment">//源码</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</span><br><span class="line">            (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">                                    <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                    <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>corePoolSize核心线程数为1，只有一个核心线程。使用LinkedBlockingQueue：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE；有OOM风险</p>
+<h2 id="阿里编程手册上推荐的创建线程池的方式"><a href="#阿里编程手册上推荐的创建线程池的方式" class="headerlink" title="阿里编程手册上推荐的创建线程池的方式"></a>阿里编程手册上推荐的创建线程池的方式</h2><font color='red'> 注:由于Executors创建的线程池还多参数的设置都是什么Integer.MaxValue和无上限的BlockQuene等由此可能会导致CPU百分百占用（创建了无数个非核心线程）和OOM(缓冲队列溢出放不下)问题， 如果我们不加思考的使用，很容易把线程池用在错误的场景上， 因此阿里巴巴的编程手册上不推荐Executors创建线程池的方式， 它要求我们必须自己设置参数来创建线程池。</font>
+
+<p>类似于上文中jdk自带的线程池实现，阿里编程手册推荐我们自己根据业务与实际自己调解参数调用ThreadPoolExecutor的构造方法实现线程池。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建数组型缓冲等待队列</span></span><br><span class="line"> BlockingQueue&lt;Runnable&gt; blockQueue = <span class="keyword">new</span> ArrayBlockingQueue&lt;Runnable&gt;(<span class="number">10</span>);</span><br><span class="line"> <span class="comment">// ThreadPoolExecutor:创建自定义线程池，池中保存的线程数为3，允许最大的线程数为6</span></span><br><span class="line"> ThreadPoolExecutor tpe = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">3</span>, <span class="number">6</span>, <span class="number">50</span>, TimeUnit.MILLISECONDS, blockQueue);</span><br></pre></td></tr></table></figure>
+<h2 id="如何合理配置线程池的大小"><a href="#如何合理配置线程池的大小" class="headerlink" title="如何合理配置线程池的大小"></a>如何合理配置线程池的大小</h2><p>一般需要根据任务的类型来配置线程池大小：</p>
+<p>如果是CPU密集型任务，就需要尽量压榨CPU，参考值可以设为 <em>N</em>CPU+1</p>
+<p>如果是IO密集型任务，参考值可以设置为2<em>*N</em>CPU</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/05/30/Hystrix服务降级/" data-toggle="tooltip" data-placement="top" title="Hystrix服务降级">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/05/27/OpenFeign服务调用/" data-toggle="tooltip" data-placement="top" title="OpenFeign服务调用">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Java线程池"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Java线程池</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线程池的概念"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">线程池的概念</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#使用线程池的原因"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">使用线程池的原因</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线程池7大参数"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">线程池7大参数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#几种缓冲队列"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">几种缓冲队列</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#几种拒绝策略"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">几种拒绝策略</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#jdk自带的三种线程池源码分析"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">jdk自带的三种线程池源码分析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#newCachedThreadPool"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">newCachedThreadPool</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#newFixedThreadPool"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">newFixedThreadPool</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#newSingleThreadExecutor"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">newSingleThreadExecutor</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#阿里编程手册上推荐的创建线程池的方式"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">阿里编程手册上推荐的创建线程池的方式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#如何合理配置线程池的大小"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">如何合理配置线程池的大小</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java线程池" title="java线程池">java线程池</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2022 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;对象？new一个就好了&#34;,&#34;just do it&#34;,&#34;🍀&#34;,&#34;🍂&#34;,&#34;🍃&#34;,&#34;time is running out&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34; ,&#34;rgb(242,153,29)&#34; ,&#34;rgb(22,36,92)&#34; ,&#34;rgb(119,195,79)&#34; ,&#34;rgb(119,195,79)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

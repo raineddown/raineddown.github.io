@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Mysql执行计划 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2021/06/07/Mysql执行计划/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Mysql" title="Mysql">Mysql</a>
+                            
+                              <a class="tag" href="/tags/#执行计划" title="执行计划">执行计划</a>
+                            
+                        </div>
+                        <h1>Mysql执行计划</h1>
+                        <h2 class="subheading">Mysql执行计划</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2021-06-07
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.8k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="Mysql-执行计划"><a href="#Mysql-执行计划" class="headerlink" title="Mysql 执行计划"></a>Mysql 执行计划</h2><p>当客户端发送给mysql 服务器一条查询语句后，经过sql的优化器，会产生一个执行计划。</p>
+<h3 id="执行计划"><a href="#执行计划" class="headerlink" title="执行计划"></a>执行计划</h3><p>使用 EXPLAIN 关键字可以模拟优化器执行 SQL 查询语句，从而知道 MYSQL 是如何处理你的 sql 语句的。分析你的查询语句或是表结构的性能瓶颈。</p>
+<p>语法: Explain + sql</p>
+<h3 id="执行计划的作用"><a href="#执行计划的作用" class="headerlink" title="执行计划的作用"></a>执行计划的作用</h3><p>分析sql语句中</p>
+<ul>
+<li>表的读取顺序</li>
+<li>数据读取操作的操作类型</li>
+<li>哪些索引可以使用</li>
+<li>哪些索引被实际使用</li>
+<li>表之间的引用</li>
+<li>每张表有多少行被优化器查</li>
+</ul>
+<h3 id="执行计划包含的信息"><a href="#执行计划包含的信息" class="headerlink" title="执行计划包含的信息"></a>执行计划包含的信息</h3><p><img src="/img/sql/Mysql执行计划.png" alt=""></p>
+<p><strong>id:获取 select 子句的操作表顺序，有几种情况</strong></p>
+<ul>
+<li>id相同的情况下执行顺序是由上到下。</li>
+<li>id 越大 优先级越高，如果是子查询，ID 序列号会递增，id值越大，优先级越高，越先执行。</li>
+<li>id 相同又有不相同的，序列号大的会先执行，然后相同的从上到下执行。</li>
+</ul>
+<p><strong>select_type:查询的类别，主要用于区别普通查询，联合查询，子查询等的复杂查询。</strong><br>simple : 简单的select 查询，不包含子查询或者 union<br>primary : 查询中包含任何复杂的子部分，最外层查询则被标记<br>subquery : 在 select 或者 where 列表中包含了子查询<br>derived : 在from 列表中包含子查询被标记为 derived Mysql 会递归执行这些子查询，把结果放到临时表里<br>union : 若在第二个 select 中出现 union之后，则被标记为 union 若union包含在 from 子句的子查询中，外层 select 将被标记为 derived<br>union result : 从 union 表获取结果的 SELECT</p>
+<p><strong>table：显示这一行的数据是关于那个表的</strong></p>
+<p><strong>type:显示的是访问类型，是较为重要的一个指标，结果值从最好到最坏依次是：</strong><br>system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery&gt; range &gt; index&gt;all</p>
+<p>需要记住的：system &gt; const &gt; eq_ref &gt; ref &gt; range &gt; index&gt;all 基本需要达到 ref range 级别。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">type</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ALL</td>
+<td style="text-align:center">全数据表扫描</td>
+</tr>
+<tr>
+<td style="text-align:center">index</td>
+<td style="text-align:center">全索引表扫描</td>
+</tr>
+<tr>
+<td style="text-align:center">RANGE</td>
+<td style="text-align:center">对索引列进行范围查找</td>
+</tr>
+<tr>
+<td style="text-align:center">INDEX_MERGE</td>
+<td style="text-align:center">合并索引，使用多个单列索引搜索</td>
+</tr>
+<tr>
+<td style="text-align:center">REF</td>
+<td style="text-align:center">根据索引查找一个或多个值</td>
+</tr>
+<tr>
+<td style="text-align:center">EQ_REF</td>
+<td style="text-align:center">搜索时使用primary key 或 unique类型</td>
+</tr>
+<tr>
+<td style="text-align:center">CONST</td>
+<td style="text-align:center">常量，表最多有一个匹配行,因为仅有一行,在这行的列值可被优化器剩余部分认为是常数,const表很快,因为它们只读取一次。</td>
+</tr>
+<tr>
+<td style="text-align:center">SYSTEM</td>
+<td style="text-align:center">系统，表仅有一行(=系统表)。这是const联接类型的一个特例。</td>
+</tr>
+<tr>
+<td style="text-align:center">性能：<code>all</code> &lt; <code>index</code> &lt; <code>range</code> &lt; <code>index_merge</code> &lt; <code>ref_or_null</code> &lt; <code>ref</code> &lt; <code>eq_ref</code> &lt; <code>system/const</code></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">性能在 range 之下基本都可以进行调优</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>system : 表中只有一行记录（等于系统表），这是const 类型的特列，平时不会出现，这个可以忽略不计。</p>
+<p>const : 表示通过索引一次就找到了，const 用于比较 primary key 或者 unqiue 索引，因为只匹配一条数据，所以很快，如将主键置于 where 条件中，Mysql 就能将该查询转换一个常量。</p>
+<p>eq_ref : 唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配，常见与主键或唯一索引扫描</p>
+<p>ref : 非唯一索引扫描，返回匹配某个单独值的所有行</p>
+<p>range: 只检索给定范围的行，使用一个索引来选择行，key列显示使用了哪个索引，一般就是在你的 where 语句中出现了 between ,&lt;,&gt;,in 等查询这种范围扫描比全表扫描要好，因为它只需要开始与索引的某一点，而结束与另一点，不用扫描全部索引。</p>
+<p>index : 当查询的结果全为索引列的时候。</p>
+<p>all : Full Table Scan 将遍历全表以找到匹配的行。</p>
+<p><strong>possible_keys</strong> : 可能使用的索引</p>
+<p><strong>key :实际上使用的索引，如果没用索引，则为NULL，查询中若使用了覆盖索引，则该索引和查询的select 字段重叠。</strong></p>
+<p><strong>key len ：</strong><br>表示索引中使用的字节数，可通过该列计算查询中使用的字节长度，在不损失精确的情况下，长度越短越好。<br>key_len 显示的值为索引字段的最大可能长度，并非实际使用长度，即key_len 是根据表定义计算而得，不是通过表内检索出的<br>key_len 表示索引使用的字节数<br>根据这个值，就可以判断索引使用情况，特别是在组合索引的时候，判断所有的索引字段是否都被查询用到。<br>char 和 varchar 跟字符编码也有密切的联系。(latin1 占用一个字节，gbk 占用两个字节，utf-8 占用三个字节)</p>
+<p>总结 ：</p>
+<p>整数/浮点数/时间类型的索引长度 NOT NULL = 字段本身的长度 NULL = 字段本身的字段长度+1（因为需要是否为空的标记，这个标记占一个字节）.</p>
+<p>datatime 类型 在5.6中占5个字节，在5.5中占8个字节。</p>
+<p>变长字段需要额外两个字节(varchar 值保存时只保存需要的字符数另外加一个字节来记录长度，如果列声明的长度超过255，则使用两个字节，所以varchar 索引长度计算时候要加2)，固定长度字段不需要额外的字节。</p>
+<p>而 NULL 都需要1个字节的额外空间，所以索引字段最好不要为 NULL，因为 NULL 让统计更加复杂并且需要额外的存储空间。</p>
+<p>复合索引有最左前缀的特性，如果复合索引能全部用上，则是复合索引字段的索引长度之和，这也可以用来判定复合索引是否部分使用，还是全部使用。</p>
+<p><strong>rows</strong> : mysql 预估为了找到所需的行而要读取的行数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">extra</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Using filesort</td>
+<td style="text-align:center">此值表示mysql将使用覆盖索引，以避免访问表。</td>
+</tr>
+<tr>
+<td style="text-align:center">Using temporary</td>
+<td style="text-align:center">mysql 将在存储引擎检索行后再进行过滤，许多where条件里涉及索引中的列，当(并且如果)它读取索引时，就能被存储引擎检验，因此不是所有带where子句的查询都会显示“Using where”。有时“Using where”的出现就是一个暗示：查询可受益于不同的索引。</td>
+</tr>
+<tr>
+<td style="text-align:center">Using index</td>
+<td style="text-align:center">mysql 对查询结果排序时会使用临时表。</td>
+</tr>
+<tr>
+<td style="text-align:center">Using where</td>
+<td style="text-align:center">mysql会对结果使用一个外部索引排序，而不是按索引次序从表里读取行。mysql有两种文件排序算法，这两种排序方式都可以在内存或者磁盘上完成，explain不会告诉你mysql将使用哪一种文件排序，也不会告诉你排序会在内存里还是磁盘上完成。</td>
+</tr>
+<tr>
+<td style="text-align:center">Using join buffer</td>
+<td style="text-align:center">没有好用的索引，新的索引将在联接的每一行上重新估算，N是显示在possible_keys列中索引的位图，并且是冗余的</td>
+</tr>
+<tr>
+<td style="text-align:center">Impossible where</td>
+<td style="text-align:center">where 子句总是 false们不能用来获取</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/06/13/Zookeeper简介/" data-toggle="tooltip" data-placement="top" title="Zookeeper简介">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/05/30/Hystrix服务降级/" data-toggle="tooltip" data-placement="top" title="Hystrix服务降级">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Mysql-执行计划"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Mysql 执行计划</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#执行计划"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">执行计划</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#执行计划的作用"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">执行计划的作用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#执行计划包含的信息"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">执行计划包含的信息</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Mysql" title="Mysql">Mysql</a>
+                        
+                          <a class="tag" href="/tags/#执行计划" title="执行计划">执行计划</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2022 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;对象？new一个就好了&#34;,&#34;just do it&#34;,&#34;🍀&#34;,&#34;🍂&#34;,&#34;🍃&#34;,&#34;time is running out&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34; ,&#34;rgb(242,153,29)&#34; ,&#34;rgb(22,36,92)&#34; ,&#34;rgb(119,195,79)&#34; ,&#34;rgb(119,195,79)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

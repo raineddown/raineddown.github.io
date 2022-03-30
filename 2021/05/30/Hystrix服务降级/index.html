@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Hystrix服务降级 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2021/05/30/Hystrix服务降级/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                            
+                              <a class="tag" href="/tags/#Hystrix" title="Hystrix">Hystrix</a>
+                            
+                              <a class="tag" href="/tags/#服务降级" title="服务降级">服务降级</a>
+                            
+                        </div>
+                        <h1>Hystrix服务降级</h1>
+                        <h2 class="subheading">Hystrix负载均衡服务调用</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2021-05-30
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.9k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="Hystrix服务降级"><a href="#Hystrix服务降级" class="headerlink" title="Hystrix服务降级"></a>Hystrix服务降级</h2><p><img src="/img/springcloud2020/Hystrix的2.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的3.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的4.png" alt=""></p>
+<h3 id="hystrix中的重要概念"><a href="#hystrix中的重要概念" class="headerlink" title="hystrix中的重要概念:"></a>hystrix中的重要概念:</h3><h4 id="1-服务降级"><a href="#1-服务降级" class="headerlink" title="1,服务降级"></a>1,服务降级</h4><p><strong>比如当某个服务繁忙,不能让客户端的请求一直等待,应该立刻返回给客户端一个备选方案</strong></p>
+<h4 id="2-服务熔断"><a href="#2-服务熔断" class="headerlink" title="2,服务熔断"></a>2,服务熔断</h4><p><strong>当某个服务出现问题,卡死了服务不可用了,不能让用户一直等待,需要关闭所有对此服务的访问（保险丝熔断电路跳闸）然后调用服务降级</strong></p>
+<h4 id="3-服务限流"><a href="#3-服务限流" class="headerlink" title="3,服务限流"></a>3,服务限流</h4><p><strong>限流,比如秒杀场景,不能访问用户瞬间都访问服务器,限制一次只可以有多少请求</strong></p>
+<h3 id="使用hystrix-服务降级"><a href="#使用hystrix-服务降级" class="headerlink" title="使用hystrix,服务降级:"></a>使用hystrix,服务降级:</h3><h4 id="1-创建带降级机制的pay模块"><a href="#1-创建带降级机制的pay模块" class="headerlink" title="1,创建带降级机制的pay模块 :"></a>1,创建带降级机制的pay模块 :</h4><p>名字: cloud-hystrix-pay-8007</p>
+<h5 id="2-pom文件"><a href="#2-pom文件" class="headerlink" title="2,pom文件"></a>2,pom文件</h5><h5 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3,配置文件"></a>3,配置文件</h5><p><img src="/img/springcloud2020/Hystrix的5.png" alt=""></p>
+<p>4,主启动类</p>
+<p><img src="/img/springcloud2020/Hystrix的8.png" alt=""></p>
+<p>5,service</p>
+<p><img src=".\图片\Hystrix的6.png" alt=""></p>
+<p>6controller</p>
+<p><img src=".\图片\Hystrix的7.png" alt=""></p>
+<p>7,先测试:</p>
+<p>此时使用压测工具（如JMeter）,并发20000个请求,请求会延迟的那个方法,<br>        压测中,发现,另外一个方法并没有被压测,但是我们访问它时,却需要等待<br>        这就是因为被压测的方法它占用了服务器大部分资源,导致其他请求也变慢了</p>
+<h5 id="8-先不加入hystrix"><a href="#8-先不加入hystrix" class="headerlink" title="8,先不加入hystrix,"></a>8,先不加入hystrix,</h5><h4 id="2-创建带降级的order模块"><a href="#2-创建带降级的order模块" class="headerlink" title="2,创建带降级的order模块:"></a>2,创建带降级的order模块:</h4><h5 id="1-名字-cloud-hystrix-order-80"><a href="#1-名字-cloud-hystrix-order-80" class="headerlink" title="1,名字:  cloud-hystrix-order-80"></a>1,名字:  cloud-hystrix-order-80</h5><h5 id="2-pom"><a href="#2-pom" class="headerlink" title="2,pom"></a>2,pom</h5><h5 id="3-配置文件-1"><a href="#3-配置文件-1" class="headerlink" title="3,配置文件"></a>3,配置文件</h5><p><img src="/img/springcloud2020/Hystrix的9.png" alt=""></p>
+<h5 id="4-主启动类"><a href="#4-主启动类" class="headerlink" title="4,主启动类"></a>4,主启动类</h5><p><img src="/img/springcloud2020/Hystrix的11.png" alt=""></p>
+<h5 id="5-远程调用pay模块的接口"><a href="#5-远程调用pay模块的接口" class="headerlink" title="5,远程调用pay模块的接口:"></a>5,远程调用pay模块的接口:</h5><p><img src="/img/springcloud2020/Hystrix的12.png" alt=""></p>
+<h5 id="6-controller"><a href="#6-controller" class="headerlink" title="6,controller:"></a>6,controller:</h5><p><img src="/img/springcloud2020/Hystrix的13.png" alt=""></p>
+<h5 id="7-测试"><a href="#7-测试" class="headerlink" title="7,测试"></a>7,测试</h5><p> 启动order模块,访问pay</p>
+<p> 再次压测2万并发,发现order访问也变慢了</p>
+<p><img src="/img/springcloud2020/Hystrix的14.png" alt=""></p>
+<p><strong>解决:</strong></p>
+<p><img src="/img/springcloud2020/Hystrix的15.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的16.png" alt=""></p>
+<h4 id="3-配置服务降级"><a href="#3-配置服务降级" class="headerlink" title="3,配置服务降级:"></a>3,配置服务降级:</h4><h5 id="1-修改pay模块"><a href="#1-修改pay模块" class="headerlink" title="1,修改pay模块"></a>1,修改pay模块</h5><h6 id="1-为service的指定方法-会延迟的方法-添加-HystrixCommand注解"><a href="#1-为service的指定方法-会延迟的方法-添加-HystrixCommand注解" class="headerlink" title="1,为service的指定方法(会延迟的方法)添加@HystrixCommand注解"></a>1,为service的指定方法(会延迟的方法)添加@HystrixCommand注解</h6><p><img src="/img/springcloud2020/Hystrix的17.png" alt=""></p>
+<h6 id="2-主启动类上-添加激活hystrix的注解"><a href="#2-主启动类上-添加激活hystrix的注解" class="headerlink" title="2,主启动类上,添加激活hystrix的注解"></a>2,主启动类上,添加激活hystrix的注解</h6><p><img src="/img/springcloud2020/Hystrix的18.png" alt=""></p>
+<h6 id="3-触发异常"><a href="#3-触发异常" class="headerlink" title="3,触发异常"></a>3,触发异常</h6><p><img src="/img/springcloud2020/Hystrix的19.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的20.png" alt=""><strong>可以看到,也触发了降级</strong></p>
+<h5 id="2-修改order模块-进行服务降级"><a href="#2-修改order模块-进行服务降级" class="headerlink" title="2,修改order模块,进行服务降级"></a>2,修改order模块,进行服务降级</h5><p>一般服务降级,都是放在客户端(order模块),</p>
+<p><img src="/img/springcloud2020/Hystrix的21.png" alt=""></p>
+<h6 id="1-修改配置文件"><a href="#1-修改配置文件" class="headerlink" title="1,修改配置文件:"></a>1,修改配置文件:</h6><p><img src="/img/springcloud2020/Hystrix的22.png" alt=""></p>
+<h6 id="2-主启动类添加直接-启用hystrix"><a href="#2-主启动类添加直接-启用hystrix" class="headerlink" title="2,主启动类添加直接,启用hystrix:"></a><strong>2,主启动类添加直接,启用hystrix:</strong></h6><p><img src="/img/springcloud2020/Hystrix的23.png" alt=""></p>
+<h6 id="3-修改controller-添加降级方法什么的"><a href="#3-修改controller-添加降级方法什么的" class="headerlink" title="3,修改controller,添加降级方法什么的"></a>3,修改controller,添加降级方法什么的</h6><p><img src="/img/springcloud2020/Hystrix的24.png" alt=""></p>
+<h6 id="4-测试"><a href="#4-测试" class="headerlink" title="4,测试"></a>4,测试</h6><p>启动pay模块,order模块,</p>
+<p><strong>注意:,这里pay模块和order模块都开启了服务降级</strong></p>
+<p> 但是order这里,设置了1.5秒就降级,所以访问时,一定会降级</p>
+<h5 id="4-重构"><a href="#4-重构" class="headerlink" title="4,重构:"></a>4,重构:</h5><p><strong>上面出现的问题:</strong><br>1,降级方法与业务方法写在了一块,耦合度高</p>
+<p> 2.每个业务方法都写了一个降级方法,重复代码多</p>
+<h5 id="解决重复代码的问题"><a href="#解决重复代码的问题" class="headerlink" title="解决重复代码的问题:"></a><strong>解决重复代码的问题</strong>:</h5><p><strong>配置一个全局的降级方法,所有方法都可以走这个降级方法,至于某些特殊创建,再单独创建方法</strong></p>
+<h6 id="1-创建一个全局方法"><a href="#1-创建一个全局方法" class="headerlink" title="1,创建一个全局方法"></a>1,创建一个全局方法</h6><p><img src="/img/springcloud2020/Hystrix的26.png" alt=""></p>
+<h6 id="2-使用注解指定其为全局降级方法-默认降级方法"><a href="#2-使用注解指定其为全局降级方法-默认降级方法" class="headerlink" title="2,使用注解指定其为全局降级方法(默认降级方法)"></a>2,使用注解指定其为全局降级方法(默认降级方法)</h6><p><img src="/img/springcloud2020/Hystrix的27.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的25.png" alt=""></p>
+<h6 id="3-业务方法使用默认降级方法"><a href="#3-业务方法使用默认降级方法" class="headerlink" title="3,业务方法使用默认降级方法:"></a>3,业务方法使用默认降级方法:</h6><p><img src="/img/springcloud2020/Hystrix的28.png" alt=""></p>
+<h6 id="4-测试-1"><a href="#4-测试-1" class="headerlink" title="4,测试:"></a>4,测试:</h6><p><img src="/img/springcloud2020/Hystrix的29.png" alt=""></p>
+<h5 id="解决代码耦合度的问题"><a href="#解决代码耦合度的问题" class="headerlink" title="解决代码耦合度的问题:"></a>解决代码耦合度的问题:</h5><p>修改order模块,这里开始,pay模块就不服务降级了,服务降级写在order模块即可</p>
+<h6 id="1-Payservice接口是远程调用pay模块的-我们这里创建一个类实现service接口-在实现类中统一处理异常"><a href="#1-Payservice接口是远程调用pay模块的-我们这里创建一个类实现service接口-在实现类中统一处理异常" class="headerlink" title="1,Payservice接口是远程调用pay模块的,我们这里创建一个类实现service接口,在实现类中统一处理异常"></a>1,Payservice接口是远程调用pay模块的,我们这里创建一个类实现service接口,在实现类中统一处理异常</h6><p><img src="/img/springcloud2020/Hystrix的30.png" alt=""></p>
+<h6 id="2-修改配置文件-添加"><a href="#2-修改配置文件-添加" class="headerlink" title="2,修改配置文件:添加:"></a>2,修改配置文件:添加:</h6><p><img src="/img/springcloud2020/Hystrix的31.png" alt=""></p>
+<h6 id="3-让PayService的实现类生效"><a href="#3-让PayService的实现类生效" class="headerlink" title="3,让PayService的实现类生效:"></a>3,让PayService的实现类生效:</h6><p><img src="/img/springcloud2020/Hystrix的32.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">它的运行逻辑是:</span><br><span class="line">        当请求过来,首先还是通过Feign远程调用pay模块对应的方法</span><br><span class="line">        但是如果pay模块报错,调用失败,那么就会调用PayMentFalbackService类的</span><br><span class="line">        当前同名的方法,作为降级方法</span><br></pre></td></tr></table></figure>
+<h6 id="4-启动测试"><a href="#4-启动测试" class="headerlink" title="4,启动测试"></a>4,启动测试</h6><p>启动order和pay正常访问—ok</p>
+<p>==此时将pay服务关闭,order再次访问==</p>
+<p><img src="/img/springcloud2020/Hystrix的33.png" alt=""></p>
+<p>可以看到,并没有报500错误,而是降级访问==实现类==的同名方法</p>
+<p>这样,即使服务器挂了,用户要不要一直等待,或者报错</p>
+<p>问题:</p>
+<p>​        <strong>这样虽然解决了代码耦合度问题,但是又出现了过多重复代码的问题,每个方法都有一个降级方法</strong></p>
+<h3 id="使用服务熔断"><a href="#使用服务熔断" class="headerlink" title="使用服务熔断:"></a>使用服务熔断:</h3><p><img src="/img/springcloud2020/Hystrix的34.png" alt=""></p>
+<p><strong>比如并发达到1000,我们就拒绝其他用户访问,在有用户访问,就访问降级方法</strong></p>
+<p><img src="/img/springcloud2020/Hystrix的35.png" alt=""></p>
+<h4 id="1-修改前面的pay模块"><a href="#1-修改前面的pay模块" class="headerlink" title="1,修改前面的pay模块"></a>1,修改前面的pay模块</h4><h5 id="1-修改Payservice接口-添加服务熔断相关的方法"><a href="#1-修改Payservice接口-添加服务熔断相关的方法" class="headerlink" title="1,修改Payservice接口,添加服务熔断相关的方法:"></a><strong>1,修改Payservice接口,添加服务熔断相关的方法:</strong></h5><p><img src="/img/springcloud2020/Hystrix的37.png" alt=""></p>
+<p>这里属性整体意思是:<br>10秒之内(窗口,会移动),如果并发==超过==10个,或者10个并发中,失败了6个,就开启熔断器</p>
+<p><img src="/img/springcloud2020/Hystrix的43.png" alt="image-20200414152637247"></p>
+<p>IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比如UUID,反射,IO流等工具方法什么的都整合了</p>
+<p><img src="/img/springcloud2020/Hystrix的36.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">断路器的打开和关闭,是按照一下<span class="number">5</span>步决定的</span><br><span class="line">        <span class="number">1</span>,并发此时是否达到我们指定的阈值</span><br><span class="line">        <span class="number">2</span>,错误百分比,比如我们配置了<span class="number">60</span>%,那么如果并发请求中,<span class="number">10</span>次有<span class="number">6</span>次是失败的,就开启断路器</span><br><span class="line">        <span class="number">3</span>,上面的条件符合,断路器改变状态为open(开启)</span><br><span class="line">        <span class="number">4</span>,这个服务的断路器开启,所有请求无法访问</span><br><span class="line">        <span class="number">5</span>,在我们的时间窗口期,期间,尝试让一些请求通过(半开状态),如果请求还是失败,证明断路器还是开启状态,服务没有恢复</span><br><span class="line">        如果请求成功了,证明服务已经恢复,断路器状态变为close关闭状态</span><br></pre></td></tr></table></figure>
+<h5 id="2-修改controller"><a href="#2-修改controller" class="headerlink" title="2,修改controller"></a>2,修改controller</h5><p>添加一个测试方法;</p>
+<p><img src="/img/springcloud2020/Hystrix的39.png" alt=""></p>
+<h5 id="3-测试"><a href="#3-测试" class="headerlink" title="3,测试:"></a>3,测试:</h5><p>启动pay,order模块</p>
+<p>==多次访问,并且错误率超过60%:==</p>
+<p><img src="/img/springcloud2020/Hystrix的40.png" alt=""></p>
+<p>此时服务熔断,此时即使访问正确的也会报错:</p>
+<p><img src="/img/springcloud2020/Hystrix的41.png" alt=""></p>
+<p><strong>但是,当过了几秒后,又恢复了</strong></p>
+<p> 因为在10秒窗口期内,它自己会尝试接收部分请求,发现服务可以正常调用,慢慢的当错误率低于60%,取消熔断</p>
+<h3 id="Hystrix所有可配置的属性"><a href="#Hystrix所有可配置的属性" class="headerlink" title="Hystrix所有可配置的属性:"></a>Hystrix所有可配置的属性:</h3><p><strong>全部在这个方法中记录,以成员变量的形式记录,</strong></p>
+<p> 以后需要什么属性,查看这个类即可</p>
+<p><img src="/img/springcloud2020/Hystrix的38.png" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p><img src="/img/springcloud2020/Hystrix的42.png" alt=""></p>
+<p><strong>==当断路器开启后:==</strong></p>
+<p>​    <img src="/img/springcloud2020/Hystrix的44.png" alt=""></p>
+<p><strong>==其他参数:==</strong></p>
+<p><img src="/img/springcloud2020/Hystrix的45.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的46.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的47.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的48.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的49.png" alt=""></p>
+<p><strong>熔断整体流程:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>请求进来,首先查询缓存,如果缓存有,直接返回</span><br><span class="line">        如果缓存没有,---&gt;<span class="number">2</span></span><br><span class="line">        <span class="number">2</span>,查看断路器是否开启,如果开启的,Hystrix直接将请求转发到降级返回,然后返回</span><br><span class="line">        如果断路器是关闭的,</span><br><span class="line">        判断线程池等资源是否已经满了,如果已经满了</span><br><span class="line">        也会走降级方法</span><br><span class="line">        如果资源没有满,判断我们使用的什么类型的Hystrix,决定调用构造方法还是run方法</span><br><span class="line">        然后处理请求</span><br><span class="line">        然后Hystrix将本次请求的结果信息汇报给断路器,因为断路器此时可能是开启的</span><br><span class="line">        (因为断路器开启也是可以接收请求的)</span><br><span class="line">        断路器收到信息,判断是否符合开启或关闭断路器的条件,</span><br><span class="line">        如果本次请求处理失败,又会进入降级方法</span><br><span class="line">        如果处理成功,判断处理是否超时,如果超时了,也进入降级方法</span><br><span class="line">        最后,没有超时,则本次请求处理成功,将结果返回给controller</span><br></pre></td></tr></table></figure>
+<h3 id="Hystrix服务监控"><a href="#Hystrix服务监控" class="headerlink" title="Hystrix服务监控:"></a>Hystrix服务监控:</h3><h4 id="HystrixDashboard"><a href="#HystrixDashboard" class="headerlink" title="HystrixDashboard"></a>HystrixDashboard</h4><p><img src="/img/springcloud2020/Hystrix的51.png" alt=""></p>
+<h4 id="2-使用HystrixDashboard"><a href="#2-使用HystrixDashboard" class="headerlink" title="2,使用HystrixDashboard:"></a>2,使用HystrixDashboard:</h4><h5 id="1-创建项目"><a href="#1-创建项目" class="headerlink" title="1,创建项目:"></a>1,创建项目:</h5><p>名字: cloud_hystrixdashboard_9001</p>
+<h5 id="2-pom文件-1"><a href="#2-pom文件-1" class="headerlink" title="2,pom文件"></a>2,pom文件</h5><h5 id="3-配置文件-2"><a href="#3-配置文件-2" class="headerlink" title="3,配置文件"></a>3,配置文件</h5><p><img src="/img/springcloud2020/Hystrix的52.png" alt=""></p>
+<h5 id="4-主启动类-1"><a href="#4-主启动类-1" class="headerlink" title="4,主启动类"></a>4,主启动类</h5><p><img src="/img/springcloud2020/Hystrix的53.png" alt=""></p>
+<h5 id="5-修改所有pay模块-8001-8002-8003…"><a href="#5-修改所有pay模块-8001-8002-8003…" class="headerlink" title="5,修改所有pay模块(8001,8002,8003…)"></a>5,修改所有pay模块(8001,8002,8003…)</h5><p><strong>他们都添加一个pom依赖:</strong></p>
+<p><img src="/img/springcloud2020/Hystrix的54.png" alt=""></p>
+<p>之前的pom文件中都添加过了,==这个是springboot的监控组件==</p>
+<h5 id="6-启动9001即可"><a href="#6-启动9001即可" class="headerlink" title="6,启动9001即可"></a>6,启动9001即可</h5><p> 访问: <strong>localhost:9001/hystrix</strong></p>
+<h5 id="7-注意-此时仅仅是可以访问HystrixDashboard-并不代表已经监控了8001-8002"><a href="#7-注意-此时仅仅是可以访问HystrixDashboard-并不代表已经监控了8001-8002" class="headerlink" title="7,注意,此时仅仅是可以访问HystrixDashboard,并不代表已经监控了8001,8002"></a>7,注意,此时仅仅是可以访问HystrixDashboard,并不代表已经监控了8001,8002</h5><p> 如果要监控,还需要配置:(8001为例)</p>
+<p>==8001的主启动类添加:==</p>
+<p><img src="/img/springcloud2020/Hystrix的55.png" alt=""></p>
+<p><strong>其他8002,8003都是一样的</strong></p>
+<h5 id="8-到此-可以启动服务"><a href="#8-到此-可以启动服务" class="headerlink" title="8,到此,可以启动服务"></a>8,到此,可以启动服务</h5><p>启动7001,8001,9001</p>
+<p><strong>然后在web界面,指定9001要监控8001:</strong></p>
+<h5 id=""><a href="#" class="headerlink" title=""></a><img src="/img/springcloud2020/Hystrix的56.png" alt=""></h5><p><img src="/img/springcloud2020/Hystrix的57.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的59.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的58.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的60.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的61.png" alt=""></p>
+<p><img src="/img/springcloud2020/Hystrix的62.png" alt=""></p>
+<h1 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h1>
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/06/07/Mysql执行计划/" data-toggle="tooltip" data-placement="top" title="Mysql执行计划">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/05/30/java线程池/" data-toggle="tooltip" data-placement="top" title="java线程池">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Hystrix服务降级"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Hystrix服务降级</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hystrix中的重要概念"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">hystrix中的重要概念:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-服务降级"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">1,服务降级</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-服务熔断"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">2,服务熔断</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-服务限流"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">3,服务限流</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用hystrix-服务降级"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">使用hystrix,服务降级:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-创建带降级机制的pay模块"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">1,创建带降级机制的pay模块 :</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-pom文件"><span class="toc-nav-number">1.2.1.1.</span> <span class="toc-nav-text">2,pom文件</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-配置文件"><span class="toc-nav-number">1.2.1.2.</span> <span class="toc-nav-text">3,配置文件</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#8-先不加入hystrix"><span class="toc-nav-number">1.2.1.3.</span> <span class="toc-nav-text">8,先不加入hystrix,</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-创建带降级的order模块"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2,创建带降级的order模块:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-名字-cloud-hystrix-order-80"><span class="toc-nav-number">1.2.2.1.</span> <span class="toc-nav-text">1,名字:  cloud-hystrix-order-80</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-pom"><span class="toc-nav-number">1.2.2.2.</span> <span class="toc-nav-text">2,pom</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-配置文件-1"><span class="toc-nav-number">1.2.2.3.</span> <span class="toc-nav-text">3,配置文件</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-主启动类"><span class="toc-nav-number">1.2.2.4.</span> <span class="toc-nav-text">4,主启动类</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#5-远程调用pay模块的接口"><span class="toc-nav-number">1.2.2.5.</span> <span class="toc-nav-text">5,远程调用pay模块的接口:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#6-controller"><span class="toc-nav-number">1.2.2.6.</span> <span class="toc-nav-text">6,controller:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#7-测试"><span class="toc-nav-number">1.2.2.7.</span> <span class="toc-nav-text">7,测试</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-配置服务降级"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">3,配置服务降级:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-修改pay模块"><span class="toc-nav-number">1.2.3.1.</span> <span class="toc-nav-text">1,修改pay模块</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#1-为service的指定方法-会延迟的方法-添加-HystrixCommand注解"><span class="toc-nav-number">1.2.3.1.1.</span> <span class="toc-nav-text">1,为service的指定方法(会延迟的方法)添加@HystrixCommand注解</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#2-主启动类上-添加激活hystrix的注解"><span class="toc-nav-number">1.2.3.1.2.</span> <span class="toc-nav-text">2,主启动类上,添加激活hystrix的注解</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#3-触发异常"><span class="toc-nav-number">1.2.3.1.3.</span> <span class="toc-nav-text">3,触发异常</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-修改order模块-进行服务降级"><span class="toc-nav-number">1.2.3.2.</span> <span class="toc-nav-text">2,修改order模块,进行服务降级</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#1-修改配置文件"><span class="toc-nav-number">1.2.3.2.1.</span> <span class="toc-nav-text">1,修改配置文件:</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#2-主启动类添加直接-启用hystrix"><span class="toc-nav-number">1.2.3.2.2.</span> <span class="toc-nav-text">2,主启动类添加直接,启用hystrix:</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#3-修改controller-添加降级方法什么的"><span class="toc-nav-number">1.2.3.2.3.</span> <span class="toc-nav-text">3,修改controller,添加降级方法什么的</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#4-测试"><span class="toc-nav-number">1.2.3.2.4.</span> <span class="toc-nav-text">4,测试</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-重构"><span class="toc-nav-number">1.2.3.3.</span> <span class="toc-nav-text">4,重构:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#解决重复代码的问题"><span class="toc-nav-number">1.2.3.4.</span> <span class="toc-nav-text">解决重复代码的问题:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#1-创建一个全局方法"><span class="toc-nav-number">1.2.3.4.1.</span> <span class="toc-nav-text">1,创建一个全局方法</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#2-使用注解指定其为全局降级方法-默认降级方法"><span class="toc-nav-number">1.2.3.4.2.</span> <span class="toc-nav-text">2,使用注解指定其为全局降级方法(默认降级方法)</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#3-业务方法使用默认降级方法"><span class="toc-nav-number">1.2.3.4.3.</span> <span class="toc-nav-text">3,业务方法使用默认降级方法:</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#4-测试-1"><span class="toc-nav-number">1.2.3.4.4.</span> <span class="toc-nav-text">4,测试:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#解决代码耦合度的问题"><span class="toc-nav-number">1.2.3.5.</span> <span class="toc-nav-text">解决代码耦合度的问题:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#1-Payservice接口是远程调用pay模块的-我们这里创建一个类实现service接口-在实现类中统一处理异常"><span class="toc-nav-number">1.2.3.5.1.</span> <span class="toc-nav-text">1,Payservice接口是远程调用pay模块的,我们这里创建一个类实现service接口,在实现类中统一处理异常</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#2-修改配置文件-添加"><span class="toc-nav-number">1.2.3.5.2.</span> <span class="toc-nav-text">2,修改配置文件:添加:</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#3-让PayService的实现类生效"><span class="toc-nav-number">1.2.3.5.3.</span> <span class="toc-nav-text">3,让PayService的实现类生效:</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#4-启动测试"><span class="toc-nav-number">1.2.3.5.4.</span> <span class="toc-nav-text">4,启动测试</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用服务熔断"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">使用服务熔断:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-修改前面的pay模块"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1,修改前面的pay模块</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-修改Payservice接口-添加服务熔断相关的方法"><span class="toc-nav-number">1.3.1.1.</span> <span class="toc-nav-text">1,修改Payservice接口,添加服务熔断相关的方法:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-修改controller"><span class="toc-nav-number">1.3.1.2.</span> <span class="toc-nav-text">2,修改controller</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-测试"><span class="toc-nav-number">1.3.1.3.</span> <span class="toc-nav-text">3,测试:</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Hystrix所有可配置的属性"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Hystrix所有可配置的属性:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">总结:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Hystrix服务监控"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">Hystrix服务监控:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#HystrixDashboard"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">HystrixDashboard</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-使用HystrixDashboard"><span class="toc-nav-number">1.6.2.</span> <span class="toc-nav-text">2,使用HystrixDashboard:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-创建项目"><span class="toc-nav-number">1.6.2.1.</span> <span class="toc-nav-text">1,创建项目:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-pom文件-1"><span class="toc-nav-number">1.6.2.2.</span> <span class="toc-nav-text">2,pom文件</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-配置文件-2"><span class="toc-nav-number">1.6.2.3.</span> <span class="toc-nav-text">3,配置文件</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-主启动类-1"><span class="toc-nav-number">1.6.2.4.</span> <span class="toc-nav-text">4,主启动类</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#5-修改所有pay模块-8001-8002-8003…"><span class="toc-nav-number">1.6.2.5.</span> <span class="toc-nav-text">5,修改所有pay模块(8001,8002,8003…)</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#6-启动9001即可"><span class="toc-nav-number">1.6.2.6.</span> <span class="toc-nav-text">6,启动9001即可</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#7-注意-此时仅仅是可以访问HystrixDashboard-并不代表已经监控了8001-8002"><span class="toc-nav-number">1.6.2.7.</span> <span class="toc-nav-text">7,注意,此时仅仅是可以访问HystrixDashboard,并不代表已经监控了8001,8002</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#8-到此-可以启动服务"><span class="toc-nav-number">1.6.2.8.</span> <span class="toc-nav-text">8,到此,可以启动服务</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#"><span class="toc-nav-number">1.6.2.9.</span> <span class="toc-nav-text"></span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#-1"><span class="toc-nav-number"></span> <span class="toc-nav-text"> </span></a>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                        
+                          <a class="tag" href="/tags/#Hystrix" title="Hystrix">Hystrix</a>
+                        
+                          <a class="tag" href="/tags/#服务降级" title="服务降级">服务降级</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2022 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;对象？new一个就好了&#34;,&#34;just do it&#34;,&#34;🍀&#34;,&#34;🍂&#34;,&#34;🍃&#34;,&#34;time is running out&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34; ,&#34;rgb(242,153,29)&#34; ,&#34;rgb(22,36,92)&#34; ,&#34;rgb(119,195,79)&#34; ,&#34;rgb(119,195,79)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>
