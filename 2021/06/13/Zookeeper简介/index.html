@@ -125,8 +125,8 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">249</span> and
-                                Reading Time <span class="post-count">1</span> Minutes
+                                Words <span class="post-count">536</span> and
+                                Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -202,13 +209,6 @@
                         
                         <li>
                             <a href="/photography/">Photography</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -276,14 +276,39 @@
 
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Zookeeper 是一个开源的分布式的，为分布式框架提供协调服务的 Apache 项目。</p>
 <h2 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h2><p>Zookeeper从设计模式角度来理解：是一个基 于观察者模式设计的分布式服务管理框架，它负 责 存储和管理大家都关心的数据，然 后接受观察者的 注 册，一旦这些数据的状态发生变化，Zookeeper 就 将负责通知已经在Zookeeper上注册的那些观察 者做出相应的反应。</p>
-<p><img src="/img/zookeeper/zookeeper.png" alt=""></p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p><img src="/img/zookeeper/zookeeper1.png" alt=""></p>
+<p><img src="../img/zookeeper/zookeeper.png" alt=""></p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p><img src="../img/zookeeper/zookeeper1.png" alt=""></p>
 <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>ZooKeeper 数据模型的结构与 Unix 文件系统很类似，整体上可以看作是一棵树，每个 节点称做一个 ZNode。每一个 ZNode 默认能够存储 1MB 的数据，每个 ZNode 都可以通过 其路径唯一标识。</p>
-<p><img src="/img/zookeeper/zookeeper2.png" alt=""></p>
+<p><img src="../img/zookeeper/zookeeper2.png" alt=""></p>
 <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>提供的服务包括：统一命名服务、统一配置管理、统一集群管理、服务器节点动态上下线、软负载均衡等。</p>
-<p><img src="/img/zookeeper/zookeeper4.png" alt=""></p>
-<p><img src="/img/zookeeper/zookeeper5.png" alt=""></p>
-<p><img src="/img/zookeeper/zookeeper6.png" alt=""></p>
+<p><img src="../img/zookeeper/zookeeper4.png" alt=""></p>
+<p><img src="../img/zookeeper/zookeeper5.png" alt=""></p>
+<p><img src="../img/zookeeper/zookeeper6.png" alt=""></p>
+<h2 id="zookeeper安装"><a href="#zookeeper安装" class="headerlink" title="zookeeper安装"></a>zookeeper安装</h2><h3 id="1-1-下载安装"><a href="#1-1-下载安装" class="headerlink" title="1.1 下载安装"></a>1.1 下载安装</h3><p><strong>1、环境准备</strong></p>
+<p>ZooKeeper服务器是用Java创建的，它运行在JVM之上。需要安装JDK 7或更高版本。</p>
+<p><strong>2、上传</strong></p>
+<p>将下载的ZooKeeper放到/opt/ZooKeeper目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">上传zookeeper alt+p</span></span><br><span class="line">put f:/setup/apache-zookeeper-3.5.6-bin.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash">打开 opt目录</span></span><br><span class="line">cd /opt</span><br><span class="line"><span class="meta">#</span><span class="bash">创建zooKeeper目录</span></span><br><span class="line">mkdir  zooKeeper</span><br><span class="line"><span class="meta">#</span><span class="bash">将zookeeper安装包移动到 /opt/zooKeeper</span></span><br><span class="line">mv apache-zookeeper-3.5.6-bin.tar.gz /opt/zookeeper/</span><br></pre></td></tr></table></figure>
+<p><strong>3、解压</strong></p>
+<p>将tar包解压到/opt/zookeeper目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-ZooKeeper-3.5.6-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-配置启动"><a href="#1-2-配置启动" class="headerlink" title="1.2 配置启动"></a>1.2 配置启动</h3><p><strong>1、配置zoo.cfg</strong></p>
+<p>进入到conf目录拷贝一个zoo_sample.cfg并完成配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">进入到conf目录</span></span><br><span class="line">cd /opt/zooKeeper/apache-zooKeeper-3.5.6-bin/conf/</span><br><span class="line"><span class="meta">#</span><span class="bash">拷贝</span></span><br><span class="line">cp  zoo_sample.cfg  zoo.cfg</span><br></pre></td></tr></table></figure>
+<p>修改zoo.cfg</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">打开目录</span></span><br><span class="line">cd /opt/zooKeeper/</span><br><span class="line"><span class="meta">#</span><span class="bash">创建zooKeeper存储目录</span></span><br><span class="line">mkdir  zkdata</span><br><span class="line"><span class="meta">#</span><span class="bash">修改zoo.cfg</span></span><br><span class="line">vim /opt/zooKeeper/apache-zooKeeper-3.5.6-bin/conf/zoo.cfg</span><br></pre></td></tr></table></figure>
+<p><img src="../img/zookeeper/zookeeper7.png" alt=""></p>
+<p>修改存储目录：dataDir=/opt/zookeeper/zkdata</p>
+<p><strong>2、启动ZooKeeper</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/zooKeeper/apache-zooKeeper-3.5.6-bin/bin/</span><br><span class="line"><span class="meta">#</span><span class="bash">启动</span></span><br><span class="line"> ./zkServer.sh  start</span><br></pre></td></tr></table></figure>
+<p><img src="../img/zookeeper/zookeeper8.png" alt=""></p>
+<p>看到上图表示ZooKeeper成功启动</p>
+<p><strong>3、查看ZooKeeper状态</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh status</span><br></pre></td></tr></table></figure>
+<p>zookeeper启动成功。standalone代表zk没有搭建集群，现在是单节点</p>
+<p><img src="../img/zookeeper/zookeeper9.png" alt=""></p>
+<p>zookeeper没有启动</p>
+<p><img src="../img/zookeeper/zookeeper10.png" alt=""></p>
 
                 
                 <hr>
@@ -405,7 +430,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#概述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#工作机制"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">工作机制</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#特点"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">特点</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据结构"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">数据结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#应用场景"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">应用场景</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#概述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#工作机制"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">工作机制</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#特点"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">特点</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据结构"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">数据结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#应用场景"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">应用场景</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#zookeeper安装"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">zookeeper安装</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-1-下载安装"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">1.1 下载安装</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-2-配置启动"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">1.2 配置启动</span></a></li></ol></li></ol>
         
         </div>
       </aside>
