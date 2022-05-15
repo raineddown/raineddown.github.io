@@ -283,6 +283,49 @@
 
         <div class="post-preview">
 
+            <a href="/2020/12/11/布隆过滤器/">
+                <h2 class="post-title">
+                    布隆过滤器
+                </h2>
+                <h3 class="post-subtitle">
+                    布隆过滤器
+                </h3>
+                <div class="post-content-preview">
+                    布隆过滤器的优缺点概述优点：
+由于存储的是二进制数据，所以占用的空间很小
+
+它的插入和查询速度是非常快的，时间复杂度是O（K），可以联想一下HashMap的过程
+
+保密性很好，因为本身不存储任何原始数据，只有二进制数据
+
+
+缺点：
+存在误判，详细说明与例子见上文布隆器基础介绍部分。
+
+删除困难，试想布隆过滤器存入的几个数据经过计算的hash值相同，那么他们的二进制数组下标也一定相同，删除后导......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-12-11
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#布隆过滤器" title="布隆过滤器">布隆过滤器</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
             <a href="/2020/11/26/常见Java并发中断方法/">
                 <h2 class="post-title">
                     常见Java并发中断相关方法
@@ -584,42 +627,6 @@ redis常见问题缓存雪崩我们知道redis......
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/13/数据库外键与级联的使用考量/">
-                <h2 class="post-title">
-                    数据库外键与级联的使用考量
-                </h2>
-                <h3 class="post-subtitle">
-                    数据库外键与级联的使用考量
-                </h3>
-                <div class="post-content-preview">
-                    背景在接触了一些企业级项目后发现，项目对应的数据库设计中很少再设计外键和级联（触发器、级联更新与删除）与大学期间的数据库设计课程以及以往的个人小项目的数据库设计相反，当需要用外键做关联的时候，也是仅对字段进行冗余存储。
-开发规范在《阿里巴巴java开发手册》中对数据库设置的规范强调————“【强制】不得使用外键与级联，一切外键概念必须在应用层解决。”
-数据库去外键设计解决方案：设计关联表。举......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2020-08-13
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#sql" title="sql">sql</a>
-                    
-                      <a href="/tags/#foreign key" title="foreign key">foreign key</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -711,6 +718,12 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
+            <a href="/tags/#IDEA" title="IDEA" rel="2">IDEA</a>
+            
+        
+            
+        
+            
         
             
         
@@ -720,16 +733,6 @@ redis常见问题缓存雪崩我们知道redis......
         
             
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#IDEA" title="IDEA" rel="2">IDEA</a>
-            
-        
-            
-        
             
         
             
@@ -761,11 +764,13 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#redis" title="redis" rel="3">redis</a>
-            
-        
-            
-        
             
         
             
@@ -779,9 +784,9 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
-            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
-            
         
+            
+            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
             
         
             
@@ -819,16 +824,6 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Zookeeper" title="Zookeeper" rel="3">Zookeeper</a>
             
         
@@ -837,7 +832,21 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#spring" title="spring" rel="3">spring</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -859,15 +868,15 @@ redis常见问题缓存雪崩我们知道redis......
             
         
             
+            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+            
+        
+            
         
             
             <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
             
         
-            
-        
-            
-            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
             
         
             
@@ -982,6 +991,10 @@ redis常见问题缓存雪崩我们知道redis......
     <ul>
       
         <li>
+          <a href="/2022/05/15/countDownLatch/">countDownLatch简介与基础使用</a>
+        </li>
+      
+        <li>
           <a href="/2022/04/22/spring%E5%AE%B9%E5%99%A8%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">spring容器注入实现策略模式</a>
         </li>
       
@@ -995,10 +1008,6 @@ redis常见问题缓存雪崩我们知道redis......
       
         <li>
           <a href="/2022/03/15/GateWay%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">GateWay漏洞</a>
-        </li>
-      
-        <li>
-          <a href="/2022/02/23/Oracle%E4%B8%8EMysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8C%BA%E5%88%AB/">Oracle与Mysql数据库区别</a>
         </li>
       
     </ul>
@@ -1027,7 +1036,7 @@ redis常见问题缓存雪崩我们知道redis......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -1042,11 +1051,13 @@ redis常见问题缓存雪崩我们知道redis......
         
           <a href="categories/#JSON"><li>JSON</li></a>
         
+          <a href="categories/#Annotation"><li>Annotation</li></a>
+        
           <a href="categories/#GitHub"><li>GitHub</li></a>
         
-          <a href="categories/#hexo"><li>hexo</li></a>
+          <a href="categories/#IDEA"><li>IDEA</li></a>
         
-          <a href="categories/#Annotation"><li>Annotation</li></a>
+          <a href="categories/#hexo"><li>hexo</li></a>
         
           <a href="categories/#Docker"><li>Docker</li></a>
         
@@ -1054,57 +1065,55 @@ redis常见问题缓存雪崩我们知道redis......
         
           <a href="categories/#jdk"><li>jdk</li></a>
         
-          <a href="categories/#IDEA"><li>IDEA</li></a>
-        
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
-        
           <a href="categories/#Druid"><li>Druid</li></a>
+        
+          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
           <a href="categories/#idea"><li>idea</li></a>
         
-          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
+          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
           <a href="categories/#异步调用"><li>异步调用</li></a>
         
-          <a href="categories/#SQL"><li>SQL</li></a>
-        
           <a href="categories/#sql"><li>sql</li></a>
         
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
-        
           <a href="categories/#shiro"><li>shiro</li></a>
+        
+          <a href="categories/#SQL"><li>SQL</li></a>
         
           <a href="categories/#redis"><li>redis</li></a>
         
           <a href="categories/#vue"><li>vue</li></a>
         
-          <a href="categories/#并发编程"><li>并发编程</li></a>
+          <a href="categories/#mysqldump"><li>mysqldump</li></a>
         
-          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
+          <a href="categories/#并发编程"><li>并发编程</li></a>
         
           <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
         
+          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
+        
           <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
+        
+          <a href="categories/#zookeeper"><li>zookeeper</li></a>
         
           <a href="categories/#javastream"><li>javastream</li></a>
         
           <a href="categories/#Eureka"><li>Eureka</li></a>
         
-          <a href="categories/#zookeeper"><li>zookeeper</li></a>
-        
           <a href="categories/#consul"><li>consul</li></a>
-        
-          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
         
           <a href="categories/#Ribbon"><li>Ribbon</li></a>
         
-          <a href="categories/#Hystrix"><li>Hystrix</li></a>
+          <a href="categories/#注册中心"><li>注册中心</li></a>
+        
+          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
         
           <a href="categories/#java线程池"><li>java线程池</li></a>
+        
+          <a href="categories/#Hystrix"><li>Hystrix</li></a>
         
           <a href="categories/#spring"><li>spring</li></a>
         
@@ -1124,11 +1133,11 @@ redis常见问题缓存雪崩我们知道redis......
         
           <a href="categories/#注册中心"><li>注册中心</li></a>
         
-          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
+          <a href="categories/#负载均衡"><li>负载均衡</li></a>
         
           <a href="categories/#spring cloud"><li>spring cloud</li></a>
         
-          <a href="categories/#负载均衡"><li>负载均衡</li></a>
+          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
         
           <a href="categories/#服务降级"><li>服务降级</li></a>
         

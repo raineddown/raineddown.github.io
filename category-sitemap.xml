@@ -8,6 +8,20 @@
     </url>
 
     <url>
+        <loc>http://radarsoftware.cn/categories/%25E6%25B3%25A8%25E5%2586%258C%25E4%25B8%25AD%25E5%25BF%2583/spring-cloud/</loc>
+        <lastmod>2022-05-15T07:21:23.672Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/categories/%25E6%25B3%25A8%25E5%2586%258C%25E4%25B8%25AD%25E5%25BF%2583/</loc>
+        <lastmod>2022-05-15T07:21:23.672Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://radarsoftware.cn/categories/spring/</loc>
         <lastmod>2022-04-04T15:05:06.905Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,20 +31,6 @@
     <url>
         <loc>http://radarsoftware.cn/categories/GateWay/</loc>
         <lastmod>2022-04-04T13:51:41.768Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://radarsoftware.cn/categories/%25E6%25B3%25A8%25E5%2586%258C%25E4%25B8%25AD%25E5%25BF%2583/spring-cloud/</loc>
-        <lastmod>2022-04-03T04:07:56.620Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://radarsoftware.cn/categories/%25E6%25B3%25A8%25E5%2586%258C%25E4%25B8%25AD%25E5%25BF%2583/</loc>
-        <lastmod>2022-04-03T04:07:56.620Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
