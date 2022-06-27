@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://radarsoftware.cn/2022/06/23/MySQL%E9%AB%98%E7%BA%A7/</loc>
+    <lastmod>2022-06-27</lastmod>
+  </url>  <url>
     <loc>http://radarsoftware.cn/2022/05/15/countDownLatch/</loc>
     <lastmod>2022-05-15</lastmod>
   </url>  <url>
