@@ -164,14 +164,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -278,6 +278,72 @@
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/08/21/javaweb项目常用缓存/">
+                <h2 class="post-title">
+                    javaweb项目常用缓存
+                </h2>
+                <h3 class="post-subtitle">
+                    线上问题分析
+                </h3>
+                <div class="post-content-preview">
+                    缓存简介随着互联网的普及，内容信息越来越复杂，用户数和访问量越来越大，我们的应用需要支撑更多的并发量，同时我们的应用服务器和数据库服务器所做的计算也越来越多。但是往往我们的应用服务器资源是有限的，且技术变革是缓慢的，数据库每秒能接受的请求次数也是有限的（或者文件的读写也是有限的），如何能够有效利用有限的资源来提供尽可能大的吞吐量? 一个有效的办法就是引入缓存，打破标准流程，每个环节中请求可以......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2022-08-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#cache" title="cache">cache</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/14/排查线上java程序高CPU占比代码/">
+                <h2 class="post-title">
+                    排查线上java程序高CPU占比代码
+                </h2>
+                <h3 class="post-subtitle">
+                    线上问题分析
+                </h3>
+                <div class="post-content-preview">
+                    java程序CPU占比过高分析一、Arthas分析高CPU占比代码Arthas官方文档地址:https://arthas.aliyun.com/doc/quick-start.html
+1.1 启动Arthas在命令行下面执行（使用和目标进程一致的用户启动，否则可能attach失败）：
+12curl -O https:&#x2F;&#x2F;arthas.aliyun.com&#x2F;ar......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2022-07-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#线上问题分析" title="线上问题分析">线上问题分析</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -568,82 +634,6 @@ oracle:
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/01/27/Seata分布式事务/">
-                <h2 class="post-title">
-                    Seata分布式事务
-                </h2>
-                <h3 class="post-subtitle">
-                    Seata分布式事务
-                </h3>
-                <div class="post-content-preview">
-                    Seata简介Seata是一款开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。
-官方网址
-分布式事务问题分布式前
-
-单机单库没这个问题
-从1:1 -&gt; 1:N -&gt; N:N
-
-单体应用被拆分成微服务应用，原来的三个模块被拆分成三个独立的应用,分别使用三个独立的数据源，业务操作需要调用三三 个服务来完成。此时每个服务内部的数据一致性由本地事务来保......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2022-01-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
-                    
-                      <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba">spring cloud alibaba</a>
-                    
-                      <a href="/tags/#Seata" title="Seata">Seata</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/12/25/Zookeeper案例-分布式屏障Barrier/">
-                <h2 class="post-title">
-                    Zookeeper案例-分布式屏障Barrier
-                </h2>
-                <h3 class="post-subtitle">
-                    分布式屏障Barrier
-                </h3>
-                <div class="post-content-preview">
-                    Zookeeper应用场景之分布式屏障BarrierBarrier就是栅栏或者屏障，适用于这样的业务场景：当有些操作需要并行执行，但后续操作又需要串行执行，此时必须等待所有并行执行的线程全部结束，才开始串行，于是就需要一个屏障，来控制所有线程同时开始，并等待所有线程全部结束。 分布式barrier一般出现在类似这样的场景,某个任务最终的执行需要基于很多并行计算的子结果。
-项目demo地址:实......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-12-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Zookeeper" title="Zookeeper">Zookeeper</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -715,15 +705,13 @@ oracle:
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -753,11 +741,11 @@ oracle:
             
         
             
+        
+            
+        
+            
             <a href="/tags/#springboot" title="springboot" rel="3">springboot</a>
-            
-        
-            
-        
             
         
             
@@ -785,6 +773,8 @@ oracle:
             
         
             
+        
+            
             <a href="/tags/#mybatis-plus" title="mybatis-plus" rel="2">mybatis-plus</a>
             
         
@@ -792,8 +782,6 @@ oracle:
         
             
             <a href="/tags/#vue" title="vue" rel="4">vue</a>
-            
-        
             
         
             
@@ -817,13 +805,17 @@ oracle:
             
         
             
-        
-            
             <a href="/tags/#注册中心" title="注册中心" rel="4">注册中心</a>
             
         
             
             <a href="/tags/#spring cloud" title="spring cloud" rel="12">spring cloud</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#cache" title="cache" rel="2">cache</a>
             
         
             
@@ -855,13 +847,15 @@ oracle:
             
         
             
-        
-            
             <a href="/tags/#spring" title="spring" rel="3">spring</a>
             
         
             
             <a href="/tags/#GateWay" title="GateWay" rel="2">GateWay</a>
+            
+        
+            
+        
             
         
             
@@ -885,9 +879,9 @@ oracle:
             
         
             
-        
-            
             <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
+            
+        
             
         
             
@@ -1006,6 +1000,14 @@ oracle:
     <ul>
       
         <li>
+          <a href="/2022/08/21/javaweb%E9%A1%B9%E7%9B%AE%E5%B8%B8%E7%94%A8%E7%BC%93%E5%AD%98/">javaweb项目常用缓存</a>
+        </li>
+      
+        <li>
+          <a href="/2022/07/14/%E6%8E%92%E6%9F%A5%E7%BA%BF%E4%B8%8Ajava%E7%A8%8B%E5%BA%8F%E9%AB%98CPU%E5%8D%A0%E6%AF%94%E4%BB%A3%E7%A0%81/">排查线上java程序高CPU占比代码</a>
+        </li>
+      
+        <li>
           <a href="/2022/06/23/MySQL%E9%AB%98%E7%BA%A7/">MySQL高级</a>
         </li>
       
@@ -1015,14 +1017,6 @@ oracle:
       
         <li>
           <a href="/2022/04/22/spring%E5%AE%B9%E5%99%A8%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">spring容器注入实现策略模式</a>
-        </li>
-      
-        <li>
-          <a href="/2022/04/02/Async%E4%B8%8EScheduled/">Async与Scheduled注解</a>
-        </li>
-      
-        <li>
-          <a href="/2022/03/31/Spring%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">Spring远程命令执行漏洞</a>
         </li>
       
     </ul>
@@ -1051,7 +1045,7 @@ oracle:
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -1062,71 +1056,69 @@ oracle:
     <div class="widget">
       <ul>
         
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
-          <a href="categories/#GitHub"><li>GitHub</li></a>
-        
           <a href="categories/#JSON"><li>JSON</li></a>
         
           <a href="categories/#架构模式"><li>架构模式</li></a>
+        
+          <a href="categories/#Annotation"><li>Annotation</li></a>
+        
+          <a href="categories/#GitHub"><li>GitHub</li></a>
         
           <a href="categories/#hexo"><li>hexo</li></a>
         
           <a href="categories/#centos"><li>centos</li></a>
         
-          <a href="categories/#Docker"><li>Docker</li></a>
-        
           <a href="categories/#IDEA"><li>IDEA</li></a>
         
           <a href="categories/#jdk"><li>jdk</li></a>
         
-          <a href="categories/#Druid"><li>Druid</li></a>
-        
           <a href="categories/#idea"><li>idea</li></a>
         
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
+          <a href="categories/#Druid"><li>Druid</li></a>
         
           <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
-          <a href="categories/#sql"><li>sql</li></a>
+          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
+        
+          <a href="categories/#异步调用"><li>异步调用</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
           <a href="categories/#shiro"><li>shiro</li></a>
         
-          <a href="categories/#异步调用"><li>异步调用</li></a>
-        
           <a href="categories/#redis"><li>redis</li></a>
         
-          <a href="categories/#vue"><li>vue</li></a>
+          <a href="categories/#sql"><li>sql</li></a>
         
           <a href="categories/#SQL"><li>SQL</li></a>
         
-          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
+          <a href="categories/#vue"><li>vue</li></a>
+        
+          <a href="categories/#mysqldump"><li>mysqldump</li></a>
         
           <a href="categories/#并发编程"><li>并发编程</li></a>
+        
+          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
         
           <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
         
           <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
         
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
-        
-          <a href="categories/#javastream"><li>javastream</li></a>
+          <a href="categories/#zookeeper"><li>zookeeper</li></a>
         
           <a href="categories/#Eureka"><li>Eureka</li></a>
         
-          <a href="categories/#注册中心"><li>注册中心</li></a>
+          <a href="categories/#javastream"><li>javastream</li></a>
         
           <a href="categories/#consul"><li>consul</li></a>
         
-          <a href="categories/#zookeeper"><li>zookeeper</li></a>
+          <a href="categories/#Ribbon"><li>Ribbon</li></a>
         
-          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
+          <a href="categories/#注册中心"><li>注册中心</li></a>
         
           <a href="categories/#Hystrix"><li>Hystrix</li></a>
         
-          <a href="categories/#Ribbon"><li>Ribbon</li></a>
+          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
         
           <a href="categories/#java线程池"><li>java线程池</li></a>
         
@@ -1140,21 +1132,23 @@ oracle:
         
           <a href="categories/#easyexcel"><li>easyexcel</li></a>
         
+          <a href="categories/#Docker"><li>Docker</li></a>
+        
+          <a href="categories/#注册中心"><li>注册中心</li></a>
+        
           <a href="categories/#注册中心"><li>注册中心</li></a>
         
           <a href="categories/#cache"><li>cache</li></a>
         
+          <a href="categories/#注册中心"><li>注册中心</li></a>
+        
+          <a href="categories/#负载均衡"><li>负载均衡</li></a>
+        
           <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
         
           <a href="categories/#服务降级"><li>服务降级</li></a>
         
-          <a href="categories/#负载均衡"><li>负载均衡</li></a>
+          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
         
           <a href="categories/#spring cloud"><li>spring cloud</li></a>
         
@@ -1344,7 +1338,7 @@ oracle:
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;对象？new一个就好了&#34;,&#34;just do it&#34;,&#34;🍀&#34;,&#34;🍂&#34;,&#34;🍃&#34;,&#34;time is running out&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34; ,&#34;rgb(242,153,29)&#34; ,&#34;rgb(22,36,92)&#34; ,&#34;rgb(119,195,79)&#34; ,&#34;rgb(119,195,79)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1354,22 +1348,6 @@ oracle:
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </body>
 
 </html>

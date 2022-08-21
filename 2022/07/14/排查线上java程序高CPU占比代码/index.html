@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          排查线上java程序高CPU占比代码 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2022/07/14/排查线上java程序高CPU占比代码/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#线上问题分析" title="线上问题分析">线上问题分析</a>
+                            
+                        </div>
+                        <h1>排查线上java程序高CPU占比代码</h1>
+                        <h2 class="subheading">线上问题分析</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2022-07-14
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.3k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="java程序CPU占比过高分析"><a href="#java程序CPU占比过高分析" class="headerlink" title="java程序CPU占比过高分析"></a>java程序CPU占比过高分析</h2><h2 id="一、Arthas分析高CPU占比代码"><a href="#一、Arthas分析高CPU占比代码" class="headerlink" title="一、Arthas分析高CPU占比代码"></a>一、Arthas分析高CPU占比代码</h2><p>Arthas官方文档地址:<a href="https://arthas.aliyun.com/doc/quick-start.html" target="_blank" rel="noopener">https://arthas.aliyun.com/doc/quick-start.html</a></p>
+<h3 id="1-1-启动Arthas"><a href="#1-1-启动Arthas" class="headerlink" title="1.1 启动Arthas"></a>1.1 启动Arthas</h3><p>在命令行下面执行（使用和目标进程一致的用户启动，否则可能attach失败）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -O https:&#x2F;&#x2F;arthas.aliyun.com&#x2F;arthas-boot.jar</span><br><span class="line">java -jar arthas-boot.jar</span><br></pre></td></tr></table></figure>
+<p>执行该程序的用户需要和目标进程具有相同的权限。比如以admin用户来执行：<code>sudo su admin &amp;&amp; java -jar arthas-boot.jar</code> 或 <code>sudo -u admin -EH java -jar arthas-boot.jar</code>。<br>如果attach不上目标进程，可以查看~/logs/arthas/ 目录下的日志。<br>如果下载速度比较慢，可以使用aliyun的镜像：<code>java -jar arthas-boot.jar --repo-mirror aliyun --use-http
+java -jar arthas-boot.jar -h</code> 打印更多参数信息。</p>
+<h3 id="1-2-模拟CPU飙升代码"><a href="#1-2-模拟CPU飙升代码" class="headerlink" title="1.2 模拟CPU飙升代码"></a>1.2 模拟CPU飙升代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fun cpuHigh() &#123;</span><br><span class="line">    Thread &#123;</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            println(&quot;cpu飙升中～&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;.start()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-运行项目运行Arthas-找到自己当前项目对应的PID进行监听"><a href="#1-3-运行项目运行Arthas-找到自己当前项目对应的PID进行监听" class="headerlink" title="1.3 运行项目运行Arthas,找到自己当前项目对应的PID进行监听"></a>1.3 运行项目运行Arthas,找到自己当前项目对应的PID进行监听</h3><p><img src="../img/cpu/cpu0.png" alt=""></p>
+<h3 id="1-3-输入dashboard仪表盘显示当前进程相关信息"><a href="#1-3-输入dashboard仪表盘显示当前进程相关信息" class="headerlink" title="1.3 输入dashboard仪表盘显示当前进程相关信息"></a>1.3 输入dashboard仪表盘显示当前进程相关信息</h3><p><img src="../img/cpu/cpu1.png" alt=""></p>
+<h3 id="1-4-使用-thread-命令，排查当前项目中的各个运行中方法的CPU占用率情况"><a href="#1-4-使用-thread-命令，排查当前项目中的各个运行中方法的CPU占用率情况" class="headerlink" title="1.4 使用 thread 命令，排查当前项目中的各个运行中方法的CPU占用率情况"></a>1.4 使用 <code>thread</code> 命令，排查当前项目中的各个运行中方法的CPU占用率情况</h3><p>可见图中，<code>ID=11</code>的线程CPU占用率很高，达到66.09%</p>
+<p><img src="../img/cpu/cpu2.png" alt=""></p>
+<h3 id="1-5-使用-thread-id-命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高"><a href="#1-5-使用-thread-id-命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高" class="headerlink" title="1.5 使用 thread -[id] 命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高"></a>1.5 使用 <code>thread -[id]</code> 命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高</h3><p><img src="../img/cpu/cpu3.png" alt=""></p>
+<p>由图可见，<code>id=11</code>的任务处于<strong>RUNNABLE状态</strong>，且CPU占用率高的主要原因是因为一直进行FileOutputStream操作，也就是输出流操作，并且定位代码在 <code>TestMain.kt</code> 中的第28行执行了这个高CPU占用率的方法，而导致的，再来看下代码</p>
+<p><img src="../img/cpu/cpu4.png" alt=""></p>
+<h2 id="二、jstack获取线程快照分析CPU占比代码"><a href="#二、jstack获取线程快照分析CPU占比代码" class="headerlink" title="二、jstack获取线程快照分析CPU占比代码"></a>二、jstack获取线程快照分析CPU占比代码</h2><ol>
+<li>查找高占比进程pid,使用<code>ps -ef|grep java</code> 、 <code>jps</code>查找对应java进程pid</li>
+</ol>
+<p>或使用top<code>`top -p &lt;pid&gt;</code> 查看Java进程的cpu占用：</p>
+<p><img src="../img/cpu/CPU占比分析0.png" alt=""></p>
+<p>该Java进程占用cpu达到92.2%。</p>
+<ol>
+<li>使用 top -Hp <pid> 命令（<pid>为Java进程的id号）查看该Java进程内所有线程的资源占用情况（按shft+p按照cpu占用进行排序，按shift+m按照内存占用进行排序）此处按照cpu排序</li>
+</ol>
+<p><img src="../img/cpu/CPU占比分析1.png" alt=""></p>
+<p>可以看到，有两个线程号为97243，97912的线程占用cpu分别达到了69.2%和22.0%</p>
+<ol>
+<li>使用 printf “%x “ <tid> 命令（tid指线程的id号）将以上10进制的线程号转换为16进制：</li>
+</ol>
+<p><img src="../img/cpu/CPU占比分析2.png" alt=""></p>
+<p>转换后的结果分别为17bdb，17e78，由于16进制以0x开头，所以对应的16进制的线程号为0x17bdb和0x17e78。</p>
+<ol>
+<li><p>使用jdk自带命令jstack获取此时的线程快照并输入到文件中： jstack -l <pid> &gt; ./jstack_result.txt 命令（<pid>为Java进程的id号）来获取线程快照结果并输入到指定文件。</p>
+</li>
+<li><p>查看第4步生成的txt文件，在其中搜索tid为0x17bdb的线程：</p>
+</li>
+</ol>
+<p><img src="../img/cpu/CPU占比分析3.png" alt=""></p>
+<p>可以看到线程号为0x17bdb（10进制线程号97243）对应的是一个”VM Thread”即虚拟机线程，这个不是与我们代码相关的线程，所以暂时忽略。</p>
+<p>　　再看0x17e78线程：</p>
+<p><img src="../img/cpu/CPU占比分析4.png" alt=""></p>
+<p>该线程的堆栈较深，且很明显有调用我们自己代码的逻辑，并且提示了具体的代码行数，我们查看该处代码：</p>
+<p><img src="../img/cpu/CPU占比分析5.png" alt=""></p>
+<p>发现此处是在一个死循环里边重复的拼接字符串导致的，我们知道，String类使用contact方法拼接字符串其实是创建新的对象并返回，看到这里，似乎可以和占用cpu最高的”VM Thread”联系起来了，因此作出假设：由于代码一直循环创建对象，导致不断有不再被引用的对象产生，虚拟机检测到对象不再被引用之后，就进行垃圾回收，垃圾回收占用了很大一部分cpu资源。</p>
+<p>　　为了证明该假设，设置jvisualvm监控，经过一段时间允许，cpu资源监控结果如下：</p>
+<p><img src="../img/cpu/CPU占比分析6.png" alt=""></p>
+<p>可以看到cpu总占用达到88.5%，而垃圾回收活动占用cpu达到84.0%，因此证明了上述假设。</p>
+<p>　　知道了该问题的原因后，我们还想知道此时垃圾回收的频率，耗时等信息，于是可以设置JVM参数 -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:./gc.log （或者使用jinfo命令动态设置GC日志，可以看到日志内容：</p>
+<p>　　 <img src="../img/cpu/CPU占比分析7.png" alt=""></p>
+<p>gc.log中频繁的打印垃圾回收，不过我们看到的基本都是Minor GC，即新生代的垃圾回收。</p>
+<p>　　为了更清晰的查看各个区的垃圾回收情况，可以使用jstat命令 jstat -gc <pid> <period> <count> （pid为Java进程的id，period指每次监控之间的时间间隔，count指监控次数）来监控垃圾回收，打印内容如下：</p>
+<p>　　 <img src="../img/cpu/CPU占比分析8.png" alt=""></p>
+<p>可以看到，虚拟机在进行频繁的Full GC，每次耗时均在增长。</p>
+<p>　　总结：</p>
+<p>　　分析Java进程占用cpu过高问题时候，基本都可以按照如下步骤进行分析：</p>
+<p>　　（1）使用 top -Hp <pid> 命令找出进程中占用cpu最高的前几个线程</p>
+<p>　　（2）使用jstack获取线程快照，然后使用线程id搜索分析快照文件</p>
+<p>　　（3）如果线程调用了业务相关代码，则分析是否是代码问题导致的cpu占用过高，如果线程是VM Thread，则应该监控检查垃圾回收活动频率，看是否是因为频繁进行垃圾回收导致的。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/08/21/javaweb项目常用缓存/" data-toggle="tooltip" data-placement="top" title="javaweb项目常用缓存">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/06/23/MySQL高级/" data-toggle="tooltip" data-placement="top" title="MySQL高级">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#java程序CPU占比过高分析"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">java程序CPU占比过高分析</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一、Arthas分析高CPU占比代码"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">一、Arthas分析高CPU占比代码</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-1-启动Arthas"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1.1 启动Arthas</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-2-模拟CPU飙升代码"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">1.2 模拟CPU飙升代码</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-3-运行项目运行Arthas-找到自己当前项目对应的PID进行监听"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">1.3 运行项目运行Arthas,找到自己当前项目对应的PID进行监听</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-3-输入dashboard仪表盘显示当前进程相关信息"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">1.3 输入dashboard仪表盘显示当前进程相关信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-4-使用-thread-命令，排查当前项目中的各个运行中方法的CPU占用率情况"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">1.4 使用 thread 命令，排查当前项目中的各个运行中方法的CPU占用率情况</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-5-使用-thread-id-命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">1.5 使用 thread -[id] 命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二、jstack获取线程快照分析CPU占比代码"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">二、jstack获取线程快照分析CPU占比代码</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#线上问题分析" title="线上问题分析">线上问题分析</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2022 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;对象？new一个就好了&#34;,&#34;just do it&#34;,&#34;🍀&#34;,&#34;🍂&#34;,&#34;🍃&#34;,&#34;time is running out&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34; ,&#34;rgb(242,153,29)&#34; ,&#34;rgb(22,36,92)&#34; ,&#34;rgb(119,195,79)&#34; ,&#34;rgb(119,195,79)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>
