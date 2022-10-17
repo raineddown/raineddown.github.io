@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -178,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -278,6 +278,121 @@
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/10/05/Nacos服务注册发现与配置中心/">
+                <h2 class="post-title">
+                    Nacos服务注册发现与配置中心
+                </h2>
+                <h3 class="post-subtitle">
+                    Nacos服务注册发现与配置中心
+                </h3>
+                <div class="post-content-preview">
+                    Nacos简介和下载为什么叫Nacos
+前四个字母分别为Naming和Configuration的前两个字母，最后的s为Service。
+
+是什么
+一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
+Nacos: Dynamic Naming and Configuration Service
+Nacos就是注册中心＋配置中心的组合 -&gt; Nacos = Eureka+C......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-10-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                      <a href="/tags/#Nacos" title="Nacos">Nacos</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/09/20/bus消息总线/">
+                <h2 class="post-title">
+                    bus消息总线
+                </h2>
+                <h3 class="post-subtitle">
+                    bus消息总线
+                </h3>
+                <div class="post-content-preview">
+                    Bus消息总线是什么config组件的加深和扩充
+一言以蔽之，分布式自动刷新配置功能。
+Spring Cloud Bus配合Spring Cloud Config使用可以实现配置的动态刷新。
+是什么
+Spring Cloud Bus 配合Spring Cloud Config 使用可以实现配置的动态刷新。
+Spring Cloud Bus是用来将分布式系统的节点与轻量级消息系统链接起来的框架......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-09-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                      <a href="/tags/#bus消息总线" title="bus消息总线">bus消息总线</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/09/05/config配置中心/">
+                <h2 class="post-title">
+                    cpnfig配置中心
+                </h2>
+                <h3 class="post-subtitle">
+                    cpnfig配置中心
+                </h3>
+                <div class="post-content-preview">
+                    Config分布式配置中心介绍分布式系统面临的配置问题
+微服务意味着要将单体应用中的业务拆分成一个个子服务，每个服务的粒度相对较小，因此系统中会出现大量的服务。由于每个服务都需要必要的配置信息才能运行，所以一套集中式的、动态的配置管理设施是必不可少的。
+SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务自己带着一个application.yml，上百个配置文......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2021-09-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                    
+                      <a href="/tags/#cpnfig配置中心" title="cpnfig配置中心">cpnfig配置中心</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -527,127 +642,6 @@ spring 单例bean，bean按照type和name获取，spring有类似于map的结构
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/05/30/Hystrix服务降级/">
-                <h2 class="post-title">
-                    Hystrix服务降级
-                </h2>
-                <h3 class="post-subtitle">
-                    Hystrix负载均衡服务调用
-                </h3>
-                <div class="post-content-preview">
-                    Hystrix服务降级
-
-
-hystrix中的重要概念:1,服务降级比如当某个服务繁忙,不能让客户端的请求一直等待,应该立刻返回给客户端一个备选方案
-2,服务熔断当某个服务出现问题,卡死了服务不可用了,不能让用户一直等待,需要关闭所有对此服务的访问（保险丝熔断电路跳闸）然后调用服务降级
-3,服务限流限流,比如秒杀场景,不能访问用户瞬间都访问服务器,限制一次只可以有多少请求
-使用hystrix......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-05-30
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
-                    
-                      <a href="/tags/#Hystrix" title="Hystrix">Hystrix</a>
-                    
-                      <a href="/tags/#服务降级" title="服务降级">服务降级</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/05/30/java线程池/">
-                <h2 class="post-title">
-                    java线程池
-                </h2>
-                <h3 class="post-subtitle">
-                    java线程池
-                </h3>
-                <div class="post-content-preview">
-                    Java线程池线程池的概念线程池就是首先创建一些线程，它们的集合称为线程池。使用线程池可以很好地提高性能，线程池在系统启动时即创建大量空闲的线程，程序将一个任务传给线程池，线程池就会启动一条线程来执行这个任务，执行结束以后，该线程并不会死亡，而是再次返回线程池中成为空闲状态，等待执行下一个任务。
-使用线程池的原因
-降低资源消耗。通过重复利⽤已创建的线程降低线程创建和销毁造成的消耗。 
-
-提⾼......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-05-30
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java线程池" title="java线程池">java线程池</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/05/27/OpenFeign服务调用/">
-                <h2 class="post-title">
-                    OpenFeign服务调用
-                </h2>
-                <h3 class="post-subtitle">
-                    OpenFeign服务调用
-                </h3>
-                <div class="post-content-preview">
-                    简介
-
-项目demo地址：https://github.com/raineddown/spring-cloud-demo
-涉及服务:cloud-consumer-feign-order80、cloud-provider-payment8001、cloud-eureka-server7001
-Feign与OpenFeign区别
-使用流程1.主启动类中
-
-2.fegin需要调用的其他的服务的接口......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-05-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
-                    
-                      <a href="/tags/#OpenFeign" title="OpenFeign">OpenFeign</a>
-                    
-                      <a href="/tags/#服务远程调用" title="服务远程调用">服务远程调用</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -723,9 +717,11 @@ Feign与OpenFeign区别
             
         
             
-            <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
+        
             
         
+            
+            <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
             
         
             
@@ -759,11 +755,13 @@ Feign与OpenFeign区别
             
         
             
-        
-            
-        
-            
             <a href="/tags/#springboot" title="springboot" rel="3">springboot</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -809,8 +807,6 @@ Feign与OpenFeign区别
             
         
             
-        
-            
             <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
             
         
@@ -823,17 +819,17 @@ Feign与OpenFeign区别
             
         
             
+            <a href="/tags/#cache" title="cache" rel="2">cache</a>
+            
+        
+            
+        
+            
             <a href="/tags/#注册中心" title="注册中心" rel="4">注册中心</a>
             
         
             
             <a href="/tags/#spring cloud" title="spring cloud" rel="12">spring cloud</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#cache" title="cache" rel="2">cache</a>
             
         
             
@@ -865,6 +861,8 @@ Feign与OpenFeign区别
             
         
             
+        
+            
             <a href="/tags/#spring" title="spring" rel="3">spring</a>
             
         
@@ -889,6 +887,12 @@ Feign与OpenFeign区别
             
         
             
+            <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
+            
+        
+            
+        
+            
             <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
             
         
@@ -896,8 +900,6 @@ Feign与OpenFeign区别
         
             
         
-            
-            <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
             
         
             
@@ -1018,23 +1020,23 @@ Feign与OpenFeign区别
     <ul>
       
         <li>
+          <a href="/2022/10/17/%E5%88%A4%E6%96%ADinputstream%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BA/">判断inputstream是否为空</a>
+        </li>
+      
+        <li>
+          <a href="/2022/09/24/stalker%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">java代码性能评估工具库Stalker</a>
+        </li>
+      
+        <li>
+          <a href="/2022/09/11/completableFuture/">CompletableFuture</a>
+        </li>
+      
+        <li>
           <a href="/2022/08/21/javaweb%E9%A1%B9%E7%9B%AE%E5%B8%B8%E7%94%A8%E7%BC%93%E5%AD%98/">javaweb项目常用缓存</a>
         </li>
       
         <li>
           <a href="/2022/07/14/%E6%8E%92%E6%9F%A5%E7%BA%BF%E4%B8%8Ajava%E7%A8%8B%E5%BA%8F%E9%AB%98CPU%E5%8D%A0%E6%AF%94%E4%BB%A3%E7%A0%81/">排查线上java程序高CPU占比代码</a>
-        </li>
-      
-        <li>
-          <a href="/2022/06/23/MySQL%E9%AB%98%E7%BA%A7/">MySQL高级</a>
-        </li>
-      
-        <li>
-          <a href="/2022/05/15/countDownLatch/">countDownLatch简介与基础使用</a>
-        </li>
-      
-        <li>
-          <a href="/2022/04/22/spring%E5%AE%B9%E5%99%A8%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">spring容器注入实现策略模式</a>
         </li>
       
     </ul>
@@ -1063,7 +1065,7 @@ Feign与OpenFeign区别
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -1074,67 +1076,69 @@ Feign与OpenFeign区别
     <div class="widget">
       <ul>
         
+          <a href="categories/#GitHub"><li>GitHub</li></a>
+        
           <a href="categories/#JSON"><li>JSON</li></a>
         
           <a href="categories/#架构模式"><li>架构模式</li></a>
         
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
-          <a href="categories/#GitHub"><li>GitHub</li></a>
-        
           <a href="categories/#hexo"><li>hexo</li></a>
         
+          <a href="categories/#Annotation"><li>Annotation</li></a>
+        
           <a href="categories/#centos"><li>centos</li></a>
+        
+          <a href="categories/#Docker"><li>Docker</li></a>
         
           <a href="categories/#IDEA"><li>IDEA</li></a>
         
           <a href="categories/#jdk"><li>jdk</li></a>
         
-          <a href="categories/#idea"><li>idea</li></a>
-        
           <a href="categories/#Druid"><li>Druid</li></a>
+        
+          <a href="categories/#idea"><li>idea</li></a>
         
           <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
         
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
-        
-          <a href="categories/#异步调用"><li>异步调用</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#shiro"><li>shiro</li></a>
-        
-          <a href="categories/#redis"><li>redis</li></a>
-        
-          <a href="categories/#sql"><li>sql</li></a>
-        
-          <a href="categories/#SQL"><li>SQL</li></a>
-        
-          <a href="categories/#vue"><li>vue</li></a>
+          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
         
           <a href="categories/#mysqldump"><li>mysqldump</li></a>
         
-          <a href="categories/#并发编程"><li>并发编程</li></a>
+          <a href="categories/#SQL"><li>SQL</li></a>
+        
+          <a href="categories/#异步调用"><li>异步调用</li></a>
+        
+          <a href="categories/#sql"><li>sql</li></a>
+        
+          <a href="categories/#redis"><li>redis</li></a>
+        
+          <a href="categories/#shiro"><li>shiro</li></a>
+        
+          <a href="categories/#vue"><li>vue</li></a>
         
           <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
+        
+          <a href="categories/#并发编程"><li>并发编程</li></a>
         
           <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
         
           <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
         
-          <a href="categories/#zookeeper"><li>zookeeper</li></a>
+          <a href="categories/#javastream"><li>javastream</li></a>
         
           <a href="categories/#Eureka"><li>Eureka</li></a>
         
-          <a href="categories/#javastream"><li>javastream</li></a>
-        
           <a href="categories/#consul"><li>consul</li></a>
         
-          <a href="categories/#Ribbon"><li>Ribbon</li></a>
+          <a href="categories/#zookeeper"><li>zookeeper</li></a>
         
           <a href="categories/#注册中心"><li>注册中心</li></a>
         
           <a href="categories/#Hystrix"><li>Hystrix</li></a>
+        
+          <a href="categories/#Ribbon"><li>Ribbon</li></a>
         
           <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
         
@@ -1150,21 +1154,19 @@ Feign与OpenFeign区别
         
           <a href="categories/#easyexcel"><li>easyexcel</li></a>
         
-          <a href="categories/#Docker"><li>Docker</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
           <a href="categories/#cache"><li>cache</li></a>
         
           <a href="categories/#注册中心"><li>注册中心</li></a>
         
-          <a href="categories/#负载均衡"><li>负载均衡</li></a>
+          <a href="categories/#注册中心"><li>注册中心</li></a>
+        
+          <a href="categories/#注册中心"><li>注册中心</li></a>
         
           <a href="categories/#spring cloud"><li>spring cloud</li></a>
         
           <a href="categories/#服务降级"><li>服务降级</li></a>
+        
+          <a href="categories/#负载均衡"><li>负载均衡</li></a>
         
           <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
         
@@ -1356,7 +1358,7 @@ Feign与OpenFeign区别
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;对象？new一个就好了&#34;,&#34;just do it&#34;,&#34;🍀&#34;,&#34;🍂&#34;,&#34;🍃&#34;,&#34;time is running out&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34; ,&#34;rgb(242,153,29)&#34; ,&#34;rgb(22,36,92)&#34; ,&#34;rgb(119,195,79)&#34; ,&#34;rgb(119,195,79)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -1366,6 +1368,22 @@ Feign与OpenFeign区别
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 
 </html>
