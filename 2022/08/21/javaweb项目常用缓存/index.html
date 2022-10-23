@@ -201,6 +201,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -209,13 +216,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -342,7 +342,7 @@
 </ul>
 <p>Redis的持久化使用了Buffer I/O，所谓Buffer I/O是指Redis对持久化文件的写入和读取操作都会使用物理内存的Page Cache，而大多数数据库系统会使用Direct I/O来绕过这层Page Cache并自行维护一个数据的Cache。而当Redis的持久化文件过大（尤其是快照文件），并对其进行读写时，磁盘文件中的数据都会被加载到物理内存中作为操作系统对该文件的一层Cache，而这层Cache的数据与Redis内存中管理的数据实际是重复存储的。虽然内核在物理内存紧张时会做Page Cache的剔除工作，但内核很可能认为某块Page Cache更重要，而让你的进程开始Swap，这时你的系统就会开始出现不稳定或者崩溃了，因此在持久化配置后，针对内存使用需要实时监控观察。</p>
 <p>与memcached客户端支持分布式方案不同，Redis更倾向于在服务端构建分布式存储，如图10、11。</p>
-<p><img src="../img/cache/cache2.png" alt=""></p>
+<p><img src="/img/cache/cache2.png" alt=""></p>
 <p><img src="../img/cache/cache3.png" alt=""></p>
 <p>Redis Cluster是一个实现了分布式且允许单点故障的Redis高级版本，它没有中心节点，具有线性可伸缩的功能。如图11，其中节点与节点之间通过二进制协议进行通信，节点与客户端之间通过ascii协议进行通信。在数据的放置策略上，Redis Cluster将整个key的数值域分成2的14次方16384个hash槽，每个节点上可以存储一个或多个hash槽，也就是说当前Redis Cluster支持的最大节点数就是16384。Redis Cluster使用的分布式算法也很简单：<code>crc16( key ) % HASH_SLOTS_NUMBER</code>。整体设计可总结为：</p>
 <ul>
@@ -494,13 +494,13 @@
 <li><strong>维护成本</strong>：我们项目中一般都会用到消息队列，维护成本并没有新增很多</li>
 </ul>
 <p>所以，引入消息队列来解决这个问题，是比较合适的。这时架构模型就变成了这样：</p>
-<p><img src="../img/cache/cache4.png" alt=""></p>
+<p><img src="/img/cache/cache4.png" alt=""></p>
 <p>那如果你确实不想在应用中去写消息队列，是否有更简单的方案，同时又可以保证一致性呢？</p>
 <p>方案还是有的，这就是近几年比较流行的解决方案：<strong>订阅数据库变更日志，再操作缓存</strong>。</p>
 <p>具体来讲就是，我们的业务应用在修改数据时，「只需」修改数据库，无需操作缓存。</p>
 <p>那什么时候操作缓存呢？这就和数据库的「变更日志」有关了。</p>
 <p>拿 MySQL 举例，当一条数据发生修改时，MySQL 就会产生一条变更日志（Binlog），我们可以订阅这个日志，拿到具体操作的数据，然后再根据这条数据，去删除对应的缓存。</p>
-<p><img src="../img/cache/cache5.png" alt=""></p>
+<p><img src="/img/cache/cache5.png" alt=""></p>
 <p>订阅变更日志，目前也有了比较成熟的开源中间件，例如阿里的 canal，使用这种方案的优点在于：</p>
 <ul>
 <li><strong>无需考虑写消息队列失败情况</strong>：只要写 MySQL 成功，Binlog 肯定会有</li>

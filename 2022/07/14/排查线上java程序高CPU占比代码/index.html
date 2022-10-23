@@ -201,6 +201,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -209,13 +216,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -280,28 +280,28 @@
 <p>执行该程序的用户需要和目标进程具有相同的权限。比如以admin用户来执行：<code>sudo su admin &amp;&amp; java -jar arthas-boot.jar</code> 或 <code>sudo -u admin -EH java -jar arthas-boot.jar</code>。<br>如果attach不上目标进程，可以查看~/logs/arthas/ 目录下的日志。<br>如果下载速度比较慢，可以使用aliyun的镜像：<code>java -jar arthas-boot.jar --repo-mirror aliyun --use-http
 java -jar arthas-boot.jar -h</code> 打印更多参数信息。</p>
 <h3 id="1-2-模拟CPU飙升代码"><a href="#1-2-模拟CPU飙升代码" class="headerlink" title="1.2 模拟CPU飙升代码"></a>1.2 模拟CPU飙升代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fun cpuHigh() &#123;</span><br><span class="line">    Thread &#123;</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            println(&quot;cpu飙升中～&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;.start()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="1-3-运行项目运行Arthas-找到自己当前项目对应的PID进行监听"><a href="#1-3-运行项目运行Arthas-找到自己当前项目对应的PID进行监听" class="headerlink" title="1.3 运行项目运行Arthas,找到自己当前项目对应的PID进行监听"></a>1.3 运行项目运行Arthas,找到自己当前项目对应的PID进行监听</h3><p><img src="../img/cpu/cpu0.png" alt=""></p>
-<h3 id="1-3-输入dashboard仪表盘显示当前进程相关信息"><a href="#1-3-输入dashboard仪表盘显示当前进程相关信息" class="headerlink" title="1.3 输入dashboard仪表盘显示当前进程相关信息"></a>1.3 输入dashboard仪表盘显示当前进程相关信息</h3><p><img src="../img/cpu/cpu1.png" alt=""></p>
+<h3 id="1-3-运行项目运行Arthas-找到自己当前项目对应的PID进行监听"><a href="#1-3-运行项目运行Arthas-找到自己当前项目对应的PID进行监听" class="headerlink" title="1.3 运行项目运行Arthas,找到自己当前项目对应的PID进行监听"></a>1.3 运行项目运行Arthas,找到自己当前项目对应的PID进行监听</h3><p><img src="/img/cpu/cpu0.png" alt=""></p>
+<h3 id="1-3-输入dashboard仪表盘显示当前进程相关信息"><a href="#1-3-输入dashboard仪表盘显示当前进程相关信息" class="headerlink" title="1.3 输入dashboard仪表盘显示当前进程相关信息"></a>1.3 输入dashboard仪表盘显示当前进程相关信息</h3><p><img src="/img/cpu/cpu1.png" alt=""></p>
 <h3 id="1-4-使用-thread-命令，排查当前项目中的各个运行中方法的CPU占用率情况"><a href="#1-4-使用-thread-命令，排查当前项目中的各个运行中方法的CPU占用率情况" class="headerlink" title="1.4 使用 thread 命令，排查当前项目中的各个运行中方法的CPU占用率情况"></a>1.4 使用 <code>thread</code> 命令，排查当前项目中的各个运行中方法的CPU占用率情况</h3><p>可见图中，<code>ID=11</code>的线程CPU占用率很高，达到66.09%</p>
-<p><img src="../img/cpu/cpu2.png" alt=""></p>
-<h3 id="1-5-使用-thread-id-命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高"><a href="#1-5-使用-thread-id-命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高" class="headerlink" title="1.5 使用 thread -[id] 命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高"></a>1.5 使用 <code>thread -[id]</code> 命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高</h3><p><img src="../img/cpu/cpu3.png" alt=""></p>
+<p><img src="/img/cpu/cpu2.png" alt=""></p>
+<h3 id="1-5-使用-thread-id-命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高"><a href="#1-5-使用-thread-id-命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高" class="headerlink" title="1.5 使用 thread -[id] 命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高"></a>1.5 使用 <code>thread -[id]</code> 命令，继续查看这个线程具体是哪个方法所导致的CPU占用率过高</h3><p><img src="/img/cpu/cpu3.png" alt=""></p>
 <p>由图可见，<code>id=11</code>的任务处于<strong>RUNNABLE状态</strong>，且CPU占用率高的主要原因是因为一直进行FileOutputStream操作，也就是输出流操作，并且定位代码在 <code>TestMain.kt</code> 中的第28行执行了这个高CPU占用率的方法，而导致的，再来看下代码</p>
-<p><img src="../img/cpu/cpu4.png" alt=""></p>
+<p><img src="/img/cpu/cpu4.png" alt=""></p>
 <h2 id="二、jstack获取线程快照分析CPU占比代码"><a href="#二、jstack获取线程快照分析CPU占比代码" class="headerlink" title="二、jstack获取线程快照分析CPU占比代码"></a>二、jstack获取线程快照分析CPU占比代码</h2><ol>
 <li>查找高占比进程pid,使用<code>ps -ef|grep java</code> 、 <code>jps</code>查找对应java进程pid</li>
 </ol>
 <p>或使用top<code>`top -p &lt;pid&gt;</code> 查看Java进程的cpu占用：</p>
-<p><img src="../img/cpu/CPU占比分析0.png" alt=""></p>
+<p><img src="/img/cpu/CPU占比分析0.png" alt=""></p>
 <p>该Java进程占用cpu达到92.2%。</p>
 <ol>
 <li>使用 top -Hp <pid> 命令（<pid>为Java进程的id号）查看该Java进程内所有线程的资源占用情况（按shft+p按照cpu占用进行排序，按shift+m按照内存占用进行排序）此处按照cpu排序</li>
 </ol>
-<p><img src="../img/cpu/CPU占比分析1.png" alt=""></p>
+<p><img src="/img/cpu/CPU占比分析1.png" alt=""></p>
 <p>可以看到，有两个线程号为97243，97912的线程占用cpu分别达到了69.2%和22.0%</p>
 <ol>
 <li>使用 printf “%x “ <tid> 命令（tid指线程的id号）将以上10进制的线程号转换为16进制：</li>
 </ol>
-<p><img src="../img/cpu/CPU占比分析2.png" alt=""></p>
+<p><img src="/img/cpu/CPU占比分析2.png" alt=""></p>
 <p>转换后的结果分别为17bdb，17e78，由于16进制以0x开头，所以对应的16进制的线程号为0x17bdb和0x17e78。</p>
 <ol>
 <li><p>使用jdk自带命令jstack获取此时的线程快照并输入到文件中： jstack -l <pid> &gt; ./jstack_result.txt 命令（<pid>为Java进程的id号）来获取线程快照结果并输入到指定文件。</p>
@@ -309,21 +309,21 @@ java -jar arthas-boot.jar -h</code> 打印更多参数信息。</p>
 <li><p>查看第4步生成的txt文件，在其中搜索tid为0x17bdb的线程：</p>
 </li>
 </ol>
-<p><img src="../img/cpu/CPU占比分析3.png" alt=""></p>
+<p><img src="/img/cpu/CPU占比分析3.png" alt=""></p>
 <p>可以看到线程号为0x17bdb（10进制线程号97243）对应的是一个”VM Thread”即虚拟机线程，这个不是与我们代码相关的线程，所以暂时忽略。</p>
 <p>　　再看0x17e78线程：</p>
-<p><img src="../img/cpu/CPU占比分析4.png" alt=""></p>
+<p><img src="/img/cpu/CPU占比分析4.png" alt=""></p>
 <p>该线程的堆栈较深，且很明显有调用我们自己代码的逻辑，并且提示了具体的代码行数，我们查看该处代码：</p>
-<p><img src="../img/cpu/CPU占比分析5.png" alt=""></p>
+<p><img src="/img/cpu/CPU占比分析5.png" alt=""></p>
 <p>发现此处是在一个死循环里边重复的拼接字符串导致的，我们知道，String类使用contact方法拼接字符串其实是创建新的对象并返回，看到这里，似乎可以和占用cpu最高的”VM Thread”联系起来了，因此作出假设：由于代码一直循环创建对象，导致不断有不再被引用的对象产生，虚拟机检测到对象不再被引用之后，就进行垃圾回收，垃圾回收占用了很大一部分cpu资源。</p>
 <p>　　为了证明该假设，设置jvisualvm监控，经过一段时间允许，cpu资源监控结果如下：</p>
-<p><img src="../img/cpu/CPU占比分析6.png" alt=""></p>
+<p><img src="/img/cpu/CPU占比分析6.png" alt=""></p>
 <p>可以看到cpu总占用达到88.5%，而垃圾回收活动占用cpu达到84.0%，因此证明了上述假设。</p>
 <p>　　知道了该问题的原因后，我们还想知道此时垃圾回收的频率，耗时等信息，于是可以设置JVM参数 -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:./gc.log （或者使用jinfo命令动态设置GC日志，可以看到日志内容：</p>
-<p>　　 <img src="../img/cpu/CPU占比分析7.png" alt=""></p>
+<p>　　 <img src="/img/cpu/CPU占比分析7.png" alt=""></p>
 <p>gc.log中频繁的打印垃圾回收，不过我们看到的基本都是Minor GC，即新生代的垃圾回收。</p>
 <p>　　为了更清晰的查看各个区的垃圾回收情况，可以使用jstat命令 jstat -gc <pid> <period> <count> （pid为Java进程的id，period指每次监控之间的时间间隔，count指监控次数）来监控垃圾回收，打印内容如下：</p>
-<p>　　 <img src="../img/cpu/CPU占比分析8.png" alt=""></p>
+<p>　　 <img src="/img/cpu/CPU占比分析8.png" alt=""></p>
 <p>可以看到，虚拟机在进行频繁的Full GC，每次耗时均在增长。</p>
 <p>　　总结：</p>
 <p>　　分析Java进程占用cpu过高问题时候，基本都可以按照如下步骤进行分析：</p>

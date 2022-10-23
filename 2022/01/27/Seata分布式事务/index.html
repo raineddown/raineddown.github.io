@@ -205,6 +205,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -213,13 +220,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -286,7 +286,7 @@
 <li>从1:1 -&gt; 1:N -&gt; N:N</li>
 </ul>
 <p>单体应用被拆分成微服务应用，原来的三个模块被拆分成三个独立的应用,分别使用三个独立的数据源，业务操作需要调用三三 个服务来完成。此时<strong>每个服务内部的数据一致性由本地事务来保证， 但是全局的数据一致性问题没法保证</strong>。</p>
-<p><img src="../img/Seata/Seata0.png" alt=""></p>
+<p><img src="/img/Seata/Seata0.png" alt=""></p>
 <p>一句话：<strong>一次业务操作需要跨多个数据源或需要跨多个系统进行远程调用，就会产生分布式事务问题</strong>。</p>
 <h2 id="Seata分布式事务处理过程"><a href="#Seata分布式事务处理过程" class="headerlink" title="Seata分布式事务处理过程"></a>Seata分布式事务处理过程</h2><p>分布式事务处理过程的一ID+三组件模型：</p>
 <ul>
@@ -306,12 +306,12 @@
 <li>TM向TC发起针对XID的全局提交或回滚决议；</li>
 <li>TC调度XID下管辖的全部分支事务完成提交或回滚请求。</li>
 </ol>
-<p><img src="../img/Seata/Seata1.png" alt=""></p>
+<p><img src="/img/Seata/Seata1.png" alt=""></p>
 <h2 id="Seata-Server安装"><a href="#Seata-Server安装" class="headerlink" title="Seata-Server安装"></a>Seata-Server安装</h2><p>发布说明: <a href="https://github.com/seata/seata/releases" target="_blank" rel="noopener">https://github.com/seata/seata/releases</a></p>
 <p>本地事务——-&gt;Spring  @Transactional </p>
 <p>全局事务——-&gt;Seata  @GlobalTransactional</p>
 <p><strong>SEATA 的分布式交易解决方案</strong></p>
-<p><img src="../img/Seata/Seata2.png" alt=""></p>
+<p><img src="/img/Seata/Seata2.png" alt=""></p>
 <p>我们只需要使用一个 @GlobalTransactional 注解在业务方法上:</p>
 <p>Seata-Server安装</p>
 <p>官网地址 - <a href="http://seata.io/zh-cn/" target="_blank" rel="noopener">http://seata.io/zh-cn/</a></p>
@@ -449,16 +449,16 @@
 <p>主启动（与seata-order-service2001模块大致相同）</p>
 <h2 id="Seata之-GlobalTransactional验证"><a href="#Seata之-GlobalTransactional验证" class="headerlink" title="Seata之@GlobalTransactional验证"></a>Seata之@GlobalTransactional验证</h2><p>下订单 -&gt; 减库存 -&gt; 扣余额 -&gt; 改（订单）状态</p>
 <p>数据库初始情况：</p>
-<p><img src="../img/Seata/Seata3.png" alt=""></p>
+<p><img src="/img/Seata/Seata3.png" alt=""></p>
 <p>正常下单 - <a href="http://localhost:2001/order/create?userId=1&amp;productId=1&amp;count=10&amp;money=100" target="_blank" rel="noopener">http://localhost:2001/order/create?userId=1&amp;productId=1&amp;count=10&amp;money=100</a></p>
 <p>数据库正常下单后状况：</p>
-<p><img src="../img/Seata/Seata4.png" alt=""></p>
+<p><img src="/img/Seata/Seata4.png" alt=""></p>
 <p><strong>超时异常，没加@GlobalTransactional</strong></p>
 <p>模拟AccountServiceImpl添加超时</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">AccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    AccountDao accountDao;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 扣减账户余额</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">decrease</span><span class="params">(Long userId, BigDecimal money)</span> </span>&#123;</span><br><span class="line">        LOGGER.info(<span class="string">"-------&gt;account-service中扣减账户余额开始"</span>);</span><br><span class="line">        <span class="comment">//模拟超时异常，全局事务回滚</span></span><br><span class="line">        <span class="comment">//暂停几秒钟线程</span></span><br><span class="line">        <span class="keyword">try</span> &#123; TimeUnit.SECONDS.sleep(<span class="number">20</span>); &#125; <span class="keyword">catch</span> (InterruptedException e) &#123; e.printStackTrace(); &#125;</span><br><span class="line">        accountDao.decrease(userId,money);</span><br><span class="line">        LOGGER.info(<span class="string">"-------&gt;account-service中扣减账户余额结束"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>另外，OpenFeign的调用默认时间是1s以内，所以最后会抛异常。</p>
 <p>数据库情况</p>
-<p><img src="../img/Seata/Seata5.png" alt=""></p>
+<p><img src="/img/Seata/Seata5.png" alt=""></p>
 <p><strong>故障情况</strong></p>
 <ul>
 <li>当库存和账户金额扣减后，订单状态并没有设置为已经完成，没有从零改为1</li>
@@ -471,7 +471,7 @@
 <h2 id="Seata原理简介"><a href="#Seata原理简介" class="headerlink" title="Seata原理简介"></a>Seata原理简介</h2><p>2019年1月份蚂蚁金服和阿里巴巴共同开源的分布式事务解决方案。</p>
 <p>Simple Extensible Autonomous Transaction Architecture，简单可扩展自治事务框架。</p>
 <p>2020起始，用1.0以后的版本。Alina Gingertail</p>
-<p><img src="../img/Seata/Seata6.png" alt=""></p>
+<p><img src="/img/Seata/Seata6.png" alt=""></p>
 <p><strong>分布式事务的执行流程</strong></p>
 <ul>
 <li>TM开启分布式事务(TM向TC注册全局事务记录) ;</li>
@@ -506,16 +506,16 @@
 <li><p>其保存成”after image”，最后生成行锁。</p>
 </li>
 </ol>
-<p>以上操作全部在一个数据库事务内完成, 这样保证了一阶段操作的原子性。<br><img src="../img/Seata/Seata7.png" alt=""></p>
+<p>以上操作全部在一个数据库事务内完成, 这样保证了一阶段操作的原子性。<br><img src="/img/Seata/Seata7.png" alt=""></p>
 <p><strong>二阶段提交</strong></p>
 <p>二阶段如果顺利提交的话，因为”业务SQL”在一阶段已经提交至数据库，所以Seata框架只需将一阶段保存的快照数据和行锁删掉，完成数据清理即可。</p>
-<p><img src="../img/Seata/Seata8.png" alt=""></p>
+<p><img src="/img/Seata/Seata8.png" alt=""></p>
 <p><strong>二阶段回滚</strong></p>
 <p>二阶段如果是回滚的话，Seata 就需要回滚一阶段已经执行的 “业务SQL”，还原业务数据。</p>
 <p>回滚方式便是用”before image”还原业务数据；但在还原前要首先要校验脏写，对比“数据库当前业务数据”和”after image”。</p>
-<p>如果两份数据完全一致就说明没有脏写， 可以还原业务数据，如果不一致就说明有脏写, 出现脏写就需要转人工处理。<br><img src="../img/Seata/Seata9.png" alt=""></p>
+<p>如果两份数据完全一致就说明没有脏写， 可以还原业务数据，如果不一致就说明有脏写, 出现脏写就需要转人工处理。<br><img src="/img/Seata/Seata9.png" alt=""></p>
 <p>补充:</p>
-<p><img src="../img/Seata/Seata10.png" alt=""></p>
+<p><img src="/img/Seata/Seata10.png" alt=""></p>
 
                 
                 <hr>

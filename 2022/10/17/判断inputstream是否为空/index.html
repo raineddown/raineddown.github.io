@@ -201,6 +201,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -209,13 +216,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -280,8 +280,8 @@
 <li><p>后端对0kb文件的判断，进行一系列处理。</p>
 </li>
 </ol>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="1-InputStream-available"><a href="#1-InputStream-available" class="headerlink" title="1.InputStream.available"></a>1.InputStream.available</h3><p><img src="C:/Users/java hadoop/Desktop/blog/blog/source/img/img/inputstream/inputstream0.png" alt="InputStream.available"></p>
-<p><img src="C:/Users/java hadoop/Desktop/blog/blog/source/img/img/inputstream/inputstream1.png" alt="FileInputStream.available"></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="1-InputStream-available"><a href="#1-InputStream-available" class="headerlink" title="1.InputStream.available"></a>1.InputStream.available</h3><p><img src="/img/inputstream/inputstream0.png" alt="InputStream.available"></p>
+<p><img src="/img/inputstream/inputstream1.png" alt="FileInputStream.available"></p>
 <p>上图为抽象类InputStream及FileInputStream类源码及注释，可以看到注释中使用estimate(估算、估计)即返回的不是真实的流的大小，而且InputStream的available方法永远返回0（The available method for class InputStream always returns 0.）。所以在业务上可以接受这个<code>estimate</code>的值且不是InputStream的available方法可以使用。</p>
 <h3 id="2-toByteArray-转字节数组"><a href="#2-toByteArray-转字节数组" class="headerlink" title="2. toByteArray 转字节数组"></a>2. toByteArray 转字节数组</h3><p><code>IOUtils.toByteArray(InputStream)</code> 转成字节数组，既然通过流拿不到大小，我就曲线救国，把流转成字节数组后，不就可以为所欲为了吗。</p>
 <p>这么做确实拿到值了，也能准确判断其是否为空。但是你一下子把流都读成字节数组了，不觉得内存可能有些扛不住吗。</p>
@@ -289,7 +289,7 @@
 <p>听我一句劝，除非你能明确评估没有 OOM 风险，否则不要转成字节数组。</p>
 <h3 id="3-read第一个字节"><a href="#3-read第一个字节" class="headerlink" title="3. read第一个字节"></a>3. read第一个字节</h3><p>既然我们只要判断其是否为空，那我干嘛费这么大劲， InputStream 不是有 read 方法吗，我 read 一次取第一个字节不就可以判断是否为空了吗。</p>
 <p>我们前面说过，InputStream 是自来水管，覆水难收啊，你读了一个字节，那流里就少了一个字节。这就好比有个外卖员，你问他汤咸不咸，他喝了一口，说：汤挺好的，不咸。 你拿到少了一半的汤，会是什么心情。 InputStream 虽然提供了 reset 方法，但是默认是抛异常的哦，不是所有流都可以 reset ,就像有多少爱可以重来。</p>
-<p><img src="C:/Users/java hadoop/Desktop/blog/blog/source/img/img/inputstream/inputstream2.png" alt="InputStream.reset"></p>
+<p><img src="/img/inputstream/inputstream2.png" alt="InputStream.reset"></p>
 <h3 id="4-PushbackInputStream可回退的流"><a href="#4-PushbackInputStream可回退的流" class="headerlink" title="4.PushbackInputStream可回退的流"></a>4.PushbackInputStream可回退的流</h3><p><code>PushbackInputStream</code> ,顾名思义，就是能回退的流，你可以拿它包装一下原始的流，这样就可以实现检查流是否为空了呀。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 检查输入流是否为空，并返回包装后的流</span></span><br><span class="line"><span class="comment"> * 请注意，原始流已经被读了一个字节，后续不能直接对原始流进行读取</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> inputStream inputStream</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 包装之后的流，后续操作的都是这个流</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> InputStream <span class="title">checkStreamIsNotEmpty</span><span class="params">(InputStream inputStream)</span> <span class="keyword">throws</span> IOException,</span></span><br><span class="line"><span class="function">        EmptyInputStreamException </span>&#123;</span><br><span class="line">    AssertKit.isNull(inputStream, <span class="string">"流不能为null"</span>);</span><br><span class="line">    PushbackInputStream pushbackInputStream = <span class="keyword">new</span> PushbackInputStream(inputStream);</span><br><span class="line">    <span class="keyword">int</span> b = pushbackInputStream.read();</span><br><span class="line">    <span class="keyword">if</span> (b == -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> EmptyInputStreamException(<span class="string">"这个流是空的，啥也没有。 "</span> + inputStream);</span><br><span class="line">    &#125;</span><br><span class="line">    pushbackInputStream.unread(b);</span><br><span class="line">    <span class="keyword">return</span> pushbackInputStream;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a>原文地址</h2><p><a href="https://mp.weixin.qq.com/s/RaUBUxjG_Ogkwecu0C-cdQ" target="_blank" rel="noopener">原文地址</a></p>
