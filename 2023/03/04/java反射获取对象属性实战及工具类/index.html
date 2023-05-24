@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          java反射获取对象属性实战及工具类 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2023/03/04/java反射获取对象属性实战及工具类/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#reflection" title="reflection">reflection</a>
+                            
+                        </div>
+                        <h1>java反射获取对象属性实战及工具类</h1>
+                        <h2 class="subheading">java反射获取对象属性实战及工具类</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2023-03-04
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.7k</span> and
+                                Reading Time <span class="post-count">8</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h2><p>反射就是把Java类中的各个成分映射成一个个的Java对象。即在运行状态中，对于任意一个类，都能够知道这个类的所以属性和方法；对于任意一个对象，都能调用它的任意一个方法和属性。这种动态获取信息及动态调用对象方法的功能叫Java的反射机制。</p>
+<h4 id="反射机制的功能"><a href="#反射机制的功能" class="headerlink" title="反射机制的功能"></a>反射机制的功能</h4><p>Java反射机制主要提供了以下功能：</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类。</li>
+<li>在运行时构造任意一个类的对象。</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法。</li>
+<li>在运行时调用任意一个对象的方法。</li>
+<li>生成动态代理。</li>
+</ul>
+<h4 id="反射的使用"><a href="#反射的使用" class="headerlink" title="反射的使用"></a>反射的使用</h4><h5 id="运行时构造修改对象"><a href="#运行时构造修改对象" class="headerlink" title="运行时构造修改对象"></a>运行时构造修改对象</h5><p>假定需求: 将List<Student>集合中reward = true的对象的score属性置为”100”，这里用反射实现举例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String score;</span><br><span class="line">    <span class="keyword">private</span> Boolean reward;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Student&gt; <span class="title">getReForecastDataView</span><span class="params">(List&lt;Student&gt; students)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(Student student : students) &#123;</span><br><span class="line">        <span class="keyword">if</span>(student.getReward) &#123;</span><br><span class="line">            Field[] declaredFields = ForecastingOCUnionCategoryVO<span class="class">.<span class="keyword">class</span>.<span class="title">getDeclaredFields</span>()</span>;</span><br><span class="line">            Field field = Student.getClass().getDeclaredField(<span class="string">"score"</span>);</span><br><span class="line">                field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                field.set(student, <span class="string">"100"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> students;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="获取特定注解的值并收集到集合中"><a href="#获取特定注解的值并收集到集合中" class="headerlink" title="获取特定注解的值并收集到集合中"></a>获取特定注解的值并收集到集合中</h5><p>假定需求，一个billing 对象有十二个月份属性，值为对应月份产生的消耗，现在要将未发生月份置为0，已发生月份置为原来的值加上1(value = value + 1), 当前月份置为1。</p>
+<p>Billing对象，月份属性添加特殊注解便于区分属性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> calss Billing &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer jan;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer feb;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer mar;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer apr;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer may;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer jun;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer jul;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer aug;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer sep;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer oct;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer nov;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CalculateField</span></span><br><span class="line">    <span class="keyword">private</span> Integer dec;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CalculateField &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; monthsList = Arrays.asList(<span class="string">"jul"</span>, <span class="string">"aug"</span>, <span class="string">"sep"</span>, <span class="string">"oct"</span>, <span class="string">"nov"</span>, <span class="string">"dec"</span>, <span class="string">"jan"</span>, <span class="string">"feb"</span>, <span class="string">"mar"</span>, <span class="string">"apr"</span>, <span class="string">"may"</span>, <span class="string">"jun"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取已发生月份</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;String&gt; <span class="title">getPastMonth</span><span class="params">(String fiscalYear)</span></span>&#123;</span><br><span class="line">    List&lt;String&gt; resultList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    String currentMonth = YearMonth.now().toString();</span><br><span class="line">    <span class="keyword">for</span> (String month : monthsList) &#123;</span><br><span class="line">        <span class="keyword">int</span> year = LocalDate.getYear();</span><br><span class="line">        month = getMonth(year, month);</span><br><span class="line">        <span class="comment">// before now</span></span><br><span class="line">        <span class="keyword">if</span>(StringUtils.compare(month, currentMonth) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            resultList.add(month);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> resultList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMonth</span><span class="params">(String year, String monthAd)</span> </span>&#123;</span><br><span class="line">    Integer monthNumber = MonthNumberEnum.getNumberByMonth(monthAd.toLowerCase());</span><br><span class="line">    <span class="keyword">if</span> (monthNumber &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> yearStr + <span class="string">"-"</span> + monthNumber;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> yearStr + <span class="string">"-0"</span> + monthNumber;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Billing&gt; <span class="title">TransformBilling</span><span class="params">(List&lt;Billing&gt; billings)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 已发生月份</span></span><br><span class="line">    List&lt;String&gt; pastMonths = getPastMonth()</span><br><span class="line">    <span class="comment">// 当前月份</span></span><br><span class="line">    String monthAd = YearMonth.parse(month, DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM"</span>)).getMonth().toString().substring(<span class="number">0</span>, <span class="number">3</span>).toLowerCase();</span><br><span class="line">          </span><br><span class="line">    <span class="keyword">for</span>(Billing billing : billings) &#123;</span><br><span class="line">        Field[] declaredFields = ForecastingOCUnionCategoryVO<span class="class">.<span class="keyword">class</span>.<span class="title">getDeclaredFields</span>()</span>;</span><br><span class="line">         <span class="keyword">for</span> (Field field : declaredFields) &#123;</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">             <span class="comment">// 特殊注解属性，即十二个月份属性</span></span><br><span class="line">            <span class="keyword">if</span> (field.getAnnotation(CalculateField<span class="class">.<span class="keyword">class</span>) !</span>= <span class="keyword">null</span>) &#123;</span><br><span class="line">                String fieldName = field.getName();</span><br><span class="line">                <span class="comment">// 已发生月份</span></span><br><span class="line">                <span class="keyword">if</span> (pastMonthList.contains(fieldName)) &#123;</span><br><span class="line">                    field.set(billing, (Integer)field.get(billing) + <span class="number">100</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (fieldName.equals(monthAd)) &#123;</span><br><span class="line">                    <span class="comment">// 当前月份</span></span><br><span class="line">                    field.set(billing, <span class="number">1</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 未发生月份</span></span><br><span class="line">                     field.set(billing, <span class="number">0</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="反射工具类"><a href="#反射工具类" class="headerlink" title="反射工具类"></a>反射工具类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectUtils</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">setStringEmptyValue</span><span class="params">(Object o, Class&lt;?&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取类中的所有定义字段</span></span><br><span class="line">        Field[] fields = FPAReflectUtils.getAllFields(c);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 循环遍历字段，获取字段对应的属性值</span></span><br><span class="line">            <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">                <span class="comment">// 如果不为空，设置可见性，然后返回</span></span><br><span class="line">                field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                <span class="comment">// 属性描述器</span></span><br><span class="line">                PropertyDescriptor pd = <span class="keyword">new</span> PropertyDescriptor(field.getName(), c);</span><br><span class="line">                <span class="comment">// 获取get方法</span></span><br><span class="line">                Method getMethod = pd.getReadMethod();</span><br><span class="line">                <span class="comment">// 获取set方法</span></span><br><span class="line">                Method setMethod = pd.getWriteMethod();</span><br><span class="line">                Type type = getMethod.getGenericReturnType();</span><br><span class="line">                <span class="comment">// 通过get方法获取到值</span></span><br><span class="line">                Object value = getMethod.invoke(o);</span><br><span class="line">                <span class="keyword">if</span> (value == <span class="keyword">null</span> &amp;&amp; type.getTypeName().equals(<span class="string">"java.lang.String"</span>)) &#123;</span><br><span class="line">                    setMethod.invoke(o, StringUtils.EMPTY);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SecurityException | IntrospectionException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取本类及其父类的属性的方法,仅一个父类</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> clazz 当前类对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 字段数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Field[] getAllFields(Class&lt;?&gt; clazz) &#123;</span><br><span class="line">        List&lt;Field&gt; fieldList = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(clazz.getDeclaredFields())));</span><br><span class="line">        clazz = clazz.getSuperclass();</span><br><span class="line">        fieldList.addAll(<span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(clazz.getDeclaredFields())));</span><br><span class="line">        Field[] fields = <span class="keyword">new</span> Field[fieldList.size()];</span><br><span class="line">        <span class="keyword">return</span> fieldList.toArray(fields);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">getValueByName</span><span class="params">(Object object, Class&lt;?&gt; clazz, String fieldName)</span> <span class="keyword">throws</span> NoSuchFieldException, IntrospectionException, InvocationTargetException, IllegalAccessException </span>&#123;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"ID"</span>.equalsIgnoreCase(fieldName)) &#123;</span><br><span class="line">            PropertyDescriptor pd = <span class="keyword">new</span> PropertyDescriptor(<span class="string">"id"</span>, clazz);</span><br><span class="line">            <span class="comment">// 获取get方法</span></span><br><span class="line">            Method getMethod = pd.getReadMethod();</span><br><span class="line">            <span class="comment">// 通过get方法获取到值</span></span><br><span class="line">            <span class="keyword">return</span> getMethod.invoke(object);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">                <span class="keyword">if</span> (field.getName().equals(fieldName)) &#123;</span><br><span class="line">                    field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                    PropertyDescriptor pd = <span class="keyword">new</span> PropertyDescriptor(field.getName(), clazz);</span><br><span class="line">                    <span class="comment">// 获取get方法</span></span><br><span class="line">                    Method getMethod = pd.getReadMethod();</span><br><span class="line">                    <span class="comment">// 通过get方法获取到值</span></span><br><span class="line">                    <span class="keyword">return</span> getMethod.invoke(object);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchFieldException(fieldName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, String&gt; <span class="title">getAnnotationFields</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        Class&lt;?&gt; clazz = o.getClass();</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> annotationPresent = field.isAnnotationPresent(TableField<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="keyword">if</span> (annotationPresent) &#123;</span><br><span class="line">                String name = field.getAnnotation(TableField<span class="class">.<span class="keyword">class</span>).<span class="title">value</span>()</span>;</span><br><span class="line">                map.put(field.getName(), name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过表名获取字段名，ID特殊处理</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> clazz</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> tableName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> Kaciry</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFieldNameByTableName</span><span class="params">(Class&lt;?&gt; clazz, String tableName)</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"ID"</span>.equalsIgnoreCase(tableName)) <span class="keyword">return</span> <span class="string">"ID"</span>;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> annotationPresent = field.isAnnotationPresent(TableField<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="keyword">if</span> (annotationPresent) &#123;</span><br><span class="line">                String fieldName = field.getAnnotation(TableField.class).value().replace("`", "");</span><br><span class="line">                <span class="keyword">if</span> (fieldName.equals(tableName)) &#123;</span><br><span class="line">                    <span class="keyword">return</span> field.getName();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchFieldException();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过字段名获取表的列名</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> clazz</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> methodName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> Kaciry</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getTableNameByFieldName</span><span class="params">(Class&lt;?&gt; clazz, String fieldName)</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> annotationPresent = field.isAnnotationPresent(TableField<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="keyword">if</span> (annotationPresent &amp;&amp; field.getName().equals(fieldName)) &#123;</span><br><span class="line">                return field.getAnnotation(TableField.class).value().replace("`", "");</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchFieldException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * map转object</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> map</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> target</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Object</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">mapToObj</span><span class="params">(Map map, Class&lt;T&gt; target)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Field[] fields = target.getDeclaredFields();</span><br><span class="line">        T o = target.newInstance();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            Object val;</span><br><span class="line">            <span class="keyword">if</span> ((val = map.get(field.getName())) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                field.set(o, val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 目标实例化对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> source       原对实例化象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> target       目标对象类</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sourceFields 源对象字段集合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> targetFields 目标对象属性字段集合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 目标实例化对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">newInstance</span><span class="params">(Object source, Class&lt;T&gt; target, List&lt;Field&gt; sourceFields,</span></span></span><br><span class="line"><span class="function"><span class="params">                                     List&lt;Field&gt; targetFields)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        T t = target.newInstance();</span><br><span class="line">        <span class="keyword">if</span> (targetFields.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> t;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (Field field : sourceFields) &#123;</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Object o = field.get(source);</span><br><span class="line">            Field sameField = getSameField(field, targetFields);</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(sameField)) &#123;</span><br><span class="line">                sameField.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                sameField.set(t, o);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取目标对象中同源对象属性相同的属性（字段名称，字段类型一致则判定为相同）</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> field  源对象属性</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fields 目标对象属性集合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 目标对象相同的属性</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Field <span class="title">getSameField</span><span class="params">(Field field, List&lt;Field&gt; fields)</span> </span>&#123;</span><br><span class="line">        String name = field.getName();</span><br><span class="line">        String type = field.getType().getName();</span><br><span class="line">        <span class="keyword">for</span> (Field f : fields) &#123;</span><br><span class="line">            <span class="keyword">if</span> (name.equals(f.getName()) &amp;&amp; type.equals(f.getType().getName())) &#123;</span><br><span class="line">                <span class="keyword">return</span> f;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取一个类中的所有属性（包括父类属性）</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> c 类名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> List&lt;Field&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Field&gt; <span class="title">getFields</span><span class="params">(Class&lt;?&gt; c)</span> </span>&#123;</span><br><span class="line">        List&lt;Field&gt; fieldList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Field[] fields = c.getDeclaredFields();</span><br><span class="line">        <span class="keyword">if</span> (fields.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            fieldList.addAll(Arrays.asList(fields));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> getSuperClassFields(c, fieldList);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 递归获取父类属性</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> o         类名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> allFields 外层定义的所有属性集合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 父类所有属性</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Field&gt; <span class="title">getSuperClassFields</span><span class="params">(Class&lt;?&gt; o, List&lt;Field&gt; allFields)</span> </span>&#123;</span><br><span class="line">        Class&lt;?&gt; superclass = o.getSuperclass();</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(superclass) || Object<span class="class">.<span class="keyword">class</span>.<span class="title">getName</span>().<span class="title">equals</span>(<span class="title">superclass</span>.<span class="title">getName</span>())) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> allFields;</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = superclass.getDeclaredFields();</span><br><span class="line">        <span class="keyword">if</span> (fields.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> allFields;</span><br><span class="line">        &#125;</span><br><span class="line">        allFields.addAll(Arrays.asList(fields));</span><br><span class="line">        <span class="keyword">return</span> getSuperClassFields(superclass, allFields);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/04/17/mysql日志bingLog-redoLog-undoLog/" data-toggle="tooltip" data-placement="top" title="mysql日志bingLog,redoLog,undoLog,java监听binlog">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/02/11/目前常见AI软件国区注册与使用/" data-toggle="tooltip" data-placement="top" title="目前常见AI软件国区注册与使用">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#什么是反射"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">什么是反射</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#反射机制的功能"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">反射机制的功能</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#反射的使用"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">反射的使用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#运行时构造修改对象"><span class="toc-nav-number">1.0.2.1.</span> <span class="toc-nav-text">运行时构造修改对象</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#获取特定注解的值并收集到集合中"><span class="toc-nav-number">1.0.2.2.</span> <span class="toc-nav-text">获取特定注解的值并收集到集合中</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#反射工具类"><span class="toc-nav-number">1.0.2.3.</span> <span class="toc-nav-text">反射工具类</span></a></li></ol></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#reflection" title="reflection">reflection</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2023 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

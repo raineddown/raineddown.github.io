@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          mysql日志bingLog,redoLog,undoLog,java监听binlog - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2023/04/17/mysql日志bingLog-redoLog-undoLog/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+                            
+                        </div>
+                        <h1>mysql日志bingLog,redoLog,undoLog,java监听binlog</h1>
+                        <h2 class="subheading">mysql日志bingLog,redoLog,undoLog</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2023-04-17
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">6.4k</span> and
+                                Reading Time <span class="post-count">27</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="binlog日志"><a href="#binlog日志" class="headerlink" title="binlog日志"></a>binlog日志</h2><p>binlog用于记录数据库执行的写入性操作(不包括查询)信息，以二进制的形式保存在磁盘中。binlog是mysql的逻辑日志，并且由Server层进行记录，使用任何存储引擎的mysql数据库都会记录binlog日志。</p>
+<ul>
+<li>逻辑日志：可以简单理解为记录的就是sql语句。</li>
+<li>物理日志：因为mysql数据最终是保存在数据页中的，物理日志记录的就是数据页变更。</li>
+</ul>
+<p>binlog是通过追加的方式进行写入的，可以通过max_binlog_size参数设置每个binlog文件的大小，当文件大小达到给定值之后，会生成新的文件来保存日志。</p>
+<h3 id="binlog使用场景"><a href="#binlog使用场景" class="headerlink" title="binlog使用场景"></a>binlog使用场景</h3><p>在实际应用中，binlog的主要使用场景有两个，分别是主从复制和数据恢复。</p>
+<ul>
+<li>主从复制：在Master端开启binlog，然后将binlog发送到各个Slave端，Slave端重放binlog从而达到主从数据一致。</li>
+<li>数据恢复：通过使用mysqlbinlog工具来恢复数据。</li>
+</ul>
+<h3 id="binlog刷盘时机"><a href="#binlog刷盘时机" class="headerlink" title="binlog刷盘时机"></a>binlog刷盘时机</h3><p>对于InnoDB存储引擎而言，只有在事务提交时才会记录biglog，此时记录还在内存中，那么biglog是什么时候刷到磁盘中的呢？mysql通过sync_binlog参数控制biglog的刷盘时机，取值范围是0-N：</p>
+<ul>
+<li>0：不去强制要求，由系统自行判断何时写入磁盘；</li>
+<li>1：每次commit的时候都要将binlog写入磁盘；</li>
+<li>N：每N个事务，才会将binlog写入磁盘。</li>
+</ul>
+<p>从上面可以看出，sync_binlog最安全的是设置是1，这也是MySQL 5.7.7之后版本的默认值。但是设置一个大一些的值可以提升数据库性能，因此实际情况下也可以将值适当调大，牺牲一定的一致性来获取更好的性能。</p>
+<h3 id="binlog日志格式"><a href="#binlog日志格式" class="headerlink" title="binlog日志格式"></a>binlog日志格式</h3><p>binlog日志有三种格式，分别为STATMENT、ROW和MIXED。</p>
+<blockquote>
+<p>在 MySQL 5.7.7之前，默认的格式是STATEMENT，MySQL 5.7.7之后，默认值是ROW。日志格式通过binlog-format指定。</p>
+</blockquote>
+<p><strong>STATMENT</strong></p>
+<p>基于SQL语句的复制(statement-based replication, SBR)，每一条会修改数据的sql语句会记录到binlog中。</p>
+<ul>
+<li>优点：不需要记录每一行的变化，减少了binlog日志量，节约了IO, 从而提高了性能；</li>
+<li>缺点：在某些情况下会导致主从数据不一致，比如执行sysdate()、sleep()等。</li>
+</ul>
+<p><strong>ROW</strong></p>
+<p>基于行的复制(row-based replication, RBR)，不记录每条sql语句的上下文信息，仅需记录哪条数据被修改了。</p>
+<ul>
+<li>优点：不会出现某些特定情况下的存储过程、或function、或trigger的调用和触发无法被正确复制的问题；</li>
+<li>缺点：会产生大量的日志，尤其是alter table的时候会让日志暴涨</li>
+</ul>
+<p><strong>MIXED</strong></p>
+<p>基于STATMENT和ROW两种模式的混合复制(mixed-based replication, MBR)，一般的复制使用STATEMENT模式保存binlog，对于STATEMENT模式无法复制的操作使用ROW模式保存binlog</p>
+<h2 id="redolog日志"><a href="#redolog日志" class="headerlink" title="redolog日志"></a>redolog日志</h2><h3 id="为什么需要redolog"><a href="#为什么需要redolog" class="headerlink" title="为什么需要redolog"></a>为什么需要redolog</h3><p>我们都知道，事务的四大特性里面有一个是持久性，具体来说就是只要事务提交成功，那么对数据库做的修改就被永久保存下来了，不可能因为任何原因再回到原来的状态。那么mysql是如何保证一致性的呢？最简单的做法是在每次事务提交的时候，将该事务涉及修改的数据页全部刷新到磁盘中。但是这么做会有严重的性能问题，主要体现在两个方面：</p>
+<ul>
+<li>因为Innodb是以页为单位进行磁盘交互的，而一个事务很可能只修改一个数据页里面的几个字节，这个时候将完整的数据页刷到磁盘的话，太浪费资源了！</li>
+<li>一个事务可能涉及修改多个数据页，并且这些数据页在物理上并不连续，使用随机IO写入性能太差！</li>
+</ul>
+<p>因此mysql设计了redo log，具体来说就是只记录事务对数据页做了哪些修改，这样就能完美地解决性能问题了(相对而言文件更小并且是顺序IO)。</p>
+<h3 id="redolog-在磁盘里的结构"><a href="#redolog-在磁盘里的结构" class="headerlink" title="redolog 在磁盘里的结构"></a>redolog 在磁盘里的结构</h3><p>redolog 在内存中的存放位置叫 log buffer，我们为了了解 redolog 应该在哪个页的哪个偏移量写，提供了一个叫 buf_free 的全局变量，该变量指明后续写入的 redo 日志应该写到 log buffer 的哪个位置</p>
+<p>那 redolog 在磁盘中又是如何存储的呢？</p>
+<p>硬盘上存储的 redo log 日志文件不只一个，而是以一个日志文件组的形式出现的，每个的 redo 日志文件的大小都是一样的</p>
+<p>比如可以配置为一组4个文件，每个文件的大小是 1GB，整个 redo log 日志文件组可以记录 4G 的内容</p>
+<p>每个文件中都包含了多个页，并且这些页负责的内容可能不一样，每个文件的前2048个字节（也就是前四页）用来存储一些管理信息，之后的页就是用来存储 redolog 的普通页了</p>
+<p>日志文件组采用的是环形数组形式，从头开始写，写到末尾又回到头循环写.为了管理这个日志文件组，我们显然需要一些全局变量，比如记录了当前写在哪里的偏移量，一共写了多少数据等等内容</p>
+<h3 id="redolog-相关全局变量"><a href="#redolog-相关全局变量" class="headerlink" title="redolog 相关全局变量"></a>redolog 相关全局变量</h3><p>lsn，也就是 log sequence number 这个全局变量是记录当前总共写入的 redo 日志量的。在 mysql 开机时，这个值为 8704（一条数据都没写入 lsn 就是8704）。每次写入 x 字节的数据，这个值就加 x。同时，他还会将遇到的 log block header 和 log block trailer 占用的字节数加上（也就是页头和页尾占用的字节数）</p>
+<p>而 buf_free 是下一次写入的记录的偏移量，一边写一边后移，它用来记录当前事务产生的 redo log 文件</p>
+<p>flushed_to_disk_lsn 是用来标记当前 log buffer 中已经有那些日志被刷新到磁盘中了，该值表达的是内存中该值一开始也是8704，因此 lsn &gt;= flushed_to_disk_lsn。log buffer 就是在磁盘中存放 redolog 的地方，log buffer 比之日志文件组就类似于 buffer pool 比之磁盘中的 Innodb</p>
+<p>checkpoint 指的是一次刷新全局变量 checkpoint_lsn 的操作，MySQL 中可以使用 lsn 来唯一确定 redolog 位置，而 checkpoint_lsn 就指向当前可以被擦除的位置。日志文件组的大小是有限的，我们不得不循环使用日志文件组中的文件，但是如果某些日志在该日志代表的数据被刷入磁盘之前就被清理掉了，日志就没有意义了。因此可以被擦除的地方就是数据已经刷入磁盘的地方，一边擦一边往后推移，MySQL 加载日志文件组恢复数据时，会清空加载过的 redo log 记录。如果 MySQL 一直不崩溃，redolog 记录满了的话，MySQL会自动刷盘并且删除一些 redo log 记录，让 checkpoint_lsn 向后推</p>
+<p>注意，执行一次 checkpoint 与将脏页刷新到磁盘中是不同步的，因此 checkpoint_lsn 不能代表刷新到磁盘中的数据的最新位置</p>
+<h3 id="redolog-恢复数据库的过程"><a href="#redolog-恢复数据库的过程" class="headerlink" title="redolog 恢复数据库的过程"></a>redolog 恢复数据库的过程</h3><p>至此，我们对数据库有了一个完整的日志记录，那如何使用这个日志记录功能呢，我们如何将数据从这个日志文件组中取出来并且用于恢复数据库呢</p>
+<p>由于之前的全局变量与日志文件组配合记录，在 MySQL 中已经有了充足的信息。我们可以拿到需要恢复的起点（全局变量 checkpoint_lsn），和恢复的终点（可以用 lsn 来表示）。这两个值都能唯一确定一个日志文件组中的位置，并且里面的数据都保证正确性（每一条数据的末尾都有唯一标识），不会出现没有被刷入磁盘的数据对应的日志被刷掉的情况（checkpoint）</p>
+<p>获取到日志后，我们可以一条条读取数据并且恢复，但是 MySQL 的设计者有更加快速的方法，将每个日志的 spaceID 与 page number 计算出哈希值并且存入 hash 表中，如果有多个 spaceID 与 page number 都相同的日志，将它们放入一个槽中。这样遍历槽，就可以一次性将一个页面恢复好，从而避免很多随机 IO，加快了恢复速度</p>
+<p>这么恢复还有一点要注意，我们需要根据时间来恢复，不然最终的数据不保证正确性。同时，由于 checkpoint_lsn 与刷入磁盘的机制不一样，因此可能出现数据已经刷入了，但是日志还需要重新操作一遍的情况。重新操作一遍不会导致任何错误，但是可以优化掉这些过程，在每个页面中的文件头有个 FIL_PAGE_LSN 的属性，该属性记录了最新一次对该页面修改的日志的 lsn。我们只需要简单的判断就可以略过重新写一遍的过程了</p>
+<h2 id="undolog日志"><a href="#undolog日志" class="headerlink" title="undolog日志"></a>undolog日志</h2><p>数据库事务四大特性中有一个是原子性，具体来说就是 原子性是指对数据库的一系列操作，要么全部成功，要么全部失败，不可能出现部分成功的情况。</p>
+<p>实际上，原子性底层就是通过undo log实现的。undo log主要记录了数据的逻辑变化，比如一条INSERT语句，对应一条DELETE的undo log，对于每个UPDATE语句，对应一条相反的UPDATE的undo log，这样在发生错误时，就能回滚到事务之前的数据状态。</p>
+<h3 id="undolog-的作用"><a href="#undolog-的作用" class="headerlink" title="undolog 的作用"></a>undolog 的作用</h3><p><strong>为什么有了 redolog 还需要 undolog？</strong>这就要从磁盘性能的优化说起</p>
+<p>Commit Logging 有一个巨大的先天缺陷：所有对数据的真实修改都必须发生在事务提交以后，即日志写入了 Commit Record 之后。在此之前，即使磁盘有足够空闲，即使某个事务修改的数据量非常庞大，占用了大量的内存缓冲区，无论何种理由，都决不允许在事务提交之前就修改磁盘上的数据，这一点是 Commit Logging 成立的前提（因为我们我们不能使用 redolog 删除错误的记录，只能用它重做正确的记录），却对提升数据库的性能十分不利。为此，ARIES 提出了“提前写入日志”（Write-Ahead Logging）的日志改进方案，所谓“提前写入”（Write-Ahead），就是允许在事务提交之前写入变动数据的意思</p>
+<p>Write-Ahead Logging 按照事务提交时点，将何时写入变动数据划分为 FORCE 和 STEAL 两类情况<br>·FORCE：当事务提交后，要求变动数据必须同时完成写入则称为 FORCE，如果不强制变动数据必须同时完成写入则称为 NO-FORCE<br>·STEAL：在事务提交前，允许变动数据提前写入则称为 STEAL，不允许则称为 NO-STEAL</p>
+<p>Write-Ahead Logging 允许 NO-FORCE，也允许 STEAL，它给出的解决办法是增加了另一种被称为 Undo Log 的日志类型，当变动数据写入磁盘前，必须先记录 Undo Log，注明修改了哪个位置的数据、从什么值改成什么值等，以便在事务回滚或者崩溃恢复时根据 Undo Log 对提前写入的数据变动进行擦除</p>
+<p>由于 Undo Log 的加入，Write-Ahead Logging 在崩溃恢复时会经历以下三个阶段</p>
+<p>分析阶段（Analysis）：该阶段从最后一次检查点（Checkpoint，可理解为在这个点之前所有应该持久化的变动都已安全落盘）开始扫描日志，找出所有没有 End Record 的事务，组成待恢复的事务集合，这个集合至少会包括事务表（Transaction Table）和脏页表（Dirty Page Table）两个组成部分<br>重做阶段（Redo）：该阶段依据分析阶段中产生的待恢复的事务集合来重演历史（Repeat History），具体操作是找出所有包含 Commit Record 的日志，将这些日志修改的数据写入磁盘，写入完成后在日志中增加一条 End Record，然后移出待恢复事务集合<br>回滚阶段（Undo）：该阶段处理经过分析、重做阶段后剩余的恢复事务集合，此时剩下的都是需要回滚的事务，它们被称为 Loser，根据 Undo Log 中的信息，将已经提前写入磁盘的信息重新改写回去，以达到回滚这些 Loser 事务的目的</p>
+<h3 id="undolog-的链表"><a href="#undolog-的链表" class="headerlink" title="undolog 的链表"></a>undolog 的链表</h3><p>一个页面只能存储一种类型的 undo 日志，不可以混合存储，之所以做出区分，是因为 insert 类型的日志可以在事务提交后直接删除，而 update 类型的由于需要为 MVCC 服务，因此要区别对待</p>
+<p>trx_undo_page_start：第一条undo日志在本页面中的起始偏移量<br>trx_undo_page_free：最后一条undo日志结束时偏移量<br>trx_undo_page_node：链表节点结构<br>从页面的角度上来说，需要注意的点就这些了，但是从事务的角度上说，知识点还没结束。一个事务可能产生很多日志，这些日志在一个页面中可能放不下，那么就需要放到更多的页面中，这些页面就通过 trx_undo_page_node 形成了一个链表</p>
+<p>链表中的第一个 undo 页面称为 first undo page，其余称为 normal undo page，因为第一个页面除了 undo page header 还有一些其他的管理信息，即 undo log segment header</p>
+<p>一个事务的执行过程中，增删改的操作都会有，因为一个 undo 页面只能存放一种类型，所以一个事务的执行过程中可能有两种链表，一个是 insert undo 链表，一个是 update undo 链表</p>
+<p>此外，Innodb 还规定，普通表和临时表的 undo 日志也要分别记录，所以一个事务中如果同时对临时表，普通表进行增删改操作，就会有4个链表</p>
+<p>undo log segment header 拥有的部分属性如下：</p>
+<p>1，trx_undo_state：本 undo 页面链表处于什么状态，我们可以用该属性了解事务是否结束，可能的状态有下面几种：</p>
+<p>trx_undo_active：活跃状态，即一个活跃的事务正在向这个Undo页面链表中写入Undo日志。<br>trx_undo_cached：被缓存状态，该状态的Undo页面链表等待被其他事务重用。<br>trx_undo_to_free：等到被释放的状态，对于insert undo类型，在其对应的事务提交后，该链表不会被重用，就是这种状态<br>trx_undo_purge：等待被purge的状态，对于update undo类型，如果在其对应的事物提交后，该链表不能被重用，则处于这种状态<br>2，trx_undo_fseg_header：本 Undo 页面链表对应的段的 Segment Header 信息</p>
+<p>3，trx_undo_page_list：Undo 页面链表的基节点，用于串联起其他页面的 trx_undo_page_node 属性，形成一个链表</p>
+<p>因此，一个事务的 undolog 不是由页为单位来管理的，而是由链表来管理的，那应该需要一个整合的地方来管理这些链表吧，我们提出了回滚段的概念。回滚段就是被称为 Rollback Segment Header 的页面，这个页面中存放了各个 Undo 页面链表的 first undo page 的页号，这些页号被称为 undo slot。这样我们就可以提供 slot 来找到对应的链表头了</p>
+<p>一个事务在执行过程中最多分配4个undo页面链表，一个回滚段中只有1024个undo slot，意味着同时只支持1024个事务的并发，</p>
+<p>为了支持更多的事务执行，Innodb定义了128个回滚段，因此可以支持更多的事务，这些回滚段的页面存在系统表空间的第五个页面的一个区域中</p>
+<h3 id="事务分配-undolog-的过程"><a href="#事务分配-undolog-的过程" class="headerlink" title="事务分配 undolog 的过程"></a>事务分配 undolog 的过程</h3><p>事务首次修改普通表的记录时，先去系统表空间的5号页面中分配到一个回滚段，之后该事务再修改记录时，不会重复分配，多个回滚段的分配方式使用 round-robin 来分配，从第一大类中循环分配回滚段给多个事务</p>
+<p>分配到回滚段后，查看回滚段的两个 cached 链表是否有缓存的 undo slot，不同的操作看不同的链表，insert 类的看 insert undo cached，update 类型的看 update undo cached</p>
+<p>如果在缓存中没找到，就从回滚段中分配一个可用的 undo slot</p>
+<p>找到可用的 undo slot，如果该 slot 是从缓存链表中获取的，其 Undo Log Segment 已经分配，否则就需要重新分配一个 Undo Log Segment，然后从该 Segment 中申请一个页面作为 Undo 页面链表的 first undo page，并把该页填入 undo slot 中</p>
+<p>事务开始写入日志到 Undo 页面链表中</p>
+<h2 id="shyiko监听解析binlog日志"><a href="#shyiko监听解析binlog日志" class="headerlink" title="shyiko监听解析binlog日志"></a>shyiko监听解析binlog日志</h2><p><a href="https://github.com/shyiko/mysql-binlog-connector-java" target="_blank" rel="noopener">shyiko项目地址</a></p>
+<h3 id="binlog监听器"><a href="#binlog监听器" class="headerlink" title="binlog监听器"></a>binlog监听器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.nacos.api.config.annotation.NacosValue;</span><br><span class="line"><span class="keyword">import</span> com.github.shyiko.mysql.binlog.BinaryLogClient;</span><br><span class="line"><span class="keyword">import</span> com.github.shyiko.mysql.binlog.event.Event;</span><br><span class="line"><span class="keyword">import</span> com.github.shyiko.mysql.binlog.event.EventData;</span><br><span class="line"><span class="keyword">import</span> com.github.shyiko.mysql.binlog.event.EventType;</span><br><span class="line"><span class="keyword">import</span> com.github.shyiko.mysql.binlog.event.TableMapEventData;</span><br><span class="line"><span class="keyword">import</span> com.google.common.collect.Maps;</span><br><span class="line"><span class="keyword">import</span> com.pwc.sdc.FPA.fms.event.AssembleCostEvent;</span><br><span class="line"><span class="keyword">import</span> com.pwc.sdc.FPA.fms.event.AssembleHeadcountEvent;</span><br><span class="line"><span class="keyword">import</span> com.pwc.sdc.FPA.utils.FPAStringUtils;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Qualifier;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.ApplicationArguments;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.ApplicationRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CompletableFuture;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinLogListener</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//主库地址</span></span><br><span class="line">    <span class="meta">@NacosValue</span>(<span class="string">"$&#123;spring.datasource.master.url&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//主库username</span></span><br><span class="line">    <span class="meta">@NacosValue</span>(<span class="string">"$&#123;spring.datasource.master.username&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//主库密码</span></span><br><span class="line">    <span class="meta">@NacosValue</span>(<span class="string">"$&#123;spring.datasource.master.password&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Qualifier</span>(<span class="string">"threadPoolTaskExecutor"</span>)</span><br><span class="line">    <span class="keyword">private</span> ThreadPoolTaskExecutor executor;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AssembleEvent assembleEvent;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, String&gt; tableInfo = Maps.newHashMap();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> </span>&#123;</span><br><span class="line">        assembleEvent.doUpdate(executor);</span><br><span class="line">        CompletableFuture.runAsync(<span class="keyword">this</span>::connectMysqlBinLog, executor);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 连接mysqlBinLog</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connectMysqlBinLog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        log.info(<span class="string">"监控BinLog服务已启动"</span>);</span><br><span class="line">        Map&lt;String, String&gt; jdbcInfo = FPAStringUtils.getJdbcInfo(url);</span><br><span class="line">        BinaryLogClient client = <span class="keyword">new</span> BinaryLogClient(jdbcInfo.get(<span class="string">"host"</span>), Integer.parseInt(jdbcInfo.get(<span class="string">"port"</span>)), username, password);</span><br><span class="line">        client.setServerId(<span class="number">1</span>);</span><br><span class="line">        client.setKeepAlive(<span class="keyword">true</span>);</span><br><span class="line">        client.registerEventListener(event -&gt; event(jdbcInfo, event));</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            client.connect();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">event</span><span class="params">(Map&lt;String, String&gt; jdbcInfo, Event event)</span> </span>&#123;</span><br><span class="line">        EventData data = event.getData();</span><br><span class="line">        TableMapEventData tableMapEventData;</span><br><span class="line">        EventType eventType = event.getHeader().getEventType();</span><br><span class="line">        <span class="keyword">if</span> (eventType == EventType.TABLE_MAP) &#123;</span><br><span class="line">            tableMapEventData = (TableMapEventData) data;</span><br><span class="line">            String database = tableMapEventData.getDatabase();</span><br><span class="line">            String table = tableMapEventData.getTable();</span><br><span class="line">            tableInfo.put(<span class="string">"database"</span>, database);</span><br><span class="line">            tableInfo.put(<span class="string">"table"</span>, table);</span><br><span class="line">        &#125;</span><br><span class="line">        assembleHeadcountEvent.assembleHeadcount(jdbcInfo, tableInfo, event, executor);</span><br><span class="line">        assembleCostEvent.assembleCost(jdbcInfo, tableInfo, event, executor);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>binlog事件处理类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AssembleEvent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;String&gt; TABLE_NAME = Lists.newArrayList(<span class="string">"LISTENER_DATABASE"</span>);</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DatabaseUpdateService databaseUpdateService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">assembleCost</span><span class="params">(Map&lt;String, String&gt; jdbcInfo, HashMap&lt;String, String&gt; map, Event event, Executor executor)</span> </span>&#123;</span><br><span class="line">    	<span class="comment">// 当LISTENER_DATABASE表发生变化</span></span><br><span class="line">        <span class="keyword">if</span> (StringUtils.equals(jdbcInfo.get(<span class="string">"database"</span>), map.get(<span class="string">"database"</span>)) &amp;&amp; TABLE_NAME.contains(map.get(<span class="string">"table"</span>))) &#123;</span><br><span class="line">        	<span class="comment">// XID表示事务提交，即当LISTENER_DATABASE发生事务提交走下面分支</span></span><br><span class="line">            <span class="keyword">if</span> (event.getHeader().getEventType() == EventType.XID) &#123;</span><br><span class="line">                log.info(<span class="string">"监听到变化，进行关联更新"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">this</span>.doUpdate(executor);</span><br><span class="line">                &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                    map.clear();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doUpdate</span><span class="params">(Executor executor)</span> </span>&#123;</span><br><span class="line">    	<span class="comment">//调用mapper更新sql</span></span><br><span class="line">        CompletableFuture.runAsync(() -&gt; databaseUpdateService.update(), executor);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="binlog数据转换器"><a href="#binlog数据转换器" class="headerlink" title="binlog数据转换器"></a>binlog数据转换器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseConverter</span> <span class="keyword">implements</span> <span class="title">Converter</span>&lt;<span class="title">BinlogData</span>&lt;<span class="title">List</span>&lt;<span class="title">Map</span>&lt;<span class="title">String</span>, <span class="title">Object</span>&gt;&gt;&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ResourceLoader resourceLoader;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JdbcTemplate jdbcTemplate;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;binglog.convert.model.package&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String packageName;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CodeUtil codeUtil;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DbProperties dbProperties;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 需要转成的model对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Class&gt; classes;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 拼接sql常量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SQL_STATEMENT_SELECT = <span class="string">"SELECT "</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SQL_STATEMENT_FROM = <span class="string">" FROM "</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SQL_STATEMENT_WHERE = <span class="string">" WHERE "</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SQL_STATEMENT_LIMIT = <span class="string">" LIMIT 1"</span>;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        classes = getClass(packageName, resourceLoader);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List <span class="title">convert</span><span class="params">(BinlogData&lt;List&lt;Map&lt;String, Object&gt;&gt;&gt; data)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Class clazz : classes) &#123;</span><br><span class="line">            Table tableAnnotation = (Table) clazz.getAnnotation(Table<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="keyword">if</span> (tableAnnotation != <span class="keyword">null</span> &amp;&amp; StringUtils.isNotBlank(tableAnnotation.name())) &#123;</span><br><span class="line">                String dbName = dbProperties.getValue(tableAnnotation.catalog());<span class="comment">//获取实际数据库名称</span></span><br><span class="line">                <span class="keyword">if</span> (data.getDatabase().equals(dbName) &amp;&amp; tableAnnotation.name().equals(data.getTable())) &#123;</span><br><span class="line">                    <span class="comment">// 找到库 需要处理的表（data.getTable()）对应的model</span></span><br><span class="line">                    <span class="keyword">return</span> setBeanProperties(data.getData(), clazz);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> List <span class="title">setBeanProperties</span><span class="params">(List&lt;Map&lt;String, Object&gt;&gt; list, Class clazz)</span> </span>&#123;</span><br><span class="line">        List target = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">            <span class="keyword">for</span> (Object object : list) &#123;</span><br><span class="line">                target.add(clazz.newInstance());</span><br><span class="line">            &#125;</span><br><span class="line">            List&lt;Field&gt; fieldList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">                Column column = field.getAnnotation(Column<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">                <span class="keyword">if</span> (column != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 该字段需要通过配置的库表查询</span></span><br><span class="line">                    <span class="keyword">if</span> ( StringUtils.isNotBlank(column.table())) &#123;</span><br><span class="line">                        <span class="comment">// 需要查询该字段的值，本数据未包含该字段值,查询可能以来本对象其他字段值</span></span><br><span class="line">                        <span class="comment">// 先设置不需要查库的字段（查库字段可能以来这些字段得值）</span></span><br><span class="line">                        <span class="comment">// setFieldFromTable(field, target, column);</span></span><br><span class="line">                        fieldList.add(field);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        setFieldFromBinlog(field, target, list, column);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// cachedMap 用于缓存,多个字段值依赖同一条数据库数据</span></span><br><span class="line">            Map&lt;String, Map&lt;String, Object&gt;&gt; cachedMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> (Field field : fieldList) &#123;</span><br><span class="line">                Column column = field.getAnnotation(Column<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">                <span class="keyword">if</span> (column != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 该字段需要通过配置的库表查询</span></span><br><span class="line">                    <span class="keyword">if</span> ( StringUtils.isNotBlank(column.table()) &amp;&amp; StringUtils.isNotBlank(column.whereCause())) &#123;</span><br><span class="line">                        <span class="comment">// 需要查询该字段的值，本数据未包含该字段值</span></span><br><span class="line">                        setFieldFromTable(field, cachedMap, list, target, column);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.info(<span class="string">""</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> target;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  类型转换</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> field</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> target</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> list</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> column</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setFieldFromBinlog</span><span class="params">(Field field, List target, List&lt;Map&lt;String, Object&gt;&gt; list, Column column)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isNotBlank(column.name())) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Object value = list.get(i).get(column.name());</span><br><span class="line">                    <span class="keyword">if</span> (value != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                        log.debug(<span class="string">"field:&#123;&#125;,value:&#123;&#125;"</span>, field.getName(), column.name());</span><br><span class="line">                        BinLogDict binLogDict = field.getAnnotation(BinLogDict<span class="class">.<span class="keyword">class</span>)</span>;<span class="comment">//判断是否需要翻译</span></span><br><span class="line">                        <span class="keyword">if</span> (binLogDict != <span class="keyword">null</span>) &#123;</span><br><span class="line">                            Object companyCode = codeUtil.getCountryCode(binLogDict.codeType(), value, field.getType());</span><br><span class="line">                            log.info(<span class="string">"get companyCode fail value:&#123;&#125; companyCode:&#123;&#125;"</span>, value, companyCode);</span><br><span class="line">                            field.set(target.get(i), companyCode);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            field.set(target.get(i), value);</span><br><span class="line">                        &#125;</span><br><span class="line">                        field.setAccessible(<span class="keyword">false</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    log.info(<span class="string">""</span>, e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  数据库类型转换</span></span><br><span class="line"><span class="comment">     * 该字段从数据库查询设置</span></span><br><span class="line"><span class="comment">     * $&#123;id&#125; 参数取本对象的id 值</span></span><br><span class="line"><span class="comment">     * #&#123;id&#125; 参数取binlog 过来的id 值</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * // 本对象缓存（db.table.columnName.value）</span></span><br><span class="line"><span class="comment">     * // 本对象缓存（db.table.id.3）</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> field</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> list</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> column</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setFieldFromTable</span><span class="params">(Field field, Map&lt;String, Map&lt;String, Object&gt;&gt; cachedMap, List&lt;Map&lt;String, Object&gt;&gt; datas, List list, Column column)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            String dbName = dbProperties.getValue(column.catalog());<span class="comment">//获取实际数据库名称</span></span><br><span class="line">            <span class="keyword">if</span> (column.whereCause().contains(<span class="string">"#"</span>)) &#123;</span><br><span class="line">                <span class="comment">// 需要依赖对象binlog字段值</span></span><br><span class="line">                <span class="keyword">int</span> startLocation = column.whereCause().indexOf(<span class="string">"#&#123;"</span>) + <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">int</span> endLocation = column.whereCause().indexOf(<span class="string">"&#125;"</span>);</span><br><span class="line">                String refFieldName = column.whereCause().substring(startLocation, endLocation);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">                    Object target = list.get(i);</span><br><span class="line">                    StringBuilder sql = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">                    sql.append(SQL_STATEMENT_SELECT).append(<span class="string">"*"</span>).append(SQL_STATEMENT_FROM).append(dbName).append(<span class="string">"."</span>).append(column.table()).append(SQL_STATEMENT_WHERE);</span><br><span class="line">                    Object refFieldValue = datas.get(i).get(refFieldName);</span><br><span class="line">                    <span class="keyword">if</span> (refFieldValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// 本对象缓存（db.table.columnName.value）</span></span><br><span class="line">                    <span class="comment">// 本对象缓存（db.table.id.3）</span></span><br><span class="line">                    String cacheKey = dbName + <span class="string">"."</span> + column.table() + <span class="string">"."</span> + refFieldName + <span class="string">"."</span> + refFieldValue;</span><br><span class="line">                    Map&lt;String, Object&gt; dataMap;</span><br><span class="line">                    <span class="keyword">if</span> (cachedMap.containsKey(cacheKey)) &#123;</span><br><span class="line">                        dataMap = cachedMap.get(cacheKey);</span><br><span class="line">                        log.debug(<span class="string">"命中缓存：cache_key:&#123;&#125;"</span>, cacheKey);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        log.debug(<span class="string">"cache_key:&#123;&#125;"</span>, cacheKey);</span><br><span class="line">                        <span class="keyword">if</span> (refFieldValue <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">                            refFieldValue = <span class="string">"'"</span> + refFieldValue + <span class="string">"'"</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        String whereCause = column.whereCause().replace(<span class="string">"#&#123;"</span> + refFieldName + <span class="string">"&#125;"</span>, String.valueOf(refFieldValue));</span><br><span class="line">                        sql.append(whereCause).append(SQL_STATEMENT_LIMIT);</span><br><span class="line">                        log.debug(<span class="string">"查询字段：&#123;&#125;，sql：&#123;&#125;"</span>, field.getName(), sql);</span><br><span class="line">                        dataMap = jdbcTemplate.queryForMap(sql.toString());</span><br><span class="line">                        <span class="keyword">if</span> (dataMap != <span class="keyword">null</span>) &#123;</span><br><span class="line">                            cachedMap.put(cacheKey, dataMap);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (dataMap != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        log.debug(<span class="string">"field:&#123;&#125;,value:&#123;&#125;"</span>, field.getName(), column.name());</span><br><span class="line">                        Object value = dataMap.get(column.name());</span><br><span class="line">                        BinLogDict binLogDict = field.getAnnotation(BinLogDict<span class="class">.<span class="keyword">class</span>)</span>;<span class="comment">//判断是否需要翻译</span></span><br><span class="line">                        <span class="keyword">if</span> (binLogDict != <span class="keyword">null</span>) &#123;</span><br><span class="line">                            Object countryCode = codeUtil.getCountryCode(binLogDict.codeType(), value, field.getType());</span><br><span class="line">                            log.info(<span class="string">"get companyCode fail value:&#123;&#125; companyCode:&#123;&#125;"</span>, value, countryCode);</span><br><span class="line">                            field.set(target, countryCode);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            field.set(target, value);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (column.whereCause().contains(<span class="string">"$"</span>)) &#123;</span><br><span class="line">                <span class="comment">// 需要依赖对象自身字段值</span></span><br><span class="line">                <span class="keyword">int</span> startLocation = column.whereCause().indexOf(<span class="string">"$&#123;"</span>) + <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">int</span> endLocation = column.whereCause().indexOf(<span class="string">"&#125;"</span>);</span><br><span class="line">                String refFieldName = column.whereCause().substring(startLocation, endLocation);</span><br><span class="line">                <span class="keyword">for</span> (Object target : list) &#123;</span><br><span class="line">                    StringBuilder sql = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">                    sql.append(SQL_STATEMENT_SELECT).append(<span class="string">"*"</span>).append(SQL_STATEMENT_FROM).append(dbName).append(<span class="string">"."</span>).append(column.table()).append(SQL_STATEMENT_WHERE);</span><br><span class="line">                    Field refField = target.getClass().getDeclaredField(refFieldName);</span><br><span class="line">                    refField.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                    Object refFieldValue = refField.get(target);</span><br><span class="line">                    <span class="keyword">if</span> (refFieldValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// 本对象缓存（db.table.columnName.value）</span></span><br><span class="line">                    <span class="comment">// 本对象缓存（db.table.id.3）</span></span><br><span class="line">                    String cacheKey = dbName + <span class="string">"."</span> + column.table() + <span class="string">"."</span> + refFieldName + <span class="string">"."</span> + refFieldValue;</span><br><span class="line">                    Map&lt;String, Object&gt; dataMap;</span><br><span class="line">                    <span class="keyword">if</span> (cachedMap.containsKey(cacheKey)) &#123;</span><br><span class="line">                        dataMap = cachedMap.get(cacheKey);</span><br><span class="line">                        log.debug(<span class="string">"命中缓存：cache_key:&#123;&#125;"</span>, cacheKey);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">if</span> (refFieldValue <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">                            refFieldValue = <span class="string">"'"</span> + refFieldValue + <span class="string">"'"</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        String whereCause = column.whereCause().replace(<span class="string">"$&#123;"</span> + refFieldName + <span class="string">"&#125;"</span>, String.valueOf(refFieldValue));</span><br><span class="line">                        sql.append(whereCause).append(SQL_STATEMENT_LIMIT);</span><br><span class="line">                        log.debug(<span class="string">"查询字段：&#123;&#125;，sql：&#123;&#125;"</span>, field.getName(), sql);</span><br><span class="line">                        dataMap = jdbcTemplate.queryForMap(sql.toString());</span><br><span class="line">                        <span class="keyword">if</span> (dataMap != <span class="keyword">null</span>) &#123;</span><br><span class="line">                            cachedMap.put(cacheKey, dataMap);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (dataMap != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        log.debug(<span class="string">"field:&#123;&#125;,value:&#123;&#125;"</span>, field.getName(), column.name());</span><br><span class="line">                        Object value = dataMap.get(column.name());</span><br><span class="line">                        BinLogDict binLogDict = field.getAnnotation(BinLogDict<span class="class">.<span class="keyword">class</span>)</span>;<span class="comment">//判断是否需要翻译</span></span><br><span class="line">                        <span class="keyword">if</span> (binLogDict != <span class="keyword">null</span>) &#123;</span><br><span class="line">                            Object countryCode = codeUtil.getCountryCode(binLogDict.codeType(), value, field.getType());</span><br><span class="line">                            log.info(<span class="string">"get companyCode fail value:&#123;&#125; companyCode:&#123;&#125;"</span>, value, countryCode);</span><br><span class="line">                            field.set(target, countryCode);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            field.set(target, value);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//  不需要依赖对象自身字段值</span></span><br><span class="line">                StringBuilder sql = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">                sql.append(SQL_STATEMENT_SELECT).append(column.name()).append(SQL_STATEMENT_FROM).append(dbName).append(<span class="string">"."</span>).append(column.table()).append(SQL_STATEMENT_WHERE);</span><br><span class="line">                sql.append(column.whereCause()).append(SQL_STATEMENT_LIMIT);</span><br><span class="line">                log.debug(<span class="string">"查询字段：&#123;&#125;，sql：&#123;&#125;"</span>, field.getName(), sql);</span><br><span class="line">                Object object = jdbcTemplate.queryForObject(sql.toString(), field.getType());</span><br><span class="line">                <span class="keyword">for</span> (Object target : list) &#123;</span><br><span class="line">                    log.debug(<span class="string">"field:&#123;&#125;,value:&#123;&#125;"</span>, field.getName(), column.name());</span><br><span class="line">                    BinLogDict binLogDict = field.getAnnotation(BinLogDict<span class="class">.<span class="keyword">class</span>)</span>;<span class="comment">//判断是否需要翻译</span></span><br><span class="line">                    <span class="keyword">if</span> (binLogDict != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        Object countryCode = codeUtil.getCountryCode(binLogDict.codeType(), object, field.getType());</span><br><span class="line">                        log.info(<span class="string">"get companyCode fail value:&#123;&#125; companyCode:&#123;&#125;"</span>, object, countryCode);</span><br><span class="line">                        field.set(target, countryCode);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        field.set(target, object);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.info(<span class="string">"&#123;&#125;"</span>, e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            field.setAccessible(<span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据报名取得改包下所有类</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> packageName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> resourceLoader</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> List&lt;Class&gt; <span class="title">getClass</span><span class="params">(String packageName, ResourceLoader resourceLoader)</span> </span>&#123;</span><br><span class="line">        List&lt;Class&gt; classList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ResourcePatternResolver resolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);</span><br><span class="line">            MetadataReaderFactory metaReader = <span class="keyword">new</span> CachingMetadataReaderFactory(resourceLoader);</span><br><span class="line">            Resource[] resources = resolver.getResources(<span class="string">"classpath*:"</span> + packageName.replaceAll(<span class="string">"\\."</span>, <span class="string">"/"</span>) + <span class="string">"/*.class"</span>);</span><br><span class="line">            <span class="keyword">for</span> (Resource r : resources) &#123;</span><br><span class="line">                MetadataReader reader = metaReader.getMetadataReader(r);</span><br><span class="line">                classList.add(Class.forName(reader.getClassMetadata().getClassName()));</span><br><span class="line">                log.debug(<span class="string">"-----&gt;binlog会自动转化的model类型：&#123;&#125;"</span>, reader.getClassMetadata().getClassName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.info(<span class="string">""</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> classList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EventType &#123;</span><br><span class="line">    UNKNOWN,</span><br><span class="line">    START_V3,</span><br><span class="line">    QUERY,</span><br><span class="line">    STOP,</span><br><span class="line">    ROTATE,</span><br><span class="line">    INTVAR,</span><br><span class="line">    LOAD,</span><br><span class="line">    SLAVE,</span><br><span class="line">    CREATE_FILE,</span><br><span class="line">    APPEND_BLOCK,</span><br><span class="line">    EXEC_LOAD,</span><br><span class="line">    DELETE_FILE,</span><br><span class="line">    NEW_LOAD,</span><br><span class="line">    RAND,</span><br><span class="line">    USER_VAR,</span><br><span class="line">    FORMAT_DESCRIPTION,</span><br><span class="line">    XID,</span><br><span class="line">    BEGIN_LOAD_QUERY,</span><br><span class="line">    EXECUTE_LOAD_QUERY,</span><br><span class="line">    TABLE_MAP,</span><br><span class="line">    PRE_GA_WRITE_ROWS,</span><br><span class="line">    PRE_GA_UPDATE_ROWS,</span><br><span class="line">    PRE_GA_DELETE_ROWS,</span><br><span class="line">    WRITE_ROWS,</span><br><span class="line">    UPDATE_ROWS,</span><br><span class="line">    DELETE_ROWS,</span><br><span class="line">    INCIDENT,</span><br><span class="line">    HEARTBEAT,</span><br><span class="line">    IGNORABLE,</span><br><span class="line">    ROWS_QUERY,</span><br><span class="line">    EXT_WRITE_ROWS,</span><br><span class="line">    EXT_UPDATE_ROWS,</span><br><span class="line">    EXT_DELETE_ROWS,</span><br><span class="line">    GTID,</span><br><span class="line">    ANONYMOUS_GTID,</span><br><span class="line">    PREVIOUS_GTIDS,</span><br><span class="line">    TRANSACTION_CONTEXT,</span><br><span class="line">    VIEW_CHANGE,</span><br><span class="line">    XA_PREPARE;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EventType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/05/13/java-lambda函数式编程/" data-toggle="tooltip" data-placement="top" title="java-lambda函数式编程">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/03/04/java反射获取对象属性实战及工具类/" data-toggle="tooltip" data-placement="top" title="java反射获取对象属性实战及工具类">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#binlog日志"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">binlog日志</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binlog使用场景"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">binlog使用场景</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binlog刷盘时机"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">binlog刷盘时机</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binlog日志格式"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">binlog日志格式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#redolog日志"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">redolog日志</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#为什么需要redolog"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">为什么需要redolog</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#redolog-在磁盘里的结构"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">redolog 在磁盘里的结构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#redolog-相关全局变量"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">redolog 相关全局变量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#redolog-恢复数据库的过程"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">redolog 恢复数据库的过程</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undolog日志"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">undolog日志</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undolog-的作用"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">undolog 的作用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undolog-的链表"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">undolog 的链表</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#事务分配-undolog-的过程"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">事务分配 undolog 的过程</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#shyiko监听解析binlog日志"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">shyiko监听解析binlog日志</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binlog监听器"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">binlog监听器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binlog数据转换器"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">binlog数据转换器</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2023 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

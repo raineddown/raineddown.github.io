@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          云计算服务类型IaaS,PaaS,SaaS,BaaS,FaaS - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2022/12/07/云计算服务类型IaaS-PaaS-SaaS-BaaS-FaaS/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#云计算" title="云计算">云计算</a>
+                            
+                        </div>
+                        <h1>云计算服务类型IaaS,PaaS,SaaS,BaaS,FaaS</h1>
+                        <h2 class="subheading">判断inputstream是否为空</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2022-12-07
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3.4k</span> and
+                                Reading Time <span class="post-count">12</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近学习AWS遇到了各种云计算服务类型IaaS,PaaS,SaaS,BaaS,FaaS特此记录各种云计算类型。</p>
+<p>AWS官方文档介绍:<a href="https://aws.amazon.com/cn/types-of-cloud-computing/" target="_blank" rel="noopener">Types of Cloud Computing</a></p>
+<p>下图为本地架构,IaaS,PaaS,SaaS之间的区别</p>
+<p><img src="/img/AWS/IaaS,SaaS,PaaS.png" alt="本地架构,IaaS,PaaS,SaaS之间的区别"></p>
+<p>概述:</p>
+<ul>
+<li>基础设施即服务 (IaaS):</li>
+</ul>
+<p>基础设施即服务有时缩写为 IaaS，包含云 IT 的基本构建块，通常提供对联网功能、计算机（虚拟或专用硬件）以及数据存储空间的访问。基础设施即服务提供最高等级的灵活性和对 IT 资源的管理控制，其机制与现今众多 IT 部门和开发人员所熟悉的现有 IT 资源最为接近。</p>
+<ul>
+<li>平台即服务 (PaaS)：</li>
+</ul>
+<p>平台即服务消除了组织对底层基础设施（一般是硬件和操作系统）的管理需要，让您可以将更多精力放在应用程序的部署和管理上面。这有助于提高效率，因为您不用操心资源购置、容量规划、软件维护、补丁安装或与应用程序运行有关的任何无差别的繁重工作。</p>
+<ul>
+<li>软件即服务 (SaaS)：</li>
+</ul>
+<p>软件即服务提供了一种完善的产品，其运行和管理皆由服务提供商负责。人们通常所说的软件即服务指的是终端用户应用程序。使用 SaaS 产品时，服务的维护和底层基础设施的管理都不用您操心，您只需要考虑怎样使用 SaaS 软件就可以了。SaaS 的常见应用是基于 Web 的电子邮件，在这种应用场景中，您可以收发电子邮件而不用管理电子邮件产品的功能添加，也不需要维护电子邮件程序运行所在的服务器和操作系统。</p>
+<h2 id="IaaS-Infrastructure-as-a-Service-基础架构即服务"><a href="#IaaS-Infrastructure-as-a-Service-基础架构即服务" class="headerlink" title="IaaS(Infrastructure as a Service)基础架构即服务"></a>IaaS(Infrastructure as a Service)基础架构即服务</h2><p>AWS官方文档介绍:<a href="https://aws.amazon.com/cn/what-is/iaas/" target="_blank" rel="noopener">什么是基础设施即服务（IaaS）？</a></p>
+<p>IaaS就是由云服务提供商，提供底层/物理层基础设施资源（服务器，数据中心，环境控制，电源，服务器机房），客户自己部署和执行操作系统或应用程序等各种软件。<br>最常见的形式，就是在阿里云、腾讯云购买ECS(Elastic Compute Service)云服务器、AWS上购买EC2(Amazon Elastic Compute Cloud)等。</p>
+<h2 id="PaaS-Platform-as-a-Service-平台即服务"><a href="#PaaS-Platform-as-a-Service-平台即服务" class="headerlink" title="PaaS(Platform as a Service)平台即服务"></a>PaaS(Platform as a Service)平台即服务</h2><p>平台即服务是指将平台作为一种服务对外提供, 那么我们要学习的云平台, 就是一种<code>PaaS</code>服务PaaS处于中间层，服务商提供基础设施底层服务，提供操作系统（Windows，Linux）、数据库服务器、Web服务器、域控制器和其他中间件，以及服务模型中的备份服务等中件层服务。</p>
+<p>下面用几款PaaS类型的AWS产品举例说明:</p>
+<ul>
+<li>S3 - Amazon Simple Storage Service</li>
+</ul>
+<p><a href="https://aws.amazon.com/cn/s3/?nc2=h_ql_prod_st_s3" target="_blank" rel="noopener">S3官方文档</a></p>
+<p>S3 是一种面向 Internet 的存储服务。您可以通过 Amazon S3 随时在 Web 上的任何位置存储和检索的任意大小的数据。您可以使用 AWS 管理控制台简单而直观的 web 界面来完成这些任务。</p>
+<p>通俗的说，S3就是AWS提供的一款 分布式的对象存储服务。可以认为S3是AWS云上的HDFS。</p>
+<p>我们可以将其当做是一个云上的私有网盘存储。</p>
+<p>可以帮助我们存储公司内的业务数据，并支持各种编程语言对其进行开发</p>
+<blockquote>
+<p>简单来说，就是云上的HDFS、或者网盘。</p>
+<p>可以存储数据，同时S3支持编程开发，可以使用许多编程语言操作S3.</p>
+</blockquote>
+<ul>
+<li>AWS Deep Learning AMI</li>
+</ul>
+<p><a href="https://aws.amazon.com/cn/machine-learning/amis/?nc2=type_a" target="_blank" rel="noopener">AWS Deep Learning AMI（DLAMI）官方文档</a></p>
+<p>AWS Deep Learning AMI 可以为机器学习专业人员和研究人员提供基础设施和各种工具，从而加速云中任意规模的深度学习进程。您可以在 Amazon Linux 或 Ubuntu（预先安装了流行的深度学习框架）上快速启动 Amazon EC2 实例。框架示例包括 Apache MXNet 和 Gluon、TensorFlow、Microsoft Cognitive Toolkit (CNTK)、Caffe、Caffe2、Theano、Torch 和 Keras。您可以使用这些框架训练复杂的自定义 AI 模型、试验新算法或学习新技能和技术。</p>
+<ul>
+<li>Cloud Watch - 云监控平台</li>
+</ul>
+<p>(Cloud Watch官方文档)[<a href="https://aws.amazon.com/cn/cloudwatch/?nc2=type_a" target="_blank" rel="noopener">https://aws.amazon.com/cn/cloudwatch/?nc2=type_a</a>]</p>
+<p>AWS Cloud Watch 是一个统一的指标收集、监控、报警等功能一体的监控处理平台。</p>
+<p>全部AWS服务均可无缝对接CloudWatch（系统内置功能），所有服务均可从CloudWatch上进行指标查看、报警配置等。</p>
+<p>对于自定义需求，CloudWatch也支持SDK进行定制开发。</p>
+<p>总结:PaaS优于IaaS的地方在于，高层级的应用程序服务已经通过设计与测试考验，并能够有效的集成。平台的操作系统，平台的应用补丁，产品的测试运维有云服务厂商全部承担职责。常见的PaaS服务平台如:腾讯地图开发平台，小程序开发平台，物联网设备开发平台。</p>
+<h2 id="SaaS-Software-as-a-Service-软件即服务"><a href="#SaaS-Software-as-a-Service-软件即服务" class="headerlink" title="SaaS(Software as a Service)软件即服务"></a>SaaS(Software as a Service)软件即服务</h2><p>软件即服务, 是指将软件作为一种服务对外提供。服务商提供基于软件的解决方案，满足客户最终需求；如OA、CRM、MIS、ERP、HRM、CM、Office 365、iCloud、G Suite等应用，客户不需考虑任何形式的专业技术知识，获得完整的软件包，使他们的日常工作和生活变得更轻松。<br>SaaS实际上是提供了具体的软件服务，细化到了具体的分类，相比IaaS和PaaS面向程序员，SaaS是直接面向产品经理甚至用户的。</p>
+<p>AWS SaaS相关产品:</p>
+<ul>
+<li>RDS - 云上关系型数据库RDS全称：Amazon Relational Database Service</li>
+</ul>
+<p>是一种 Web 服务，可让用户更轻松地在云中设置、操作和扩展关系数据库。</p>
+<p>同时，RDS也是一款Serverless（无服务器化、全托管）的服务，也就是，不需要准备服务器，只需要鼠标点击几下即可在云上得到一款可用的数据库。</p>
+<p>用户只需要通过网络连接到数据库就可开展业务开发和应用。</p>
+<p>同时，关于数据库的维护、高可用、异常处理等均无需用户管理，这些交由AWS进行管理</p>
+<blockquote>
+<p>简单来说就是在云上创建关系型数据库，然后通过网络连接使用。</p>
+</blockquote>
+<ul>
+<li>DynamoDB - 云上的KV型NoSQL数据库</li>
+</ul>
+<p>DynamoDB是AWS提供的一款KV型、列式存储的NoSQL数据库。</p>
+<p>它也是一款Server Less的服务，用户只需要通过web页面简单的配置，即可得到一款可用的DynamoDB数据库。</p>
+<p>通过网络连接到DynamoDB之上，即可进行业务的开发和构建。</p>
+<p>DynamoDB 的架构和HBase有一定的相识度，它继续分区键来确定数据分区，基于排序键来确定数据排序</p>
+<p>同时支持二级索引，可以为一个DynamoDB表增加最多5个二级索引来加速检索。</p>
+<ul>
+<li>RedShift - 云上的数据仓库服务</li>
+</ul>
+<p>Amazon Redshift 是一种快速、完全托管的 PB 级数据仓库服务，它使得用现有商业智能工具对您的所有数据进行高效分析变得简单而实惠。它为从几百 GB 到 1PB 或更大的数据集而优化，且每年每 TB 花费不到 1 000 USD，为最传统数据仓库存储解决方案成本的十分之一。</p>
+<p>Redshift是AWS提供的一款：快速、大容量、分布式、完全托管（非Serverless）的PB级数据仓库服务。</p>
+<p>Redshift底层基于Postgresql而构造，可以认为是一款分布式的Postgresql数据库，并且Redshift为数仓应用进行了单独的优化，完全适合作为公司内的PB级的大型数仓来使用。</p>
+<p>同时，在市面上，Redshift很受欢迎，许多数仓的生态都加入了Redshift的支持，比如常见的BI领域，许多BI工具都可以直接对Redshift进行BI分析。如：Tableau、PowerBI等。</p>
+<h2 id="Serverless无服务模型"><a href="#Serverless无服务模型" class="headerlink" title="Serverless无服务模型"></a>Serverless无服务模型</h2><p>Serverless 是一种云原生开发模型，允许开发人员构建和运行应用程序而无需管理服务器。 Serverless 并不意味着不需要服务器，只是服务器由云厂商提供服务器的维护，更新，扩展等无差异化的服务器管理的日常工作。开发人员可以将其代码简单的打包部署在无服务器，最大化利用云的弹性可扩展性构建自己的应用程序。IT 的整个发展历程，我们可以看出是从本地为中心，最后到以应用为中心的 Serverless 架构的一系列变革。云计算类型BaaS,FaaS属于Serverless模型。</p>
+<h3 id="Serverless-优势"><a href="#Serverless-优势" class="headerlink" title="Serverless 优势"></a>Serverless 优势</h3><ul>
+<li>以应用为中心，无需运营基础架构</li>
+</ul>
+<p>以应用为中心，无需管理和运营基础架构，部署和升级，IT 人员只需要专注于核心的业务和代码，大大缩短开发周期，同时也大大节省管理基础架构的成本。</p>
+<ul>
+<li>自动伸缩</li>
+</ul>
+<p>底层基础架构根据业务需求，自动伸缩。企业不需要考虑预置多少服务器，比如说 Lambda 会根据业务的负载自动增加和减少 Lambda 实例的个数，保证在极致负载情况下业务的连续性，同时在负载减少时，lambda 也会自动减少实例，没有服务器空跑的情况。</p>
+<ul>
+<li>为价值付费</li>
+</ul>
+<p>Serverless 为价值付费，节省成本。比如说 Lambda 的付费模式，是根据 lambda 函数的运行时长和调用次数来收费的，每一次调用和运行，都是一次真正的客户请求，业务和费用直接关联，没有成本浪费；EventBridge 根据发不到事件总线的事件数量收费，SNSSNS 根据请求的数量收费，等等。</p>
+<ul>
+<li>内置高可用和高安全</li>
+</ul>
+<p>Serverless 内置高可用和高安全，不需要再为此设计再高可用的架构和定期打安全补丁，高可用方面，lambda 函数都是垮可用区扩展，在安全方面比如说每个 lambda 函数都是运行在独立的 firecracker 虚拟机中，lambda 函数实例会被自动回收，杜绝感染，也可以及时更新安全补丁，保证性能的，减少开发工作，提高效率。举个例子，2021 年 12 月很多开发和运维人员花了几周或者上月的时间升级 java Log4j CVE 的安全补丁，但是对于 lambda 的客户来说，他们不需要做任何的事，亚马逊云科技自动更新了 lambda 的 java 安全补丁，客户不需要花费人力和时间管理更新，保证安全性的同时提高了生产效率。</p>
+<p><span style="color:red;">AWS Serverless F&amp;Q: <a href="https://aws.amazon.com/cn/serverless/faqs/" target="_blank" rel="noopener">Serverless F&amp;Q</a></span></p>
+<h3 id="BaaS-Backend-as-a-Service-后端即服务"><a href="#BaaS-Backend-as-a-Service-后端即服务" class="headerlink" title="BaaS(Backend as a Service)后端即服务"></a>BaaS(Backend as a Service)后端即服务</h3><p>Backend as a Service，后端即服务。<br>服务商为客户(开发者)提供整合云后端的服务，如提供文件存储、数据存储、推送服务、身份验证服务等功能，以帮助开发者快速开发应用。</p>
+<p>国外比较知名的BaaS服务提供商是StackMob和Parse。<br>在国内，Talking Data、友盟、Bmob、百度和新浪开发平台均有相关业务。</p>
+<p>事实上google的Firebase也是一个BaaS。Firebase提供了广泛的功能列表，这些功能分为三个阶段，即开发，获取和成长。 开发阶段包括实时数据库，身份验证，云消息传递，存储，托管，测试实验室（用于在设备上测试应用程序）和崩溃报告。 作为商业提供商，它还集成了AdMob平台，可通过您的应用获利。 在发展之路上，您会发现诸如App Indexing，AdWords，Notifications等功能。</p>
+<p>也可以理解为BaaS = IaaS + PaaS + APIs + SDKs，即服务提供商提供了大量的功能，使用方只需要接入sdk，然后使用其api即可。</p>
+<p><span style="color:red;">补充:<code>区块链即服务</code>，这个简称同名，也是BaaS。</span></p>
+<p><span style="color:red;">常见产品: <a href="https://aws.amazon.com/cn/managed-blockchain/?nc2=h_ql_prod_bl_amb" target="_blank" rel="noopener">Amazon Managed Blockchain</a>,阿里云<a href="https://help.aliyun.com/document_detail/89193.html" target="_blank" rel="noopener">Hyperledger Fabric</a> </span></p>
+<h3 id="FaaS-Function-as-a-service-函数即服务"><a href="#FaaS-Function-as-a-service-函数即服务" class="headerlink" title="FaaS(Function as a service)函数即服务"></a>FaaS(Function as a service)函数即服务</h3><p>Function as a service，函数即服务，也叫功能即服务。<br>服务商提供一个平台，允许客户开发、运行和管理应用程序功能，而无需构建和维护通常与开发和启动应用程序相关的基础架构的复杂性。 按照此模型构建应用程序是实现“无服务器”体系结构的一种方式，通常在构建微服务应用程序时使用。</p>
+<p>无服务器计算，当前使用最广泛的是AWS的Lambada。<a href="https://aws.amazon.com/cn/lambda/" target="_blank" rel="noopener">AWS lambda官方文档</a><br>腾讯Serverless云函数：Serverless新手体验<br>阿里云：产品 函数计算<br>FaaS实例最佳实践</p>
+<p>一般情况下，云平台的计算费用取决于调用次数，执行时长，内存消耗。所以如果这个函数的功能代码写得不好，调用次数非常多，执行时间特别长，或者消耗了大量的内存，那么价格就会很贵。<br>一般和BaaS结合，开发一些项目所需的特殊计算，只为实际计算量付费。<br>那么这种服务适合用于计算量偶尔比较高，但是一般情况没有计算量，或者计算量低的服务。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/01/08/几种深拷贝方式/" data-toggle="tooltip" data-placement="top" title="几种深拷贝方式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/11/14/java-function函数式编程-Map实现轻量级的策略模式/" data-toggle="tooltip" data-placement="top" title="java-function函数式编程+Map实现轻量级的策略模式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#IaaS-Infrastructure-as-a-Service-基础架构即服务"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">IaaS(Infrastructure as a Service)基础架构即服务</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#PaaS-Platform-as-a-Service-平台即服务"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">PaaS(Platform as a Service)平台即服务</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SaaS-Software-as-a-Service-软件即服务"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">SaaS(Software as a Service)软件即服务</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Serverless无服务模型"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Serverless无服务模型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Serverless-优势"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">Serverless 优势</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#BaaS-Backend-as-a-Service-后端即服务"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">BaaS(Backend as a Service)后端即服务</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#FaaS-Function-as-a-service-函数即服务"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">FaaS(Function as a service)函数即服务</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#云计算" title="云计算">云计算</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2023 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

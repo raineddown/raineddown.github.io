@@ -3,6 +3,69 @@
 
 
     <url>
+        <loc>http://radarsoftware.cn/tags/AI/</loc>
+        <lastmod>2023-05-24T15:50:37.795Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/tags/%25E4%25BA%2591%25E8%25AE%25A1%25E7%25AE%2597/</loc>
+        <lastmod>2023-05-24T15:38:28.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/tags/mysql/</loc>
+        <lastmod>2023-05-24T15:30:57.731Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/tags/reflection/</loc>
+        <lastmod>2023-05-24T15:30:57.716Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/tags/%25E6%25B7%25B1%25E6%258B%25B7%25E8%25B4%259D/</loc>
+        <lastmod>2023-05-24T15:30:57.685Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/tags/json/</loc>
+        <lastmod>2023-05-24T15:30:57.685Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/tags/java/</loc>
+        <lastmod>2023-05-24T15:30:57.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/tags/function%25E5%2587%25BD%25E6%2595%25B0%25E5%25BC%258F%25E7%25BC%2596%25E7%25A8%258B/</loc>
+        <lastmod>2023-05-24T15:30:57.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://radarsoftware.cn/tags/%25E7%25AD%2596%25E7%2595%25A5%25E6%25A8%25A1%25E5%25BC%258F/</loc>
+        <lastmod>2023-05-24T15:30:57.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://radarsoftware.cn/tags/inputstream/</loc>
         <lastmod>2022-10-23T04:31:18.995Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -89,13 +152,6 @@
     <url>
         <loc>http://radarsoftware.cn/tags/%25E6%25B3%25A8%25E5%2586%258C%25E4%25B8%25AD%25E5%25BF%2583/</loc>
         <lastmod>2022-05-15T07:21:23.672Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://radarsoftware.cn/tags/%25E7%25AD%2596%25E7%2595%25A5%25E6%25A8%25A1%25E5%25BC%258F/</loc>
-        <lastmod>2022-05-06T15:06:49.733Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
