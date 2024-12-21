@@ -283,87 +283,24 @@
 
         <div class="post-preview">
 
-            <a href="/2022/08/21/javaweb项目常用缓存/">
+            <a href="/2024/02/14/MySQL事务-ACID特性及其实现原理/">
                 <h2 class="post-title">
-                    javaweb项目常用缓存
+                    MySQL事务:ACID特性及其实现原理
                 </h2>
                 <h3 class="post-subtitle">
-                    线上问题分析
+                    MySQL事务:ACID特性及其实现原理
                 </h3>
                 <div class="post-content-preview">
-                    缓存简介随着互联网的普及，内容信息越来越复杂，用户数和访问量越来越大，我们的应用需要支撑更多的并发量，同时我们的应用服务器和数据库服务器所做的计算也越来越多。但是往往我们的应用服务器资源是有限的，且技术变革是缓慢的，数据库每秒能接受的请求次数也是有限的（或者文件的读写也是有限的），如何能够有效利用有限的资源来提供尽可能大的吞吐量? 一个有效的办法就是引入缓存，打破标准流程，每个环节中请求可以......
+                    一、基础概念事务（Transaction）是访问和更新数据库的程序执行单元；事务中可能包含一个或多个sql语句，这些语句要么都执行，要么都不执行。作为一个关系型数据库，MySQL支持事务，本文介绍基于MySQL5.6。
+首先回顾一下MySQL事务的基础知识。
+1. 逻辑架构和存储引擎 
+图片来源：https://blog.csdn.net/fuzhongmin05/article/detai......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-08-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#cache" title="cache">cache</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/14/排查线上java程序高CPU占比代码/">
-                <h2 class="post-title">
-                    排查线上java程序高CPU占比代码
-                </h2>
-                <h3 class="post-subtitle">
-                    线上问题分析
-                </h3>
-                <div class="post-content-preview">
-                    java程序CPU占比过高分析一、Arthas分析高CPU占比代码Arthas官方文档地址:https://arthas.aliyun.com/doc/quick-start.html
-1.1 启动Arthas在命令行下面执行（使用和目标进程一致的用户启动，否则可能attach失败）：
-12curl -O https:&#x2F;&#x2F;arthas.aliyun.com&#x2F;ar......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2022-07-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#线上问题分析" title="线上问题分析">线上问题分析</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/06/23/MySQL高级/">
-                <h2 class="post-title">
-                    MySQL高级
-                </h2>
-                <h3 class="post-subtitle">
-                    MySQL
-                </h3>
-                <div class="post-content-preview">
-                    MySQL高级一、MySQL简介MySQL 是⼀种关系型数据库，在Java企业级开发中⾮常常⽤，因为 MySQL 是开源免费的，并 且⽅便扩展。阿⾥巴巴数据库系统也⼤量⽤到了 MySQL，因此它的稳定性是有保障的。MySQL 是开放源代码的，因此任何⼈都可以在 GPL(General Public License) 的许可下下载并根据个性化的需要对其进⾏修改。MySQL的默认端⼝号是3306......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2022-06-23
+                    2024-02-14
                 </p>
                 <div class="tags">
                     
@@ -381,29 +318,29 @@
 
         <div class="post-preview">
 
-            <a href="/2022/05/15/countDownLatch/">
+            <a href="/2024/01/12/springboot启动流程分析/">
                 <h2 class="post-title">
-                    countDownLatch简介与基础使用
+                    springboot启动流程分析
                 </h2>
                 <h3 class="post-subtitle">
-                    countDownLatch简介与基础使用
+                    springboot启动流程分析
                 </h3>
                 <div class="post-content-preview">
-                    简介概念CountDownLatch允许一个或者多个线程去等待其他线程完成操作。
-CountDownLatch接收一个int型参数，表示要等待的工作线程的个数。
-当然也不一定是多线程，在单线程中可以用这个int型参数表示多个操作步骤。
-方法CountDownLatch 提供了一些方法：
-方法    说明await()    使当前线程进入同步队列进行等待，直到latch的值被减到0或者当前线......
+                    spring boot启动概述spring boot 框架凭借极简配置，一键运行和强大的第三方框架集成等特点，受到广大开发者的青睐，基本成为java开发中必不可少的基础的框架。spirng boot带给我们这么多便利的背后，它都做了些什么，让我们就跟随spirng boot的整个启动流程一探究竟。
+ 
+上图可见spring boot的整个启动流程及各组件的相互调用关系。
+
+java程序由启动......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-05-15
+                    2024-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#countDownLatch" title="countDownLatch">countDownLatch</a>
+                      <a href="/tags/#springboot" title="springboot">springboot</a>
                     
                 </div>
             
@@ -417,33 +354,30 @@ CountDownLatch接收一个int型参数，表示要等待的工作线程的个数
 
         <div class="post-preview">
 
-            <a href="/2022/04/22/spring容器注入实现策略模式/">
+            <a href="/2023/12/21/Elasticsearch——复合查询/">
                 <h2 class="post-title">
-                    spring容器注入实现策略模式
+                    Elasticsearch——复合查询
                 </h2>
                 <h3 class="post-subtitle">
-                    spring容器注入实现策略模式
+                    复合查询
                 </h3>
                 <div class="post-content-preview">
-                    背景一个项目对接多个系统的同一功能，或者同一功能多种实现的选择需求的策略模式实现。
-Spring容器实现需求: 物质采购汉堡选择，可以选择采购肯德基或麦当劳
-示例代码:
-汉堡策略类上下文HamburgerContext:
-12345678910111213141516171819@Componentpublic class HamburgerContext &#123;    /**    ......
+                    前言复合查询有：bool query(布尔查询)、boosting query(提高查询)、constant_score（固定分数查询）、dis_max(最佳匹配查询）、function_score(函数查询）。
+一、bool query(布尔查询)1、概念定义 可以理解成通过布尔逻辑将较小的查询组合成较大的查询。
+Bool查询语法有以下特点
+
+子查询可以任意顺序出现
+可以嵌套多个查询，包括......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-04-22
+                    2023-12-21
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#spring" title="spring">spring</a>
-                    
-                      <a href="/tags/#Strategy" title="Strategy">Strategy</a>
-                    
-                      <a href="/tags/#策略模式" title="策略模式">策略模式</a>
+                      <a href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
                     
                 </div>
             
@@ -457,31 +391,27 @@ Spring容器实现需求: 物质采购汉堡选择，可以选择采购肯德基
 
         <div class="post-preview">
 
-            <a href="/2022/04/02/Async与Scheduled/">
+            <a href="/2023/11/10/Elasticsearch——Bucket聚合查询/">
                 <h2 class="post-title">
-                    Async与Scheduled注解
+                    Elasticsearch——Bucket聚合查询
                 </h2>
                 <h3 class="post-subtitle">
-                    Async与Scheduled
+                    Bucket聚合查询
                 </h3>
                 <div class="post-content-preview">
-                    背景最近项目中使用了@Async与@Scheduled自定义线程池注解实现定时任务，特此记录实现及其原理。
-@Async简介@Async是Spring 3.0之后提供的注解，使用@Async注解可以轻松的实现异步调用。
-官方文档: https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/schedu......
+                    概念Bucket 可以理解为一个桶，它会遍历文档中的内容，凡是符合某一要求的就放入一个桶中，分桶相当与 SQL 中的 group by。
+这篇博客讲的桶的关键字有：Terms Aggregation 、Filter Aggregation、Histogram Aggregation、Range Aggregation 、Date Aggregation。
+一、创建索引、数据1、创建索引123......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-04-02
+                    2023-11-10
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Async" title="Async">Async</a>
-                    
-                      <a href="/tags/#Scheduled" title="Scheduled">Scheduled</a>
-                    
-                      <a href="/tags/#线程池" title="线程池">线程池</a>
+                      <a href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
                     
                 </div>
             
@@ -495,30 +425,27 @@ Spring容器实现需求: 物质采购汉堡选择，可以选择采购肯德基
 
         <div class="post-preview">
 
-            <a href="/2022/03/31/Spring远程代码执行漏洞/">
+            <a href="/2023/10/08/Elasticsearch——Metric聚合查询/">
                 <h2 class="post-title">
-                    Spring远程命令执行漏洞
+                    Elasticsearch——Metric聚合查询
                 </h2>
                 <h3 class="post-subtitle">
-                    Spring远程命令执行漏洞
+                    Metric聚合查询
                 </h3>
                 <div class="post-content-preview">
-                    Spring远程命令执行漏洞转载地址:https://mp.weixin.qq.com/s/BnF8CWuUxNliCoa260bEaA
- Spring RCE （远程代码执行漏洞）已被官方证实。
-
-国家信息安全漏洞平台：https://mp.weixin.qq.com/s/BnF8CWuUxNliCoa260bEaA
-
-CVE: https://tanzu.vmware.com/secur......
+                    前言在Mysql中，我们可以获取一组数据的 最大值(Max)、最小值(Min)。同样我们能够对这组数据进行 分组(Group)。那么对于Elasticsearch中
+我们也可以实现同样的功能，聚合有关资料官方文档内容较多，这里大概分两篇博客写这个有关Elasticsearch聚合。
+官方对聚合有四个关键字: Metric(指标）、Bucketing(桶）、Matrix(矩阵）、Pipelin......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-03-31
+                    2023-10-08
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#spring" title="spring">spring</a>
+                      <a href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
                     
                 </div>
             
@@ -532,26 +459,27 @@ CVE: https://tanzu.vmware.com/secur......
 
         <div class="post-preview">
 
-            <a href="/2022/03/15/GateWay远程代码执行漏洞/">
+            <a href="/2023/09/12/Elasticsearch——Query查询和Filter查询/">
                 <h2 class="post-title">
-                    GateWay漏洞
+                    Elasticsearch——Query查询和Filter查询
                 </h2>
                 <h3 class="post-subtitle">
-                    GateWay漏洞
+                    Query查询和Filter查询
                 </h3>
                 <div class="post-content-preview">
-                    描述2022年3月1日，Spring官方发布了关于Spring Cloud Gateway的两个CVE漏洞，分别为CVE-2022-22946与CVE-2022-22947：
-漏洞1：Spring Cloud Gateway 远程代码执行漏洞（CVE-2022-22947）3 月 1 日，VMware 官方发布安全公告，声明对 Spring Cloud Gateway 中的一处命令注入漏洞进......
+                    概念1、概念一个查询语句究竟具有什么样的行为和得到什么结果，主要取决于它到底是处Query还是Filter。两者有很大区别，我们来看下：
+Query context 查询上下文 这种语句在执行时既要计算文档是否匹配，还要计算文档相对于其他文档的匹配度有多高，匹配度越高，_score 分数就越高
+Filter context 过滤上下文 过滤上下文中的语句在执行时只关心文档是否和查询匹配，不会......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-03-15
+                    2023-09-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#GateWay" title="GateWay">GateWay</a>
+                      <a href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
                     
                 </div>
             
@@ -565,30 +493,27 @@ CVE: https://tanzu.vmware.com/secur......
 
         <div class="post-preview">
 
-            <a href="/2022/02/23/Oracle与Mysql数据库区别/">
+            <a href="/2023/08/07/Elasticsearch——基本命令/">
                 <h2 class="post-title">
-                    Oracle与Mysql数据库区别
+                    Elasticsearch——基本命令
                 </h2>
                 <h3 class="post-subtitle">
-                    Oracle与Mysql数据库区别
+                    Elasticsearch基本命令
                 </h3>
                 <div class="post-content-preview">
-                    (1) 对事务的提交
-MySQL默认是自动提交，而Oracle默认不自动提交，需要用户手动提交，需要在写commit;指令或者点击commit按钮
-(2) 分页查询
-MySQL是直接在SQL语句中写”select… from …where…limit x, y”,有limit就可以实现分页;而Oracle则是需要用到伪列ROWNUM和嵌套查询
-oracle:
-12345select * fr......
+                    1.ES集群相关命令ES集群相关命令主要是_cat命令，所以这里详细讲解下该命令。
+1、_cat命令_cat系列提供了一系列查询Elasticsearch集群状态的接口。
+123456789101112131415161718192021222324&#x2F;_cat&#x2F;allocation      #查看单节点的shard分配整体情况&#x2F;_cat&#x2F;shards......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-02-23
+                    2023-08-07
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Oracle" title="Oracle">Oracle</a>
+                      <a href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
                     
                 </div>
             
@@ -602,29 +527,115 @@ oracle:
 
         <div class="post-preview">
 
-            <a href="/2022/02/03/Dubbo四种负载均衡算法/">
+            <a href="/2023/07/22/Elasticsearch——基本概念/">
                 <h2 class="post-title">
-                    Dubbo四种负载均衡算法
+                    Elasticsearch——基本概念
                 </h2>
                 <h3 class="post-subtitle">
-                    Dubbo四种负载均衡算法
+                    Elasticsearch基本概念
                 </h3>
                 <div class="post-content-preview">
-                    Dubbo四种负载均衡算法整体架构图可以看出抽象的负载均衡下的类分为4个，这4个类表示了4种负载均衡策略，分别是一致性Hash均衡算法、随机调用法、轮询法、最少活动调用法
-
-原理RandomLoadBalance随机调用负载均衡，该类实现了抽象的AbstractLoadBalance接口,重写了doSelect方法，看方法的细节就是首先遍历每个提供服务的机器，获取每个服务的权重，然后累加权重......
+                    前言本文包含的基本概念包含:Index、Type、Document。集群，节点，分片及副本，倒排索引，分词器。
+1.Index,Type,Document1.1 Indexindex：索引是文档(Document)的容器，是一类文档的集合。
+索引这个词在 ElasticSearch 会有三种意思:
+1)、索引(名词)
+类比传统的关系型数据库领域来说，索引相当于SQL中的一个数据库(Datab......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-02-03
+                    2023-07-22
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Dubbo" title="Dubbo">Dubbo</a>
+                      <a href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
                     
-                      <a href="/tags/#LoadBalanced" title="LoadBalanced">LoadBalanced</a>
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/06/16/Elasticsearch——Docker容器中运行ES-Kibana-Cerebro/">
+                <h2 class="post-title">
+                    Elasticsearch——Docker容器中运行ES,Kibana,Cerebro
+                </h2>
+                <h3 class="post-subtitle">
+                    Docker容器中运行ES,Kibana,Cerebro
+                </h3>
+                <div class="post-content-preview">
+                    Docker容器中运行ES,Kibana,Cerebro1.所需环境以及配置文件环境：Docker
+配置文件:
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071version:......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2023-06-16
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/05/13/java-lambda函数式编程/">
+                <h2 class="post-title">
+                    java-lambda函数式编程
+                </h2>
+                <h3 class="post-subtitle">
+                    java-lambda函数式编程
+                </h3>
+                <div class="post-content-preview">
+                    简介java函数式编程可以简单概括:
+基本函数 + lambda表达式 + 方法引用 + stream API = java函数式编程
+本文介绍java.util.function包下常用的函数式接口及其实战
+基本函数完整文档地址
+
+
+
+
+接口
+描述
+
+
+
+
+Predicate
+表示一个参数的谓词（布尔值函数）。
+
+
+Consumer
+表示接受单个输入参数并且不返回结果的操作。
+
+
+Func......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2023-05-13
+                </p>
+                <div class="tags">
                     
                 </div>
             
@@ -705,15 +716,13 @@ oracle:
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -735,6 +744,12 @@ oracle:
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
             
         
@@ -743,11 +758,11 @@ oracle:
             
         
             
-        
+            <a href="/tags/#springboot" title="springboot" rel="4">springboot</a>
             
         
             
-            <a href="/tags/#springboot" title="springboot" rel="3">springboot</a>
+        
             
         
             
@@ -781,12 +796,6 @@ oracle:
             
         
             
-        
-            
-            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
-            
-        
-            
             <a href="/tags/#mybatis-plus" title="mybatis-plus" rel="2">mybatis-plus</a>
             
         
@@ -797,11 +806,13 @@ oracle:
             
         
             
-        
+            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
             
         
             
             <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
+            
+        
             
         
             
@@ -853,14 +864,6 @@ oracle:
             
         
             
-            <a href="/tags/#spring" title="spring" rel="3">spring</a>
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#GateWay" title="GateWay" rel="2">GateWay</a>
             
         
@@ -877,13 +880,21 @@ oracle:
             
         
             
+            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+            
+        
+            
         
             
             <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
             
         
             
-            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+        
+            
+        
+            
+            <a href="/tags/#spring" title="spring" rel="3">spring</a>
             
         
             
@@ -907,7 +918,19 @@ oracle:
             
         
             
+            <a href="/tags/#MySQL" title="MySQL" rel="2">MySQL</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="2">java</a>
             
         
             
@@ -925,7 +948,17 @@ oracle:
             
         
             
+            <a href="/tags/#Elasticsearch" title="Elasticsearch" rel="7">Elasticsearch</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#powerJob" title="powerJob" rel="4">powerJob</a>
             
         
             
@@ -1030,23 +1063,23 @@ oracle:
     <ul>
       
         <li>
-          <a href="/2023/05/13/java-lambda%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">java-lambda函数式编程</a>
+          <a href="/2024/12/07/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6outlook%E9%82%AE%E4%BB%B6%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件outlook邮件扫描功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/04/17/mysql%E6%97%A5%E5%BF%97bingLog-redoLog-undoLog/">mysql日志bingLog,redoLog,undoLog,java监听binlog</a>
+          <a href="/2024/11/07/ETL%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E8%84%9A%E6%9C%ACkettle/">ETL数据清洗脚本kettle</a>
         </li>
       
         <li>
-          <a href="/2023/03/04/java%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%AE%9E%E6%88%98%E5%8F%8A%E5%B7%A5%E5%85%B7%E7%B1%BB/">java反射获取对象属性实战及工具类</a>
+          <a href="/2024/10/09/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E6%B0%B4%E5%8D%B0%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件水印功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/02/11/%E7%9B%AE%E5%89%8D%E5%B8%B8%E8%A7%81AI%E8%BD%AF%E4%BB%B6%E5%9B%BD%E5%8C%BA%E6%B3%A8%E5%86%8C%E4%B8%8E%E4%BD%BF%E7%94%A8/">目前常见AI软件国区注册与使用</a>
+          <a href="/2024/09/06/Java%E7%88%AC%E8%99%AB/">Java爬虫</a>
         </li>
       
         <li>
-          <a href="/2023/01/08/%E5%87%A0%E7%A7%8D%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F/">几种深拷贝方式</a>
+          <a href="/2024/08/04/powerJob%E8%B0%83%E5%BA%A6%E5%B1%82%E5%8E%9F%E7%90%86/">powerJob调度层原理</a>
         </li>
       
     </ul>
@@ -1069,131 +1102,6 @@ oracle:
         <li><a href="#" target="_blank">Other</a></li>
     
 </ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-    <h5>categories</h5>
-    <div class="widget">
-      <ul>
-        
-          <a href="categories/#GitHub"><li>GitHub</li></a>
-        
-          <a href="categories/#JSON"><li>JSON</li></a>
-        
-          <a href="categories/#架构模式"><li>架构模式</li></a>
-        
-          <a href="categories/#hexo"><li>hexo</li></a>
-        
-          <a href="categories/#Docker"><li>Docker</li></a>
-        
-          <a href="categories/#centos"><li>centos</li></a>
-        
-          <a href="categories/#IDEA"><li>IDEA</li></a>
-        
-          <a href="categories/#jdk"><li>jdk</li></a>
-        
-          <a href="categories/#idea"><li>idea</li></a>
-        
-          <a href="categories/#Druid"><li>Druid</li></a>
-        
-          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
-        
-          <a href="categories/#docker"><li>docker</li></a>
-        
-          <a href="categories/#sql"><li>sql</li></a>
-        
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
-        
-          <a href="categories/#SQL"><li>SQL</li></a>
-        
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
-        
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
-          <a href="categories/#异步调用"><li>异步调用</li></a>
-        
-          <a href="categories/#shiro"><li>shiro</li></a>
-        
-          <a href="categories/#redis"><li>redis</li></a>
-        
-          <a href="categories/#并发编程"><li>并发编程</li></a>
-        
-          <a href="categories/#vue"><li>vue</li></a>
-        
-          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
-        
-          <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
-        
-          <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
-        
-          <a href="categories/#javastream"><li>javastream</li></a>
-        
-          <a href="categories/#Eureka"><li>Eureka</li></a>
-        
-          <a href="categories/#zookeeper"><li>zookeeper</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#consul"><li>consul</li></a>
-        
-          <a href="categories/#Ribbon"><li>Ribbon</li></a>
-        
-          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
-        
-          <a href="categories/#java线程池"><li>java线程池</li></a>
-        
-          <a href="categories/#Hystrix"><li>Hystrix</li></a>
-        
-          <a href="categories/#spring"><li>spring</li></a>
-        
-          <a href="categories/#Oracle"><li>Oracle</li></a>
-        
-          <a href="categories/#GateWay"><li>GateWay</li></a>
-        
-          <a href="categories/#map"><li>map</li></a>
-        
-          <a href="categories/#easyexcel"><li>easyexcel</li></a>
-        
-          <a href="categories/#cache"><li>cache</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#负载均衡"><li>负载均衡</li></a>
-        
-          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
-        
-          <a href="categories/#服务降级"><li>服务降级</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-      </ul>
-    </div>
 
         <hr>
     
@@ -1242,7 +1150,7 @@ oracle:
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; John Doe 2023 
+                    Copyright &copy; John Doe 2024 
                     <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

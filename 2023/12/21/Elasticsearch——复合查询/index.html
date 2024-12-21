@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Elasticsearch——复合查询 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2023/12/21/Elasticsearch——复合查询/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                            
+                        </div>
+                        <h1>Elasticsearch——复合查询</h1>
+                        <h2 class="subheading">复合查询</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2023-12-21
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.7k</span> and
+                                Reading Time <span class="post-count">11</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>复合查询有</strong>：<code>bool query</code>(布尔查询)、<code>boosting query</code>(提高查询)、<code>constant_score</code>（固定分数查询）、<code>dis_max</code>(最佳匹配查询）、<code>function_score</code>(函数查询）。</p>
+<h2 id="一、bool-query-布尔查询"><a href="#一、bool-query-布尔查询" class="headerlink" title="一、bool query(布尔查询)"></a>一、bool query(布尔查询)</h2><h4 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h4><p><code>定义</code> 可以理解成通过<code>布尔逻辑</code>将较小的查询组合成较大的查询。</p>
+<p>Bool查询语法有以下特点</p>
+<ol>
+<li>子查询可以任意顺序出现</li>
+<li>可以嵌套多个查询，包括bool查询</li>
+<li>如果bool查询中没有must条件，should中必须至少满足一条才会返回结果。</li>
+</ol>
+<p>bool查询包含四种操作符，分别是<strong>must,should,must_not,filter</strong>。他们均是一种数组，数组里面是对应的判断条件。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">must</span>：    必须匹配。贡献算分</span><br><span class="line"><span class="selector-tag">must_not</span>：过滤子句，必须不能匹配，但不贡献算分 </span><br><span class="line"><span class="selector-tag">should</span>：  选择性匹配，至少满足一条。贡献算分</span><br><span class="line"><span class="selector-tag">filter</span>：  过滤子句，必须匹配，但不贡献算分</span><br></pre></td></tr></table></figure>
+<h4 id="2、官方例子"><a href="#2、官方例子" class="headerlink" title="2、官方例子"></a>2、官方例子</h4><p>看下官方举例</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">POST _search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"query"</span>: &#123;</span><br><span class="line">    <span class="attr">"bool"</span> : &#123;</span><br><span class="line">      <span class="attr">"must"</span> : &#123;</span><br><span class="line">        <span class="attr">"term"</span> : &#123; <span class="attr">"user"</span> : <span class="string">"kimchy"</span> &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"filter"</span>: &#123;</span><br><span class="line">        <span class="attr">"term"</span> : &#123; <span class="attr">"tag"</span> : <span class="string">"tech"</span> &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"must_not"</span> : &#123;</span><br><span class="line">        <span class="attr">"range"</span> : &#123;</span><br><span class="line">          <span class="attr">"age"</span> : &#123; <span class="attr">"gte"</span> : <span class="number">10</span>, <span class="attr">"lte"</span> : <span class="number">20</span> &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"should"</span> : [</span><br><span class="line">        &#123; <span class="attr">"term"</span> : &#123; <span class="attr">"tag"</span> : <span class="string">"wow"</span> &#125; &#125;,</span><br><span class="line">        &#123; <span class="attr">"term"</span> : &#123; <span class="attr">"tag"</span> : <span class="string">"elasticsearch"</span> &#125; &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"minimum_should_match"</span> : <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"boost"</span> : <span class="number">1.0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在filter元素下指定的查询对评分没有影响 , 评分返回为0。分数仅受已指定查询的影响。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">官方例子</span><br><span class="line">GET _search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;term&quot;: &#123;</span><br><span class="line">          &quot;status&quot;: &quot;active&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子查询查询为所有文档分配0分，因为没有指定评分查询。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">官方例子</span><br><span class="line">GET _search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: &#123;</span><br><span class="line">        &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;term&quot;: &#123;</span><br><span class="line">          &quot;status&quot;: &quot;active&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此bool查询具有match_all查询，该查询为所有文档指定1.0分。</p>
+<h4 id="3、Bool嵌套查询"><a href="#3、Bool嵌套查询" class="headerlink" title="3、Bool嵌套查询"></a>3、Bool嵌套查询</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 嵌套，实现了 should not 逻辑</span></span><br><span class="line">POST /products/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"query"</span>: &#123;</span><br><span class="line">    <span class="string">"bool"</span>: &#123;</span><br><span class="line">      <span class="string">"must"</span>: &#123;</span><br><span class="line">        <span class="string">"term"</span>: &#123;</span><br><span class="line">          <span class="string">"price"</span>: <span class="string">"30"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"should"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">"bool"</span>: &#123;</span><br><span class="line">            <span class="string">"must_not"</span>: &#123;</span><br><span class="line">              <span class="string">"term"</span>: &#123;</span><br><span class="line">                <span class="string">"avaliable"</span>: <span class="string">"false"</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="string">"minimum_should_match"</span>: 1</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二、boosting-query"><a href="#二、boosting-query" class="headerlink" title="二、boosting query"></a>二、boosting query</h2><h4 id="1、概念-1"><a href="#1、概念-1" class="headerlink" title="1、概念"></a>1、概念</h4><p>在上面的复合查询我们可以通过<code>must_not+must</code> 先剔除不想匹配的文档，再获取匹配的文档，但是有一种场景就是我并不需要完全剔除，而是把需要剔除的那部分文档的</p>
+<p>分数降低。这个时候就可以使用boosting query。下面会举例说明。</p>
+<h4 id="2、举例"><a href="#2、举例" class="headerlink" title="2、举例"></a>2、举例</h4><p><strong>1)、创建索引并添加数据</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建索引并添加数据</span></span><br><span class="line">POST /news/_bulk</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123; <span class="string">"_id"</span>: 1 &#125;&#125;</span><br><span class="line">&#123; <span class="string">"content"</span>:<span class="string">"Apple Mac"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123; <span class="string">"_id"</span>: 2 &#125;&#125;</span><br><span class="line">&#123; <span class="string">"content"</span>:<span class="string">"Apple iPad"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123; <span class="string">"_id"</span>: 3 &#125;&#125;</span><br><span class="line">&#123; <span class="string">"content"</span>:<span class="string">"Apple employee like Apple Pie and Apple Juice"</span> &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2)、 bool must复合查询</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查询结果3-&gt;1-&gt;2</span></span><br><span class="line">POST news/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"query"</span>: &#123;</span><br><span class="line">    <span class="string">"bool"</span>: &#123;</span><br><span class="line">      <span class="string">"must"</span>: &#123;</span><br><span class="line">        <span class="string">"match"</span>:&#123;<span class="string">"content"</span>:<span class="string">"apple"</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3)、bool must_not复合查询</strong></p>
+<p>我们需要的是文档中需要包含 <strong>apple</strong>，但是文档中不包含 <strong>pie</strong>，那么我们可以这么做</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#must_not的方式，将3的记录强制排除掉 (结果 1-&gt;2)</span></span><br><span class="line">POST news/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"query"</span>: &#123;</span><br><span class="line">    <span class="string">"bool"</span>: &#123;</span><br><span class="line">      <span class="string">"must"</span>: &#123;</span><br><span class="line">        <span class="string">"match"</span>:&#123;<span class="string">"content"</span>:<span class="string">"apple"</span>&#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"must_not"</span>: &#123;</span><br><span class="line">        <span class="string">"match"</span>:&#123;<span class="string">"content"</span>:<span class="string">"pie"</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3)、 boosting query</strong></p>
+<p>上面第二种比较粗暴，可能我实际开发过程中，如果出现 <strong>pie</strong>，我并不想把这条记录完全过滤掉，而是希望降低他的分数，让它也出现在列表中，只是查询结果可能比较靠后。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过Boosting的方式，将3的记录也纳入结果集，只是排名会靠后。(结果 1-&gt;2-&gt;3)</span></span><br><span class="line">POST news/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"query"</span>: &#123;</span><br><span class="line">    <span class="string">"boosting"</span>: &#123;</span><br><span class="line">      <span class="string">"positive"</span>: &#123;</span><br><span class="line">        <span class="string">"match"</span>: &#123;</span><br><span class="line">          <span class="string">"content"</span>: <span class="string">"apple"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"negative"</span>: &#123;</span><br><span class="line">        <span class="string">"match"</span>: &#123;</span><br><span class="line">          <span class="string">"content"</span>: <span class="string">"pie"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"negative_boost"</span>: 0.5</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">说明`boosting需要搭配三个关键字 `positive` , `negative` , `negative_boost</span><br></pre></td></tr></table></figure>
+<p>只有匹配了 <strong>positive查询</strong> 的文档才会被包含到结果集中，但是同时匹配了<strong>negative查询</strong> 的文档会被降低其相关度，通过将文档原本的<code>_score和negative_boost</code>参数进行</p>
+<p>相乘来得到新的_score。因此，<code>negative_boost参数一般小于1.0</code>。在上面的例子中，任何包含了指定负面词条的文档的<code>_score</code>都会是其原本_score的一半。</p>
+<h4 id="3、思考boosting-query应用场景"><a href="#3、思考boosting-query应用场景" class="headerlink" title="3、思考boosting query应用场景"></a>3、思考boosting query应用场景</h4><p><code>场景举例</code> 我们通过去索引中搜索 <strong>‘苹果公司’</strong> 相关的信息，然后我们在查询中的信息为 <strong>‘苹果’</strong>。</p>
+<p><strong>1）那么我们查询的条件是：must = ‘苹果’。也就是文档中必须包含’苹果’</strong></p>
+<p>但是我们需要的结果是苹果公司相关信息，如果你的文档是 <strong>‘苹果树’,’苹果水果’</strong>，那么其实此苹果非彼苹果如果匹配到其实没有任何意义。</p>
+<p><strong>2）那么我们修改查询条件为： must = ‘苹果’ AND must_not = ‘树 or 水果’</strong></p>
+<p>就是说就算文档包含了<strong>苹果</strong>，但因为包含了<strong>树或者水果</strong>那么我们也会过滤这条文档信息，因为我们要查的苹果公司相关信息，如果你是苹果树那对我来讲确实是不匹配，</p>
+<p>所以直接过滤掉，看是没啥问题。</p>
+<p>但是你想，这样做是不是太粗暴了，因为一个文档中包含’苹果’和’树’那不代表一定是苹果树，而可能是 <strong>‘苹果公司组织员工一起去种树’</strong> 那么这条文档理应出现</p>
+<p>而不是直接过滤掉，所以我们就可以用<code>boosting query</code>。就像上面这个例子一样。</p>
+<h2 id="三、constant-score-固定分数查询"><a href="#三、constant-score-固定分数查询" class="headerlink" title="三、constant_score(固定分数查询)"></a>三、constant_score(固定分数查询)</h2><p><code>定义</code> 常量分值查询，目的就是返回<code>指定的score</code>，一般都结合<code>filter</code>使用，因为filter context忽略score。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">举例</span><br><span class="line">（结果 1-&gt;2-&gt;3 同时分数都为2.5）</span><br><span class="line">POST news&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;constant_score&quot;: &#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;match&quot;: &#123;</span><br><span class="line">         &quot;content&quot;:&quot;apple&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;boost&quot;: 2.5</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es7-0.png" alt="es"> </p>
+<p>可以看出分数都是2.5</p>
+<h2 id="四、dis-max-最佳匹配查询）"><a href="#四、dis-max-最佳匹配查询）" class="headerlink" title="四、dis_max(最佳匹配查询）"></a>四、dis_max(最佳匹配查询）</h2><h4 id="1、概念-2"><a href="#1、概念-2" class="headerlink" title="1、概念"></a>1、概念</h4><p><code>dis_max</code> : 只是取分数最高的那个query的分数而已。</p>
+<p>看下官方例子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET /_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"query"</span>: &#123;</span><br><span class="line">        <span class="string">"dis_max"</span> : &#123;</span><br><span class="line">            <span class="string">"queries"</span> : [</span><br><span class="line">                &#123; <span class="string">"term"</span> : &#123; <span class="string">"title"</span> : <span class="string">"Quick pets"</span> &#125;&#125;,</span><br><span class="line">                &#123; <span class="string">"term"</span> : &#123; <span class="string">"body"</span> : <span class="string">"Quick pets"</span> &#125;&#125;</span><br><span class="line">            ],</span><br><span class="line">            <span class="string">"tie_breaker"</span> : 0.7</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">解释</span><br></pre></td></tr></table></figure>
+<p>假设一条文档的’title’查询得分是 1，’body’查询得分是1.6。那么总得分为：1.6+1*0.7 = 2.3。</p>
+<p>如果我们去掉<code>&quot;tie_breaker&quot; : 0.7</code> ，那么tie_breaker默认为0，那么这条文档的得分就是 1.6 + 1*0 = 1.6</p>
+<h4 id="2、举例-1"><a href="#2、举例-1" class="headerlink" title="2、举例"></a>2、举例</h4><p><strong>1）创建数据</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1、创建索引</span></span><br><span class="line">PUT /dismax</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"number_of_shards"</span>: 1,</span><br><span class="line">        <span class="string">"number_of_replicas"</span>: 1</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"mappings"</span>: &#123;</span><br><span class="line">            <span class="string">"properties"</span>: &#123;</span><br><span class="line">                <span class="string">"title"</span>: &#123;</span><br><span class="line">                    <span class="string">"type"</span>:<span class="string">"text"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="string">"content"</span>: &#123;</span><br><span class="line">                    <span class="string">"type"</span>:<span class="string">"text"</span></span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#2、创建数据</span></span><br><span class="line">PUT  /dismax/_doc/1 </span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"title"</span> : <span class="string">"i like java"</span>,  </span><br><span class="line">  <span class="string">"content"</span> : <span class="string">"the weather is nice today"</span> </span><br><span class="line">&#125;</span><br><span class="line">PUT  /dismax/_doc/2</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"title"</span> : <span class="string">"It will rain tomorrow"</span>, </span><br><span class="line">  <span class="string">"content"</span> : <span class="string">"Development beginner"</span></span><br><span class="line">&#125;</span><br><span class="line">PUT  /dismax/_doc/3</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"title"</span> :<span class="string">"i like java is very much"</span>, </span><br><span class="line">  <span class="string">"content"</span> :<span class="string">"I am a development beginner"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2）、should查询</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#should查询查询 （结果 3-&gt;2-&gt;1</span></span><br><span class="line">GET /dismax/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"query"</span>: &#123;</span><br><span class="line">        <span class="string">"bool"</span>: &#123;</span><br><span class="line">            <span class="string">"should"</span>: [</span><br><span class="line">                &#123; <span class="string">"match"</span>: &#123; <span class="string">"title"</span>: <span class="string">"java beginner"</span> &#125;&#125;,</span><br><span class="line">                &#123; <span class="string">"match"</span>: &#123; <span class="string">"content"</span>:  <span class="string">"java beginner"</span> &#125;&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es7-1.png" alt="es"> </p>
+<p>should计算分值：<strong>1)、运行<code>should</code>子句中的两个查询 2)、相加查询返回的分值</strong></p>
+<p>doc1：title: 0.53 + content: 0 = 0.53</p>
+<p>doc2：title：0 + content：0.59 = 0,59</p>
+<p>doc3：title：0.41 + content：0.42 = 0.83</p>
+<p>所有最终运行结果： <code>3 – 2 – 1</code></p>
+<p><strong>2)dis_max查询（不带tie_breaker）</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行结果（2-1-3)</span></span><br><span class="line">GET /dismax/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"query"</span>: &#123;</span><br><span class="line">        <span class="string">"dis_max"</span>: &#123;</span><br><span class="line">            <span class="string">"queries"</span>: [</span><br><span class="line">                &#123; <span class="string">"match"</span>: &#123; <span class="string">"title"</span>: <span class="string">"java beginner"</span> &#125;&#125;,</span><br><span class="line">                &#123; <span class="string">"match"</span>: &#123; <span class="string">"content"</span>:  <span class="string">"java beginner"</span> &#125;&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es7-2.png" alt="es"> </p>
+<p>我们可以很明显看出: <strong>只是取分数最高的那个query的分数排序。</strong></p>
+<p>doc1：title: 0.53 ; content: 0 = 0.53</p>
+<p>doc2：title：0 ; content：0.59 = 0,59</p>
+<p>doc3：title：0.41 ; content：0.42 = 0.42</p>
+<p>所以这里的排序为 <code>2 – 1 – 3</code></p>
+<p><strong>3）dis_max查询（不带tie_breaker）</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行结果 3-2-1</span></span><br><span class="line">GET /dismax/_search</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"query"</span>: &#123;</span><br><span class="line">        <span class="string">"dis_max"</span>: &#123;</span><br><span class="line">            <span class="string">"queries"</span>: [</span><br><span class="line">                &#123; <span class="string">"match"</span>: &#123; <span class="string">"title"</span>: <span class="string">"java beginner"</span> &#125;&#125;,</span><br><span class="line">                &#123; <span class="string">"match"</span>: &#123; <span class="string">"content"</span>:  <span class="string">"java beginner"</span> &#125;&#125;</span><br><span class="line">            ],</span><br><span class="line">             <span class="string">"tie_breaker"</span> : 0.5</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/es/es7-3.png" alt="es"> </p>
+<p>这里可以看出看出: <strong>取分数最高的那个query的分数,同时其它子查询查询的分数乘以tie_breaker</strong></p>
+<p>doc1：title: 0.53 + content: 0 = 0.53</p>
+<p>doc2：title：0 + content：0.59 = 0,59</p>
+<p>doc3：title：0.41 + content：0.42*0.5 = 0.62</p>
+<p>所以这里的排序为 <code>3 – 2 – 1</code></p>
+<h2 id="五、function-score-函数查询）"><a href="#五、function-score-函数查询）" class="headerlink" title="五、function_score(函数查询）"></a>五、function_score(函数查询）</h2><h4 id="1、概念-3"><a href="#1、概念-3" class="headerlink" title="1、概念"></a>1、概念</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定义&#96; function_score是处理分值计算过程的终极工具。它让你能够对所有匹配了主查询的每份文档&#96;调用一个函数来调整甚至是完全替换原来的_score。</span><br></pre></td></tr></table></figure>
+<p><code>注意</code> 要使用function_score，用户必须定义一个查询和一个或多个函数，这些函数计算查询返回的每个文档的新分数。</p>
+<p>它拥有几种预先定义好了的函数：</p>
+<p><code>weight</code> 对每份文档适用一个简单的提升，且该提升不会被归约：当weight为2时，结果为2 * _score。</p>
+<p><code>field_value_factor</code> 使用文档中某个字段的值来改变_score，比如将受欢迎程度或者投票数量考虑在内。</p>
+<p><code>random_score</code> 使用一致性随机分值计算来对每个用户采用不同的结果排序方式，对相同用户仍然使用相同的排序方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">衰减函数(Decay Function) - linear，exp，gauss</span><br></pre></td></tr></table></figure>
+<p>将像publish_date，geo_location或者price这类浮动值考虑到_score中，偏好最近发布的文档，邻近于某个地理位置(译注：其中的某个字段)的文档或者价格</p>
+<p>(译注：其中的某个字段)靠近某一点的文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script_score</span><br></pre></td></tr></table></figure>
+<p>使用自定义的脚本来完全控制分值计算逻辑。如果你需要以上预定义函数之外的功能，可以根据需要通过脚本进行实现。</p>
+<h4 id="2）使用场景"><a href="#2）使用场景" class="headerlink" title="2）使用场景"></a>2）使用场景</h4><p>有关function_score如果要深入讲，估计一篇博客都不够，所以这里说下在现实中可能会用的场景，如果你有这些场景，那么就可以考虑用function_score。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1）假设我们又一个资讯类<span class="selector-tag">APP</span>我们希望让人阅读量高的文章出现在结果列表的头部，但是主要的排序依据仍然是全文搜索分值。</span><br><span class="line"></span><br><span class="line">2）当用户搜索酒店，它的要求是 1、离他目前位置1<span class="selector-tag">Km</span>内 2、价格在500元内。如果我们只是使用一个 <span class="selector-tag">filter</span> 排除所有市中心方圆 1<span class="selector-tag">KM</span>以外的酒店，</span><br><span class="line">再用一个<span class="selector-tag">filter</span>排除每晚价格超过500元的酒店，这种作法太过强硬，可能有一间房在2<span class="selector-tag">K</span>米，但是超级便宜一晚只要100元，用户可能会因此愿意妥协住这间房。</span><br></pre></td></tr></table></figure>
+<p>有关function_score例子这里就不写了，具体的可以参考官方文档：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html" target="_blank" rel="noopener">Function score query</a></p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2024/01/12/springboot启动流程分析/" data-toggle="tooltip" data-placement="top" title="springboot启动流程分析">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/11/10/Elasticsearch——Bucket聚合查询/" data-toggle="tooltip" data-placement="top" title="Elasticsearch——Bucket聚合查询">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一、bool-query-布尔查询"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">一、bool query(布尔查询)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、概念"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">1、概念</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、官方例子"><span class="toc-nav-number">2.0.2.</span> <span class="toc-nav-text">2、官方例子</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3、Bool嵌套查询"><span class="toc-nav-number">2.0.3.</span> <span class="toc-nav-text">3、Bool嵌套查询</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二、boosting-query"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">二、boosting query</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、概念-1"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">1、概念</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、举例"><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text">2、举例</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3、思考boosting-query应用场景"><span class="toc-nav-number">3.0.3.</span> <span class="toc-nav-text">3、思考boosting query应用场景</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三、constant-score-固定分数查询"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">三、constant_score(固定分数查询)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四、dis-max-最佳匹配查询）"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">四、dis_max(最佳匹配查询）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、概念-2"><span class="toc-nav-number">5.0.1.</span> <span class="toc-nav-text">1、概念</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、举例-1"><span class="toc-nav-number">5.0.2.</span> <span class="toc-nav-text">2、举例</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五、function-score-函数查询）"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">五、function_score(函数查询）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、概念-3"><span class="toc-nav-number">6.0.1.</span> <span class="toc-nav-text">1、概念</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2）使用场景"><span class="toc-nav-number">6.0.2.</span> <span class="toc-nav-text">2）使用场景</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2024 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

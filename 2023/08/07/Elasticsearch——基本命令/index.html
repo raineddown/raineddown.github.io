@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Elasticsearch——基本命令 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2023/08/07/Elasticsearch——基本命令/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                            
+                        </div>
+                        <h1>Elasticsearch——基本命令</h1>
+                        <h2 class="subheading">Elasticsearch基本命令</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2023-08-07
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.6k</span> and
+                                Reading Time <span class="post-count">7</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="1-ES集群相关命令"><a href="#1-ES集群相关命令" class="headerlink" title="1.ES集群相关命令"></a>1.ES集群相关命令</h2><p>ES集群相关命令主要是<code>_cat</code>命令，所以这里详细讲解下该命令。</p>
+<h4 id="1、-cat命令"><a href="#1、-cat命令" class="headerlink" title="1、_cat命令"></a>1、_cat命令</h4><p><code>_cat</code>系列提供了一系列查询Elasticsearch集群状态的接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;_cat&#x2F;allocation      #查看单节点的shard分配整体情况</span><br><span class="line">&#x2F;_cat&#x2F;shards          #查看各shard的详细情况</span><br><span class="line">&#x2F;_cat&#x2F;shards&#x2F;&#123;index&#125;  #查看指定分片的详细情况</span><br><span class="line">&#x2F;_cat&#x2F;master          #查看master节点信息</span><br><span class="line">&#x2F;_cat&#x2F;nodes           #查看所有节点信息</span><br><span class="line">&#x2F;_cat&#x2F;indices         #查看集群中所有index的详细信息</span><br><span class="line">&#x2F;_cat&#x2F;indices&#x2F;&#123;index&#125; #查看集群中指定index的详细信息</span><br><span class="line">&#x2F;_cat&#x2F;segments        #查看各index的segment详细信息,包括segment名, 所属shard, 内存(磁盘)占用大小, 是否刷盘</span><br><span class="line">&#x2F;_cat&#x2F;segments&#x2F;&#123;index&#125;#查看指定index的segment详细信息</span><br><span class="line">&#x2F;_cat&#x2F;count           #查看当前集群的doc数量</span><br><span class="line">&#x2F;_cat&#x2F;count&#x2F;&#123;index&#125;   #查看指定索引的doc数量</span><br><span class="line">&#x2F;_cat&#x2F;recovery        #查看集群内每个shard的recovery过程.调整replica。</span><br><span class="line">&#x2F;_cat&#x2F;recovery&#x2F;&#123;index&#125;#查看指定索引shard的recovery过程</span><br><span class="line">&#x2F;_cat&#x2F;health          #查看集群当前状态：红、黄、绿</span><br><span class="line">&#x2F;_cat&#x2F;pending_tasks   #查看当前集群的pending task</span><br><span class="line">&#x2F;_cat&#x2F;aliases         #查看集群中所有alias信息,路由配置等</span><br><span class="line">&#x2F;_cat&#x2F;aliases&#x2F;&#123;alias&#125; #查看指定索引的alias信息</span><br><span class="line">&#x2F;_cat&#x2F;thread_pool     #查看集群各节点内部不同类型的threadpool的统计信息,</span><br><span class="line">&#x2F;_cat&#x2F;plugins         #查看集群各个节点上的plugin信息</span><br><span class="line">&#x2F;_cat&#x2F;fielddata       #查看当前集群各个节点的fielddata内存使用情况</span><br><span class="line">&#x2F;_cat&#x2F;fielddata&#x2F;&#123;fields&#125;     #查看指定field的内存使用情况,里面传field属性对应的值</span><br><span class="line">&#x2F;_cat&#x2F;nodeattrs              #查看单节点的自定义属性</span><br><span class="line">&#x2F;_cat&#x2F;repositories           #输出集群中注册快照存储库</span><br><span class="line">&#x2F;_cat&#x2F;templates              #输出当前正在存在的模板信息</span><br></pre></td></tr></table></figure>
+<p>每个命令都支持使用?v参数，让输出内容表格显示表头; pretty则让输出缩进更规范</p>
+<h4 id="2、示例"><a href="#2、示例" class="headerlink" title="2、示例"></a>2、示例</h4><p><strong>1) 节点信息</strong></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET <span class="string">"localhost:9200/_cat/nodes?v&amp;pretty"</span></span><br><span class="line"><span class="built_in">ip</span>         heap<span class="number">.</span>percent ram<span class="number">.</span>percent <span class="meta">cpu</span> load_1m load_5m load_15m node<span class="number">.</span>role master name</span><br><span class="line"><span class="number">172.18</span><span class="number">.0</span><span class="number">.4</span>           <span class="number">52</span>          <span class="number">97</span>   <span class="number">6</span>    <span class="number">0.02</span>    <span class="number">0.11</span>     <span class="number">0.28</span> mdi       -      es7_02</span><br><span class="line"><span class="number">172.18</span><span class="number">.0</span><span class="number">.5</span>           <span class="number">57</span>          <span class="number">97</span>   <span class="number">6</span>    <span class="number">0.02</span>    <span class="number">0.11</span>     <span class="number">0.28</span> mdi       *      es7_01</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>heap.percent</code> 堆内存占用百分比</li>
+<li><code>ram.percent</code> 内存占用百分比</li>
+<li><code>cpu</code> CPU占用百分比</li>
+<li><code>master</code> <code>*</code>表示节点是集群中的<code>主节点</code></li>
+<li><code>name</code> 节点名</li>
+</ol>
+<p><strong>2) 分片信息</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET &quot;localhost:9200&#x2F;_cat&#x2F;shards?v&amp;pretty&quot;</span><br><span class="line">index                           shard prirep state    docs   store ip         node</span><br><span class="line">.monitoring-es-7-2019.08.30     0     p      STARTED 21333  11.8mb 172.18.0.5 es7_01</span><br><span class="line">.monitoring-es-7-2019.08.30     0     r      STARTED 21333  11.8mb 172.18.0.4 es7_02</span><br><span class="line">goods-index                     0     p      STARTED     1   2.5mb 172.18.0.5 es7_01</span><br><span class="line">goods-index                     0     r      STARTED     1   2.5mb 172.18.0.4 es7_02</span><br><span class="line">.kibana_1                       0     p      STARTED     4  22.4kb 172.18.0.5 es7_01</span><br><span class="line">.kibana_1                       0     r      STARTED     4  22.4kb 172.18.0.4 es7_02</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>index</code> 索引名称</li>
+<li><code>shard</code> 分片序号</li>
+<li><code>prirep</code> <code>p</code>表示该分片是<code>主分片</code>, <code>r</code> 表示该分片是<code>复制分片</code></li>
+<li><code>store</code> 该分片占用存储空间</li>
+<li><code>node</code> 所属节点<code>节点名</code></li>
+<li><code>docs</code> 分片存放的<code>文档</code>数</li>
+</ol>
+<p><strong>3) 索引信息</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET &quot;localhost:9200&#x2F;_cat&#x2F;indices?v&quot;</span><br><span class="line">health status index                           uuid                   pri rep docs.count docs.deleted store.size pri.store.size</span><br><span class="line">green  open   goods-index                     NhqSRJWUQiu46tdOKol4wA   1   1          1         7018        5mb          2.5mb</span><br><span class="line">green  open   .monitoring-es-7-2019.08.30     lVDNFDVdSXqqrn8CdI_XGg   1   1      21333        18920     23.6mb         11.8mb</span><br><span class="line">green  open   .kibana_1                       rvSlNVjJTsus80klzU19jQ   1   1          4            1     44.9kb         22.4kb</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>health</code> 索引的健康状态</li>
+<li><code>index</code> 索引名</li>
+<li><code>pri</code> 索引<code>主分片</code>数量</li>
+<li><code>rep</code> 索引<code>复制分片</code> 数</li>
+<li><code>store.size</code> 索引<code>主分片</code> <code>复制分片</code> 总占用存储空间</li>
+<li><code>pri.store.size</code> 索引总占用空间, 不计算<code>复制分片</code> 占用空间</li>
+</ol>
+<h2 id="2-索引CRUD命令"><a href="#2-索引CRUD命令" class="headerlink" title="2.索引CRUD命令"></a>2.索引CRUD命令</h2><h4 id="2-1、查询索引"><a href="#2-1、查询索引" class="headerlink" title="2.1、查询索引"></a>2.1、查询索引</h4><p>查询索引命令上面已经展示过了，这里再补充一些</p>
+<p><strong>条件过滤</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_cat/indices?v&amp;health=yellow   <span class="comment">#查询健康状态为yellow的索引</span></span><br></pre></td></tr></table></figure>
+<p><strong>排序</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_cat/indices?v&amp;health=yellow&amp;s=docs.count:desc <span class="comment">#根据文档数量进行索引排序</span></span><br></pre></td></tr></table></figure>
+<p><strong>索引详细信息</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET "localhost:9200/my_index/_stats?pretty" <span class="comment">#索引详细信息</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、创建索引"><a href="#2、创建索引" class="headerlink" title="2、创建索引"></a>2、创建索引</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">PUT /student</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"number_of_shards"</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="attr">"number_of_replicas"</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"mappings"</span>: &#123;</span><br><span class="line">            <span class="attr">"properties"</span>: &#123;</span><br><span class="line">                <span class="attr">"name"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>:<span class="string">"text"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">"country"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>:<span class="string">"keyword"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">"age"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>:<span class="string">"integer"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">"date"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>: <span class="string">"date"</span>,</span><br><span class="line">                    <span class="attr">"format"</span>: <span class="string">"yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建成功</p>
+<p><img src="/img/es/es2-0.png" alt="es"> </p>
+<h4 id="3、删除索引"><a href="#3、删除索引" class="headerlink" title="3、删除索引"></a>3、删除索引</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X <span class="keyword">DELETE</span> <span class="string">"localhost:9200/index-name"</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-文档CRUD命令"><a href="#3-文档CRUD命令" class="headerlink" title="3.文档CRUD命令"></a>3.文档CRUD命令</h2><p>在讲文档的CRUD之前我们要先理解 <code>GET/PUT/POST/DELETE</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST /uri        <span class="comment">#创建</span></span><br><span class="line">DELETE /uri/xxx  <span class="comment">#删除</span></span><br><span class="line">PUT /uri/xxx     <span class="comment">#更新或创建</span></span><br><span class="line">GET /uri/xxx     <span class="comment">#查看</span></span><br></pre></td></tr></table></figure>
+<p><code>思考</code>：<strong>POST和PUT的区别</strong></p>
+<p>1）在ES中,如果不确定文档的ID，那么就需要用POST，它可以自己生成唯一的文档ID。如果确定文档的ID，那么就可以用PUT，当然也可以用POST，它们都可以创建或修改文档（如果是修改，那么_version版本号提高1）</p>
+<p>2）PUT、GET、DELETE是幂等的，而POST并不一定是幂等。如果你对POST也指定了文档ID,那它其实和PUT没啥区别，那它就是幂等。如果你没有指定文档ID那么就不是幂等操作了，因为同一数据，你执行多次POST，那么生成多个UUID的文档，</p>
+<p>也就是每POST一次都会新增一条数据。</p>
+<h4 id="3-1、创建文档"><a href="#3-1、创建文档" class="headerlink" title="3.1、创建文档"></a>3.1、创建文档</h4><p><strong>1）PUT方式创建</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PUT  /student/_doc/1 </span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"徐小小"</span>,</span><br><span class="line">    <span class="attr">"country"</span>: <span class="string">"杭州"</span>,</span><br><span class="line">    <span class="attr">"age"</span>: <span class="string">"3"</span>,</span><br><span class="line">    <span class="attr">"date"</span>: <span class="string">"2019-09-04"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es2-1.png" alt="es"> </p>
+<p><strong>2）POST方式创建</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST不指定主键</span><br><span class="line">POST  &#x2F;student&#x2F;_doc</span><br><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;徐小小&quot;,</span><br><span class="line">    &quot;country&quot;: &quot;杭州&quot;,</span><br><span class="line">    &quot;age&quot;: &quot;3&quot;,</span><br><span class="line">    &quot;date&quot;: &quot;2019-09-04&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es2-2.png" alt="es"> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST指定主键ID</span><br><span class="line">POST  &#x2F;student&#x2F;_doc&#x2F;88</span><br><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;徐小小&quot;,</span><br><span class="line">    &quot;country&quot;: &quot;杭州&quot;,</span><br><span class="line">    &quot;age&quot;: &quot;3&quot;,</span><br><span class="line">    &quot;date&quot;: &quot;2019-09-04&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es2-3.png" alt="es"> </p>
+<p>可以明显看出，POST也可以指定文档ID,如果指定文档ID,那么就和PUT没有区别。ID不存在则创建，存在则更新并且<code>_version</code>版本+1.</p>
+<h4 id="3-2、文档查看"><a href="#3-2、文档查看" class="headerlink" title="3.2、文档查看"></a>3.2、文档查看</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET  /student/_doc/1</span><br></pre></td></tr></table></figure>
+<p>如图</p>
+<p><img src="/img/es/es2-4.png" alt="es"> </p>
+<h4 id="3-3、文档更新"><a href="#3-3、文档更新" class="headerlink" title="3.3、文档更新"></a>3.3、文档更新</h4><p>商品PUT和POST执行的时候，如果指定的文档ID存在，那么就可以执行更新操作。不过它们执行的是全量更新，如果需要单独对某字段更新我们可以使用关键字<code>_update</code></p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST &#x2F;student&#x2F;_update&#x2F;1</span><br><span class="line">&#123;</span><br><span class="line">   &quot;doc&quot; : &#123;</span><br><span class="line">      &quot;age&quot;: 5</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>POST /student/_update/1 {   “doc” : {      “age”: 5   } }</p>
+<p><img src="/img/es/es2-5.png" alt="es"> </p>
+<h4 id="4、文档删除"><a href="#4、文档删除" class="headerlink" title="4、文档删除"></a>4、文档删除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE &#x2F;&#123;index&#125;&#x2F;&#123;type&#125;&#x2F;&#123;id&#125;</span><br></pre></td></tr></table></figure>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/09/12/Elasticsearch——Query查询和Filter查询/" data-toggle="tooltip" data-placement="top" title="Elasticsearch——Query查询和Filter查询">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/07/22/Elasticsearch——基本概念/" data-toggle="tooltip" data-placement="top" title="Elasticsearch——基本概念">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-ES集群相关命令"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1.ES集群相关命令</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、-cat命令"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">1、_cat命令</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、示例"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">2、示例</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-索引CRUD命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2.索引CRUD命令</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-1、查询索引"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">2.1、查询索引</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、创建索引"><span class="toc-nav-number">2.0.2.</span> <span class="toc-nav-text">2、创建索引</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3、删除索引"><span class="toc-nav-number">2.0.3.</span> <span class="toc-nav-text">3、删除索引</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-文档CRUD命令"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3.文档CRUD命令</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1、创建文档"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">3.1、创建文档</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2、文档查看"><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text">3.2、文档查看</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-3、文档更新"><span class="toc-nav-number">3.0.3.</span> <span class="toc-nav-text">3.3、文档更新</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4、文档删除"><span class="toc-nav-number">3.0.4.</span> <span class="toc-nav-text">4、文档删除</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2024 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

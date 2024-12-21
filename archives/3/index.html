@@ -283,36 +283,30 @@
 
         <div class="post-preview">
 
-            <a href="/2022/01/27/Seata分布式事务/">
+            <a href="/2023/04/17/mysql日志bingLog-redoLog-undoLog/">
                 <h2 class="post-title">
-                    Seata分布式事务
+                    mysql日志bingLog,redoLog,undoLog,java监听binlog
                 </h2>
                 <h3 class="post-subtitle">
-                    Seata分布式事务
+                    mysql日志bingLog,redoLog,undoLog
                 </h3>
                 <div class="post-content-preview">
-                    Seata简介Seata是一款开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。
-官方网址
-分布式事务问题分布式前
+                    binlog日志binlog用于记录数据库执行的写入性操作(不包括查询)信息，以二进制的形式保存在磁盘中。binlog是mysql的逻辑日志，并且由Server层进行记录，使用任何存储引擎的mysql数据库都会记录binlog日志。
 
-单机单库没这个问题
-从1:1 -&gt; 1:N -&gt; N:N
+逻辑日志：可以简单理解为记录的就是sql语句。
+物理日志：因为mysql数据最终是保存在数据页中的，物理日志记录的就是数据页变更。
 
-单体应用被拆分成微服务应用，原来的三个模块被拆分成三个独立的应用,分别使用三个独立的数据源，业务操作需要调用三三 个服务来完成。此时每个服务内部的数据一致性由本地事务来保......
+binlog是通过追加的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2022-01-27
+                    2023-04-17
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
-                    
-                      <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba">spring cloud alibaba</a>
-                    
-                      <a href="/tags/#Seata" title="Seata">Seata</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -326,26 +320,30 @@
 
         <div class="post-preview">
 
-            <a href="/2021/12/25/Zookeeper案例-分布式屏障Barrier/">
+            <a href="/2023/03/04/java反射获取对象属性实战及工具类/">
                 <h2 class="post-title">
-                    Zookeeper案例-分布式屏障Barrier
+                    java反射获取对象属性实战及工具类
                 </h2>
                 <h3 class="post-subtitle">
-                    分布式屏障Barrier
+                    java反射获取对象属性实战及工具类
                 </h3>
                 <div class="post-content-preview">
-                    Zookeeper应用场景之分布式屏障BarrierBarrier就是栅栏或者屏障，适用于这样的业务场景：当有些操作需要并行执行，但后续操作又需要串行执行，此时必须等待所有并行执行的线程全部结束，才开始串行，于是就需要一个屏障，来控制所有线程同时开始，并等待所有线程全部结束。 分布式barrier一般出现在类似这样的场景,某个任务最终的执行需要基于很多并行计算的子结果。
-项目demo地址:实......
+                    什么是反射反射就是把Java类中的各个成分映射成一个个的Java对象。即在运行状态中，对于任意一个类，都能够知道这个类的所以属性和方法；对于任意一个对象，都能调用它的任意一个方法和属性。这种动态获取信息及动态调用对象方法的功能叫Java的反射机制。
+反射机制的功能Java反射机制主要提供了以下功能：
+
+在运行时判断任意一个对象所属的类。
+在运行时构造任意一个类的对象。
+在运行时判断任意一个类......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-12-25
+                    2023-03-04
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Zookeeper" title="Zookeeper">Zookeeper</a>
+                      <a href="/tags/#reflection" title="reflection">reflection</a>
                     
                 </div>
             
@@ -359,30 +357,32 @@
 
         <div class="post-preview">
 
-            <a href="/2021/12/14/log4j2漏洞介绍及demo/">
+            <a href="/2023/02/11/目前常见AI软件国区注册与使用/">
                 <h2 class="post-title">
-                    log4j2漏洞介绍及demo
+                    目前常见AI软件国区注册与使用
                 </h2>
                 <h3 class="post-subtitle">
-                    log4j2漏洞介绍及demo
+                    目前常见AI软件国区注册与使用
                 </h3>
                 <div class="post-content-preview">
-                    漏洞评级及影响版本Apache Log4j远程代码执行漏洞 严重
-影响的版本范围：Apache Log4j 2.x &lt;= 2.14.1
-Log4j2漏洞修复方案升级Log4j2最新的包
-https://logging.apache.org/log4j/2.x/download.html
-临时解决方案
-（1） 修改项目 jvm 参数：-Dlog4j2.formatMsgNoLookups......
+                    国区注册OpenAI账号使用ChatGPT指南前期准备
+科学上网，最好是美国IP
+外国邮箱，如gmail、outlook、iCloud邮箱等
+有一个能收到验证码的外国手机号码，如果你没有，请跳到下一步，注册一个能接验证码的手机号，注意这是收费的！
+
+注册短信平台并充值打开 https://sms-activate.org/ (opens new window)点击右上角注册
+
+输入邮箱和密码......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-12-14
+                    2023-02-11
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#log4j2" title="log4j2">log4j2</a>
+                      <a href="/tags/#AI" title="AI">AI</a>
                     
                 </div>
             
@@ -396,40 +396,29 @@ https://logging.apache.org/log4j/2.x/download.html
 
         <div class="post-preview">
 
-            <a href="/2021/12/05/Dubbo/">
+            <a href="/2023/01/08/几种深拷贝方式/">
                 <h2 class="post-title">
-                    Dubbo
+                    几种深拷贝方式
                 </h2>
                 <h3 class="post-subtitle">
-                    Dubbo
+                    利用json转换深拷贝
                 </h3>
                 <div class="post-content-preview">
-                    Dubbo 概述Dubbo概念
-Dubbo是阿里巴巴公司开源的一个高性能、轻量级的 Java RPC 框架。
-
-致力于提供高性能和透明化的 RPC 远程服务调用方案，以及 SOA 服务治理方案。
-
-官网：http://dubbo.apache.org
-
-
-Dubbo架构
-节点角色说明
-
-Provider：暴露服务的服务提供方
-
-Container：服务运行容器
-
-Consumer：调用远程服......
+                    背景由于业务代码的方法将传递的引用数据类型参数进行了修改，后续业务又需要修改前的参数，所以需要在修改前进行深拷贝保持修改前的对象。
+java值传递基本数据类型代码:
+123456789101112public class TestJavaPass &#123;    public static void main(String[] args) &#123;        TestJavaPa......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-12-05
+                    2023-01-08
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Dubbo" title="Dubbo">Dubbo</a>
+                      <a href="/tags/#json" title="json">json</a>
+                    
+                      <a href="/tags/#深拷贝" title="深拷贝">深拷贝</a>
                     
                 </div>
             
@@ -443,33 +432,33 @@ Consumer：调用远程服......
 
         <div class="post-preview">
 
-            <a href="/2021/11/10/Sentinel服务熔断降级与限流/">
+            <a href="/2022/12/07/云计算服务类型IaaS-PaaS-SaaS-BaaS-FaaS/">
                 <h2 class="post-title">
-                    sentinel服务熔断与限流
+                    云计算服务类型IaaS,PaaS,SaaS,BaaS,FaaS
                 </h2>
                 <h3 class="post-subtitle">
-                    sentinel服务熔断与限流
+                    判断inputstream是否为空
                 </h3>
                 <div class="post-content-preview">
-                    Sentinel简介官方Github
-官方文档
+                    前言最近学习AWS遇到了各种云计算服务类型IaaS,PaaS,SaaS,BaaS,FaaS特此记录各种云计算类型。
+AWS官方文档介绍:Types of Cloud Computing
+下图为本地架构,IaaS,PaaS,SaaS之间的区别
 
-Sentinel 是什么？
-随着微服务的流行，服务和服务之间的稳定性变得越来越重要。Sentinel 以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。
-Sentinel 具有以下特征:
-丰富的应用场景：Sentinel 承接了阿里巴巴近 10 年的双十一大促流量的核心场景，例如秒杀（即突发流量控制在系统容量可以承......
+概述:
+
+基础设施即服务 (IaaS):
+
+基础设施即服务有时缩写为 IaaS，包含云 IT 的基本构建块，通常提供对联网功能、计算机（虚拟或专用硬件......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-11-10
+                    2022-12-07
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#sentinel" title="sentinel">sentinel</a>
-                    
-                      <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba">spring cloud alibaba</a>
+                      <a href="/tags/#云计算" title="云计算">云计算</a>
                     
                 </div>
             
@@ -483,27 +472,31 @@ Sentinel 具有以下特征:
 
         <div class="post-preview">
 
-            <a href="/2021/11/02/httpClient、RestTemplate、OpenFeign/">
+            <a href="/2022/11/14/java-function函数式编程-Map实现轻量级的策略模式/">
                 <h2 class="post-title">
-                    httpClient、RestTemplate、OpenFeign
+                    java-function函数式编程+Map实现轻量级的策略模式
                 </h2>
                 <h3 class="post-subtitle">
-                    httpClient、RestTemplate、OpenFeign
+                    java-function函数式编程+Map实现轻量级的策略模式
                 </h3>
                 <div class="post-content-preview">
-                    前言系统经常有调用其他系统(or服务)的需求，通过Java发送HTTP请求往往有httpClient、RestTemplate、OpenFeign三种方式，特此总结记录。
-httpclient简介HttpClient是Apache Jakarta Common下的子项目，用来提供高效的、最新的、功能丰富的支持HTTP协议的客户端编程工具包，并且它支持HTTP协议最新的版本和建议。
-HttpC......
+                    前言策略模式目的是取代if…else…的写法，但是策略模式一般需要定义一个接口+多个实现类，然后使用枚举类（实现享元模式）或者Map（实现享元模式）来维护type：实现类的关系。但是很给人一种很重的感觉（因为写法有点繁琐，接口类+多个实现类）。
+函数式编程轻量级实现借助lambda中Function+Map，使用Map+内部类来实现轻量级的策略模式。
+12345678910111213141......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-11-02
+                    2022-11-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#远程调用" title="远程调用">远程调用</a>
+                      <a href="/tags/#策略模式" title="策略模式">策略模式</a>
+                    
+                      <a href="/tags/#function函数式编程" title="function函数式编程">function函数式编程</a>
+                    
+                      <a href="/tags/#java" title="java">java</a>
                     
                 </div>
             
@@ -517,29 +510,33 @@ HttpC......
 
         <div class="post-preview">
 
-            <a href="/2021/10/27/TtlExcutors解决父子线程的上下文传递/">
+            <a href="/2022/10/17/判断inputstream是否为空/">
                 <h2 class="post-title">
-                    TtlExcutors解决父子线程的上下文传递
+                    判断inputstream是否为空
                 </h2>
                 <h3 class="post-subtitle">
-                    TtlExcutors解决父子线程的上下文传递
+                    判断inputstream是否为空
                 </h3>
                 <div class="post-content-preview">
-                    背景在项目中出现线程池创建的线程无法获取到创建线程的父线程main线程的信息，采用阿里开源的TtlExcutors线程池解决父子线程上下文传递问题。
-简介官方文档
-TTL（transmittable-thread-local）是一个线程间传递ThreadLocal，异步执行时上下文传递的解决方案。 整个库的核心是构建在TransmittableThreadLocal类（继承并加强Inheri......
+                    应用背景
+对文件进行格式转换时如word文件转pdf文件，判断流是否为0kb，如果传入0kb的流，Aspose低版本做文件转换时会出现stackoverflow。
+
+后端对0kb文件的判断，进行一系列处理。
+
+
+解决方案1.InputStream.available
+
+上图为抽象类InputStream及FileInputStream类源码及注释，可以看到注释中使用estimate(估算、估......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-10-27
+                    2022-10-17
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#TtlExcutors" title="TtlExcutors">TtlExcutors</a>
-                    
-                      <a href="/tags/#Thread" title="Thread">Thread</a>
+                      <a href="/tags/#inputstream" title="inputstream">inputstream</a>
                     
                 </div>
             
@@ -553,33 +550,34 @@ TTL（transmittable-thread-local）是一个线程间传递ThreadLocal，异步�
 
         <div class="post-preview">
 
-            <a href="/2021/10/05/Nacos服务注册发现与配置中心/">
+            <a href="/2022/09/24/stalker性能测试/">
                 <h2 class="post-title">
-                    Nacos服务注册发现与配置中心
+                    java代码性能评估工具库Stalker
                 </h2>
                 <h3 class="post-subtitle">
-                    Nacos服务注册发现与配置中心
+                    java代码性能评估工具库Stalker
                 </h3>
                 <div class="post-content-preview">
-                    Nacos简介和下载为什么叫Nacos
-前四个字母分别为Naming和Configuration的前两个字母，最后的s为Service。
+                    Java代码性能评估库Stalker简介文档地址
+ 这是一个简单的用来对Java代码做性能评估的工具库。
+特性
+轻量级（jar包仅26kb）
+API简单易用
+易于集成或扩展
 
-是什么
-一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
-Nacos: Dynamic Naming and Configuration Service
-Nacos就是注册中心＋配置中心的组合 -&gt; Nacos = Eureka+C......
+Maven集成12345&lt;dependency&gt;    &lt;groupId&gt;com.blinkfox&lt;/groupId&gt;    &lt;artifactId&gt;stalker&lt......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-10-05
+                    2022-09-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
+                      <a href="/tags/#Stalker" title="Stalker">Stalker</a>
                     
-                      <a href="/tags/#Nacos" title="Nacos">Nacos</a>
+                      <a href="/tags/#性能评估" title="性能评估">性能评估</a>
                     
                 </div>
             
@@ -593,32 +591,25 @@ Nacos就是注册中心＋配置中心的组合 -&gt; Nacos = Eureka+C......
 
         <div class="post-preview">
 
-            <a href="/2021/09/20/bus消息总线/">
+            <a href="/2022/09/11/completableFuture/">
                 <h2 class="post-title">
-                    bus消息总线
+                    CompletableFuture
                 </h2>
                 <h3 class="post-subtitle">
-                    bus消息总线
+                    CompletableFuture使用
                 </h3>
                 <div class="post-content-preview">
-                    Bus消息总线是什么config组件的加深和扩充
-一言以蔽之，分布式自动刷新配置功能。
-Spring Cloud Bus配合Spring Cloud Config使用可以实现配置的动态刷新。
-是什么
-Spring Cloud Bus 配合Spring Cloud Config 使用可以实现配置的动态刷新。
-Spring Cloud Bus是用来将分布式系统的节点与轻量级消息系统链接起来的框架......
+                    一、简介1.1 概述CompletableFuture是对Future的扩展和增强。CompletableFuture实现了Future接口，并在此基础上进行了丰富的扩展，完美弥补了Future的局限性，同时CompletableFuture实现了对任务编排的能力。借助这项能力，可以轻松地组织不同任务的运行顺序、规则以及方式。从某种程度上说，这项能力是它的核心能力。而在以往，虽然通过Coun......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-09-20
+                    2022-09-11
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
-                    
-                      <a href="/tags/#bus消息总线" title="bus消息总线">bus消息总线</a>
+                      <a href="/tags/#CompletableFuture" title="CompletableFuture">CompletableFuture</a>
                     
                 </div>
             
@@ -632,29 +623,25 @@ Spring Cloud Bus是用来将分布式系统的节点与轻量级消息系统链�
 
         <div class="post-preview">
 
-            <a href="/2021/09/05/config配置中心/">
+            <a href="/2022/08/21/javaweb项目常用缓存/">
                 <h2 class="post-title">
-                    cpnfig配置中心
+                    javaweb项目常用缓存
                 </h2>
                 <h3 class="post-subtitle">
-                    cpnfig配置中心
+                    线上问题分析
                 </h3>
                 <div class="post-content-preview">
-                    Config分布式配置中心介绍分布式系统面临的配置问题
-微服务意味着要将单体应用中的业务拆分成一个个子服务，每个服务的粒度相对较小，因此系统中会出现大量的服务。由于每个服务都需要必要的配置信息才能运行，所以一套集中式的、动态的配置管理设施是必不可少的。
-SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务自己带着一个application.yml，上百个配置文......
+                    缓存简介随着互联网的普及，内容信息越来越复杂，用户数和访问量越来越大，我们的应用需要支撑更多的并发量，同时我们的应用服务器和数据库服务器所做的计算也越来越多。但是往往我们的应用服务器资源是有限的，且技术变革是缓慢的，数据库每秒能接受的请求次数也是有限的（或者文件的读写也是有限的），如何能够有效利用有限的资源来提供尽可能大的吞吐量? 一个有效的办法就是引入缓存，打破标准流程，每个环节中请求可以......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-09-05
+                    2022-08-21
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
-                    
-                      <a href="/tags/#cpnfig配置中心" title="cpnfig配置中心">cpnfig配置中心</a>
+                      <a href="/tags/#cache" title="cache">cache</a>
                     
                 </div>
             
@@ -735,15 +722,13 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -765,6 +750,12 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
             
         
@@ -773,11 +764,11 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
-        
+            <a href="/tags/#springboot" title="springboot" rel="4">springboot</a>
             
         
             
-            <a href="/tags/#springboot" title="springboot" rel="3">springboot</a>
+        
             
         
             
@@ -811,12 +802,6 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
-        
-            
-            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
-            
-        
-            
             <a href="/tags/#mybatis-plus" title="mybatis-plus" rel="2">mybatis-plus</a>
             
         
@@ -827,11 +812,13 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
-        
+            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
             
         
             
             <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
+            
+        
             
         
             
@@ -883,14 +870,6 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
-            <a href="/tags/#spring" title="spring" rel="3">spring</a>
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#GateWay" title="GateWay" rel="2">GateWay</a>
             
         
@@ -907,13 +886,21 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
+            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+            
+        
+            
         
             
             <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
             
         
             
-            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+        
+            
+        
+            
+            <a href="/tags/#spring" title="spring" rel="3">spring</a>
             
         
             
@@ -937,7 +924,19 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
+            <a href="/tags/#MySQL" title="MySQL" rel="2">MySQL</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="2">java</a>
             
         
             
@@ -955,7 +954,17 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
             
         
             
+            <a href="/tags/#Elasticsearch" title="Elasticsearch" rel="7">Elasticsearch</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#powerJob" title="powerJob" rel="4">powerJob</a>
             
         
             
@@ -1060,23 +1069,23 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
     <ul>
       
         <li>
-          <a href="/2023/05/13/java-lambda%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">java-lambda函数式编程</a>
+          <a href="/2024/12/07/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6outlook%E9%82%AE%E4%BB%B6%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件outlook邮件扫描功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/04/17/mysql%E6%97%A5%E5%BF%97bingLog-redoLog-undoLog/">mysql日志bingLog,redoLog,undoLog,java监听binlog</a>
+          <a href="/2024/11/07/ETL%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E8%84%9A%E6%9C%ACkettle/">ETL数据清洗脚本kettle</a>
         </li>
       
         <li>
-          <a href="/2023/03/04/java%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%AE%9E%E6%88%98%E5%8F%8A%E5%B7%A5%E5%85%B7%E7%B1%BB/">java反射获取对象属性实战及工具类</a>
+          <a href="/2024/10/09/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E6%B0%B4%E5%8D%B0%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件水印功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/02/11/%E7%9B%AE%E5%89%8D%E5%B8%B8%E8%A7%81AI%E8%BD%AF%E4%BB%B6%E5%9B%BD%E5%8C%BA%E6%B3%A8%E5%86%8C%E4%B8%8E%E4%BD%BF%E7%94%A8/">目前常见AI软件国区注册与使用</a>
+          <a href="/2024/09/06/Java%E7%88%AC%E8%99%AB/">Java爬虫</a>
         </li>
       
         <li>
-          <a href="/2023/01/08/%E5%87%A0%E7%A7%8D%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F/">几种深拷贝方式</a>
+          <a href="/2024/08/04/powerJob%E8%B0%83%E5%BA%A6%E5%B1%82%E5%8E%9F%E7%90%86/">powerJob调度层原理</a>
         </li>
       
     </ul>
@@ -1099,131 +1108,6 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
         <li><a href="#" target="_blank">Other</a></li>
     
 </ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-    <h5>categories</h5>
-    <div class="widget">
-      <ul>
-        
-          <a href="categories/#GitHub"><li>GitHub</li></a>
-        
-          <a href="categories/#JSON"><li>JSON</li></a>
-        
-          <a href="categories/#架构模式"><li>架构模式</li></a>
-        
-          <a href="categories/#hexo"><li>hexo</li></a>
-        
-          <a href="categories/#Docker"><li>Docker</li></a>
-        
-          <a href="categories/#centos"><li>centos</li></a>
-        
-          <a href="categories/#IDEA"><li>IDEA</li></a>
-        
-          <a href="categories/#jdk"><li>jdk</li></a>
-        
-          <a href="categories/#idea"><li>idea</li></a>
-        
-          <a href="categories/#Druid"><li>Druid</li></a>
-        
-          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
-        
-          <a href="categories/#docker"><li>docker</li></a>
-        
-          <a href="categories/#sql"><li>sql</li></a>
-        
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
-        
-          <a href="categories/#SQL"><li>SQL</li></a>
-        
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
-        
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
-          <a href="categories/#异步调用"><li>异步调用</li></a>
-        
-          <a href="categories/#shiro"><li>shiro</li></a>
-        
-          <a href="categories/#redis"><li>redis</li></a>
-        
-          <a href="categories/#并发编程"><li>并发编程</li></a>
-        
-          <a href="categories/#vue"><li>vue</li></a>
-        
-          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
-        
-          <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
-        
-          <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
-        
-          <a href="categories/#javastream"><li>javastream</li></a>
-        
-          <a href="categories/#Eureka"><li>Eureka</li></a>
-        
-          <a href="categories/#zookeeper"><li>zookeeper</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#consul"><li>consul</li></a>
-        
-          <a href="categories/#Ribbon"><li>Ribbon</li></a>
-        
-          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
-        
-          <a href="categories/#java线程池"><li>java线程池</li></a>
-        
-          <a href="categories/#Hystrix"><li>Hystrix</li></a>
-        
-          <a href="categories/#spring"><li>spring</li></a>
-        
-          <a href="categories/#Oracle"><li>Oracle</li></a>
-        
-          <a href="categories/#GateWay"><li>GateWay</li></a>
-        
-          <a href="categories/#map"><li>map</li></a>
-        
-          <a href="categories/#easyexcel"><li>easyexcel</li></a>
-        
-          <a href="categories/#cache"><li>cache</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#负载均衡"><li>负载均衡</li></a>
-        
-          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
-        
-          <a href="categories/#服务降级"><li>服务降级</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-      </ul>
-    </div>
 
         <hr>
     
@@ -1272,7 +1156,7 @@ SpringCloud提供了ConfigServer来解决这个问题，我们每一个微服务
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; John Doe 2023 
+                    Copyright &copy; John Doe 2024 
                     <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

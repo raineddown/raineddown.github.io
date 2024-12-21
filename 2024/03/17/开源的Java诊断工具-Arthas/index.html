@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          开源的Java诊断工具:Arthas - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2024/03/17/开源的Java诊断工具-Arthas/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Arthas" title="Arthas">Arthas</a>
+                            
+                        </div>
+                        <h1>开源的Java诊断工具:Arthas</h1>
+                        <h2 class="subheading">Java诊断工具</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2024-03-17
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.4k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="带你上手阿里开源的-Java-诊断利器：Arthas"><a href="#带你上手阿里开源的-Java-诊断利器：Arthas" class="headerlink" title="带你上手阿里开源的 Java 诊断利器：Arthas"></a>带你上手阿里开源的 Java 诊断利器：Arthas</h1><p>转载自HelloGitHub 推出的<a href="https://github.com/HelloGitHub-Team/Article" target="_blank" rel="noopener">《讲解开源项目》</a>系列，今天给大家带来一款阿里开源的 Java 诊断利器 Arthas 项目—— <a href="https://github.com/alibaba/arthas" target="_blank" rel="noopener">Arthas</a> </p>
+<blockquote>
+<p>项目源码地址：<a href="https://github.com/alibaba/arthas" target="_blank" rel="noopener">https://github.com/alibaba/arthas</a></p>
+</blockquote>
+<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>为什么要用 Arthas？好多 Java 开发的小伙伴可能有遇到下面这些问题：</p>
+<ul>
+<li><p>项目中导入了一个 jar 包的不同版本，那么这个类从哪个 jar 包加载的？线上环境为什么会报各种异常？</p>
+</li>
+<li><p>本地项目运行没问题，线上环境运行的结果为什么和本地不同？数据原因没有执行到？代码没有 commit？环境上使用的分支搞不对？</p>
+</li>
+<li><p>线上环境遇到偶先问题，难道只能通过加日志，调整项目日志级别，重新打包发布验证问题吗？</p>
+</li>
+<li><p>线上环境遇到某个用户的审批流程走的不对，线下环境无法重现，怎么在线上进行远程调试呢？</p>
+</li>
+<li><p>有没有一个监控系统的运行整体状况的功能？</p>
+</li>
+<li><p>JDK 自带了一些监控工具，本地可动态监控 JVM 运行状态，那么线上环境有什么办法可以监控到 JVM 的实时运行状态？</p>
+</li>
+<li><p>在线上环境怎么快速定位应用的热点，生成火焰图？</p>
+</li>
+</ul>
+<h3 id="1-1-实现原理"><a href="#1-1-实现原理" class="headerlink" title="1.1 实现原理"></a>1.1 实现原理</h3><p>整体宏观模块调用图如下：</p>
+<p><img src="/img/arthas/1.png" alt="arthas"> </p>
+<h3 id="1-2-主要功能"><a href="#1-2-主要功能" class="headerlink" title="1.2 主要功能"></a>1.2 主要功能</h3><p>Arthas 提供的功能主要可以分为以下三个方面：</p>
+<ol>
+<li>信息监控<ul>
+<li>进程运行基本信息包括：内存、CPU占用、线程信息、线程堆栈、线程数统计、环境变量信息。</li>
+<li>对象信息：类对象静态属性、 Mbean 的属性信息、已加载类信息、类加载器、类方法信息。</li>
+</ul>
+</li>
+<li>方法调用<ul>
+<li>方法调用入参、返回值查看。</li>
+<li>方法被调用的调用路径、调用耗时、方法调用次数、成功次数、失败次数等统计。</li>
+<li>记录和重做方法调用。</li>
+</ul>
+</li>
+<li>类文件处理<ul>
+<li>dump 已加载类的字节码、字节码反编译、类编译、类重新热加载。</li>
+</ul>
+</li>
+</ol>
+<h2 id="二、安装和使用"><a href="#二、安装和使用" class="headerlink" title="二、安装和使用"></a>二、安装和使用</h2><h3 id="2-1-Linux-环境使用"><a href="#2-1-Linux-环境使用" class="headerlink" title="2.1 Linux 环境使用"></a>2.1 Linux 环境使用</h3><p>登录 <code>Linux</code> 环境，下载 <code>arthas-boot.jar</code>，然后使用命令 <code>java -jar xxx.jar</code> 直接运行 <code>jar</code> 包。</p>
+<p>下面两个命令效果一样，都可以下载。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://alibaba.github.io/arthas/arthas-boot.jar</span><br><span class="line">wget https://alibaba.github.io/arthas/arthas-boot.jar</span><br></pre></td></tr></table></figure>
+<p>进入 Arthas 第一步需要选择项目</p>
+<p><img src="/img/arthas/2.png" alt="arthas"> </p>
+<h3 id="2-2-Docker-环境使用"><a href="#2-2-Docker-环境使用" class="headerlink" title="2.2 Docker 环境使用"></a>2.2 Docker 环境使用</h3><p>进入一个之前已经启动的 Docker 容器，这里我进入了 tomcat7 容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a <span class="comment">#查看所有容器</span></span><br><span class="line">docker cp arthas-boot.jar tomcat7:/home <span class="comment">#拷贝 jar 到容器 home 目录</span></span><br><span class="line">docker <span class="built_in">exec</span> -it tomcat7 bash <span class="comment">#进入名称叫 tomcat7 的容器</span></span><br><span class="line"><span class="built_in">cd</span> /home </span><br><span class="line">java -jar arthas-boot.jar <span class="comment">#运行 jar 包</span></span><br></pre></td></tr></table></figure>
+<p>注意：选择的 Docker 容器必须是以 JDK 为基础依赖构建的。</p>
+<p>在命令行输入 <code>dashboard</code> 就可以进入仪表板的所有数据。</p>
+<p><img src="/img/arthas/3.png" alt="arthas"> </p>
+<h3 id="2-3-在开发工具-IntelliJ-IDEA-使用"><a href="#2-3-在开发工具-IntelliJ-IDEA-使用" class="headerlink" title="2.3 在开发工具 IntelliJ IDEA 使用"></a>2.3 在开发工具 IntelliJ IDEA 使用</h3><p>Cloud Toolkit 是一个 IDE 插件，帮助开发者更高效地开发、测试、诊断并部署应用。方便地将本地应用一键部署到任意机器，或 ECS、EDAS、Kubernetes。这里只介绍一下连接远程服务器，使用 Arthas。</p>
+<h4 id="2-3-1-安装插件"><a href="#2-3-1-安装插件" class="headerlink" title="2.3.1 安装插件"></a>2.3.1 安装插件</h4><p>在 <code>File</code>-&gt;<code>Settings</code>-&gt;<code>Plugins</code> 搜索 <code>Alibaba Cloud Toolkit</code></p>
+<p><img src="/img/arthas/4.png" alt="arthas"> </p>
+<p>插件安装完重启 IDEA。</p>
+<h4 id="2-3-2-使用工具"><a href="#2-3-2-使用工具" class="headerlink" title="2.3.2 使用工具"></a>2.3.2 使用工具</h4><p>添加远程服务器，如下图操作：</p>
+<p><img src="/img/arthas/5.png" alt="arthas"> </p>
+<p>服务器配置成功后，选择 <code>More</code>-&gt;<code>Diagnostic</code> 即可连接到服务器上。</p>
+<p>  <img src="/img/arthas/6.png" alt="arthas"> </p>
+<h4 id="2-3-3-运行效果"><a href="#2-3-3-运行效果" class="headerlink" title="2.3.3 运行效果"></a>2.3.3 运行效果</h4><p><img src="/img/arthas/7.png" alt="arthas"> </p>
+<h2 id="三、实战案例分析"><a href="#三、实战案例分析" class="headerlink" title="三、实战案例分析"></a>三、实战案例分析</h2><p>以线上代码热更新，这里我写了一个小的 <code>Sprinboot</code> 项目，主要就是一个获取学习信息的接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentConroller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@GetMapping</span>(<span class="string">"getUserInfo"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> Student <span class="title">getUserInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Student(<span class="string">"小刘"</span>,<span class="number">12</span>,<span class="string">"西安市雁塔区"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过 <code>curl http://localhost:9000/getUserInfo</code>，访问内容如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"小刘"</span>,<span class="attr">"id"</span>:<span class="number">12</span>,<span class="attr">"address"</span>:<span class="string">"西安市雁塔区"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>在服务运行要测试的项目 <code>demo-0.0.1-SNAPSHOT.jar</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar demo-0.0.1-SNAPSHOT.jar &amp; <span class="comment">#后台运行</span></span><br><span class="line">curl http://localhost:9000/getUserInfo <span class="comment">#访问接口</span></span><br></pre></td></tr></table></figure>
+<p>运行 Arthas 主程序 <code>arthas-boot.jar</code>，选择进入<code>demo-0.0.1-SNAPSHOT.jar</code></p>
+<p><img src="/img/arthas/8.png" alt="arthas"> </p>
+<p>使用 <code>jad</code> 反编译 <code>StudentConroller.java</code> 代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jad --<span class="built_in">source</span>-only com.example.demo.controller.StudentConroller &gt; /tmp/StudentConroller.java</span><br></pre></td></tr></table></figure>
+<p>打开 <code>/tmp/StudentConroller.java</code> 下的文件，修改反编绎出来的代码，修改内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentConroller</span> </span>&#123;</span><br><span class="line">   <span class="meta">@GetMapping</span>(value=&#123;<span class="string">"getUserInfo"</span>&#125;)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> Student <span class="title">getUserInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Student(<span class="string">"小刘1"</span>, <span class="number">122</span>, <span class="string">"西安市高新区"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>sc</code> 命令查找加载 <code>StudentConroller</code> 的 ClassLoader</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sc -d *StudentConroller | grep classLoaderHash</span><br><span class="line">classLoaderHash   2e0fa5d3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>mc</code> 命令内存编绎代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mc -c 2e0fa5d3 /tmp/StudentConroller.java -d /tmp</span><br><span class="line">Memory compiler output:/tmp/com/example/demo/arthas/user/controller/StudentConroller.class</span><br><span class="line">Affect(row-cnt:1) cost <span class="keyword">in</span> 346 ms</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>redefine</code> 命令热更新代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ redefine /tmp/com/example/demo/controller/StudentConroller.class</span><br><span class="line">redefine success, size: 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检测热更新结果<br>再次访问 <code>curl http://localhost:9000/getUserInfo</code>，显示如下内容：<br><img src="/img/arthas/9.png" alt="arthas"> </p>
+</li>
+</ul>
+<p>用 Arthas 的 <code>jad/mc/redefine</code> 一条龙命令来线上热更新代码非常强大，但也很危险，要做好权限管理哦。</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>本文开头讲 Arthas 有什么作用、我们为什么要用它。接着讲了三种场景是如何使用 Arthas。最后以 Java 代码在线热部署为例，感受了 Arthas 的强大。看到这里我想你也对 Arthas 工具有了一个简单的认识。</p>
+<p>现在的趋势开发人员做了久了慢慢就变为 DevOps，了解更多的底层逻辑也能更好的反馈到代码层面的<strong>上层建筑</strong>。</p>
+<p>本文只能带大家入门，Arthas 还有更多强大的功能等待你的发现！</p>
+<h2 id="五、附录"><a href="#五、附录" class="headerlink" title="五、附录"></a>五、附录</h2><ul>
+<li><a href="https://alibaba.github.io/arthas/quick-start.html" target="_blank" rel="noopener">Arthas 官方文档</a></li>
+<li><a href="https://github.com/alibaba/arthas/issues/1003" target="_blank" rel="noopener">Arthas 脑图—常用命令汇总</a></li>
+</ul>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2024/04/02/快速生成二维码的python项目/" data-toggle="tooltip" data-placement="top" title="快速生成二维码的python项目">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2024/02/14/MySQL事务-ACID特性及其实现原理/" data-toggle="tooltip" data-placement="top" title="MySQL事务:ACID特性及其实现原理">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#带你上手阿里开源的-Java-诊断利器：Arthas"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">带你上手阿里开源的 Java 诊断利器：Arthas</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一、简介"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">一、简介</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-1-实现原理"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">1.1 实现原理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-2-主要功能"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">1.2 主要功能</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二、安装和使用"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">二、安装和使用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-1-Linux-环境使用"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">2.1 Linux 环境使用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-2-Docker-环境使用"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2.2 Docker 环境使用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-3-在开发工具-IntelliJ-IDEA-使用"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">2.3 在开发工具 IntelliJ IDEA 使用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-3-1-安装插件"><span class="toc-nav-number">1.2.3.1.</span> <span class="toc-nav-text">2.3.1 安装插件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-3-2-使用工具"><span class="toc-nav-number">1.2.3.2.</span> <span class="toc-nav-text">2.3.2 使用工具</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-3-3-运行效果"><span class="toc-nav-number">1.2.3.3.</span> <span class="toc-nav-text">2.3.3 运行效果</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三、实战案例分析"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">三、实战案例分析</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四、总结"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">四、总结</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五、附录"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">五、附录</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Arthas" title="Arthas">Arthas</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2024 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

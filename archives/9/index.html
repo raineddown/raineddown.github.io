@@ -261,6 +261,20 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -269,30 +283,27 @@
 
         <div class="post-preview">
 
-            <a href="/2019/08/19/使用Git上传、更新、删除 GitHub 仓库文件/">
+            <a href="/2020/08/24/java后端使用mysqldump备份数据库/">
                 <h2 class="post-title">
-                    使用Git上传、更新、删除GitHub仓库文件
+                    java后端使用mysqldump备份数据库
                 </h2>
                 <h3 class="post-subtitle">
-                    GitHub管理
+                    java后端使用mysqldump命令备份数据库
                 </h3>
                 <div class="post-content-preview">
-                    本文为转载CSDN博主ZY-JIMMY的文章,感谢博主转载允许
-创建GitHub代码仓库首先在GitHub上创建自己的仓库，进入GitHub官网并登陆，点击 New repository 如下图然后输入自己的仓库名称及仓库说明，输入完毕后点击 Create repository
-
-Repository name: 仓库名称Description(可选): 仓库描述介绍Public, Priv......
+                    背景在接老师开发商业性质的项目的时候，接受了一个前端操作向后端发送请求进行数据库备份文件生成于下载的任务，花费了自己蛮多心血特此记录一下。
+任务要求在指定页面以form表单（采用layui框架）显示出相关企业单位的备份信息(备份时间、备份文件名，文件名显示备份完成时间、备份相关内容、备份次数)，同时提供操作栏进行备份下载于删除操作
+核心完成方法java拼接mysqldump运行指令，并执行，......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2019-08-19
+                    2020-08-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Git" title="Git">Git</a>
-                    
-                      <a href="/tags/#GitHub" title="GitHub">GitHub</a>
+                      <a href="/tags/#mysqldump" title="mysqldump">mysqldump</a>
                     
                 </div>
             
@@ -306,27 +317,28 @@ Repository name: 仓库名称Description(可选): 仓库描述介绍Public, Priv
 
         <div class="post-preview">
 
-            <a href="/2019/08/19/JSON/">
+            <a href="/2020/08/15/数据库批量修改语句生成查询语句/">
                 <h2 class="post-title">
-                    JSON基础
+                    数据库批量修改语句生成查询语句
                 </h2>
                 <h3 class="post-subtitle">
-                    JSON基础配置
+                    sql批量修改语句生成语句
                 </h3>
                 <div class="post-content-preview">
-                    JSON简介JSON(JavaScript Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式。它基于 ECMAScript (欧洲计算机协会制定的js规范)的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。 易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率，是JavaSc......
+                    背景在接老师开发商业性质的项目的时候，接受了一个批量修改数据库的任务，花费了自己蛮多心血特此记录一下。
+任务要求任务详情：数据库的表结构不统一，字段列名缺失以及长度不匹配。在现有的数据库中，每张表都有 CREATER，CREATER_ID，CREATE_DATE，UPDATER，UPDATER_ID，UPDATE_DATE等字段，编写一个工具，用于：
+
+确保一致性：每张表内的这些字段名字，类......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2019-08-19
+                    2020-08-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#JSON" title="JSON">JSON</a>
-                    
-                      <a href="/tags/#JSON时间对象" title="JSON时间对象">JSON时间对象</a>
+                      <a href="/tags/#SQL" title="SQL">SQL</a>
                     
                 </div>
             
@@ -340,36 +352,273 @@ Repository name: 仓库名称Description(可选): 仓库描述介绍Public, Priv
 
         <div class="post-preview">
 
-            <a href="/2019/07/21/我的第一篇博客/">
+            <a href="/2020/08/13/数据库外键与级联的使用考量/">
                 <h2 class="post-title">
-                    MVC、MVP、MVVM架构模式与多层架构
+                    数据库外键与级联的使用考量
                 </h2>
                 <h3 class="post-subtitle">
-                    软件基础架构模式
+                    数据库外键与级联的使用考量
                 </h3>
                 <div class="post-content-preview">
-                    架构模式概要：MVC、MVP、MVVM是传统较为主流的三种架构模式，使用架构模式的目的是为了解决界面呈现和逻辑代码分离问题，其中MVP和MVVM都是在MVC的基础上发展而来的，引发发展的主要原因在于各个模块间的耦合度、模块测试引发的问题。  
-MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model、View、Controller三个模块设计创......
+                    背景在接触了一些企业级项目后发现，项目对应的数据库设计中很少再设计外键和级联（触发器、级联更新与删除）与大学期间的数据库设计课程以及以往的个人小项目的数据库设计相反，当需要用外键做关联的时候，也是仅对字段进行冗余存储。
+开发规范在《阿里巴巴java开发手册》中对数据库设置的规范强调————“【强制】不得使用外键与级联，一切外键概念必须在应用层解决。”
+数据库去外键设计解决方案：设计关联表。举......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2019-07-21
+                    2020-08-13
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#MVC" title="MVC">MVC</a>
+                      <a href="/tags/#sql" title="sql">sql</a>
                     
-                      <a href="/tags/#MVP" title="MVP">MVP</a>
+                      <a href="/tags/#foreign key" title="foreign key">foreign key</a>
                     
-                      <a href="/tags/#MVVM" title="MVVM">MVVM</a>
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/08/08/SpringBoot使用-Async实现异步调用/">
+                <h2 class="post-title">
+                    SpringBoot使用@Async实现异步调用
+                </h2>
+                <h3 class="post-subtitle">
+                    SpringBoot使用@Async实现异步调用
+                </h3>
+                <div class="post-content-preview">
+                    背景在写项目时，有个需求为前端使用用户下载数据库备份压缩文件，其中涉及多表多条件dump备份
+部分代码类似方法有4个，未异步调用耗时较长影响用户体验。1234567891011121314151617181920212223242526272829303132333435public void entIdSqlDumpOne(String path, String dateString, S......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-08-08
+                </p>
+                <div class="tags">
                     
-                      <a href="/tags/#三层架构(3-tier application)" title="三层架构(3-tier application)">三层架构(3-tier application)</a>
+                      <a href="/tags/#异步调用" title="异步调用">异步调用</a>
                     
-                      <a href="/tags/#多层架构(n-tier application)" title="多层架构(n-tier application)">多层架构(n-tier application)</a>
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/25/前后端分离整体项目docker部署/">
+                <h2 class="post-title">
+                    前后端分离整体项目docker部署
+                </h2>
+                <h3 class="post-subtitle">
+                    docker部署jar+vue+nginx
+                </h3>
+                <div class="post-content-preview">
+                    背景介绍前后端分离项目涉及vue、nginx与含dockerFile的jar包部署，使用docker一次性部署vue、nginx、jar、mysql。
+操作流程安装&amp;启动docker123yum install dockersystemctl start docker
+安装nginx12//查看镜像docker images
+12#使用nginx镜像来创建nginx容器实例并运行do......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-07-25
+                </p>
+                <div class="tags">
                     
-                      <a href="/tags/#架构模式" title="架构模式">架构模式</a>
+                      <a href="/tags/#docker" title="docker">docker</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/06/25/大三实训记录——thymeleaf传值给外联js文件/">
+                <h2 class="post-title">
+                    大三实训记录——thymeleaf传值给外联js文件
+                </h2>
+                <h3 class="post-subtitle">
+                    thymeleaf传值给外联js文件
+                </h3>
+                <div class="post-content-preview">
+                    实训最近大三下半学期刚刚结束，打算用实训记录类标题记录一下自己实训开发中遇到的一些问题。这次实训由京东互联网科技实践中心的老师授课并且给与我们开发小组达到毕设水平的评价，不知后续参加工作后看大学中开发的项目会有一些什么样的感受。项目后续上传到github上，个人负责建筑平台用户操作系统开发，管理员与评审专家由其他组员开发。
+实训问题——thymeleaf传值给外联js文件这次实训中后端业务逻......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-06-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#js" title="js">js</a>
+                    
+                      <a href="/tags/#thymeleaf" title="thymeleaf">thymeleaf</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/06/20/idea配置run Dashboard/">
+                <h2 class="post-title">
+                    idea配置run Dashboard
+                </h2>
+                <h3 class="post-subtitle">
+                    idea配置run Dashboard
+                </h3>
+                <div class="post-content-preview">
+                    run Dashboard功能如下图所示run Dashboard面板可以管理多个服务、modules，对微服务项目以及多modules项目运行和管理十分方便，但idea在运行中不是默认就有run Dashboard的面板 
+解决方案1.点击多个模块服务启动时的idea右下角弹窗2.edit configurations配置，步骤如下图： 
+...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-06-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#idea" title="idea">idea</a>
+                    
+                      <a href="/tags/#run Dashboard" title="run Dashboard">run Dashboard</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/06/20/大三实训记录——springboot2-0后版本配置虚拟路径以访问本地图片/">
+                <h2 class="post-title">
+                    大三实训记录——springboot2.0后版本配置虚拟路径以访问本地图片
+                </h2>
+                <h3 class="post-subtitle">
+                    springboot2.0后版本配置虚拟路径以访问本地图片
+                </h3>
+                <div class="post-content-preview">
+                    实训最近大三下半学期刚刚结束，打算用实训记录类标题记录一下自己实训开发中遇到的一些问题。这次实训由京东互联网科技实践中心的老师授课并且给与我们开发小组达到毕设水平的评价，不知后续参加工作后看大学中开发的项目会有一些什么样的感受。项目后续上传到github上，个人负责建筑奖项参评平台用户操作系统开发，管理员与评审专家系统由其他组员开发。
+实训问题——thymeleaf传值给外联js文件这次实训......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-06-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#springboot" title="springboot">springboot</a>
+                    
+                      <a href="/tags/#虚拟路径" title="虚拟路径">虚拟路径</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/04/30/Druid的sql数据监控没有数据/">
+                <h2 class="post-title">
+                    Druid的sql数据监控没有数据
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Druid无sql数据监控在使用springboot集成Druid数据源时遇到了一直监控不到sql数据问题问题情形如下：可以发现filter类名下为空，查看配置问题
+解决方案可能原因：(1)config下的filter方法没添加@Bean(2)filters没配置
+(1)的解决方案不做赘述。(2)的解决方案：打开resources目录下配置文件添加配置.yml格式：12345678sprin......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-04-30
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Druid" title="Druid">Druid</a>
+                    
+                      <a href="/tags/#alibaba.druid" title="alibaba.druid">alibaba.druid</a>
+                    
+                      <a href="/tags/#springboot" title="springboot">springboot</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/04/21/IDEA旗舰版学生党如何获得免费的个人许可证-1/">
+                <h2 class="post-title">
+                    IDEA旗舰版学生党如何获得免费的个人许可证
+                </h2>
+                <h3 class="post-subtitle">
+                    转载学生党如何获得免费的IDEA旗舰版
+                </h3>
+                <div class="post-content-preview">
+                    说明版本：Ultimate | Community Edition        旗舰版    社区版本为什么我要使用旗舰版的IDEA？请看官方比较：https://www.jetbrains.com/idea/features/editions_comparison_matrix.html旗舰版还支持HTML，CSS，PHP，SQL，Python等语言，并且支持更多的服务端框架和前端框架例......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2020-04-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#IDEA" title="IDEA">IDEA</a>
                     
                 </div>
             
@@ -389,6 +638,10 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             <a href="/archives/8/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/archives/10/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -446,15 +699,13 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -476,6 +727,12 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
             
         
@@ -484,11 +741,11 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
-        
+            <a href="/tags/#springboot" title="springboot" rel="4">springboot</a>
             
         
             
-            <a href="/tags/#springboot" title="springboot" rel="3">springboot</a>
+        
             
         
             
@@ -522,12 +779,6 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
-        
-            
-            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
-            
-        
-            
             <a href="/tags/#mybatis-plus" title="mybatis-plus" rel="2">mybatis-plus</a>
             
         
@@ -538,11 +789,13 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
-        
+            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
             
         
             
             <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
+            
+        
             
         
             
@@ -594,14 +847,6 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
-            <a href="/tags/#spring" title="spring" rel="3">spring</a>
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#GateWay" title="GateWay" rel="2">GateWay</a>
             
         
@@ -618,13 +863,21 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
+            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+            
+        
+            
         
             
             <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
             
         
             
-            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+        
+            
+        
+            
+            <a href="/tags/#spring" title="spring" rel="3">spring</a>
             
         
             
@@ -648,7 +901,19 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
+            <a href="/tags/#MySQL" title="MySQL" rel="2">MySQL</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="2">java</a>
             
         
             
@@ -666,7 +931,17 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
             
         
             
+            <a href="/tags/#Elasticsearch" title="Elasticsearch" rel="7">Elasticsearch</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#powerJob" title="powerJob" rel="4">powerJob</a>
             
         
             
@@ -771,23 +1046,23 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
     <ul>
       
         <li>
-          <a href="/2023/05/13/java-lambda%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">java-lambda函数式编程</a>
+          <a href="/2024/12/07/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6outlook%E9%82%AE%E4%BB%B6%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件outlook邮件扫描功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/04/17/mysql%E6%97%A5%E5%BF%97bingLog-redoLog-undoLog/">mysql日志bingLog,redoLog,undoLog,java监听binlog</a>
+          <a href="/2024/11/07/ETL%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E8%84%9A%E6%9C%ACkettle/">ETL数据清洗脚本kettle</a>
         </li>
       
         <li>
-          <a href="/2023/03/04/java%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%AE%9E%E6%88%98%E5%8F%8A%E5%B7%A5%E5%85%B7%E7%B1%BB/">java反射获取对象属性实战及工具类</a>
+          <a href="/2024/10/09/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E6%B0%B4%E5%8D%B0%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件水印功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/02/11/%E7%9B%AE%E5%89%8D%E5%B8%B8%E8%A7%81AI%E8%BD%AF%E4%BB%B6%E5%9B%BD%E5%8C%BA%E6%B3%A8%E5%86%8C%E4%B8%8E%E4%BD%BF%E7%94%A8/">目前常见AI软件国区注册与使用</a>
+          <a href="/2024/09/06/Java%E7%88%AC%E8%99%AB/">Java爬虫</a>
         </li>
       
         <li>
-          <a href="/2023/01/08/%E5%87%A0%E7%A7%8D%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F/">几种深拷贝方式</a>
+          <a href="/2024/08/04/powerJob%E8%B0%83%E5%BA%A6%E5%B1%82%E5%8E%9F%E7%90%86/">powerJob调度层原理</a>
         </li>
       
     </ul>
@@ -810,131 +1085,6 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
         <li><a href="#" target="_blank">Other</a></li>
     
 </ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-    <h5>categories</h5>
-    <div class="widget">
-      <ul>
-        
-          <a href="categories/#GitHub"><li>GitHub</li></a>
-        
-          <a href="categories/#JSON"><li>JSON</li></a>
-        
-          <a href="categories/#架构模式"><li>架构模式</li></a>
-        
-          <a href="categories/#hexo"><li>hexo</li></a>
-        
-          <a href="categories/#Docker"><li>Docker</li></a>
-        
-          <a href="categories/#centos"><li>centos</li></a>
-        
-          <a href="categories/#IDEA"><li>IDEA</li></a>
-        
-          <a href="categories/#jdk"><li>jdk</li></a>
-        
-          <a href="categories/#idea"><li>idea</li></a>
-        
-          <a href="categories/#Druid"><li>Druid</li></a>
-        
-          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
-        
-          <a href="categories/#docker"><li>docker</li></a>
-        
-          <a href="categories/#sql"><li>sql</li></a>
-        
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
-        
-          <a href="categories/#SQL"><li>SQL</li></a>
-        
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
-        
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
-          <a href="categories/#异步调用"><li>异步调用</li></a>
-        
-          <a href="categories/#shiro"><li>shiro</li></a>
-        
-          <a href="categories/#redis"><li>redis</li></a>
-        
-          <a href="categories/#并发编程"><li>并发编程</li></a>
-        
-          <a href="categories/#vue"><li>vue</li></a>
-        
-          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
-        
-          <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
-        
-          <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
-        
-          <a href="categories/#javastream"><li>javastream</li></a>
-        
-          <a href="categories/#Eureka"><li>Eureka</li></a>
-        
-          <a href="categories/#zookeeper"><li>zookeeper</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#consul"><li>consul</li></a>
-        
-          <a href="categories/#Ribbon"><li>Ribbon</li></a>
-        
-          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
-        
-          <a href="categories/#java线程池"><li>java线程池</li></a>
-        
-          <a href="categories/#Hystrix"><li>Hystrix</li></a>
-        
-          <a href="categories/#spring"><li>spring</li></a>
-        
-          <a href="categories/#Oracle"><li>Oracle</li></a>
-        
-          <a href="categories/#GateWay"><li>GateWay</li></a>
-        
-          <a href="categories/#map"><li>map</li></a>
-        
-          <a href="categories/#easyexcel"><li>easyexcel</li></a>
-        
-          <a href="categories/#cache"><li>cache</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#负载均衡"><li>负载均衡</li></a>
-        
-          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
-        
-          <a href="categories/#服务降级"><li>服务降级</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-      </ul>
-    </div>
 
         <hr>
     
@@ -983,7 +1133,7 @@ MVC ：MVC(全名：Model View Controller),正如名字一样MVC是使用Model�
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; John Doe 2023 
+                    Copyright &copy; John Doe 2024 
                     <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

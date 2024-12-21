@@ -288,7 +288,9 @@
 <ol>
 <li>interrupt():<br>interrupt() 方法是 唯一一个 可以将上面提到中断标志设置为 true 的方法，从上面源码可以看出，这是一个 Thread 类 public的对象方法，所以可以推断出任何线程对象都可以调用该方法，进一步说明就是可以一个线程 interrupt 其他线程，也可以 interrupt自己。其中，中断标识的设置是通过 native 方法 interrupt0 完成的。<br><img src="/img/thread/interrupt0.png" alt="interrupt0"> </li>
 </ol>
-<p>同时，我们关注一下源码注释：<br><img src="/img/thread/threadBlocked.png" alt="threadBlocked"><br>表达为当线程被阻塞在：wait()、join()、sleep()这些方法时，如果被中断，就会抛出 InterruptedException 异常。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    wait(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>同理，这些抛出了InterruptedException异常的方法表明这些是可以中断的。<br>总结：当调用了interrupt()方法，线程的中断标志变为true。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interrupt0();           <span class="comment">// Just to set the interrupt flag即只修改</span></span><br></pre></td></tr></table></figure></p>
+<p>同时，我们关注一下源码注释：<br><img src="/img/thread/threadBlocked.png" alt="threadBlocked"><br>表达为当线程被阻塞在：wait()、join()、sleep()这些方法时，如果被中断，就会抛出 InterruptedException 异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    wait(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同理，这些抛出了InterruptedException异常的方法表明这些是可以中断的。<br>总结：当调用了interrupt()方法，线程的中断标志变为true。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interrupt0();           <span class="comment">// Just to set the interrupt flag即只修改</span></span><br></pre></td></tr></table></figure></p>
 <ol>
 <li>isInterrupted():<br>该方法就是返回中断标识的结果：</li>
 </ol>
@@ -548,7 +550,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; John Doe 2023 
+                    Copyright &copy; John Doe 2024 
                     <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

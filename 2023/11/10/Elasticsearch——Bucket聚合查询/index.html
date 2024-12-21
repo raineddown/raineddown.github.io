@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Elasticsearch——Bucket聚合查询 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2023/11/10/Elasticsearch——Bucket聚合查询/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                            
+                        </div>
+                        <h1>Elasticsearch——Bucket聚合查询</h1>
+                        <h2 class="subheading">Bucket聚合查询</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2023-11-10
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.3k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>Bucket</strong> 可以理解为一个桶，它会遍历文档中的内容，凡是符合某一要求的就放入一个桶中，分桶相当与 SQL 中的 <strong>group by</strong>。</p>
+<p>这篇博客讲的桶的关键字有：<code>Terms Aggregation</code> 、<code>Filter Aggregation</code>、<code>Histogram Aggregation</code>、<code>Range Aggregation</code> 、<code>Date Aggregation</code>。</p>
+<h2 id="一、创建索引、数据"><a href="#一、创建索引、数据" class="headerlink" title="一、创建索引、数据"></a>一、创建索引、数据</h2><h4 id="1、创建索引"><a href="#1、创建索引" class="headerlink" title="1、创建索引"></a>1、创建索引</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">DELETE cars</span><br><span class="line">PUT cars</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"mappings"</span>: &#123;</span><br><span class="line">      <span class="attr">"properties"</span>: &#123;</span><br><span class="line">        <span class="attr">"price"</span>: &#123;</span><br><span class="line">          <span class="attr">"type"</span>:<span class="string">"long"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"color"</span>: &#123;</span><br><span class="line">          <span class="attr">"type"</span>:<span class="string">"keyword"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"brand"</span>: &#123;</span><br><span class="line">          <span class="attr">"type"</span>:<span class="string">"keyword"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"sellTime"</span>: &#123;</span><br><span class="line">          <span class="attr">"type"</span>:<span class="string">"date"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>属性字段：价格、颜色、品牌、销售时间</strong></p>
+<h4 id="2、添加索引数据"><a href="#2、添加索引数据" class="headerlink" title="2、添加索引数据"></a>2、添加索引数据</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST /cars/_bulk</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123;&#125;&#125;</span><br><span class="line">&#123; <span class="string">"price"</span> : 80000, <span class="string">"color"</span> : <span class="string">"red"</span>, <span class="string">"brand"</span> : <span class="string">"BMW"</span>, <span class="string">"sellTime"</span> : <span class="string">"2014-01-28"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123;&#125;&#125;</span><br><span class="line">&#123; <span class="string">"price"</span> : 85000, <span class="string">"color"</span> : <span class="string">"green"</span>, <span class="string">"brand"</span> : <span class="string">"BMW"</span>, <span class="string">"sellTime"</span> : <span class="string">"2014-02-05"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123;&#125;&#125;</span><br><span class="line">&#123; <span class="string">"price"</span> : 120000, <span class="string">"color"</span> : <span class="string">"green"</span>, <span class="string">"brand"</span> : <span class="string">"Mercedes"</span>, <span class="string">"sellTime"</span> : <span class="string">"2014-03-18"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123;&#125;&#125;</span><br><span class="line">&#123; <span class="string">"price"</span> : 105000, <span class="string">"color"</span> : <span class="string">"blue"</span>, <span class="string">"brand"</span> : <span class="string">"Mercedes"</span>, <span class="string">"sellTime"</span> : <span class="string">"2014-04-02"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123;&#125;&#125;</span><br><span class="line">&#123; <span class="string">"price"</span> : 72000, <span class="string">"color"</span> : <span class="string">"green"</span>, <span class="string">"brand"</span> : <span class="string">"Audi"</span>, <span class="string">"sellTime"</span> : <span class="string">"2014-05-19"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123;&#125;&#125;</span><br><span class="line">&#123; <span class="string">"price"</span> : 60000, <span class="string">"color"</span> : <span class="string">"red"</span>, <span class="string">"brand"</span> : <span class="string">"Audi"</span>, <span class="string">"sellTime"</span> : <span class="string">"2014-06-05"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123;&#125;&#125;</span><br><span class="line">&#123; <span class="string">"price"</span> : 40000, <span class="string">"color"</span> : <span class="string">"red"</span>, <span class="string">"brand"</span> : <span class="string">"Audi"</span>, <span class="string">"sellTime"</span> : <span class="string">"2014-07-01"</span> &#125;</span><br><span class="line">&#123; <span class="string">"index"</span>: &#123;&#125;&#125;</span><br><span class="line">&#123; <span class="string">"price"</span> : 35000, <span class="string">"color"</span> : <span class="string">"blue"</span>, <span class="string">"brand"</span> : <span class="string">"Honda"</span>, <span class="string">"sellTime"</span> : <span class="string">"2014-08-12"</span> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3、查看是否成功"><a href="#3、查看是否成功" class="headerlink" title="3、查看是否成功"></a>3、查看是否成功</h4><p><strong>命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /_cat/count/cars?v</span><br></pre></td></tr></table></figure>
+<p>可以看到该索引存在，并且有8条文档数据。</p>
+<p><img src="/img/es/es6-0.png" alt="es"> </p>
+<h2 id="二、Terms-Aggregation"><a href="#二、Terms-Aggregation" class="headerlink" title="二、Terms Aggregation"></a>二、Terms Aggregation</h2><p><strong>官方7.3文档</strong>：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html" target="_blank" rel="noopener">Terms Aggregation</a></p>
+<p><code>概念</code> : 根据某一项的每个唯一的值的聚合。</p>
+<h4 id="1、根据品牌分桶"><a href="#1、根据品牌分桶" class="headerlink" title="1、根据品牌分桶"></a>1、根据品牌分桶</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"genres"</span> : &#123;</span><br><span class="line">            <span class="string">"terms"</span> : &#123; <span class="string">"field"</span> : <span class="string">"brand"</span> &#125; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<p><img src="/img/es/es6-1.png" alt="es"> </p>
+<h4 id="2、分桶后只显示文档数量前3的桶"><a href="#2、分桶后只显示文档数量前3的桶" class="headerlink" title="2、分桶后只显示文档数量前3的桶"></a>2、分桶后只显示文档数量前3的桶</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"cars"</span> : &#123;</span><br><span class="line">            <span class="string">"terms"</span> : &#123;</span><br><span class="line">                <span class="string">"field"</span> : <span class="string">"brand"</span>,</span><br><span class="line">                <span class="string">"size"</span> : 3</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es6-2.png" alt="es"> </p>
+<p>从图中可以看出文档数量前三的桶。</p>
+<h4 id="3、分桶后排序"><a href="#3、分桶后排序" class="headerlink" title="3、分桶后排序"></a>3、分桶后排序</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"genres"</span> : &#123;</span><br><span class="line">            <span class="string">"terms"</span> : &#123;</span><br><span class="line">                <span class="string">"field"</span> : <span class="string">"brand"</span>,</span><br><span class="line">                <span class="string">"order"</span> : &#123; <span class="string">"_count"</span> : <span class="string">"asc"</span> &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4、显示文档数量大于3的桶"><a href="#4、显示文档数量大于3的桶" class="headerlink" title="4、显示文档数量大于3的桶"></a>4、显示文档数量大于3的桶</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"brands"</span> : &#123;</span><br><span class="line">            <span class="string">"terms"</span> : &#123;</span><br><span class="line">                <span class="string">"field"</span> : <span class="string">"brand"</span>,</span><br><span class="line">                <span class="string">"min_doc_count"</span>: 3</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5、使用精确指定的词条进行分桶"><a href="#5、使用精确指定的词条进行分桶" class="headerlink" title="5、使用精确指定的词条进行分桶"></a>5、使用精确指定的词条进行分桶</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"JapaneseCars"</span> : &#123;</span><br><span class="line">             <span class="string">"terms"</span> : &#123;</span><br><span class="line">                 <span class="string">"field"</span> : <span class="string">"brand"</span>,</span><br><span class="line">                 <span class="string">"include"</span> : [<span class="string">"BMW"</span>, <span class="string">"Audi"</span>]</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里也只展示些常用的，更多有关Terms Aggregation那就看官网吧。</p>
+<h2 id="三、-Filter-Aggregation"><a href="#三、-Filter-Aggregation" class="headerlink" title="三、 Filter Aggregation"></a>三、 Filter Aggregation</h2><p><strong>官方文档</strong>： <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html" target="_blank" rel="noopener">Filter Aggregation</a> 和 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html" target="_blank" rel="noopener">Filters Aggregation</a></p>
+<p><code>Filter概念</code>：指具体的域和具体的值，可以说是在 Terms Aggregation 的基础上进行了过滤，只对特定的值进行了聚合。</p>
+<h4 id="1、过滤获取品牌为BMW的桶，并求该桶平均值"><a href="#1、过滤获取品牌为BMW的桶，并求该桶平均值" class="headerlink" title="1、过滤获取品牌为BMW的桶，并求该桶平均值"></a>1、过滤获取品牌为BMW的桶，并求该桶平均值</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"brands"</span> : &#123;</span><br><span class="line">            <span class="string">"filter"</span> : &#123; <span class="string">"term"</span>: &#123; <span class="string">"brand"</span>: <span class="string">"BMW"</span> &#125; &#125;,</span><br><span class="line">            <span class="string">"aggs"</span> : &#123;</span><br><span class="line">                <span class="string">"avg_price"</span> : &#123; <span class="string">"avg"</span> : &#123; <span class="string">"field"</span> : <span class="string">"price"</span> &#125; &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es6-3.png" alt="es"> </p>
+<h4 id="2、过滤获取品牌为BMW的或者color为绿色的桶"><a href="#2、过滤获取品牌为BMW的或者color为绿色的桶" class="headerlink" title="2、过滤获取品牌为BMW的或者color为绿色的桶"></a>2、过滤获取品牌为BMW的或者color为绿色的桶</h4><p><code>Filters概念</code> : Filter Aggreagtion 只能指定一个过滤条件，响应也只是单个桶。如果想要只对多个特定值进行聚合，使用 Filter Aggreagtion 只能进行多次请求。</p>
+<p>而使用 Filters Aggreagation 就可以解决上述的问题，它可以指定多个过滤条件，也是说可以对多个特定值进行聚合。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">GET /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"size"</span>: 0,</span><br><span class="line">  <span class="string">"aggs"</span> : &#123;</span><br><span class="line">    <span class="string">"cars"</span> : &#123;</span><br><span class="line">      <span class="string">"filters"</span> : &#123;</span><br><span class="line">        <span class="string">"filters"</span> : &#123;</span><br><span class="line">          <span class="string">"colorBucket"</span> :   &#123; <span class="string">"match"</span> : &#123; <span class="string">"color"</span> : <span class="string">"red"</span>   &#125;&#125;,</span><br><span class="line">          <span class="string">"brandBucket"</span> : &#123; <span class="string">"match"</span> : &#123; <span class="string">"brand"</span> : <span class="string">"Audi"</span> &#125;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es6-4.png" alt="es"> </p>
+<h2 id="四、Histogram-Aggreagtion"><a href="#四、Histogram-Aggreagtion" class="headerlink" title="四、Histogram Aggreagtion"></a>四、Histogram Aggreagtion</h2><p><strong>官方文档</strong>：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html" target="_blank" rel="noopener">Histogram Aggreagtion</a></p>
+<p><code>概念</code> Histogram与Terms聚合类似，都是数据分组，区别是Terms是按照Field的值分组，而Histogram可以按照指定的间隔对Field进行分组</p>
+<h4 id="1、根据价格区间为10000分桶"><a href="#1、根据价格区间为10000分桶" class="headerlink" title="1、根据价格区间为10000分桶"></a>1、根据价格区间为10000分桶</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"prices"</span> : &#123;</span><br><span class="line">            <span class="string">"histogram"</span> : &#123;</span><br><span class="line">                <span class="string">"field"</span> : <span class="string">"price"</span>,</span><br><span class="line">                <span class="string">"interval"</span> : 10000</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es6-5.png" alt="es"> </p>
+<h4 id="2、根据价格区间为10000分桶，同时如果桶中没有文档就不显示桶"><a href="#2、根据价格区间为10000分桶，同时如果桶中没有文档就不显示桶" class="headerlink" title="2、根据价格区间为10000分桶，同时如果桶中没有文档就不显示桶"></a>2、根据价格区间为10000分桶，同时如果桶中没有文档就不显示桶</h4><p>上面的分桶我们可以发现价格在5000～6000 的文档没有也显示为0，我们想把如果桶中没有文档就不显示该桶</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GET /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"prices"</span> : &#123;</span><br><span class="line">            <span class="string">"histogram"</span> : &#123;</span><br><span class="line">                <span class="string">"field"</span> : <span class="string">"price"</span>,</span><br><span class="line">                <span class="string">"interval"</span> : 10000,</span><br><span class="line">                 <span class="string">"min_doc_count"</span> : 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es6-6.png" alt="es"> </p>
+<h2 id="五、Range-Aggregation"><a href="#五、Range-Aggregation" class="headerlink" title="五、Range Aggregation"></a>五、Range Aggregation</h2><p><strong>官方文档</strong>：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html" target="_blank" rel="noopener">Range Aggregation</a></p>
+<p><code>概念</code>: 根据用户传递的范围参数作为桶，进行相应的聚合。在同一个请求中，可以传递多组范围，每组范围作为一个桶。</p>
+<h4 id="1、根据价格区间分桶"><a href="#1、根据价格区间分桶" class="headerlink" title="1、根据价格区间分桶"></a>1、根据价格区间分桶</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GET /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"price_ranges"</span> : &#123;</span><br><span class="line">            <span class="string">"range"</span> : &#123;</span><br><span class="line">                <span class="string">"field"</span> : <span class="string">"price"</span>,</span><br><span class="line">                <span class="string">"ranges"</span> : [</span><br><span class="line">                    &#123; <span class="string">"to"</span> : 50000 &#125;,</span><br><span class="line">                    &#123; <span class="string">"from"</span> : 5000, <span class="string">"to"</span> : 80000 &#125;,</span><br><span class="line">                    &#123; <span class="string">"from"</span> : 80000 &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es6-7.png" alt="es"> </p>
+<p>我们也可以指定key的名称</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GET /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"price_ranges"</span> : &#123;</span><br><span class="line">            <span class="string">"range"</span> : &#123;</span><br><span class="line">                <span class="string">"field"</span> : <span class="string">"price"</span>,</span><br><span class="line">                <span class="string">"ranges"</span> : [</span><br><span class="line">                    &#123; <span class="string">"key"</span> : <span class="string">"xiaoyu"</span>,  <span class="string">"to"</span> : 50000 &#125;,</span><br><span class="line">                    &#123;  <span class="string">"key"</span> : <span class="string">"baohan"</span>, <span class="string">"from"</span> : 5000, <span class="string">"to"</span> : 80000 &#125;,</span><br><span class="line">                    &#123;  <span class="string">"key"</span> : <span class="string">"dayu"</span>, <span class="string">"from"</span> : 80000 &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es6-8.png" alt="es"> </p>
+<h2 id="六、-Date-Aggregation"><a href="#六、-Date-Aggregation" class="headerlink" title="六、 Date Aggregation"></a>六、 Date Aggregation</h2><p><strong>官方文档</strong>： <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html" target="_blank" rel="noopener">Date Histogram Aggregation</a> 和 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html" target="_blank" rel="noopener">Date Range Aggregation</a></p>
+<p><code>Date Histogram概念</code> 针对于时间格式数据的直方图聚合，基本的特性与 Histogram Aggregation 一致。</p>
+<h4 id="1、按月分桶显示每个月的销量"><a href="#1、按月分桶显示每个月的销量" class="headerlink" title="1、按月分桶显示每个月的销量"></a>1、按月分桶显示每个月的销量</h4><p><code>注意</code> 官方文档这里不是interval而是calendar_interval，但是按照这样操作会报错，因为我看的7.3的文档，而我部署的es是7.1版本。说明这个地方7.3有了改进。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">POST /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span> : &#123;</span><br><span class="line">        <span class="string">"sales_over_time"</span> : &#123;</span><br><span class="line">            <span class="string">"date_histogram"</span> : &#123;</span><br><span class="line">                <span class="string">"field"</span> : <span class="string">"sellTime"</span>,</span><br><span class="line">                <span class="string">"interval"</span> : <span class="string">"1M"</span>,</span><br><span class="line">                <span class="string">"format"</span> : <span class="string">"yyyy-MM-dd"</span> </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es6-9.png" alt="es"> </p>
+<h4 id="2、根据指定时间区间分桶"><a href="#2、根据指定时间区间分桶" class="headerlink" title="2、根据指定时间区间分桶"></a>2、根据指定时间区间分桶</h4><p><code>Date Range概念</code> ：针对于时间格式数据的范围聚合，基本的特性与 Range Aggreagtion 一致。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST /cars/_search?size=0</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"aggs"</span>: &#123;</span><br><span class="line">        <span class="string">"range"</span>: &#123;</span><br><span class="line">            <span class="string">"date_range"</span>: &#123;</span><br><span class="line">                <span class="string">"field"</span>: <span class="string">"sellTime"</span>,</span><br><span class="line">                <span class="string">"format"</span>: <span class="string">"MM-yyyy"</span>,</span><br><span class="line">                <span class="string">"ranges"</span>: [</span><br><span class="line">                    &#123; <span class="string">"to"</span>: <span class="string">"now-10M/M"</span> &#125;, </span><br><span class="line">                    &#123; <span class="string">"from"</span>: <span class="string">"now-10M/M"</span> &#125; </span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的意思是10个月前的分为一个桶，10个月前之后的分为一个桶</p>
+<p><img src="/img/es/es6-10.png" alt="es"> </p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/12/21/Elasticsearch——复合查询/" data-toggle="tooltip" data-placement="top" title="Elasticsearch——复合查询">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/10/08/Elasticsearch——Metric聚合查询/" data-toggle="tooltip" data-placement="top" title="Elasticsearch——Metric聚合查询">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#概念"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概念</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一、创建索引、数据"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">一、创建索引、数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、创建索引"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">1、创建索引</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、添加索引数据"><span class="toc-nav-number">2.0.2.</span> <span class="toc-nav-text">2、添加索引数据</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3、查看是否成功"><span class="toc-nav-number">2.0.3.</span> <span class="toc-nav-text">3、查看是否成功</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二、Terms-Aggregation"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">二、Terms Aggregation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、根据品牌分桶"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">1、根据品牌分桶</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、分桶后只显示文档数量前3的桶"><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text">2、分桶后只显示文档数量前3的桶</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3、分桶后排序"><span class="toc-nav-number">3.0.3.</span> <span class="toc-nav-text">3、分桶后排序</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4、显示文档数量大于3的桶"><span class="toc-nav-number">3.0.4.</span> <span class="toc-nav-text">4、显示文档数量大于3的桶</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#5、使用精确指定的词条进行分桶"><span class="toc-nav-number">3.0.5.</span> <span class="toc-nav-text">5、使用精确指定的词条进行分桶</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三、-Filter-Aggregation"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">三、 Filter Aggregation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、过滤获取品牌为BMW的桶，并求该桶平均值"><span class="toc-nav-number">4.0.1.</span> <span class="toc-nav-text">1、过滤获取品牌为BMW的桶，并求该桶平均值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、过滤获取品牌为BMW的或者color为绿色的桶"><span class="toc-nav-number">4.0.2.</span> <span class="toc-nav-text">2、过滤获取品牌为BMW的或者color为绿色的桶</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四、Histogram-Aggreagtion"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">四、Histogram Aggreagtion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、根据价格区间为10000分桶"><span class="toc-nav-number">5.0.1.</span> <span class="toc-nav-text">1、根据价格区间为10000分桶</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、根据价格区间为10000分桶，同时如果桶中没有文档就不显示桶"><span class="toc-nav-number">5.0.2.</span> <span class="toc-nav-text">2、根据价格区间为10000分桶，同时如果桶中没有文档就不显示桶</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五、Range-Aggregation"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">五、Range Aggregation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、根据价格区间分桶"><span class="toc-nav-number">6.0.1.</span> <span class="toc-nav-text">1、根据价格区间分桶</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#六、-Date-Aggregation"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">六、 Date Aggregation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、按月分桶显示每个月的销量"><span class="toc-nav-number">7.0.1.</span> <span class="toc-nav-text">1、按月分桶显示每个月的销量</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、根据指定时间区间分桶"><span class="toc-nav-number">7.0.2.</span> <span class="toc-nav-text">2、根据指定时间区间分桶</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2024 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

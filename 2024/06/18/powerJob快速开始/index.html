@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          powerJob快速开始 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2024/06/18/powerJob快速开始/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#powerJob" title="powerJob">powerJob</a>
+                            
+                        </div>
+                        <h1>powerJob快速开始</h1>
+                        <h2 class="subheading">powerJob快速开始+配置详解</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2024-06-18
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.8k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="Java-分布式任务调度平台：PowerJob-快速开始-配置详解"><a href="#Java-分布式任务调度平台：PowerJob-快速开始-配置详解" class="headerlink" title="Java 分布式任务调度平台：PowerJob 快速开始+配置详解"></a>Java 分布式任务调度平台：PowerJob 快速开始+配置详解</h2><p>转发自HelloGitHub 推出的<a href="https://github.com/HelloGitHub-Team/Article" target="_blank" rel="noopener">《讲解开源项目》</a>系列。</p>
+<blockquote>
+<p>项目地址：</p>
+<p><a href="https://github.com/KFCFans/PowerJob" target="_blank" rel="noopener">https://github.com/KFCFans/PowerJob</a></p>
+</blockquote>
+<p>PowerJob 的设计目标为企业级的分布式任务调度平台，即成为公司内部的调度中间件。整个公司统一部署调度中心 powerjob-server，旗下所有业务线应用只需要依赖 ‘powerjob-worker’ 即可接入获取任务调度与分布式计算能力。</p>
+<p>因此，PowerJob 由调度服务器（powerjob-server）和执行器（powerjob-worker）两部分组成，powerjob-server 负责提供 Web 服务和完成任务的调度，powerjob-worker 则负责执行用户所编写的任务代码，同时提供分布式计算能力。</p>
+<p>以下为在本地开发环境快速搭建并试用 PowerJob 的教程。</p>
+<h2 id="一、STEP1-初始化项目"><a href="#一、STEP1-初始化项目" class="headerlink" title="一、STEP1: 初始化项目"></a>一、STEP1: 初始化项目</h2><ol>
+<li><code>git clone https://github.com/KFCFans/PowerJob.git</code></li>
+<li>导入 IDE，源码结构如下，我们需要启动调度服务器（powerjob-server），同时在 samples 工程中编写自己的处理器代码<br><img src="/img/powerjob/1.png" alt="powerjob"> </li>
+</ol>
+<h2 id="二、STEP2-启动调度服务器"><a href="#二、STEP2-启动调度服务器" class="headerlink" title="二、STEP2: 启动调度服务器"></a>二、STEP2: 启动调度服务器</h2><ol>
+<li><p>创建数据库（不需要建表，只需要创建数据库）powerjob-daily</p>
+</li>
+<li><p>修改配置文件，配置文件的说明<a href="https://www.yuque.com/ohmyscheduler/guidence/bdvp1u#4DTFD" target="_blank" rel="noopener">官方文档</a>写的非常详细，此处不再赘述。由于是在本地 IDE 搭建测试环境，因此我们选择使用开发环境的配置文件 <code>application-daily.properties</code> 来修改并使用。需要修改的地方为数据库配置：</p>
+<ul>
+<li><code>spring.datasource.core.jdbc-url</code></li>
+<li><code>spring.datasource.core.username</code></li>
+<li><code>spring.datasource.core.password</code></li>
+<li>当然，有 mongoDB 的同学也可以修改 <code>spring.data.mongodb.uri</code> 以获取完全版体验。</li>
+</ul>
+</li>
+<li><p>完成配置文件的修改后，可以直接通过启动类 <code>OhMyApplication</code> 启动调度服务器，观察启动日志，查看是否启动成功～启动成功后，访问 <a href="http://127.0.0.1:7700/" target="_blank" rel="noopener">http://127.0.0.1:7700/</a> ，如果能顺利出现 Web 界面，则说明调度服务器启动成功！</p>
+</li>
+<li><p>注册应用：点击主页<strong>应用注册</strong>按钮，填入 <code>powerjob-agent-test</code> 和控制台密码（用于进入控制台），注册示例应用（当然你也可以注册其他的 appName，只是别忘记在示例程序中同步修改～）<br><img src="/img/powerjob/2.png" alt="powerjob"> </p>
+</li>
+</ol>
+<h2 id="三、STEP3-编写示例代码"><a href="#三、STEP3-编写示例代码" class="headerlink" title="三、STEP3: 编写示例代码"></a>三、STEP3: 编写示例代码</h2><blockquote>
+<p>进入示例工程（powerjob-worker-samples），修改配置文件连接 powerjob-server 并编写自己的处理器代码。</p>
+</blockquote>
+<ol>
+<li><p>修改 powerjob-worker-samples 的启动配置类 <code>OhMySchedulerConfig</code>，<strong>将  <code>appName</code> 修改为刚刚在控制台注册的名称</strong>。</p>
+</li>
+<li><p>编写自己的处理器：在示例工程中新建一个类，继承你想要使用的处理器（各个处理器的介绍可见<a href="https://www.yuque.com/ohmyscheduler/guidence/hczm7m" target="_blank" rel="noopener">官方文档</a>），这里为了简单演示，选择使用单机处理器 <code>BasicProcessor</code> ，以下代码示例演示了在线日志功能的使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StandaloneProcessorDemo</span> <span class="keyword">implements</span> <span class="title">BasicProcessor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ProcessResult <span class="title">process</span><span class="params">(TaskContext context)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        OmsLogger omsLogger = context.getOmsLogger();</span><br><span class="line">        omsLogger.info(<span class="string">"start process,context is &#123;&#125;."</span>, context);</span><br><span class="line">        System.out.println(<span class="string">"jobParams is "</span> + context.getJobParams());</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ProcessResult(<span class="keyword">true</span>, <span class="string">"process successfully~"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动示例程序，即直接运行主类 <code>SampleApplication</code>，观察控制台输出信息，判断是否启动成功。</p>
+</li>
+</ol>
+<h2 id="四、STEP4-任务的配置与运行"><a href="#四、STEP4-任务的配置与运行" class="headerlink" title="四、STEP4: 任务的配置与运行"></a>四、STEP4: 任务的配置与运行</h2><p>调度服务器与示例工程都启动完毕后，再次前往 Web 页面（ <a href="http://127.0.0.1:7700/" target="_blank" rel="noopener">http://127.0.0.1:7700/</a> ），进行任务的配置与运行。</p>
+<ol>
+<li><p>在首页输入框输入配置的应用名称，成功操作后会正式进入前端管理界面。<br><img src="/img/powerjob/3.png" alt="powerjob"> </p>
+</li>
+<li><p>点击任务管理 -&gt; 新建任务（右上角），开始创建任务。<br><img src="/img/powerjob/4.png" alt="powerjob"> </p>
+</li>
+<li><p>完成任务创建后，即可在控制台看到刚才创建的任务，如果觉得等待调度太过于漫长，可以直接点击<strong>运行</strong>按钮，立即运行本任务。<br><img src="/img/powerjob/5.png" alt="powerjob"> </p>
+</li>
+<li><p>前往<strong>任务示例</strong>边栏，查看任务的运行状态和在线日志<br><img src="/img/powerjob/6.png" alt="powerjob"> </p>
+</li>
+</ol>
+<h3 id="4-1-基本配置"><a href="#4-1-基本配置" class="headerlink" title="4.1 基本配置"></a>4.1 基本配置</h3><ul>
+<li>任务名称：名称</li>
+<li>任务描述：描述</li>
+<li>任务参数：任务处理时能够获取到的参数（即各个 Processor的process 方法入参 <code>TaskContext</code> 对象的 jobParams 属性）（进行一次处理器开发就能理解了）</li>
+<li>定时信息：该任务的触发方式，由下拉框和输入框组成</li>
+<li>API -&gt; 不需要填写任何参数，表明该任务由 OpenAPI 触发</li>
+<li>CRON -&gt; 填写 CRON 表达式（<a href="https://cron.qqe2.com/" target="_blank" rel="noopener">在线生成网站</a>）</li>
+<li>固定频率 -&gt; 填写整数，单位<strong>毫秒</strong></li>
+<li>固定延迟 -&gt; 填写整数，单位<strong>毫秒</strong></li>
+<li>工作流 -&gt; 不需要填写任何参数，表明该任务由工作流（workflow）触发</li>
+</ul>
+<h3 id="4-2-执行配置"><a href="#4-2-执行配置" class="headerlink" title="4.2 执行配置"></a>4.2 执行配置</h3><p>由执行类型（单机、广播和 MapReduce）、处理器类型和处理器参数组成，后两项相互关联。</p>
+<ul>
+<li>内置 Java 处理器 -&gt; 填写该处理器的<strong>全限定类名</strong>（eg，<code>com.github.kfcfans.oms.processors.demo.MapReduceProcessorDemo</code>）</li>
+<li>Java（容器） -&gt; 填写<strong>容器ID#处理器全限定类名</strong>（eg，<code>18#com.github.kfcfans.oms.container.DemoProcessor</code>）</li>
+<li>SHELL -&gt; 填写需要处理的脚本（直接复制文件内容）或脚本下载链接（<a href="http://xxx）" target="_blank" rel="noopener">http://xxx）</a></li>
+<li>PYTHON -&gt; 填写完整的 python 脚本或下载链接（<a href="http://xxx）" target="_blank" rel="noopener">http://xxx）</a></li>
+</ul>
+<h3 id="4-3-运行配置"><a href="#4-3-运行配置" class="headerlink" title="4.3 运行配置"></a>4.3 运行配置</h3><ul>
+<li>最大实例数：该任务同时执行的数量</li>
+<li>单机线程并发数：该实例执行过程中每个 Worker 使用的线程数量（MapReduce 任务生效，其余无论填什么，都只会使用必要的线程数…）</li>
+<li>运行时间限制：限定任务的最大运行时间，超时则视为失败，单位<strong>毫秒</strong>，0 代表不限制超时时间（<strong>不建议不限制超时时间</strong>）。</li>
+</ul>
+<h3 id="4-4-重试配置"><a href="#4-4-重试配置" class="headerlink" title="4.4 重试配置"></a>4.4 重试配置</h3><ul>
+<li>Instance 重试次数：实例级别，失败了整个任务实例重试，会更换 TaskTracker（本次任务实例的Master节点），代价较大，大型 Map/MapReduce 慎用。</li>
+<li>Task重试次数：Task 级别，每个子 Task 失败后单独重试，会更换 ProcessorTracker（本次任务实际执行的 Worker 节点），代价较小，推荐使用。</li>
+<li>注：<strong>请注意同时配置任务重试次数和子任务重试次数之后的重试放大</strong>，比如对于单机任务来说，假如任务重试次数和子任务重试次数都配置了 1 且都执行失败，实际执行次数会变成 4 次！推荐任务实例重试配置为 0，子任务重试次数根据实际情况配置。</li>
+</ul>
+<h3 id="4-5-机器配置"><a href="#4-5-机器配置" class="headerlink" title="4.5 机器配置"></a>4.5 机器配置</h3><p>用来标明允许执行任务的机器状态，避开那些摇摇欲坠的机器，0 代表无任何限制。</p>
+<ul>
+<li>最低 CPU 核心数：填写浮点数，CPU 可用核心数小于该值的 Worker 将不会执行该任务。</li>
+<li>最低内存（GB）：填写浮点数，可用内存小于该值的 Worker 将不会执行该任务。</li>
+<li>最低磁盘（GB）：填写浮点数，可用磁盘空间小于该值的 Worker 将不会执行该任务。</li>
+</ul>
+<h3 id="4-6-集群配置"><a href="#4-6-集群配置" class="headerlink" title="4.6 集群配置"></a>4.6 集群配置</h3><ul>
+<li>执行机器地址：指定集群中的某几台机器执行任务（debug 的好帮手），多值英文逗号分割，如<code>192.168.1.1:27777,192.168.1.2:27777</code></li>
+<li>最大执行机器数量：限定调动执行的机器数量</li>
+</ul>
+<h3 id="4-7-报警配置"><a href="#4-7-报警配置" class="headerlink" title="4.7 报警配置"></a>4.7 报警配置</h3><p>选择任务执行失败后报警通知的对象，需要事先录入。</p>
+<p>基础的教程到这里也就结束了～更多功能示例可见<a href="https://www.yuque.com/ohmyscheduler/guidence/ysug77" target="_blank" rel="noopener">官方文档</a>，工作流、MapReduce、容器等高级特性等你来探索！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2024/07/19/powerJob高可用原理/" data-toggle="tooltip" data-placement="top" title="powerJob高可用原理">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2024/05/16/powerJob调研报告/" data-toggle="tooltip" data-placement="top" title="powerJob调研报告">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Java-分布式任务调度平台：PowerJob-快速开始-配置详解"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Java 分布式任务调度平台：PowerJob 快速开始+配置详解</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一、STEP1-初始化项目"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">一、STEP1: 初始化项目</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二、STEP2-启动调度服务器"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">二、STEP2: 启动调度服务器</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三、STEP3-编写示例代码"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">三、STEP3: 编写示例代码</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四、STEP4-任务的配置与运行"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">四、STEP4: 任务的配置与运行</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-1-基本配置"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">4.1 基本配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-2-执行配置"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">4.2 执行配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-3-运行配置"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">4.3 运行配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-4-重试配置"><span class="toc-nav-number">5.4.</span> <span class="toc-nav-text">4.4 重试配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-5-机器配置"><span class="toc-nav-number">5.5.</span> <span class="toc-nav-text">4.5 机器配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-6-集群配置"><span class="toc-nav-number">5.6.</span> <span class="toc-nav-text">4.6 集群配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-7-报警配置"><span class="toc-nav-number">5.7.</span> <span class="toc-nav-text">4.7 报警配置</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#powerJob" title="powerJob">powerJob</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2024 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

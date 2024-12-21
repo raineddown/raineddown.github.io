@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Elasticsearch——基本概念 - radarsoftware
+        
+    </title>
+
+    <link rel="canonical" href="http://radarsoftware.cn/2023/07/22/Elasticsearch——基本概念/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/Iron-Man-3.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                            
+                        </div>
+                        <h1>Elasticsearch——基本概念</h1>
+                        <h2 class="subheading">Elasticsearch基本概念</h2>
+                        <span class="meta">
+                            Posted by John Doe on
+                            2023-07-22
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3.6k</span> and
+                                Reading Time <span class="post-count">13</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">welcome to heavy rain&#39;s website</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文包含的基本概念包含:Index、Type、Document。集群，节点，分片及副本，倒排索引，分词器。</p>
+<h2 id="1-Index-Type-Document"><a href="#1-Index-Type-Document" class="headerlink" title="1.Index,Type,Document"></a>1.Index,Type,Document</h2><h3 id="1-1-Index"><a href="#1-1-Index" class="headerlink" title="1.1 Index"></a>1.1 Index</h3><p><code>index</code>：索引是文档(Document)的容器，是一类文档的集合。</p>
+<p><strong>索引</strong>这个词在 ElasticSearch 会有三种意思:</p>
+<p><strong>1)、索引(名词)</strong></p>
+<p>类比传统的关系型数据库领域来说，<code>索引相当于SQL中的一个数据库(Database)</code>。索引由其名称(<strong>必须为全小写字符</strong>)进行标识。</p>
+<p><strong>2)、索引(动词)</strong></p>
+<p><code>保存一个文档到索引(名词)的过程</code>。这非常类似于SQL语句中的 INSERT关键词。如果该文档已存在时那就相当于数据库的UPDATE。</p>
+<p><strong>3)、倒排索引</strong></p>
+<p>关系型数据库通过增加一个<strong>B+树索</strong>引到指定的列上，以便提升数据检索速度。索引ElasticSearch 使用了一个叫做 <code>倒排索引</code> 的结构来达到相同的目的。</p>
+<h3 id="1-2-Type"><a href="#1-2-Type" class="headerlink" title="1.2 Type"></a>1.2 Type</h3><p><code>Type</code> 可以理解成关系数据库中Table。</p>
+<p>之前的版本中，索引和文档中间还有个类型的概念，每个索引下可以建立多个类型，文档存储时需要指定index和type。从6.0.0开始单个索引中只能有一个类型，</p>
+<p>7.0.0以后将将不建议使用，8.0.0 以后完全不支持。</p>
+<h5 id="弃用该概念的原因："><a href="#弃用该概念的原因：" class="headerlink" title="弃用该概念的原因："></a>弃用该概念的原因：</h5><p>我们虽然可以通俗的去理解Index比作 SQL 的 Database，Type比作SQL的Table。但这并不准确，因为如果在SQL中,Table 之前相互独立，同名的字段在两个表中毫无关系。</p>
+<p>但是在ES中，同一个Index 下不同的 Type 如果有同名的字段，他们会被 Luecence 当作同一个字段 ，并且他们的定义必须相同。所以我觉得Index现在更像一个表，</p>
+<p>而Type字段并没有多少意义。目前Type已经被Deprecated，在7.0开始，一个索引只能建一个Type为<code>_doc</code></p>
+<h3 id="1-3-Document"><a href="#1-3-Document" class="headerlink" title="1.3 Document"></a>1.3 Document</h3><p><code>Document</code> Index 里面单条的记录称为Document（文档）。<strong>等同于关系型数据库表中的行</strong>。</p>
+<p>我们来看下一个文档的源数据</p>
+<p><img src="/img/es/es1-0.png" alt="es1"> </p>
+<p><code>_index</code> 文档所属索引名称。</p>
+<p><code>_type</code> 文档所属类型名。</p>
+<p><code>_id</code> Doc的主键。在写入的时候，可以指定该Doc的ID值，如果不指定，则系统自动生成一个唯一的UUID值。</p>
+<p><code>_version</code> 文档的版本信息。Elasticsearch通过使用version来保证对文档的变更能以正确的顺序执行，避免乱序造成的数据丢失。</p>
+<p><code>_seq_no</code> 严格递增的顺序号，每个文档一个，Shard级别严格递增，保证后写入的Doc的<code>_seq_no</code>大于先写入的Doc的_seq_no。</p>
+<p><code>primary_term</code> primary_term也和<code>_seq_no</code>一样是一个整数，每当Primary Shard发生重新分配时，比如重启，Primary选举等，_primary_term会递增1</p>
+<p><code>found</code> 查询的ID正确那么ture, 如果 Id 不正确，就查不到数据，found字段就是false。</p>
+<p><code>_source</code> 文档的原始JSON数据。</p>
+<h2 id="二、集群，节点，分片及副本"><a href="#二、集群，节点，分片及副本" class="headerlink" title="二、集群，节点，分片及副本"></a>二、集群，节点，分片及副本</h2><h4 id="2-1、集群"><a href="#2-1、集群" class="headerlink" title="2.1、集群"></a>2.1、集群</h4><p>ElasticSearch集群实际上是一个分布式系统，它需要具备两个特性：</p>
+<p>　　1）<code>高可用性</code></p>
+<p>　　　　a）服务可用性：允许有节点停止服务；</p>
+<p>　　　　b）数据可用性：部分节点丢失，不会丢失数据；</p>
+<p>　　2）<code>可扩展性</code></p>
+<p>　　　　随着请求量的不断提升，数据量的不断增长，系统可以将数据分布到其他节点，实现水平扩展；</p>
+<p><strong>一个集群中可以有一个或者多个节点</strong>；</p>
+<p><strong>集群健康值</strong></p>
+<ol>
+<li><code>green</code>：所有主要分片和复制分片都可用</li>
+<li><code>yellow</code>：所有主要分片可用，但不是所有复制分片都可用</li>
+<li><code>red</code>：不是所有的主要分片都可用</li>
+</ol>
+<p>当集群状态为 red，它仍然正常提供服务，它会在现有存活分片中执行请求，我们需要尽快修复故障分片，防止查询数据的丢失；</p>
+<h4 id="2-2、节点-Node"><a href="#2-2、节点-Node" class="headerlink" title="2.2、节点(Node)"></a>2.2、节点(Node)</h4><p>　1）<strong>节点是什么？</strong></p>
+<p>　　　　a）节点是一个ElasticSearch的实例，其本质就是一个Java进程；</p>
+<p>　　　　b）一台机器上可以运行多个ElasticSearch实例，但是建议在生产环境中一台机器上只运行一个ElasticSearch实例；</p>
+<p>Node 是组成集群的一个单独的服务器，用于存储数据并提供集群的搜索和索引功能。与集群一样，节点也有一个唯一名字，默认在节点启动时会生成一个uuid作为节点名，</p>
+<p>该名字也可以手动指定。单个集群可以由任意数量的节点组成。如果只启动了一个节点，则会形成一个单节点的集群。</p>
+<h4 id="2、节点-Node"><a href="#2、节点-Node" class="headerlink" title="2、节点(Node)"></a>2、节点(Node)</h4><p>　1）<strong>节点是什么？</strong></p>
+<p>　　　　a）节点是一个ElasticSearch的实例，其本质就是一个Java进程；</p>
+<p>　　　　b）一台机器上可以运行多个ElasticSearch实例，但是建议在生产环境中一台机器上只运行一个ElasticSearch实例；</p>
+<p>Node 是组成集群的一个单独的服务器，用于存储数据并提供集群的搜索和索引功能。与集群一样，节点也有一个唯一名字，默认在节点启动时会生成一个uuid作为节点名，</p>
+<p>该名字也可以手动指定。单个集群可以由任意数量的节点组成。如果只启动了一个节点，则会形成一个单节点的集群。</p>
+<h4 id="2-3、分片"><a href="#2-3、分片" class="headerlink" title="2.3、分片"></a>2.3、分片</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Primary Shard(主分片）</span><br></pre></td></tr></table></figure>
+<p>ES中的shard用来解决节点的容量上限问题,，通过主分片，可以将数据分布到集群内的所有节点之上。</p>
+<p>它们之间关系</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">一个节点对应一个ES实例；</span><br><span class="line">一个节点可以有多个<span class="keyword">index</span>（索引）;</span><br><span class="line">一个<span class="keyword">index</span>可以有多个shard（分片）；</span><br><span class="line">　一个分片是一个lucene <span class="keyword">index</span>（此处的<span class="keyword">index</span>是lucene自己的概念，与ES的<span class="keyword">index</span>不是一回事）；</span><br><span class="line">主分片数是在索引创建时指定，后续不允许修改，除非Reindex</span><br></pre></td></tr></table></figure>
+<p>一个索引中的数据保存在多个分片中(默认为一个)，相当于水平分表。一个分片便是一个Lucene 的实例，它本身就是一个完整的搜索引擎。我们的文档被存储和索引到分片内，</p>
+<p>但是应用程序是直接与索引而不是与分片进行交互。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Replica Shard（副本）</span><br></pre></td></tr></table></figure>
+<p>副本有两个重要作用：</p>
+<p>1、<strong>服务高可用</strong>：由于数据只有一份,如果一个node挂了,那存在上面的数据就都丢了,有了replicas,只要不是存储这条数据的node全挂了,数据就不会丢。因此分片副本不会与</p>
+<p>主分片分配到同一个节点；</p>
+<p>2、<strong>扩展性能</strong>：通过在所有replicas上并行搜索提高搜索性能.由于replicas上的数据是近实时的(near realtime),因此所有replicas都能提供搜索功能,通过设置合理的replicas</p>
+<p>数量可以极高的提高搜索吞吐量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">分片的设定</span><br></pre></td></tr></table></figure>
+<p>　　对于生产环境中分片的设定，需要提前做好容量规划，因为主分片数是在索引创建时预先设定的，后续无法修改。</p>
+<p><strong>分片数设置过小</strong></p>
+<p>　　　　　　导致后续无法增加节点进行水平扩展。</p>
+<p>　　　　　　导致分片的数据量太大，数据在重新分配时耗时；</p>
+<p><strong>分片数设置过大</strong></p>
+<p>　　　　　　影响搜索结果的相关性打分，影响统计结果的准确性；</p>
+<p>　　　　　　单个节点上过多的分片，会导致资源浪费，同时也会影响性能；</p>
+<h3 id="3-倒排索引"><a href="#3-倒排索引" class="headerlink" title="3.倒排索引"></a>3.倒排索引</h3><p>ES的搜索功能是基于lucene,而lucene搜索的基本原理就是倒叙索引,<code>倒序排序的结果跟分词的类型有关</code>。</p>
+<p>举例</p>
+<p>1、假设文档集合包含五个文档，毎个文档内容如图所示，在图中最左端一栏是每个文档对应的文挡编号。</p>
+<p><img src="/img/es/es1-1.png" alt="es1"> </p>
+<p>2、首先要用分词系统将文挡自动切分成单词序列，记录下哪些文挡包含这个单词，在如此处理结束后，我们可以得到最简单的倒排索引。</p>
+<p><img src="/img/es/es1-2.png" alt="es1"> </p>
+<p>3、索引系统还可以记录除此之外的更多信息，下图还记载了单词频率信息。文档中的句子被划分为一个个term(term 用来表示一个单词或词语,<code>取决于使用的分词方式</code>),</p>
+<p><code>倒叙索引</code>中存储着term,term的出现频率(tf,term frequency)和出现位置(<code>倒叙索引中的单词是按顺序排列的,这张图没有体现出来</code>),请注意这里的文档内容是document</p>
+<p>中的一个字段,也就是说每个被索引了的字段都有自己的倒叙索引</p>
+<p><img src="/img/es/es1-2.png" alt="es1"> </p>
+<p><strong>一次简单的搜索流程</strong></p>
+<p>假设我们搜索<code>谷歌地图之父</code>,搜索流程会是这样</p>
+<ol>
+<li>分词,分词插件将句子分为3个term <code>谷歌</code>,<code>地图</code>,<code>之父</code></li>
+<li>将这3个term拿到倒叙索引中去查找(会很高效,比如二分查找),如果匹配到了就拿对应的文档id,获得文档内容</li>
+</ol>
+<p><strong>但是,如何确定结果顺序?</strong></p>
+<p>这里要引入_score的概念,对于term的匹配,lucene会对其打分,得分越高,排名越靠前.这里要介绍几个相关的概念</p>
+<p>- TF(term frequency),词频,term在当前document中出现的频率,一个term在当前document中出现5次要比出现1次更相关,打分也会更高 - IDF(inverse doucment frequency),逆向文档频率,term在所有document中出现的频率,这个频率越高,该term对应的分值越低 - 字段长度归一值,简单来说就是字段越短,字段的权重越高, 比如 term <code>我</code>在匹配 <code>我123</code>和<code>我123456</code>时,<code>我123</code>的得分会更高.</p>
+<h3 id="4-分词器"><a href="#4-分词器" class="headerlink" title="4.分词器"></a>4.分词器</h3><h4 id="4-1分词器概念"><a href="#4-1分词器概念" class="headerlink" title="4.1分词器概念"></a>4.1分词器概念</h4><h5 id="4-1-1、Analysis-和-Analyzer"><a href="#4-1-1、Analysis-和-Analyzer" class="headerlink" title="4.1.1、Analysis 和 Analyzer"></a>4.1.1、Analysis 和 Analyzer</h5><p><code>Analysis</code>： 文本分析是把全文本转换一系列单词(term/token)的过程，也叫分词。<strong>Analysis是通过Analyzer来实现的</strong>。</p>
+<p>当一个文档被索引时，每个Field都可能会创建一个倒排索引（Mapping可以设置不索引该Field）。</p>
+<p><strong>倒排索引的过程就是将文档通过Analyzer分成一个一个的Term,每一个Term都指向包含这个Term的文档集合。</strong></p>
+<p>当查询query时，Elasticsearch会根据搜索类型决定是否对query进行analyze，然后和倒排索引中的term进行相关性查询，匹配相应的文档。</p>
+<h5 id="4-1-2-、Analyzer组成"><a href="#4-1-2-、Analyzer组成" class="headerlink" title="4.1.2 、Analyzer组成"></a>4.1.2 、Analyzer组成</h5><p>分析器（analyzer）都由三种构件块组成的：<code>character filters</code> ， <code>tokenizers</code> ， <code>token filters</code>。</p>
+<p>1) character filter 字符过滤器</p>
+<p><strong>* 在一段文本进行分词之前，先进行预处理，比如说最常见的就是，过滤html标签（<span>hello<span> —&gt; hello），&amp; —&gt; and（I&amp;you —&gt; I and you </strong></p>
+<p>2) tokenizers 分词器</p>
+<p>英文分词可以根据空格将单词分开,中文分词比较复杂,可以采用机器学习算法来分词。</p>
+<p>3) Token filters Token过滤器</p>
+<p><strong>将切分的单词进行加工</strong>。大小写转换（例将“Quick”转为小写），去掉词（例如停用词像“a”、“and”、“the”等等），或者增加词（例如同义词像“jump”和“leap”）。</p>
+<p><code>三者顺序</code>：<strong>Character Filters—-&gt;Tokenizer—-&gt;Token Filter</strong></p>
+<p><code>三者个数</code>：<strong>analyzer = CharFilters（0个或多个） + Tokenizer(恰好一个) + TokenFilters(0个或多个)</strong></p>
+<h5 id="4-1-3、Elasticsearch的内置分词器"><a href="#4-1-3、Elasticsearch的内置分词器" class="headerlink" title="4.1.3、Elasticsearch的内置分词器"></a>4.1.3、Elasticsearch的内置分词器</h5><ul>
+<li>Standard Analyzer - 默认分词器，按词切分，小写处理</li>
+<li>Simple Analyzer - 按照非字母切分(符号被过滤), 小写处理</li>
+<li>Stop Analyzer - 小写处理，停用词过滤(the,a,is)</li>
+<li>Whitespace Analyzer - 按照空格切分，不转小写</li>
+<li>Keyword Analyzer - 不分词，直接将输入当作输出</li>
+<li>Patter Analyzer - 正则表达式，默认\W+(非字符分割)</li>
+<li>Language - 提供了30多种常见语言的分词器</li>
+<li>Customer Analyzer 自定义分词器</li>
+</ul>
+<h5 id="4-1-4、创建索引时设置分词器"><a href="#4-1-4、创建索引时设置分词器" class="headerlink" title="4.1.4、创建索引时设置分词器"></a>4.1.4、创建索引时设置分词器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">PUT new_index</span><br><span class="line">&#123;</span><br><span class="line">	&quot;settings&quot;: &#123;</span><br><span class="line">		&quot;analysis&quot;: &#123;</span><br><span class="line">			&quot;analyzer&quot;: &#123;</span><br><span class="line">				&quot;std_folded&quot;: &#123;</span><br><span class="line">					&quot;type&quot;: &quot;custom&quot;,</span><br><span class="line">					&quot;tokenizer&quot;: &quot;standard&quot;,</span><br><span class="line">					&quot;filter&quot;: [</span><br><span class="line">						&quot;lowercase&quot;,</span><br><span class="line">						&quot;asciifolding&quot;</span><br><span class="line">					]</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;mappings&quot;: &#123;</span><br><span class="line">		&quot;properties&quot;: &#123;</span><br><span class="line">			&quot;title&quot;: &#123;</span><br><span class="line">				&quot;type&quot;: &quot;text&quot;,</span><br><span class="line">				&quot;analyzer&quot;: &quot;std_folded&quot; #指定分词器</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;content&quot;: &#123;</span><br><span class="line">				&quot;type&quot;: &quot;text&quot;,</span><br><span class="line">				&quot;analyzer&quot;: &quot;whitespace&quot; #指定分词器</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-ES内置分词器"><a href="#4-2-ES内置分词器" class="headerlink" title="4.2 ES内置分词器"></a>4.2 ES内置分词器</h4><p>这里讲解下常见的几个分词器：<code>Standard Analyzer</code>、<code>Simple Analyzer</code>、<code>whitespace Analyzer</code>。</p>
+<h5 id="4-2-1、Standard-Analyzer-默认"><a href="#4-2-1、Standard-Analyzer-默认" class="headerlink" title="4.2.1、Standard Analyzer(默认)"></a>4.2.1、Standard Analyzer(默认)</h5><p><strong>1）示例</strong></p>
+<p>standard 是默认的分析器。它提供了基于语法的标记化（基于Unicode文本分割算法），适用于大多数语言</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;standard&quot;,</span><br><span class="line">  &quot;text&quot;:     &quot;Like X 国庆放假的&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es1-3.png" alt="es1"> </p>
+<p><strong>2）配置</strong></p>
+<p>标准分析器接受下列参数：</p>
+<ul>
+<li>max_token_length ： 最大token长度，默认255</li>
+<li>stopwords ： 预定义的停止词列表，如<code>_english_</code>或 包含停止词列表的数组，默认是 <code>_none_</code></li>
+<li>stopwords_path ： 包含停止词的文件路径</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">PUT new_index</span><br><span class="line">&#123;</span><br><span class="line">  &quot;settings&quot;: &#123;</span><br><span class="line">    &quot;analysis&quot;: &#123;</span><br><span class="line">      &quot;analyzer&quot;: &#123;</span><br><span class="line">        &quot;my_english_analyzer&quot;: &#123;</span><br><span class="line">          &quot;type&quot;: &quot;standard&quot;,       #设置分词器为standard</span><br><span class="line">          &quot;max_token_length&quot;: 5,    #设置分词最大为5</span><br><span class="line">          &quot;stopwords&quot;: &quot;_english_&quot;  #设置过滤词</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="4-2-2-Simple-Analyzer"><a href="#4-2-2-Simple-Analyzer" class="headerlink" title="4.2.2 Simple Analyzer"></a>4.2.2 Simple Analyzer</h5><p>simple 分析器当它遇到<strong>只要不是字母的字符</strong>，就将文本解析成term，而且所有的term都是小写的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;simple&quot;,</span><br><span class="line">  &quot;text&quot;:     &quot;Like X 国庆放假 的&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es1-4.png" alt="es1"> </p>
+<h5 id="4-2-3、Whitespace-Analyzer"><a href="#4-2-3、Whitespace-Analyzer" class="headerlink" title="4.2.3、Whitespace Analyzer"></a>4.2.3、Whitespace Analyzer</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;whitespace&quot;,</span><br><span class="line">  &quot;text&quot;:     &quot;Like X 国庆放假 的&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<p><img src="/img/es/es1-5.png" alt="es1"> </p>
+<h4 id="4-3中文分词器"><a href="#4-3中文分词器" class="headerlink" title="4.3中文分词器"></a>4.3中文分词器</h4><p>中文的分词器现在大家比较推荐的就是 <code>IK分词器</code>，当然也有些其它的比如 <strong>smartCN</strong>、<strong>HanLP</strong>。</p>
+<p>这里只讲如何使用IK做为中文分词。</p>
+<h4 id="1、IK分词器安装"><a href="#1、IK分词器安装" class="headerlink" title="1、IK分词器安装"></a>1、IK分词器安装</h4><p>开源分词器 Ik 的github：<a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="noopener">https://github.com/medcl/elasticsearch-analysis-ik</a></p>
+<p><code>注意</code> IK分词器的版本要你安装ES的版本一致，我这边是7.1.0那么就在github找到对应版本，然后启动命令··</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;bin&#x2F;elasticsearch-plugin install https:&#x2F;&#x2F;github.com&#x2F;medcl&#x2F;elasticsearch-analysis-ik&#x2F;releases&#x2F;download&#x2F;v7.1.0&#x2F;elasticsearch-analysis-ik-7.1.0.zip</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es1-6.png" alt="es1"> </p>
+<p><code>注意</code> 安装完插件后需重启Es，才能生效。</p>
+<h4 id="2、IK使用"><a href="#2、IK使用" class="headerlink" title="2、IK使用"></a>2、IK使用</h4><p>IK有两种颗粒度的拆分：</p>
+<p><code>ik_smart</code>: 会做最粗粒度的拆分</p>
+<p><code>ik_max_word</code>: 会将文本做最细粒度的拆分</p>
+<p><strong>1) ik_smart 拆分</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;_analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;text&quot;:&quot;中华人民共和国国徽&quot;,</span><br><span class="line">  &quot;analyzer&quot;:&quot;ik_smart&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es1-7.png" alt="es1"> </p>
+<p><strong>2）ik_max_word 拆分</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /_analyze</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"text"</span>:<span class="string">"中华人民共和国国徽"</span>,</span><br><span class="line">  <span class="string">"analyzer"</span>:<span class="string">"ik_max_word"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/es/es1-8.png" alt="es1"> </p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/08/07/Elasticsearch——基本命令/" data-toggle="tooltip" data-placement="top" title="Elasticsearch——基本命令">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/06/16/Elasticsearch——Docker容器中运行ES-Kibana-Cerebro/" data-toggle="tooltip" data-placement="top" title="Elasticsearch——Docker容器中运行ES,Kibana,Cerebro">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+
+<script src="/js/music-player/player.js"></script>
+
+
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Index-Type-Document"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">1.Index,Type,Document</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-1-Index"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1.1 Index</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-2-Type"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">1.2 Type</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#弃用该概念的原因："><span class="toc-nav-number">2.2.0.1.</span> <span class="toc-nav-text">弃用该概念的原因：</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-3-Document"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">1.3 Document</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二、集群，节点，分片及副本"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">二、集群，节点，分片及副本</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-1、集群"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">2.1、集群</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-2、节点-Node"><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text">2.2、节点(Node)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、节点-Node"><span class="toc-nav-number">3.0.3.</span> <span class="toc-nav-text">2、节点(Node)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-3、分片"><span class="toc-nav-number">3.0.4.</span> <span class="toc-nav-text">2.3、分片</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-倒排索引"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">3.倒排索引</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-分词器"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">4.分词器</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-1分词器概念"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">4.1分词器概念</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-1-1、Analysis-和-Analyzer"><span class="toc-nav-number">3.2.1.1.</span> <span class="toc-nav-text">4.1.1、Analysis 和 Analyzer</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-1-2-、Analyzer组成"><span class="toc-nav-number">3.2.1.2.</span> <span class="toc-nav-text">4.1.2 、Analyzer组成</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-1-3、Elasticsearch的内置分词器"><span class="toc-nav-number">3.2.1.3.</span> <span class="toc-nav-text">4.1.3、Elasticsearch的内置分词器</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-1-4、创建索引时设置分词器"><span class="toc-nav-number">3.2.1.4.</span> <span class="toc-nav-text">4.1.4、创建索引时设置分词器</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-2-ES内置分词器"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">4.2 ES内置分词器</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-2-1、Standard-Analyzer-默认"><span class="toc-nav-number">3.2.2.1.</span> <span class="toc-nav-text">4.2.1、Standard Analyzer(默认)</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-2-2-Simple-Analyzer"><span class="toc-nav-number">3.2.2.2.</span> <span class="toc-nav-text">4.2.2 Simple Analyzer</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-2-3、Whitespace-Analyzer"><span class="toc-nav-number">3.2.2.3.</span> <span class="toc-nav-text">4.2.3、Whitespace Analyzer</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-3中文分词器"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">4.3中文分词器</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1、IK分词器安装"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">1、IK分词器安装</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2、IK使用"><span class="toc-nav-number">3.2.5.</span> <span class="toc-nav-text">2、IK使用</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Elasticsearch" title="Elasticsearch">Elasticsearch</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/Where_dWanaGo" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/raineddown" target="_blank">raineddown&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/raineddown">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; John Doe 2024 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://radarsoftware.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;对象？new一个就好了&quot;,&quot;just do it&quot;,&quot;🍀&quot;,&quot;🍂&quot;,&quot;🍃&quot;,&quot;time is running out&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot; ,&quot;rgb(242,153,29)&quot; ,&quot;rgb(22,36,92)&quot; ,&quot;rgb(119,195,79)&quot; ,&quot;rgb(119,195,79)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

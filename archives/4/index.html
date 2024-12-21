@@ -283,30 +283,27 @@
 
         <div class="post-preview">
 
-            <a href="/2021/08/18/GateWay网关/">
+            <a href="/2022/07/14/排查线上java程序高CPU占比代码/">
                 <h2 class="post-title">
-                    GateWay网关
+                    排查线上java程序高CPU占比代码
                 </h2>
                 <h3 class="post-subtitle">
-                    GateWay网关
+                    线上问题分析
                 </h3>
                 <div class="post-content-preview">
-                    GateWay是什么上一代zuul 1.x官网[https://github.com/Netflix/zuul/wiki]
-Gateway官网[https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.2.1.RELEASE/reference/html/]
-概述
-Cloud全家桶中有个很重要的组件就是网关，在1.x......
+                    java程序CPU占比过高分析一、Arthas分析高CPU占比代码Arthas官方文档地址:https://arthas.aliyun.com/doc/quick-start.html
+1.1 启动Arthas在命令行下面执行（使用和目标进程一致的用户启动，否则可能attach失败）：
+12curl -O https:&#x2F;&#x2F;arthas.aliyun.com&#x2F;ar......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-08-18
+                    2022-07-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
-                    
-                      <a href="/tags/#GateWay" title="GateWay">GateWay</a>
+                      <a href="/tags/#线上问题分析" title="线上问题分析">线上问题分析</a>
                     
                 </div>
             
@@ -320,23 +317,172 @@ Cloud全家桶中有个很重要的组件就是网关，在1.x......
 
         <div class="post-preview">
 
-            <a href="/2021/07/18/spring/">
+            <a href="/2022/06/23/MySQL高级/">
                 <h2 class="post-title">
-                    spring
+                    MySQL高级
                 </h2>
                 <h3 class="post-subtitle">
-                    spring
+                    MySQL
                 </h3>
                 <div class="post-content-preview">
-                    SpringBean的生命周期
-spirng根据类实例化对象后，对加了@Autowired、@Resource注解的属性进行赋值(属性填充)、进行对象初始化(@PostConstruct注解)、判断是否需要AOP(配置控制)需要的话AOP生成代理对象、代理对象注册成bean
-spring 单例bean，bean按照type和name获取，spring有类似于map的结构存储bean，key为......
+                    MySQL高级一、MySQL简介MySQL 是⼀种关系型数据库，在Java企业级开发中⾮常常⽤，因为 MySQL 是开源免费的，并 且⽅便扩展。阿⾥巴巴数据库系统也⼤量⽤到了 MySQL，因此它的稳定性是有保障的。MySQL 是开放源代码的，因此任何⼈都可以在 GPL(General Public License) 的许可下下载并根据个性化的需要对其进⾏修改。MySQL的默认端⼝号是3306......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-07-18
+                    2022-06-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#MySQL" title="MySQL">MySQL</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/05/15/countDownLatch/">
+                <h2 class="post-title">
+                    countDownLatch简介与基础使用
+                </h2>
+                <h3 class="post-subtitle">
+                    countDownLatch简介与基础使用
+                </h3>
+                <div class="post-content-preview">
+                    简介概念CountDownLatch允许一个或者多个线程去等待其他线程完成操作。
+CountDownLatch接收一个int型参数，表示要等待的工作线程的个数。
+当然也不一定是多线程，在单线程中可以用这个int型参数表示多个操作步骤。
+方法CountDownLatch 提供了一些方法：
+方法    说明await()    使当前线程进入同步队列进行等待，直到latch的值被减到0或者当前线......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2022-05-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#countDownLatch" title="countDownLatch">countDownLatch</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/04/22/spring容器注入实现策略模式/">
+                <h2 class="post-title">
+                    spring容器注入实现策略模式
+                </h2>
+                <h3 class="post-subtitle">
+                    spring容器注入实现策略模式
+                </h3>
+                <div class="post-content-preview">
+                    背景一个项目对接多个系统的同一功能，或者同一功能多种实现的选择需求的策略模式实现。
+Spring容器实现需求: 物质采购汉堡选择，可以选择采购肯德基或麦当劳
+示例代码:
+汉堡策略类上下文HamburgerContext:
+12345678910111213141516171819@Componentpublic class HamburgerContext &#123;    /**    ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2022-04-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#spring" title="spring">spring</a>
+                    
+                      <a href="/tags/#Strategy" title="Strategy">Strategy</a>
+                    
+                      <a href="/tags/#策略模式" title="策略模式">策略模式</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/04/02/Async与Scheduled/">
+                <h2 class="post-title">
+                    Async与Scheduled注解
+                </h2>
+                <h3 class="post-subtitle">
+                    Async与Scheduled
+                </h3>
+                <div class="post-content-preview">
+                    背景最近项目中使用了@Async与@Scheduled自定义线程池注解实现定时任务，特此记录实现及其原理。
+@Async简介@Async是Spring 3.0之后提供的注解，使用@Async注解可以轻松的实现异步调用。
+官方文档: https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/schedu......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2022-04-02
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Async" title="Async">Async</a>
+                    
+                      <a href="/tags/#Scheduled" title="Scheduled">Scheduled</a>
+                    
+                      <a href="/tags/#线程池" title="线程池">线程池</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/31/Spring远程代码执行漏洞/">
+                <h2 class="post-title">
+                    Spring远程命令执行漏洞
+                </h2>
+                <h3 class="post-subtitle">
+                    Spring远程命令执行漏洞
+                </h3>
+                <div class="post-content-preview">
+                    Spring远程命令执行漏洞转载地址:https://mp.weixin.qq.com/s/BnF8CWuUxNliCoa260bEaA
+ Spring RCE （远程代码执行漏洞）已被官方证实。
+
+国家信息安全漏洞平台：https://mp.weixin.qq.com/s/BnF8CWuUxNliCoa260bEaA
+
+CVE: https://tanzu.vmware.com/secur......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by John Doe on
+                    2022-03-31
                 </p>
                 <div class="tags">
                     
@@ -354,27 +500,26 @@ spring 单例bean，bean按照type和name获取，spring有类似于map的结构
 
         <div class="post-preview">
 
-            <a href="/2021/07/05/Zookeeper案例-分布式全局唯一ID生成/">
+            <a href="/2022/03/15/GateWay远程代码执行漏洞/">
                 <h2 class="post-title">
-                    Zookeeper案例-分布式全局唯一ID生成
+                    GateWay漏洞
                 </h2>
                 <h3 class="post-subtitle">
-                    Zookeeper实现分布式全局唯一ID生成
+                    GateWay漏洞
                 </h3>
                 <div class="post-content-preview">
-                    概述在单体架构中，我们通常使用数据库字段自带的自增auto_increment属性来自动为每一条记录生成唯一的ID，但是当我们采用分布式系统后，特别是分库分表后，就无法再依靠数据库的auto_increment属性来唯一标识一条记录，这就需要采用其他方法来生成全局唯一ID。
-在zookeeper中，它提供了一种以创建临时有序节点来获取到全局唯一ID，它能保证在整个分布式系统中的全局唯一性。
-......
+                    描述2022年3月1日，Spring官方发布了关于Spring Cloud Gateway的两个CVE漏洞，分别为CVE-2022-22946与CVE-2022-22947：
+漏洞1：Spring Cloud Gateway 远程代码执行漏洞（CVE-2022-22947）3 月 1 日，VMware 官方发布安全公告，声明对 Spring Cloud Gateway 中的一处命令注入漏洞进......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-07-05
+                    2022-03-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Zookeeper" title="Zookeeper">Zookeeper</a>
+                      <a href="/tags/#GateWay" title="GateWay">GateWay</a>
                     
                 </div>
             
@@ -388,25 +533,30 @@ spring 单例bean，bean按照type和name获取，spring有类似于map的结构
 
         <div class="post-preview">
 
-            <a href="/2021/06/25/Zookeeper案例-分布式锁/">
+            <a href="/2022/02/23/Oracle与Mysql数据库区别/">
                 <h2 class="post-title">
-                    Zookeeper案例-分布式锁
+                    Oracle与Mysql数据库区别
                 </h2>
                 <h3 class="post-subtitle">
-                    Zookeeper案例-分布式锁
+                    Oracle与Mysql数据库区别
                 </h3>
                 <div class="post-content-preview">
-                    为什么需要分布式锁为了保证一个方法或属性在高并发情况下的同一时间只能被同一个线程执行，在传统单体应用单机部署的情况下，可以使用并发处理相关的功能进行互斥控制。但是，随着业务发展的需要，原单体单机部署的系统被演化成分布式集群系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制锁策略失效，单纯的应用并不能提供分布式锁的能力。为了解决这个问题就需要一种跨机器的......
+                    (1) 对事务的提交
+MySQL默认是自动提交，而Oracle默认不自动提交，需要用户手动提交，需要在写commit;指令或者点击commit按钮
+(2) 分页查询
+MySQL是直接在SQL语句中写”select… from …where…limit x, y”,有limit就可以实现分页;而Oracle则是需要用到伪列ROWNUM和嵌套查询
+oracle:
+12345select * fr......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-06-25
+                    2022-02-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Zookeeperwe" title="Zookeeperwe">Zookeeperwe</a>
+                      <a href="/tags/#Oracle" title="Oracle">Oracle</a>
                     
                 </div>
             
@@ -420,27 +570,29 @@ spring 单例bean，bean按照type和name获取，spring有类似于map的结构
 
         <div class="post-preview">
 
-            <a href="/2021/06/19/ftp连接池/">
+            <a href="/2022/02/03/Dubbo四种负载均衡算法/">
                 <h2 class="post-title">
-                    ftp连接池
+                    Dubbo四种负载均衡算法
                 </h2>
                 <h3 class="post-subtitle">
-                    ftp连接池
+                    Dubbo四种负载均衡算法
                 </h3>
                 <div class="post-content-preview">
-                    背景​    老系统和其他系统对接采用ftp交互(内外网隔离，通过光闸内外网摆渡交互文件.ak)，每次对ftp的操作都是新创建连接消耗较大，于是将ftp池化降低ftp创建的消耗，完成系统优化。
-介绍使用依赖:
-1234567891011121314151617181920212223242526272829303132333435363738394041&lt;dependency&gt; ......
+                    Dubbo四种负载均衡算法整体架构图可以看出抽象的负载均衡下的类分为4个，这4个类表示了4种负载均衡策略，分别是一致性Hash均衡算法、随机调用法、轮询法、最少活动调用法
+
+原理RandomLoadBalance随机调用负载均衡，该类实现了抽象的AbstractLoadBalance接口,重写了doSelect方法，看方法的细节就是首先遍历每个提供服务的机器，获取每个服务的权重，然后累加权重......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-06-19
+                    2022-02-03
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#ftp连接池" title="ftp连接池">ftp连接池</a>
+                      <a href="/tags/#Dubbo" title="Dubbo">Dubbo</a>
+                    
+                      <a href="/tags/#LoadBalanced" title="LoadBalanced">LoadBalanced</a>
                     
                 </div>
             
@@ -454,191 +606,36 @@ spring 单例bean，bean按照type和name获取，spring有类似于map的结构
 
         <div class="post-preview">
 
-            <a href="/2021/06/13/Zookeeper简介/">
+            <a href="/2022/01/27/Seata分布式事务/">
                 <h2 class="post-title">
-                    Zookeeper简介
+                    Seata分布式事务
                 </h2>
                 <h3 class="post-subtitle">
-                    Zookeeper
+                    Seata分布式事务
                 </h3>
                 <div class="post-content-preview">
-                    概述Zookeeper 是一个开源的分布式的，为分布式框架提供协调服务的 Apache 项目。
-工作机制Zookeeper从设计模式角度来理解：是一个基 于观察者模式设计的分布式服务管理框架，它负 责 存储和管理大家都关心的数据，然 后接受观察者的 注 册，一旦这些数据的状态发生变化，Zookeeper 就 将负责通知已经在Zookeeper上注册的那些观察 者做出相应的反应。
+                    Seata简介Seata是一款开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。
+官方网址
+分布式事务问题分布式前
 
-特点
-数据......
+单机单库没这个问题
+从1:1 -&gt; 1:N -&gt; N:N
+
+单体应用被拆分成微服务应用，原来的三个模块被拆分成三个独立的应用,分别使用三个独立的数据源，业务操作需要调用三三 个服务来完成。此时每个服务内部的数据一致性由本地事务来保......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2021-06-13
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Zookeeper" title="Zookeeper">Zookeeper</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/06/07/Mysql执行计划/">
-                <h2 class="post-title">
-                    Mysql执行计划
-                </h2>
-                <h3 class="post-subtitle">
-                    Mysql执行计划
-                </h3>
-                <div class="post-content-preview">
-                    Mysql 执行计划当客户端发送给mysql 服务器一条查询语句后，经过sql的优化器，会产生一个执行计划。
-执行计划使用 EXPLAIN 关键字可以模拟优化器执行 SQL 查询语句，从而知道 MYSQL 是如何处理你的 sql 语句的。分析你的查询语句或是表结构的性能瓶颈。
-语法: Explain + sql
-执行计划的作用分析sql语句中
-
-表的读取顺序
-数据读取操作的操作类型
-哪些索引......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-06-07
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Mysql" title="Mysql">Mysql</a>
-                    
-                      <a href="/tags/#执行计划" title="执行计划">执行计划</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/05/30/java线程池/">
-                <h2 class="post-title">
-                    java线程池
-                </h2>
-                <h3 class="post-subtitle">
-                    java线程池
-                </h3>
-                <div class="post-content-preview">
-                    Java线程池线程池的概念线程池就是首先创建一些线程，它们的集合称为线程池。使用线程池可以很好地提高性能，线程池在系统启动时即创建大量空闲的线程，程序将一个任务传给线程池，线程池就会启动一条线程来执行这个任务，执行结束以后，该线程并不会死亡，而是再次返回线程池中成为空闲状态，等待执行下一个任务。
-使用线程池的原因
-降低资源消耗。通过重复利⽤已创建的线程降低线程创建和销毁造成的消耗。 
-
-提⾼......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-05-30
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java线程池" title="java线程池">java线程池</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/05/30/Hystrix服务降级/">
-                <h2 class="post-title">
-                    Hystrix服务降级
-                </h2>
-                <h3 class="post-subtitle">
-                    Hystrix负载均衡服务调用
-                </h3>
-                <div class="post-content-preview">
-                    Hystrix服务降级
-
-
-hystrix中的重要概念:1,服务降级比如当某个服务繁忙,不能让客户端的请求一直等待,应该立刻返回给客户端一个备选方案
-2,服务熔断当某个服务出现问题,卡死了服务不可用了,不能让用户一直等待,需要关闭所有对此服务的访问（保险丝熔断电路跳闸）然后调用服务降级
-3,服务限流限流,比如秒杀场景,不能访问用户瞬间都访问服务器,限制一次只可以有多少请求
-使用hystrix......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-05-30
+                    2022-01-27
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
                     
-                      <a href="/tags/#Hystrix" title="Hystrix">Hystrix</a>
+                      <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba">spring cloud alibaba</a>
                     
-                      <a href="/tags/#服务降级" title="服务降级">服务降级</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/05/27/OpenFeign服务调用/">
-                <h2 class="post-title">
-                    OpenFeign服务调用
-                </h2>
-                <h3 class="post-subtitle">
-                    OpenFeign服务调用
-                </h3>
-                <div class="post-content-preview">
-                    简介
-
-项目demo地址：https://github.com/raineddown/spring-cloud-demo
-涉及服务:cloud-consumer-feign-order80、cloud-provider-payment8001、cloud-eureka-server7001
-Feign与OpenFeign区别
-使用流程1.主启动类中
-
-2.fegin需要调用的其他的服务的接口......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by John Doe on
-                    2021-05-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#spring cloud" title="spring cloud">spring cloud</a>
-                    
-                      <a href="/tags/#OpenFeign" title="OpenFeign">OpenFeign</a>
-                    
-                      <a href="/tags/#服务远程调用" title="服务远程调用">服务远程调用</a>
+                      <a href="/tags/#Seata" title="Seata">Seata</a>
                     
                 </div>
             
@@ -719,15 +716,13 @@ Feign与OpenFeign区别
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -749,6 +744,12 @@ Feign与OpenFeign区别
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
             
         
@@ -757,11 +758,11 @@ Feign与OpenFeign区别
             
         
             
-        
+            <a href="/tags/#springboot" title="springboot" rel="4">springboot</a>
             
         
             
-            <a href="/tags/#springboot" title="springboot" rel="3">springboot</a>
+        
             
         
             
@@ -795,12 +796,6 @@ Feign与OpenFeign区别
             
         
             
-        
-            
-            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
-            
-        
-            
             <a href="/tags/#mybatis-plus" title="mybatis-plus" rel="2">mybatis-plus</a>
             
         
@@ -811,11 +806,13 @@ Feign与OpenFeign区别
             
         
             
-        
+            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
             
         
             
             <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
+            
+        
             
         
             
@@ -867,14 +864,6 @@ Feign与OpenFeign区别
             
         
             
-            <a href="/tags/#spring" title="spring" rel="3">spring</a>
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#GateWay" title="GateWay" rel="2">GateWay</a>
             
         
@@ -891,13 +880,21 @@ Feign与OpenFeign区别
             
         
             
+            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+            
+        
+            
         
             
             <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
             
         
             
-            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+        
+            
+        
+            
+            <a href="/tags/#spring" title="spring" rel="3">spring</a>
             
         
             
@@ -921,7 +918,19 @@ Feign与OpenFeign区别
             
         
             
+            <a href="/tags/#MySQL" title="MySQL" rel="2">MySQL</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="2">java</a>
             
         
             
@@ -939,7 +948,17 @@ Feign与OpenFeign区别
             
         
             
+            <a href="/tags/#Elasticsearch" title="Elasticsearch" rel="7">Elasticsearch</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#powerJob" title="powerJob" rel="4">powerJob</a>
             
         
             
@@ -1044,23 +1063,23 @@ Feign与OpenFeign区别
     <ul>
       
         <li>
-          <a href="/2023/05/13/java-lambda%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">java-lambda函数式编程</a>
+          <a href="/2024/12/07/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6outlook%E9%82%AE%E4%BB%B6%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件outlook邮件扫描功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/04/17/mysql%E6%97%A5%E5%BF%97bingLog-redoLog-undoLog/">mysql日志bingLog,redoLog,undoLog,java监听binlog</a>
+          <a href="/2024/11/07/ETL%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E8%84%9A%E6%9C%ACkettle/">ETL数据清洗脚本kettle</a>
         </li>
       
         <li>
-          <a href="/2023/03/04/java%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%AE%9E%E6%88%98%E5%8F%8A%E5%B7%A5%E5%85%B7%E7%B1%BB/">java反射获取对象属性实战及工具类</a>
+          <a href="/2024/10/09/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E6%B0%B4%E5%8D%B0%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件水印功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/02/11/%E7%9B%AE%E5%89%8D%E5%B8%B8%E8%A7%81AI%E8%BD%AF%E4%BB%B6%E5%9B%BD%E5%8C%BA%E6%B3%A8%E5%86%8C%E4%B8%8E%E4%BD%BF%E7%94%A8/">目前常见AI软件国区注册与使用</a>
+          <a href="/2024/09/06/Java%E7%88%AC%E8%99%AB/">Java爬虫</a>
         </li>
       
         <li>
-          <a href="/2023/01/08/%E5%87%A0%E7%A7%8D%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F/">几种深拷贝方式</a>
+          <a href="/2024/08/04/powerJob%E8%B0%83%E5%BA%A6%E5%B1%82%E5%8E%9F%E7%90%86/">powerJob调度层原理</a>
         </li>
       
     </ul>
@@ -1083,131 +1102,6 @@ Feign与OpenFeign区别
         <li><a href="#" target="_blank">Other</a></li>
     
 </ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-    <h5>categories</h5>
-    <div class="widget">
-      <ul>
-        
-          <a href="categories/#GitHub"><li>GitHub</li></a>
-        
-          <a href="categories/#JSON"><li>JSON</li></a>
-        
-          <a href="categories/#架构模式"><li>架构模式</li></a>
-        
-          <a href="categories/#hexo"><li>hexo</li></a>
-        
-          <a href="categories/#Docker"><li>Docker</li></a>
-        
-          <a href="categories/#centos"><li>centos</li></a>
-        
-          <a href="categories/#IDEA"><li>IDEA</li></a>
-        
-          <a href="categories/#jdk"><li>jdk</li></a>
-        
-          <a href="categories/#idea"><li>idea</li></a>
-        
-          <a href="categories/#Druid"><li>Druid</li></a>
-        
-          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
-        
-          <a href="categories/#docker"><li>docker</li></a>
-        
-          <a href="categories/#sql"><li>sql</li></a>
-        
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
-        
-          <a href="categories/#SQL"><li>SQL</li></a>
-        
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
-        
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
-          <a href="categories/#异步调用"><li>异步调用</li></a>
-        
-          <a href="categories/#shiro"><li>shiro</li></a>
-        
-          <a href="categories/#redis"><li>redis</li></a>
-        
-          <a href="categories/#并发编程"><li>并发编程</li></a>
-        
-          <a href="categories/#vue"><li>vue</li></a>
-        
-          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
-        
-          <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
-        
-          <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
-        
-          <a href="categories/#javastream"><li>javastream</li></a>
-        
-          <a href="categories/#Eureka"><li>Eureka</li></a>
-        
-          <a href="categories/#zookeeper"><li>zookeeper</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#consul"><li>consul</li></a>
-        
-          <a href="categories/#Ribbon"><li>Ribbon</li></a>
-        
-          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
-        
-          <a href="categories/#java线程池"><li>java线程池</li></a>
-        
-          <a href="categories/#Hystrix"><li>Hystrix</li></a>
-        
-          <a href="categories/#spring"><li>spring</li></a>
-        
-          <a href="categories/#Oracle"><li>Oracle</li></a>
-        
-          <a href="categories/#GateWay"><li>GateWay</li></a>
-        
-          <a href="categories/#map"><li>map</li></a>
-        
-          <a href="categories/#easyexcel"><li>easyexcel</li></a>
-        
-          <a href="categories/#cache"><li>cache</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#负载均衡"><li>负载均衡</li></a>
-        
-          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
-        
-          <a href="categories/#服务降级"><li>服务降级</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-      </ul>
-    </div>
 
         <hr>
     
@@ -1256,7 +1150,7 @@ Feign与OpenFeign区别
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; John Doe 2023 
+                    Copyright &copy; John Doe 2024 
                     <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

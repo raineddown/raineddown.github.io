@@ -283,25 +283,26 @@
 
         <div class="post-preview">
 
-            <a href="/2020/04/21/IDEA旗舰版学生党如何获得免费的个人许可证-1/">
+            <a href="/2020/12/25/stream流/">
                 <h2 class="post-title">
-                    IDEA旗舰版学生党如何获得免费的个人许可证
+                    javastream流
                 </h2>
                 <h3 class="post-subtitle">
-                    转载学生党如何获得免费的IDEA旗舰版
+                    javastream流
                 </h3>
                 <div class="post-content-preview">
-                    说明版本：Ultimate | Community Edition        旗舰版    社区版本为什么我要使用旗舰版的IDEA？请看官方比较：https://www.jetbrains.com/idea/features/editions_comparison_matrix.html旗舰版还支持HTML，CSS，PHP，SQL，Python等语言，并且支持更多的服务端框架和前端框架例......
+                    前言在工作过程中看到类似以下代码，一时间理解不能，static void方法中有return方法，后续意识到这应该是stream流的拦截处理，特此记录巩固java stream的写法
+1234567891011121314151617181920212223&#x2F;** 获取结案操作逻辑处理*&#x2F;private static void getXXXXByEnum(List&lt;......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-04-21
+                    2020-12-25
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IDEA" title="IDEA">IDEA</a>
+                      <a href="/tags/#javastream" title="javastream">javastream</a>
                     
                 </div>
             
@@ -315,27 +316,26 @@
 
         <div class="post-preview">
 
-            <a href="/2020/04/21/jdk12新特性/">
+            <a href="/2020/12/20/消息队列、RabbitMQ简介/">
                 <h2 class="post-title">
-                    jdk12新特性
+                    消息队列、RabbitMQ简介
                 </h2>
                 <h3 class="post-subtitle">
-                    本文为记录java12特性
+                    消息队列基础、RabbitMQ简介
                 </h3>
                 <div class="post-content-preview">
-                    这日子过着过着jdk14都发布了，刚起步用jdk11的我瑟瑟发抖，打算记录一下。
-低暂停延时的垃圾收集器 (实验版)1A Low-Pause-Time Garbage Collector (Experimental)
-添加一个名为 Shenandoah的新垃圾收集 (GC)算法，该算法通过与正在运行的 Java线程并发执行回收工作来减少 GC暂停时间。Shenandoah的暂停时间与堆大小无......
+                    消息队列简介消息队列MQ(Message Queue)中间件是分布式系统中重要的组件，主要解决应用耦合，异步消息，流量削锋等问题实现高性能，高可用，可伸缩和终一致性,使用较多的消息队列有ActiveMQ，RabbitMQ，ZeroMQ，Kafka，RocketMQ.其中把数据放到消息队列叫做生产者，从消息队列里边取数据叫做消费者。
+消息队列的作用解耦： 假设有A、B2个系统，B系统需要调用A......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-04-21
+                    2020-12-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#jdk" title="jdk">jdk</a>
+                      <a href="/tags/#rabbitmq" title="rabbitmq">rabbitmq</a>
                     
                 </div>
             
@@ -349,26 +349,36 @@
 
         <div class="post-preview">
 
-            <a href="/2020/04/21/jdk11新特性/">
+            <a href="/2020/12/11/布隆过滤器/">
                 <h2 class="post-title">
-                    jdk11新特性
+                    布隆过滤器
                 </h2>
                 <h3 class="post-subtitle">
-                    本文为记录java11特性
+                    布隆过滤器
                 </h3>
                 <div class="post-content-preview">
-                    这日子过着过着jdk14都发布了，刚起步用jdk11的我瑟瑟发抖，打算记录一下。
-Java11 vs Java8Java 11相对于Java 8确实有一部分进化，除了有很多内部的升级（比如开销和时延更低的GC、TLS1.3加持等等）之外，对于初学使用者来说也有一些语言使用层面的进化。正好最近我在自己的个人小项目上尝试升级使用了一下 Java11（公司项目咱也不敢动、也不敢问，只好动自己的个人......
+                    布隆过滤器的优缺点概述优点：
+由于存储的是二进制数据，所以占用的空间很小
+
+它的插入和查询速度是非常快的，时间复杂度是O（K），可以联想一下HashMap的过程
+
+保密性很好，因为本身不存储任何原始数据，只有二进制数据
+
+
+缺点：
+存在误判，详细说明与例子见上文布隆器基础介绍部分。
+
+删除困难，试想布隆过滤器存入的几个数据经过计算的hash值相同，那么他们的二进制数组下标也一定相同，删除后导......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-04-21
+                    2020-12-11
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#jdk" title="jdk">jdk</a>
+                      <a href="/tags/#布隆过滤器" title="布隆过滤器">布隆过滤器</a>
                     
                 </div>
             
@@ -382,27 +392,26 @@ Java11 vs Java8Java 11相对于Java 8确实有一部分进化，除了有很多�
 
         <div class="post-preview">
 
-            <a href="/2020/04/21/IDEA 2020升级体验Java14/">
+            <a href="/2020/11/26/常见Java并发中断方法/">
                 <h2 class="post-title">
-                    IDEA 2020、Java14升级体验
+                    常见Java并发中断相关方法
                 </h2>
                 <h3 class="post-subtitle">
-                    本文为转载记录IDEA 2020、Java14更新功能特性
+                    常见Java并发中断方法
                 </h3>
                 <div class="post-content-preview">
-                    IntelliJ IDEA2020就在前几天，Java软件开发神器 IDEA 2020.1 新版发布了：我第一时间在机子上更新并体验了几天，感觉还是有点香的！怎么硕呢，体验完新特性之后，不由的感叹一句：IDEA现在真的是越来越智能，越来越懂开发者了。
-UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：各花入各眼，好坏就不做评判了，可以根据自己的喜好来调节。
-必须要说的是，这个中文汉化......
+                    背景在极客时间学习09Java线程的生命周期(上)时，课后思考出现了本文没有介绍的isInterrupted()方法，特此记录学习Java并发中断方法。
+中断介绍并发编程引用了中断机制无疑证明了中断对多线程并发的裨益，想想死锁的四个条件：互斥、请求与保持、环路等待、不可抢占。中断可以完美的破坏请求与保持、环路等待的死锁条件。再比如有的线程可能迷失在怪圈无法自拔（自旋浪费资源），这时就可以用其......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-04-21
+                    2020-11-26
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IDEA" title="IDEA">IDEA</a>
+                      <a href="/tags/#并发编程" title="并发编程">并发编程</a>
                     
                 </div>
             
@@ -416,32 +425,25 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
 
         <div class="post-preview">
 
-            <a href="/2020/04/05/centos安装nginx并配置SSL证书/">
+            <a href="/2020/11/25/并发编程初步认识与基础理论（一）/">
                 <h2 class="post-title">
-                    centos安装nginx并配置SSL证书
+                    并发编程初步认识与基础理论（一）
                 </h2>
                 <h3 class="post-subtitle">
-                    SSL证书安装
+                    java并发编程认识
                 </h3>
                 <div class="post-content-preview">
-                    安装nginx的命令12sudo yum install epel-releasesudo yum install nginx
-让nginx随系统启动而启动1sudo systemctl enable nginx
-常用命令123启动：nginx停止：nginx -s stop重载配置：nginx -s reload
-配置SSL证书配置路径：/etc/nginx/日志路径：/var/log/n......
+                    学习资源总结来源感谢这位大佬课程的教育与分享，从中我得以管中窥豹一番，本文为并发编程基础理论的个人总结笔记，欢迎大家于下方链接去学习更全面的Java并发编程知识。来源：https://time.geekbang.org/column/intro/159?utm_campaign=guanwang&amp;utm_source=baidu-ad&amp;utm_medium=ppzq-pc&a......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-04-05
+                    2020-11-25
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#nginx" title="nginx">nginx</a>
-                    
-                      <a href="/tags/#centos" title="centos">centos</a>
-                    
-                      <a href="/tags/#SSL" title="SSL">SSL</a>
+                      <a href="/tags/#并发编程" title="并发编程">并发编程</a>
                     
                 </div>
             
@@ -455,27 +457,33 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
 
         <div class="post-preview">
 
-            <a href="/2020/03/01/六边形架构/">
+            <a href="/2020/11/06/element-ui-mybatis-plus-springboot解决IPage分页问题/">
                 <h2 class="post-title">
-                    六边形架构认识
+                    element-ui+mybatis-plus+springboot解决IPage分页问题
                 </h2>
                 <h3 class="post-subtitle">
-                    微服务架构基础架构
+                    element-ui+mybatis-plus+springboot解决IPage分页问题
                 </h3>
                 <div class="post-content-preview">
-                    六边形架构简介六边形架构由Alistair Cockburn于2005年提出，相较于传统三层架构方式的缺点————不支持多客户端、不支持多数据库、领域层依赖持久层，六边形架构实现了业务逻辑以一种松耦合的形式与多个外部系统通过“适配器-端口”的形式进行集成。某种意义上六边形架构也是一种分层架构，将架构分为了内部和外部但没有了层的概念。六边形架构也称为端口与适配器，在领域驱动设计（DDD）和微服......
+                    简介本文应用于ssm框架，解决controller接口返回mybatis-plus封装的IPage类型与Vue.element-ui前端的接收与分页
+mybatis-plus中的IPage与Page类首先上源码(部分)接口Ipage类型：IPage的实现类Page:
+源码可见Page是IPage的实现类，可见想使用mybatis-plus的封装分页则要明白Page类的属性Page类的属性介绍......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-03-01
+                    2020-11-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#架构模式" title="架构模式">架构模式</a>
+                      <a href="/tags/#springboot" title="springboot">springboot</a>
                     
-                      <a href="/tags/#六边形架构" title="六边形架构">六边形架构</a>
+                      <a href="/tags/#mybatis-plus" title="mybatis-plus">mybatis-plus</a>
+                    
+                      <a href="/tags/#element-ui" title="element-ui">element-ui</a>
+                    
+                      <a href="/tags/#vue" title="vue">vue</a>
                     
                 </div>
             
@@ -489,26 +497,26 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
 
         <div class="post-preview">
 
-            <a href="/2020/02/25/docker容器运行简单前后端结合实例/">
+            <a href="/2020/11/02/redis常见问题/">
                 <h2 class="post-title">
-                    Docker容器运行前后端分离简单实例
+                    redis缓存雪崩、缓存穿透、缓存击穿与布隆过滤器
                 </h2>
                 <h3 class="post-subtitle">
-                    
+                    redis常见问题与布隆过滤器基础原理介绍
                 </h3>
                 <div class="post-content-preview">
-                    DockerDocker简介Docker是一种运行于Linux和Windows上的软件，用于创建、管理和编排容器。Docker是在GitHub上开发的Moby开源项目的一部分。Docker官方文档 Docker中文社区(ps:别忘配置加速器Docker图标》Settings》Docker Engine)
-后端代码springboot项目，非常简单的演示后端，注解代码实现获取/hello/路径......
+                    前言redis作为基于内存的非关系型数据库，通过读取缓存有效降低了大数据量访问系统(如购物商城网站)导致的数据库大量的磁盘读写操作，减少了数据库瘫痪、服务器宕机的风险。但是引入redis后也可能会产生新的问题导致redis缓存失效，大量数据访问依旧直接落在数据库上导致数据库瘫痪。本文主要介绍redis缓存雪崩、缓存穿透、缓存击穿与他们的解决方案。
+redis常见问题缓存雪崩我们知道redis......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2020-02-25
+                    2020-11-02
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Docker" title="Docker">Docker</a>
+                      <a href="/tags/#redis" title="redis">redis</a>
                     
                 </div>
             
@@ -522,28 +530,27 @@ UI/界面升级1、界面支持中文了汉化后的效果就是这个样子：�
 
         <div class="post-preview">
 
-            <a href="/2019/12/25/hexo博客/">
+            <a href="/2020/10/07/AOP自定义注解/">
                 <h2 class="post-title">
-                    Hexo博客配置及个人网站部署
+                    Spring AOP自定义注解
                 </h2>
                 <h3 class="post-subtitle">
-                    hexo基础搭建
+                    自定义注解
                 </h3>
                 <div class="post-content-preview">
-                    一、HexoHexo简介Hexo官方文档本文简化列举Hexo框架搭建基础步骤Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
-Hexo安装安装前确保电脑安装了Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)和Git
-
-必备的应用程序安装完......
+                    自定义注解类1234567891011import java.lang.annotation.ElementType;import java.lang.annotation.Retention;import java.lang.annotation.RetentionPolicy;import java.lang.annotation.Target;@Target(value = &#123......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2019-12-25
+                    2020-10-07
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#hexo" title="hexo">hexo</a>
+                      <a href="/tags/#Spring" title="Spring">Spring</a>
+                    
+                      <a href="/tags/#AOP" title="AOP">AOP</a>
                     
                 </div>
             
@@ -557,28 +564,25 @@ Hexo安装安装前确保电脑安装了Node.js (Node.js 版本需不低于 8.10
 
         <div class="post-preview">
 
-            <a href="/2019/11/01/Hexo-Theme-Snail/">
+            <a href="/2020/09/08/redis基础认识/">
                 <h2 class="post-title">
-                    Hexo-Theme-Snail
+                    Redis基础认识
                 </h2>
                 <h3 class="post-subtitle">
-                    A succinct hexo theme.
+                    中间件Redis的了解与认识
                 </h3>
                 <div class="post-content-preview">
-                    hexo-theme-snailView Hexo-Theme-Snail Sources On Github &#10174; 
-View Live Super Snail Blog &#10174;
-
-Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, that can be set ......
+                    概述Redis属于NOSQL((NoSQL = Not Only SQL )，意即“不仅仅是SQL”。NoSQL 数据库种类繁多(Redis、Mongodb、HBase、Elasticsearch 等等)),NOSQL的特点是去掉关系数据库的关系型特性。数据之间无关系，这样就非常容易扩展。无形之间也在架构的层面上带来了可扩展的能力。NoSQL数据库都具有非常高的读写性能，尤其在大量下数据，更......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2019-11-01
+                    2020-09-08
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#hexo-theme-snail" title="hexo-theme-snail">hexo-theme-snail</a>
+                      <a href="/tags/#redis" title="redis">redis</a>
                     
                 </div>
             
@@ -592,35 +596,25 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
 
         <div class="post-preview">
 
-            <a href="/2019/10/01/Annotation/">
+            <a href="/2020/09/05/shiro基础认识/">
                 <h2 class="post-title">
-                    springboot注解代码Annotation整合
+                    shiro基础认识
                 </h2>
                 <h3 class="post-subtitle">
-                    注解代码大全
+                    中间件shiro的了解与认识
                 </h3>
                 <div class="post-content-preview">
-                    常见注解代码集合，方便以后查阅，后续持续更新。
-Annotation简介
-从Java1.5开始，Java增加了元数据（MetaData）的支持，也就是Annotation（注释）；
-
-Annotation能被用来为程序元素（类、方法、成员变量等）设置元数据；
-
-Annotation不能影响程序代码的执行，无论添加、删除Annotation，代码始终如一的执行；
-
-如果希望让程序中的Annot......
+                    shiro 简介shiro是apache的一个开源框架，而且呢是一个权限管理的框架，用于实现用户认证、用户授权。spring 中也有一个权限框架 spring security (原名Acegi)，它和 spring 依赖过于紧密，没有 shiro 使用简单。shiro 不依赖于 spring，shiro 不仅可以实现 web应用的权限管理，还可以实现c/s系统，分布式系统权限管理，shir......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by John Doe on
-                    2019-10-01
+                    2020-09-05
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Annotation" title="Annotation">Annotation</a>
-                    
-                      <a href="/tags/#注解代码" title="注解代码">注解代码</a>
+                      <a href="/tags/#shiro" title="shiro">shiro</a>
                     
                 </div>
             
@@ -701,15 +695,13 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#架构模式" title="架构模式" rel="2">架构模式</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -731,6 +723,12 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#jdk" title="jdk" rel="2">jdk</a>
             
         
@@ -739,11 +737,11 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
-        
+            <a href="/tags/#springboot" title="springboot" rel="4">springboot</a>
             
         
             
-            <a href="/tags/#springboot" title="springboot" rel="3">springboot</a>
+        
             
         
             
@@ -777,12 +775,6 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
-        
-            
-            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
-            
-        
-            
             <a href="/tags/#mybatis-plus" title="mybatis-plus" rel="2">mybatis-plus</a>
             
         
@@ -793,11 +785,13 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
-        
+            <a href="/tags/#并发编程" title="并发编程" rel="2">并发编程</a>
             
         
             
             <a href="/tags/#rabbitmq" title="rabbitmq" rel="2">rabbitmq</a>
+            
+        
             
         
             
@@ -849,14 +843,6 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
-            <a href="/tags/#spring" title="spring" rel="3">spring</a>
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#GateWay" title="GateWay" rel="2">GateWay</a>
             
         
@@ -873,13 +859,21 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
+            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+            
+        
+            
         
             
             <a href="/tags/#spring cloud alibaba" title="spring cloud alibaba" rel="2">spring cloud alibaba</a>
             
         
             
-            <a href="/tags/#Dubbo" title="Dubbo" rel="2">Dubbo</a>
+        
+            
+        
+            
+            <a href="/tags/#spring" title="spring" rel="3">spring</a>
             
         
             
@@ -903,7 +897,19 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
+            <a href="/tags/#MySQL" title="MySQL" rel="2">MySQL</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="2">java</a>
             
         
             
@@ -921,7 +927,17 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
             
         
             
+            <a href="/tags/#Elasticsearch" title="Elasticsearch" rel="7">Elasticsearch</a>
+            
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#powerJob" title="powerJob" rel="4">powerJob</a>
             
         
             
@@ -1026,23 +1042,23 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
     <ul>
       
         <li>
-          <a href="/2023/05/13/java-lambda%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">java-lambda函数式编程</a>
+          <a href="/2024/12/07/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6outlook%E9%82%AE%E4%BB%B6%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件outlook邮件扫描功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/04/17/mysql%E6%97%A5%E5%BF%97bingLog-redoLog-undoLog/">mysql日志bingLog,redoLog,undoLog,java监听binlog</a>
+          <a href="/2024/11/07/ETL%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E8%84%9A%E6%9C%ACkettle/">ETL数据清洗脚本kettle</a>
         </li>
       
         <li>
-          <a href="/2023/03/04/java%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%AE%9E%E6%88%98%E5%8F%8A%E5%B7%A5%E5%85%B7%E7%B1%BB/">java反射获取对象属性实战及工具类</a>
+          <a href="/2024/10/09/java%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E6%B0%B4%E5%8D%B0%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/">java项目文件水印功能实现</a>
         </li>
       
         <li>
-          <a href="/2023/02/11/%E7%9B%AE%E5%89%8D%E5%B8%B8%E8%A7%81AI%E8%BD%AF%E4%BB%B6%E5%9B%BD%E5%8C%BA%E6%B3%A8%E5%86%8C%E4%B8%8E%E4%BD%BF%E7%94%A8/">目前常见AI软件国区注册与使用</a>
+          <a href="/2024/09/06/Java%E7%88%AC%E8%99%AB/">Java爬虫</a>
         </li>
       
         <li>
-          <a href="/2023/01/08/%E5%87%A0%E7%A7%8D%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F/">几种深拷贝方式</a>
+          <a href="/2024/08/04/powerJob%E8%B0%83%E5%BA%A6%E5%B1%82%E5%8E%9F%E7%90%86/">powerJob调度层原理</a>
         </li>
       
     </ul>
@@ -1065,131 +1081,6 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
         <li><a href="#" target="_blank">Other</a></li>
     
 </ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-    <h5>categories</h5>
-    <div class="widget">
-      <ul>
-        
-          <a href="categories/#GitHub"><li>GitHub</li></a>
-        
-          <a href="categories/#JSON"><li>JSON</li></a>
-        
-          <a href="categories/#架构模式"><li>架构模式</li></a>
-        
-          <a href="categories/#hexo"><li>hexo</li></a>
-        
-          <a href="categories/#Docker"><li>Docker</li></a>
-        
-          <a href="categories/#centos"><li>centos</li></a>
-        
-          <a href="categories/#IDEA"><li>IDEA</li></a>
-        
-          <a href="categories/#jdk"><li>jdk</li></a>
-        
-          <a href="categories/#idea"><li>idea</li></a>
-        
-          <a href="categories/#Druid"><li>Druid</li></a>
-        
-          <a href="categories/#虚拟路径"><li>虚拟路径</li></a>
-        
-          <a href="categories/#docker"><li>docker</li></a>
-        
-          <a href="categories/#sql"><li>sql</li></a>
-        
-          <a href="categories/#thymeleaf"><li>thymeleaf</li></a>
-        
-          <a href="categories/#SQL"><li>SQL</li></a>
-        
-          <a href="categories/#mysqldump"><li>mysqldump</li></a>
-        
-          <a href="categories/#Annotation"><li>Annotation</li></a>
-        
-          <a href="categories/#异步调用"><li>异步调用</li></a>
-        
-          <a href="categories/#shiro"><li>shiro</li></a>
-        
-          <a href="categories/#redis"><li>redis</li></a>
-        
-          <a href="categories/#并发编程"><li>并发编程</li></a>
-        
-          <a href="categories/#vue"><li>vue</li></a>
-        
-          <a href="categories/#布隆过滤器"><li>布隆过滤器</li></a>
-        
-          <a href="categories/#rabbitmq"><li>rabbitmq</li></a>
-        
-          <a href="categories/#mybatis-plus"><li>mybatis-plus</li></a>
-        
-          <a href="categories/#javastream"><li>javastream</li></a>
-        
-          <a href="categories/#Eureka"><li>Eureka</li></a>
-        
-          <a href="categories/#zookeeper"><li>zookeeper</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#consul"><li>consul</li></a>
-        
-          <a href="categories/#Ribbon"><li>Ribbon</li></a>
-        
-          <a href="categories/#OpenFeign"><li>OpenFeign</li></a>
-        
-          <a href="categories/#java线程池"><li>java线程池</li></a>
-        
-          <a href="categories/#Hystrix"><li>Hystrix</li></a>
-        
-          <a href="categories/#spring"><li>spring</li></a>
-        
-          <a href="categories/#Oracle"><li>Oracle</li></a>
-        
-          <a href="categories/#GateWay"><li>GateWay</li></a>
-        
-          <a href="categories/#map"><li>map</li></a>
-        
-          <a href="categories/#easyexcel"><li>easyexcel</li></a>
-        
-          <a href="categories/#cache"><li>cache</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#注册中心"><li>注册中心</li></a>
-        
-          <a href="categories/#负载均衡"><li>负载均衡</li></a>
-        
-          <a href="categories/#服务远程调用"><li>服务远程调用</li></a>
-        
-          <a href="categories/#服务降级"><li>服务降级</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-          <a href="categories/#spring cloud"><li>spring cloud</li></a>
-        
-      </ul>
-    </div>
 
         <hr>
     
@@ -1238,7 +1129,7 @@ Annotation不能影响程序代码的执行，无论添加、删除Annotation，
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; John Doe 2023 
+                    Copyright &copy; John Doe 2024 
                     <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
